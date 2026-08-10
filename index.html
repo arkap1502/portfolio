@@ -80,6 +80,20 @@ body::after{
   #bg3d{ opacity:0.38; }
 }
 
+/* custom "water flow in space" cursor */
+#cursorCanvas{
+  position:fixed; inset:0;
+  width:100%; height:100%;
+  z-index:9999;
+  pointer-events:none;
+  mix-blend-mode:screen;
+}
+@media (hover:hover) and (pointer:fine){
+  html, body, a, button, .btn, input, textarea, .social-ic, .filter-btn, .details-toggle{
+    cursor:none !important;
+  }
+}
+
 a{color:inherit; text-decoration:none;}
 ul{list-style:none;}
 img{max-width:100%; display:block;}
@@ -568,6 +582,7 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
 <body>
 
 <canvas id="bg3d" aria-hidden="true"></canvas>
+<canvas id="cursorCanvas" aria-hidden="true"></canvas>
 
 <!-- ===================== NAV ===================== -->
 <header id="siteHeader">
@@ -1185,6 +1200,189 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
     renderer.render(scene, camera);
   }
   animate();
+})();
+
+/* ===================== "WATER FLOW IN SPACE" CURSOR ===================== */
+(function(){
+  const canvas = document.getElementById('cursorCanvas');
+  if (!canvas) return;
+  const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!isFinePointer || reduceMotion) { canvas.remove(); return; }
+
+  const ctx = canvas.getContext('2d');
+  let W = window.innerWidth, H = window.innerHeight;
+  canvas.width = W * (window.devicePixelRatio || 1);
+  canvas.height = H * (window.devicePixelRatio || 1);
+  canvas.style.width = W + 'px';
+  canvas.style.height = H + 'px';
+  ctx.scale(window.devicePixelRatio || 1, window.devicePixelRatio || 1);
+
+  window.addEventListener('resize', () => {
+    W = window.innerWidth; H = window.innerHeight;
+    canvas.width = W * (window.devicePixelRatio || 1);
+    canvas.height = H * (window.devicePixelRatio || 1);
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
+    ctx.scale(window.devicePixelRatio || 1, window.devicePixelRatio || 1);
+  });
+
+  let mouseX = W / 2, mouseY = H / 2;
+  let lastX = mouseX, lastY = mouseY;
+  let active = false;
+
+  // a chain of "flow" points that lag behind the real cursor, like current dragging water
+  const CHAIN_LEN = 14;
+  const chain = Array.from({ length: CHAIN_LEN }, () => ({ x: mouseX, y: mouseY }));
+
+  const colors = ['#00e5ff', '#39ff88', '#7ef9ff'];
+  const particles = [];
+  const stars = [];
+
+  function spawnFlowParticles(x, y, vx, vy) {
+    const speed = Math.min(Math.hypot(vx, vy), 40);
+    const count = Math.max(1, Math.min(3, Math.round(speed / 6)));
+    for (let i = 0; i < count; i++) {
+      const spread = (Math.random() - 0.5) * 0.9;
+      particles.push({
+        x, y,
+        vx: -vx * 0.12 + (Math.random() - 0.5) * 0.6,
+        vy: -vy * 0.12 + (Math.random() - 0.5) * 0.6,
+        life: 1,
+        decay: 0.018 + Math.random() * 0.018,
+        size: 1.4 + Math.random() * 2.2,
+        wavePhase: Math.random() * Math.PI * 2,
+        waveAmp: 0.4 + spread,
+        color: colors[Math.floor(Math.random() * colors.length)]
+      });
+    }
+    // occasional tiny "star" sparkle drifting off, for the space feel
+    if (Math.random() < 0.18) {
+      stars.push({
+        x: x + (Math.random() - 0.5) * 14,
+        y: y + (Math.random() - 0.5) * 14,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        life: 1,
+        decay: 0.006 + Math.random() * 0.01,
+        size: 0.6 + Math.random() * 1.1
+      });
+    }
+  }
+
+  window.addEventListener('pointermove', (e) => {
+    mouseX = e.clientX; mouseY = e.clientY;
+    active = true;
+  });
+  window.addEventListener('pointerdown', () => {
+    for (let i = 0; i < 10; i++) {
+      const a = (Math.PI * 2 * i) / 10;
+      particles.push({
+        x: mouseX, y: mouseY,
+        vx: Math.cos(a) * (1.5 + Math.random() * 1.5),
+        vy: Math.sin(a) * (1.5 + Math.random() * 1.5),
+        life: 1, decay: 0.02 + Math.random() * 0.015,
+        size: 1.8 + Math.random() * 2, wavePhase: Math.random() * Math.PI * 2,
+        waveAmp: 0.5, color: colors[Math.floor(Math.random() * colors.length)]
+      });
+    }
+  });
+  window.addEventListener('mouseleave', () => { active = false; });
+
+  let t = 0;
+  function frame() {
+    requestAnimationFrame(frame);
+    t += 1;
+
+    // fade the previous frame (canvas-local only, doesn't dim the page)
+    ctx.globalCompositeOperation = 'destination-out';
+    ctx.fillStyle = 'rgba(0,0,0,0.14)';
+    ctx.fillRect(0, 0, W, H);
+    ctx.globalCompositeOperation = 'lighter';
+
+    // advance the lagging "current" chain toward the real cursor
+    chain[0].x += (mouseX - chain[0].x) * 0.5;
+    chain[0].y += (mouseY - chain[0].y) * 0.5;
+    for (let i = 1; i < CHAIN_LEN; i++) {
+      chain[i].x += (chain[i - 1].x - chain[i].x) * 0.42;
+      chain[i].y += (chain[i - 1].y - chain[i].y) * 0.42;
+    }
+
+    const dx = mouseX - lastX, dy = mouseY - lastY;
+    if (active) spawnFlowParticles(mouseX, mouseY, dx, dy);
+    lastX = mouseX; lastY = mouseY;
+
+    // draw the flowing water ribbon through the chain, with a wavy perpendicular offset
+    ctx.beginPath();
+    for (let i = 0; i < CHAIN_LEN - 1; i++) {
+      const p0 = chain[i], p1 = chain[i + 1];
+      const nx = -(p1.y - p0.y), ny = (p1.x - p0.x);
+      const nl = Math.hypot(nx, ny) || 1;
+      const wobble = Math.sin(t * 0.12 + i * 0.6) * (1.6 - i * 0.06);
+      const ox = p0.x + (nx / nl) * wobble;
+      const oy = p0.y + (ny / nl) * wobble;
+      if (i === 0) ctx.moveTo(ox, oy); else ctx.lineTo(ox, oy);
+    }
+    const grad = ctx.createLinearGradient(chain[0].x, chain[0].y, chain[CHAIN_LEN - 1].x, chain[CHAIN_LEN - 1].y);
+    grad.addColorStop(0, 'rgba(0,229,255,0.55)');
+    grad.addColorStop(1, 'rgba(57,255,136,0)');
+    ctx.strokeStyle = grad;
+    ctx.lineWidth = 2;
+    ctx.lineCap = 'round';
+    ctx.shadowBlur = 12;
+    ctx.shadowColor = '#00e5ff';
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+
+    // flow particles
+    for (let i = particles.length - 1; i >= 0; i--) {
+      const p = particles[i];
+      p.wavePhase += 0.15;
+      p.x += p.vx + Math.sin(p.wavePhase) * p.waveAmp * 0.3;
+      p.y += p.vy + Math.cos(p.wavePhase) * p.waveAmp * 0.3;
+      p.vx *= 0.96; p.vy *= 0.96;
+      p.life -= p.decay;
+      if (p.life <= 0) { particles.splice(i, 1); continue; }
+      ctx.beginPath();
+      ctx.fillStyle = p.color;
+      ctx.globalAlpha = Math.max(p.life, 0) * 0.9;
+      ctx.shadowBlur = 8;
+      ctx.shadowColor = p.color;
+      ctx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.shadowBlur = 0;
+      ctx.globalAlpha = 1;
+    }
+
+    // drifting star sparkles
+    for (let i = stars.length - 1; i >= 0; i--) {
+      const s = stars[i];
+      s.x += s.vx; s.y += s.vy;
+      s.life -= s.decay;
+      if (s.life <= 0) { stars.splice(i, 1); continue; }
+      ctx.beginPath();
+      ctx.fillStyle = '#ffffff';
+      ctx.globalAlpha = Math.max(s.life, 0) * 0.8;
+      ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    }
+
+    // the visible cursor core: a bright glowing dot marking the real pointer position
+    ctx.beginPath();
+    ctx.fillStyle = '#e7fbff';
+    ctx.shadowBlur = 14;
+    ctx.shadowColor = '#00e5ff';
+    ctx.arc(mouseX, mouseY, 3.2, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.strokeStyle = 'rgba(0,229,255,0.55)';
+    ctx.lineWidth = 1;
+    ctx.shadowBlur = 0;
+    ctx.arc(mouseX, mouseY, 9 + Math.sin(t * 0.08) * 1.5, 0, Math.PI * 2);
+    ctx.stroke();
+  }
+  frame();
 })();
 
 document.addEventListener('DOMContentLoaded', function(){
