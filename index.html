@@ -225,6 +225,145 @@ header.scrolled{
 .scroll-cue .line{width:1px; height:34px; background:linear-gradient(var(--cyan), transparent); animation: scrolldown 1.8s ease-in-out infinite;}
 @keyframes scrolldown{0%{transform:scaleY(0); transform-origin:top;} 50%{transform:scaleY(1); transform-origin:top;} 51%{transform-origin:bottom;} 100%{transform:scaleY(0); transform-origin:bottom;}}
 
+/* ===================== AI ROBOT (3D dancing companion) ===================== */
+.robot-widget{
+  position:relative;
+  display:flex; flex-direction:column; align-items:center;
+  margin-bottom:26px;
+  user-select:none;
+}
+.robot-widget .r-label{
+  font-family:var(--font-mono); font-size:0.7rem; letter-spacing:0.14em; color:var(--text-faint);
+  text-transform:uppercase; margin-bottom:8px; display:flex; align-items:center; gap:8px;
+}
+.robot-widget .r-label .dot{width:5px;height:5px;border-radius:50%;background:var(--cyan);box-shadow:0 0 6px var(--cyan);animation:pulse 1.6s ease-in-out infinite;}
+
+.robot-scene{
+  position:relative;
+  width:200px; height:196px;
+  perspective:900px;
+}
+.ai-particle{
+  position:absolute; border-radius:50%;
+  background: var(--cyan);
+  box-shadow:0 0 8px var(--cyan), 0 0 16px var(--cyan);
+  opacity:0.35;
+  animation: aiFloat 4.2s ease-in-out infinite;
+  pointer-events:none;
+}
+@keyframes aiFloat{
+  0%,100%{ transform:translateY(0) scale(1); opacity:0.25; }
+  50%{ transform:translateY(-18px) scale(1.35); opacity:0.85; }
+}
+
+.r-pad{
+  position:absolute; left:50%; bottom:4px; width:104px; height:18px; border-radius:50%;
+  transform:translateX(-50%);
+  background: radial-gradient(ellipse at center, rgba(0,229,255,0.35), rgba(0,229,255,0) 72%);
+  filter:blur(1px);
+  animation: padPulse 2.2s ease-in-out infinite;
+}
+@keyframes padPulse{
+  0%,100%{ opacity:.5; transform:translateX(-50%) scale(1); }
+  50%{ opacity:1; transform:translateX(-50%) scale(1.18); }
+}
+
+.robot{
+  position:absolute; left:50%; bottom:26px; width:100px; height:150px;
+  transform:translateX(-50%);
+  transform-style:preserve-3d;
+  animation: robotDance 2.1s ease-in-out infinite;
+}
+@keyframes robotDance{
+  0%,100%{ transform:translateX(-50%) translateY(0) rotateZ(-5deg) rotateY(-10deg); }
+  25%{ transform:translateX(-50%) translateY(-15px) rotateZ(5deg) rotateY(10deg); }
+  50%{ transform:translateX(-50%) translateY(-2px) rotateZ(-4deg) rotateY(-8deg); }
+  75%{ transform:translateX(-50%) translateY(-18px) rotateZ(6deg) rotateY(12deg); }
+}
+
+.r-antenna{
+  position:absolute; top:-16px; left:50%; width:2px; height:16px; background:var(--cyan);
+  transform:translateX(-50%); box-shadow:0 0 6px var(--cyan);
+}
+.r-antenna span{
+  position:absolute; top:-6px; left:50%; width:8px; height:8px; border-radius:50%;
+  transform:translateX(-50%); background:var(--green); box-shadow:0 0 10px var(--green);
+  animation: pulse 1s ease-in-out infinite;
+}
+
+.r-head{
+  position:absolute; top:0; left:50%; width:58px; height:50px; transform:translateX(-50%);
+  border-radius:16px;
+  background: linear-gradient(160deg, #16232c, #0b141a 70%);
+  border:1.5px solid var(--border-strong);
+  box-shadow: 0 0 18px rgba(0,229,255,0.25), inset 0 0 10px rgba(0,229,255,0.1);
+  animation: headBob 2.1s ease-in-out infinite;
+}
+@keyframes headBob{
+  0%,100%{ transform:translateX(-50%) rotate(-7deg); }
+  50%{ transform:translateX(-50%) rotate(7deg); }
+}
+.r-eye{
+  position:absolute; top:20px; width:10px; height:10px; border-radius:50%;
+  background: var(--cyan); box-shadow:0 0 8px var(--cyan), 0 0 16px var(--cyan);
+  animation: eyeBlink 3.4s ease-in-out infinite;
+}
+.r-eye.l{left:12px;} .r-eye.r{right:12px;}
+@keyframes eyeBlink{
+  0%,92%,100%{ transform:scaleY(1); }
+  96%{ transform:scaleY(0.15); }
+}
+
+.r-body{
+  position:absolute; top:46px; left:50%; width:64px; height:64px; transform:translateX(-50%);
+  border-radius:18px;
+  background: linear-gradient(160deg, #131f27, #0a1216 75%);
+  border:1.5px solid var(--border);
+  box-shadow: 0 8px 26px rgba(0,0,0,0.5), 0 0 20px rgba(0,229,255,0.14);
+}
+.r-chip{
+  position:absolute; top:50%; left:50%; width:22px; height:22px; border-radius:50%;
+  transform:translate(-50%,-50%);
+  background: radial-gradient(circle, var(--green), transparent 70%);
+  box-shadow:0 0 14px var(--green);
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+.r-arm{
+  position:absolute; top:50px; width:10px; height:44px; border-radius:6px;
+  background: linear-gradient(180deg, #17242c, #0b1216);
+  border:1px solid var(--border);
+  transform-origin: top center;
+  box-shadow: 0 0 10px rgba(0,229,255,0.08);
+}
+.r-arm.l{ left:12px; animation: armSwingL 2.1s ease-in-out infinite; }
+.r-arm.r{ right:12px; animation: armSwingR 2.1s ease-in-out infinite; }
+@keyframes armSwingL{
+  0%,100%{ transform:rotate(-32deg); }
+  50%{ transform:rotate(52deg); }
+}
+@keyframes armSwingR{
+  0%,100%{ transform:rotate(32deg); }
+  50%{ transform:rotate(-52deg); }
+}
+
+.r-leg{
+  position:absolute; bottom:0; width:12px; height:26px; border-radius:5px;
+  background: linear-gradient(180deg, #17242c, #0b1216);
+  border:1px solid var(--border);
+  transform-origin: top center;
+}
+.r-leg.l{ left:24px; animation: legKickL 2.1s ease-in-out infinite; }
+.r-leg.r{ right:24px; animation: legKickR 2.1s ease-in-out infinite; }
+@keyframes legKickL{
+  0%,100%{ transform:rotate(12deg); }
+  50%{ transform:rotate(-20deg); }
+}
+@keyframes legKickR{
+  0%,100%{ transform:rotate(-12deg); }
+  50%{ transform:rotate(20deg); }
+}
+
 /* ===================== REVEAL ===================== */
 .reveal{ opacity:0; transform: translateY(26px); transition: opacity .7s ease, transform .7s ease;}
 .reveal.visible{ opacity:1; transform:none;}
@@ -405,6 +544,7 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
   .wrap{padding:0 20px;}
   .contact-box{padding:32px 22px;}
   .hero{padding-top:100px;}
+  .robot-scene{transform:scale(0.82); transform-origin:top center; margin-bottom:-24px;}
 }
 
 @media (prefers-reduced-motion: reduce){
@@ -481,6 +621,31 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
     </div>
 
     <div>
+      <div class="robot-widget" aria-hidden="true">
+        <div class="r-label"><span class="dot"></span>AI COMPANION — dancing.sys</div>
+        <div class="robot-scene">
+          <div class="ai-particle" style="width:5px;height:5px;left:6%;top:18%;animation-delay:0s;"></div>
+          <div class="ai-particle" style="width:4px;height:4px;left:88%;top:12%;animation-delay:.9s;background:var(--green);box-shadow:0 0 8px var(--green),0 0 16px var(--green);"></div>
+          <div class="ai-particle" style="width:6px;height:6px;left:80%;top:62%;animation-delay:1.8s;"></div>
+          <div class="ai-particle" style="width:3px;height:3px;left:12%;top:68%;animation-delay:2.6s;background:var(--green);box-shadow:0 0 8px var(--green),0 0 16px var(--green);"></div>
+          <div class="ai-particle" style="width:4px;height:4px;left:50%;top:6%;animation-delay:1.2s;"></div>
+          <div class="robot">
+            <div class="r-antenna"><span></span></div>
+            <div class="r-head">
+              <div class="r-eye l"></div>
+              <div class="r-eye r"></div>
+            </div>
+            <div class="r-arm l"></div>
+            <div class="r-arm r"></div>
+            <div class="r-body">
+              <div class="r-chip"></div>
+            </div>
+            <div class="r-leg l"></div>
+            <div class="r-leg r"></div>
+          </div>
+          <div class="r-pad"></div>
+        </div>
+      </div>
       <div class="terminal">
         <div class="term-bar">
           <span class="term-dot r"></span><span class="term-dot y"></span><span class="term-dot g"></span>
