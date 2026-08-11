@@ -1,66 +1,59 @@
 # Arka Patra — Portfolio
 
-A premium, dark cybersecurity-themed personal portfolio for **Arka Patra**, a B.Sc. Cyber Security student and security-focused developer from West Bengal, India.
+Personal portfolio site for **Arka Patra**, a B.Sc. Cyber Security student building security-focused Python and web applications.
 
-Live sections: Hero · About · Skills · Projects · Certifications · Education · Cybersecurity Journey · GitHub · Security Lab · Contact.
-
-## Preview
-
-Open `index.html` in any modern browser — it's a single self-contained file with no build step and no dependencies to install.
-
-## Tech Stack
-
-- **HTML5** — semantic structure
-- **CSS3** — custom properties (design tokens), glassmorphism, grid/flex layout, keyframe animations
-- **Vanilla JavaScript** — no frameworks or libraries; all interactivity is hand-written
-
-Fonts are loaded from Google Fonts (Space Grotesk, Inter, JetBrains Mono). Everything else — icons, layout, animation — is inline, so the whole site is a single portable `index.html`.
+🔗 Single-page, dark-themed site with a terminal-style hero, animated 3D background, and smooth in-page navigation.
 
 ## Features
 
-- Responsive layout (desktop, tablet, mobile) with a hamburger menu below 900px
-- Sticky navigation with scroll-based active-link highlighting
-- Typed terminal animation in the hero
-- Scroll-reveal animations via `IntersectionObserver`
-- Project filtering (All / Cybersecurity / Web Development)
-- Expandable "Technical Details" panels on each project card
-- Animated 0–100 risk meter on the URL Threat Scanner project card
-- Click-to-copy email in the contact section
-- Holographic certification cards
-- Full keyboard navigation and visible focus states
-- Respects `prefers-reduced-motion`
-- SEO metadata, Open Graph tags, and an inline SVG favicon (no external image files needed)
+- **Single-page layout** — all sections (Home, Skills, Projects, Certifications, Journey, GitHub, Contact) live on one scrollable page with smooth-scroll navigation and scroll-based active-link highlighting.
+- **Animated hero terminal** with a typing effect and a small animated 3D robot companion.
+- **Three.js background** — subtle animated network/particle scene behind the content.
+- **Custom cursor** — canvas-based "water flow" cursor effect on desktop/pointer devices.
+- **Project showcase** with category filtering (Cybersecurity / Web) and expandable technical detail panels.
+- **Scroll-reveal animations** for section content as you scroll down the page.
+- **Responsive design** with a mobile hamburger menu.
+- **Accessible** — respects `prefers-reduced-motion`, includes focus states and ARIA labels.
 
-## File Structure
+## Tech Stack
 
-```
-index.html   → everything: markup, <style> CSS, and <script> JS in one file
-```
+- HTML5, CSS3 (custom properties, no framework)
+- Vanilla JavaScript (no build step required)
+- [Three.js](https://threejs.org/) (r128) for the 3D background
+- Google Fonts: Space Grotesk, Inter, JetBrains Mono
 
-## Before You Publish
+## Sections
 
-Two placeholders still need your details:
+| Section | Description |
+|---|---|
+| Home | Hero intro, terminal animation, status chips, socials |
+| Skills | Tools and concepts used across development and security work |
+| Projects | Featured builds (e.g. Altron Password Inspector, URL Threat Scanner, Phish·AI, Personal Portfolio) with filtering and tech details |
+| Certifications | Verified credentials |
+| Journey | Timeline of the cybersecurity learning path |
+| GitHub | Highlighted public repositories |
+| Contact | Contact form and direct contact options |
 
-| What | Where in the file | What to do |
-|---|---|---|
-| Contact email | search for `emailBtn` / `data-copy` | Replace `your.email@example.com` with your real email |
-| CV download | search for `downloadCvBtn` | Currently shows an alert — point the button at a hosted PDF resume (e.g. upload to your repo and link `href="/resume.pdf"`) |
+## Getting Started
 
-## Content Policy
+This is a static site with no dependencies or build process.
 
-All project details, GitHub links, CGPA figures, and the Deloitte Australia Cyber Job Simulation (Forage) credential reflect only what was explicitly provided — nothing about work experience, internships, certifications, or credentials was invented. Cybersecurity projects are clearly labeled as educational/demo tools, not production security products.
+1. Clone or download the repository.
+2. Open `index.html` directly in a browser, **or** serve it locally:
 
-## Deploying
+   ```bash
+   python3 -m http.server 8000
+   ```
 
-Since it's a single static file, you can host it for free on any of:
+   Then visit `http://localhost:8000`.
 
-- **GitHub Pages** — push to a repo (e.g. `arkap1502/portfolio`), enable Pages on the `main` branch
-- **Netlify / Vercel** — drag-and-drop deploy of the folder containing `index.html`
+## Customization
+
+- **Colors / theme** — edit the CSS custom properties in the `:root` block at the top of `index.html` (`--cyan`, `--green`, `--bg`, etc.).
+- **Content** — update the relevant `<section>` blocks (Skills, Projects, Certifications, Journey, GitHub, Contact) directly in `index.html`.
+- **Resume/CV** — the "Download CV" button currently shows a placeholder alert; replace it with a real link to your PDF resume.
+- **Social links** — update the footer and hero social icons with your own profile URLs.
 
 ## License
 
-Personal portfolio content — free to use as a structural reference, but replace the personal details before reusing.
-
----
-
-© 2026 Arka Patra. Built with curiosity, code & security in mind.
+This project is free to use and adapt for your own portfolio.
