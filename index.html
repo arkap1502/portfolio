@@ -94,6 +94,17 @@ body::after{
   }
 }
 
+/* multi-page router: only the active page is shown */
+[data-page]{display:none;}
+[data-page].page-active{display:block; animation:pageIn .45s ease both;}
+@keyframes pageIn{
+  from{ opacity:0; transform:translateY(14px);}
+  to{ opacity:1; transform:translateY(0);}
+}
+@media (prefers-reduced-motion: reduce){
+  [data-page].page-active{ animation:none; }
+}
+
 a{color:inherit; text-decoration:none;}
 ul{list-style:none;}
 img{max-width:100%; display:block;}
@@ -542,6 +553,30 @@ header.scrolled{
 .copy-tip{ position:absolute; top:-32px; left:50%; transform:translateX(-50%); font-size:0.68rem; background:var(--green); color:#00250f; padding:3px 8px; border-radius:5px; opacity:0; transition: opacity .2s ease; pointer-events:none; white-space:nowrap;}
 .copy-tip.show{opacity:1;}
 
+.contact-divider{ display:flex; align-items:center; gap:14px; margin:36px 0 28px; color:var(--text-faint); font-family:var(--font-mono); font-size:0.72rem; letter-spacing:.08em;}
+.contact-divider::before, .contact-divider::after{ content:''; flex:1; height:1px; background:var(--border);}
+
+.contact-form{ text-align:left; max-width:640px; margin:0 auto; position:relative;}
+.form-row{ display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+.form-group{ margin-bottom:18px; display:flex; flex-direction:column; gap:7px;}
+.form-group label{ font-family:var(--font-mono); font-size:0.74rem; letter-spacing:.05em; color:var(--text-dim);}
+.form-group input, .form-group textarea{
+  width:100%; background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:9px;
+  padding:12px 14px; color:var(--text); font-family:inherit; font-size:0.92rem; resize:vertical;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+.form-group input:focus, .form-group textarea:focus{
+  outline:none; border-color:var(--cyan); box-shadow:0 0 0 3px rgba(0,229,255,0.12);
+}
+.form-group input.invalid, .form-group textarea.invalid{ border-color:#ff5d6c; }
+.form-error{ font-size:0.72rem; color:#ff5d6c; min-height:1em; font-family:var(--font-mono);}
+.form-submit{ display:inline-flex; align-items:center; gap:10px; cursor:pointer; border:none;}
+.form-status{ margin-top:16px; font-family:var(--font-mono); font-size:0.82rem; color:var(--green); min-height:1.2em;}
+.form-status.error{ color:#ff5d6c;}
+@media (max-width:640px){
+  .form-row{ grid-template-columns:1fr;}
+}
+
 /* ===================== FOOTER ===================== */
 footer{ padding:36px 0; border-top:1px solid var(--border);}
 .footer-inner{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;}
@@ -565,13 +600,30 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
   .hero-grid{ grid-template-columns:1fr; gap:44px;}
   .about-grid{ grid-template-columns:1fr;}
   .navlinks{display:none;}
+  .nav-cta{display:flex; align-items:center; gap:12px;}
   .hamburger{display:flex;}
+  .skills, .projects, .certs, .timeline-section, .github-sec, .lab, .contact{ padding:72px 0;}
+  .footer-inner{ justify-content:center; text-align:center;}
 }
-@media (max-width:560px){
+@media (max-width:640px){
   .wrap{padding:0 20px;}
   .contact-box{padding:32px 22px;}
-  .hero{padding-top:100px;}
+  .hero{padding-top:104px; padding-bottom:56px;}
   .robot-scene{transform:scale(0.82); transform-origin:top center; margin-bottom:-24px;}
+  .skill-groups, .cert-grid, .repo-grid{ grid-template-columns:1fr;}
+  .project-grid{ grid-template-columns:1fr;}
+  .lab-grid{ grid-template-columns:repeat(2,1fr);}
+  .filter-row{ gap:8px;}
+  .filter-btn{ padding:7px 13px; font-size:0.72rem;}
+  .contact-methods{ flex-direction:column; align-items:stretch;}
+  .contact-method{ justify-content:center;}
+  .footer-links{ justify-content:center; flex-wrap:wrap; gap:14px;}
+  .modal-box{ padding:24px 20px;}
+  h1, .hero-name{ word-break:break-word;}
+}
+@media (max-width:400px){
+  .lab-grid{ grid-template-columns:1fr;}
+  .logo{ font-size:0.95rem;}
 }
 
 @media (prefers-reduced-motion: reduce){
@@ -589,12 +641,11 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
   <nav class="navbar">
     <a href="#home" class="logo"><span class="logo-mark">AP</span>arka<span class="bracket">.</span>patra</a>
     <div class="navlinks" id="navlinks">
-      <a href="#home" class="active">HOME</a>
-      <a href="#about">ABOUT</a>
+      <a href="#home" class="active">DASHBOARD</a>
       <a href="#skills">SKILLS</a>
       <a href="#projects">PROJECTS</a>
       <a href="#certifications">CERTS</a>
-      <a href="#education">EDUCATION</a>
+      <a href="#journey">JOURNEY</a>
       <a href="#github">GITHUB</a>
       <a href="#contact">CONTACT</a>
     </div>
@@ -606,19 +657,18 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
     </div>
   </nav>
   <div class="mobile-menu" id="mobileMenu">
-    <a href="#home">HOME</a>
-    <a href="#about">ABOUT</a>
+    <a href="#home">DASHBOARD</a>
     <a href="#skills">SKILLS</a>
     <a href="#projects">PROJECTS</a>
     <a href="#certifications">CERTIFICATIONS</a>
-    <a href="#education">EDUCATION</a>
+    <a href="#journey">JOURNEY</a>
     <a href="#github">GITHUB</a>
     <a href="#contact">CONTACT</a>
   </div>
 </header>
 
 <!-- ===================== HERO ===================== -->
-<section class="hero" id="home">
+<section class="hero page" id="home" data-page="home">
   <div class="wrap hero-grid">
     <div>
       <div class="eyebrow"><span class="dot"></span>AVAILABLE FOR INTERNSHIPS &amp; OPPORTUNITIES</div>
@@ -693,46 +743,8 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
   <div class="scroll-cue"><span class="line"></span>SCROLL</div>
 </section>
 
-<!-- ===================== ABOUT ===================== -->
-<section class="about" id="about">
-  <div class="wrap">
-    <div class="eyebrow"><span class="dot"></span>ABOUT</div>
-    <h2 class="section-title reveal">Who I Am</h2>
-    <p class="section-sub reveal">A quick profile of where cybersecurity and development meet in my work.</p>
-
-    <div class="about-grid">
-      <div class="about-text reveal">
-        <p>I'm a <strong>B.Sc. Cyber Security student</strong> at Guru Nanak Institute of Technology (MAKAUT), interested in combining programming with security thinking. Most of what I build sits at that intersection — <strong>Python</strong> scripts, <strong>Flask</strong> web apps, and browser-based tools that explore real security concepts like password strength, phishing detection, and safe authentication.</p>
-        <p>I learn primarily through practical projects rather than theory alone — building something, breaking it, and fixing it is how the concepts stick. Alongside development, I stay focused on <strong>phishing awareness</strong> and <strong>password security</strong> as everyday, applicable areas of cybersecurity.</p>
-        <p>I'm early in this journey as a student, not a working professional — but every project on this site was designed and built end-to-end by me, and each one is meant to demonstrate a real, working concept rather than a mockup.</p>
-        <div class="chips">
-          <span class="pill">Cybersecurity</span>
-          <span class="pill">Python Development</span>
-          <span class="pill">Web Development</span>
-          <span class="pill">Security Tooling</span>
-          <span class="pill">Phishing Awareness</span>
-          <span class="pill">Password Security</span>
-          <span class="pill">Problem Solving</span>
-        </div>
-      </div>
-
-      <div class="profile-card glass reveal">
-        <h3>Cyber Profile</h3>
-        <div class="profile-row"><span class="k">EDUCATION</span><span class="v">B.Sc. Cyber Security</span></div>
-        <div class="profile-row"><span class="k">PRIMARY LANGUAGE</span><span class="v">Python</span></div>
-        <div class="profile-row"><span class="k">SECURITY FOCUS</span><span class="v">Web Security</span></div>
-        <div class="profile-row"><span class="k">ENVIRONMENT</span><span class="v">Linux / Kali Linux</span></div>
-        <div class="profile-row"><span class="k">DEVELOPMENT</span><span class="v">HTML / CSS / JS / Flask</span></div>
-        <div class="profile-row"><span class="k">DATABASE</span><span class="v">SQLite / SQL</span></div>
-        <div class="profile-row"><span class="k">LOCATION</span><span class="v">West Bengal, India</span></div>
-        <div class="profile-row"><span class="k">LANGUAGES</span><span class="v">English, Bengali, Hindi</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ===================== SKILLS ===================== -->
-<section class="skills" id="skills">
+<section class="skills page" id="skills" data-page="skills">
   <div class="wrap">
     <div class="eyebrow"><span class="dot"></span>SKILL MATRIX</div>
     <h2 class="section-title reveal">What I Work With</h2>
@@ -765,7 +777,7 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
       <div class="skill-card glass reveal">
         <h4>▣ Operating Systems</h4>
         <div class="skill-tags">
-          <span class="skill-tag">Windows 11</span><span class="skill-tag">Linux</span><span class="skill-tag">Kali Linux</span>
+          <span class="skill-tag">Windows 11</span><span class="skill-tag">Linux</span>
         </div>
       </div>
       <div class="skill-card glass reveal">
@@ -787,7 +799,7 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
 </section>
 
 <!-- ===================== PROJECTS ===================== -->
-<section class="projects" id="projects">
+<section class="projects page" id="projects" data-page="projects">
   <div class="wrap">
     <div class="eyebrow"><span class="dot"></span>FEATURED PROJECTS</div>
     <h2 class="section-title reveal">Things I've Built</h2>
@@ -903,7 +915,7 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
 </section>
 
 <!-- ===================== CERTIFICATIONS ===================== -->
-<section class="certs" id="certifications">
+<section class="certs page" id="certifications" data-page="certifications">
   <div class="wrap">
     <div class="eyebrow"><span class="dot"></span>CERTIFICATIONS</div>
     <h2 class="section-title reveal">Verified Credentials</h2>
@@ -922,40 +934,8 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
   </div>
 </section>
 
-<!-- ===================== EDUCATION ===================== -->
-<section class="timeline-section" id="education">
-  <div class="wrap">
-    <div class="eyebrow"><span class="dot"></span>EDUCATION</div>
-    <h2 class="section-title reveal">Academic Timeline</h2>
-    <p class="section-sub reveal">My academic path so far.</p>
-
-    <div class="timeline">
-      <div class="tl-item reveal">
-        <div class="tl-year">2024 — Present</div>
-        <h4>B.Sc. in Cyber Security</h4>
-        <p>Guru Nanak Institute of Technology, MAKAUT</p>
-        <div class="tl-scores">
-          <span class="score-chip">Semester 2 — 8.09 CGPA</span>
-          <span class="score-chip">Semester 3 — 7.29 CGPA</span>
-          <span class="score-chip">Semester 4 — 7.35 CGPA</span>
-        </div>
-      </div>
-      <div class="tl-item reveal">
-        <div class="tl-year">2024</div>
-        <h4>Higher Secondary</h4>
-        <p>63.2%</p>
-      </div>
-      <div class="tl-item reveal">
-        <div class="tl-year">2022</div>
-        <h4>Secondary</h4>
-        <p>60.71%</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ===================== CYBERSECURITY JOURNEY ===================== -->
-<section class="timeline-section">
+<section class="timeline-section page" id="journey" data-page="journey">
   <div class="wrap">
     <div class="eyebrow"><span class="dot"></span>THE PATH SO FAR</div>
     <h2 class="section-title reveal" style="text-align:center">Cybersecurity Journey</h2>
@@ -982,7 +962,7 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
 </section>
 
 <!-- ===================== GITHUB ===================== -->
-<section class="github-sec" id="github">
+<section class="github-sec page" id="github" data-page="github">
   <div class="wrap">
     <div class="eyebrow"><span class="dot"></span>GITHUB</div>
     <h2 class="section-title reveal">Code Is Where I Experiment, Build &amp; Learn</h2>
@@ -1015,7 +995,7 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
 </section>
 
 <!-- ===================== SECURITY LAB ===================== -->
-<section class="lab">
+<section class="lab page" data-page="home">
   <div class="wrap">
     <div class="eyebrow"><span class="dot"></span>LIVE STATUS</div>
     <h2 class="section-title reveal">Arka's Security Lab</h2>
@@ -1032,14 +1012,14 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
         <div class="lab-stat"><div class="label">Tools Built</div><div class="value">04</div></div>
         <div class="lab-stat"><div class="label">Security Focus</div><div class="value" style="font-size:1.05rem">WEB + APP SECURITY</div></div>
         <div class="lab-stat"><div class="label">Primary Language</div><div class="value">PYTHON</div></div>
-        <div class="lab-stat"><div class="label">Environment</div><div class="value" style="font-size:1.05rem">LINUX / KALI</div></div>
+        <div class="lab-stat"><div class="label">Environment</div><div class="value" style="font-size:1.05rem">LINUX</div></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ===================== CONTACT ===================== -->
-<section class="contact" id="contact">
+<section class="contact page" id="contact" data-page="contact">
   <div class="wrap">
     <div class="contact-box glass reveal">
       <div class="eyebrow" style="justify-content:center">LET'S CONNECT</div>
@@ -1060,6 +1040,37 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
           GitHub
         </a>
       </div>
+
+      <div class="contact-divider"><span>OR SEND A MESSAGE</span></div>
+
+      <form class="contact-form" id="contactForm" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="cfName">Name</label>
+            <input type="text" id="cfName" name="name" placeholder="Your name" autocomplete="name" required>
+            <span class="form-error" id="cfNameError"></span>
+          </div>
+          <div class="form-group">
+            <label for="cfEmail">Email</label>
+            <input type="email" id="cfEmail" name="email" placeholder="you@example.com" autocomplete="email" required>
+            <span class="form-error" id="cfEmailError"></span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="cfSubject">Subject</label>
+          <input type="text" id="cfSubject" name="subject" placeholder="What's this about?" autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label for="cfMessage">Message</label>
+          <textarea id="cfMessage" name="message" rows="5" placeholder="Tell me a bit about the opportunity, project, or question…" required></textarea>
+          <span class="form-error" id="cfMessageError"></span>
+        </div>
+        <button type="submit" class="btn btn-primary form-submit" id="cfSubmit">
+          <span>Send Message</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7Z"/></svg>
+        </button>
+        <p class="form-status" id="cfStatus" role="status" aria-live="polite"></p>
+      </form>
     </div>
   </div>
 </section>
@@ -1407,28 +1418,30 @@ document.addEventListener('DOMContentLoaded', function(){
     hamburger.setAttribute('aria-expanded', false);
   }));
 
-  /* ---------- Active nav highlighting ---------- */
-  const sections = document.querySelectorAll('section[id]');
+  /* ---------- Page router (dashboard-style multi-page navigation) ---------- */
+  const pageEls = document.querySelectorAll('[data-page]');
   const navA = document.querySelectorAll('.navlinks a, .mobile-menu a');
-  function onScrollActive(){
-    let current = 'home';
-    sections.forEach(sec => {
-      const top = sec.offsetTop - 140;
-      if (window.scrollY >= top) current = sec.getAttribute('id');
-    });
-    navA.forEach(a => {
-      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
-    });
-  }
-  window.addEventListener('scroll', onScrollActive);
-  onScrollActive();
+  const validPages = new Set(Array.from(pageEls).map(el => el.dataset.page));
 
-  /* ---------- Scroll reveal ---------- */
-  const revealEls = document.querySelectorAll('.reveal');
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
-  }, { threshold: 0.12 });
-  revealEls.forEach(el => io.observe(el));
+  function showPage(id, opts){
+    opts = opts || {};
+    if (!validPages.has(id)) id = 'home';
+    pageEls.forEach(el => el.classList.toggle('page-active', el.dataset.page === id));
+    navA.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+    // reveal every 'reveal' element on the page we just switched to
+    document.querySelectorAll('[data-page="' + id + '"] .reveal').forEach(el => el.classList.add('visible'));
+    if (!opts.skipScroll) window.scrollTo({ top: 0, behavior: 'auto' });
+    header.classList.remove('scrolled');
+    navCta.style.display = 'none';
+  }
+
+  function routeFromHash(opts){
+    const id = (location.hash || '#home').replace('#', '') || 'home';
+    showPage(id, opts);
+  }
+
+  window.addEventListener('hashchange', () => routeFromHash());
+  routeFromHash({ skipScroll: true });
 
   /* ---------- Terminal typing animation ---------- */
   const termBody = document.getElementById('termBody');
