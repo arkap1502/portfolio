@@ -94,16 +94,7 @@ body::after{
   }
 }
 
-/* multi-page router: only the active page is shown */
-[data-page]{display:none;}
-[data-page].page-active{display:block; animation:pageIn .45s ease both;}
-@keyframes pageIn{
-  from{ opacity:0; transform:translateY(14px);}
-  to{ opacity:1; transform:translateY(0);}
-}
-@media (prefers-reduced-motion: reduce){
-  [data-page].page-active{ animation:none; }
-}
+
 
 a{color:inherit; text-decoration:none;}
 ul{list-style:none;}
@@ -668,7 +659,7 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
 </header>
 
 <!-- ===================== HERO ===================== -->
-<section class="hero page" id="home" data-page="home">
+<section class="hero" id="home">
   <div class="wrap hero-grid">
     <div>
       <div class="eyebrow"><span class="dot"></span>AVAILABLE FOR INTERNSHIPS &amp; OPPORTUNITIES</div>
@@ -744,7 +735,7 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
 </section>
 
 <!-- ===================== SKILLS ===================== -->
-<section class="skills page" id="skills" data-page="skills">
+<section class="skills" id="skills">
   <div class="wrap">
     <div class="eyebrow"><span class="dot"></span>SKILL MATRIX</div>
     <h2 class="section-title reveal">What I Work With</h2>
@@ -799,7 +790,7 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
 </section>
 
 <!-- ===================== PROJECTS ===================== -->
-<section class="projects page" id="projects" data-page="projects">
+<section class="projects" id="projects">
   <div class="wrap">
     <div class="eyebrow"><span class="dot"></span>FEATURED PROJECTS</div>
     <h2 class="section-title reveal">Things I've Built</h2>
@@ -915,7 +906,7 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
 </section>
 
 <!-- ===================== CERTIFICATIONS ===================== -->
-<section class="certs page" id="certifications" data-page="certifications">
+<section class="certs" id="certifications">
   <div class="wrap">
     <div class="eyebrow"><span class="dot"></span>CERTIFICATIONS</div>
     <h2 class="section-title reveal">Verified Credentials</h2>
@@ -935,7 +926,7 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
 </section>
 
 <!-- ===================== CYBERSECURITY JOURNEY ===================== -->
-<section class="timeline-section page" id="journey" data-page="journey">
+<section class="timeline-section" id="journey">
   <div class="wrap">
     <div class="eyebrow"><span class="dot"></span>THE PATH SO FAR</div>
     <h2 class="section-title reveal" style="text-align:center">Cybersecurity Journey</h2>
@@ -962,7 +953,7 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
 </section>
 
 <!-- ===================== GITHUB ===================== -->
-<section class="github-sec page" id="github" data-page="github">
+<section class="github-sec" id="github">
   <div class="wrap">
     <div class="eyebrow"><span class="dot"></span>GITHUB</div>
     <h2 class="section-title reveal">Code Is Where I Experiment, Build &amp; Learn</h2>
@@ -995,7 +986,7 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
 </section>
 
 <!-- ===================== SECURITY LAB ===================== -->
-<section class="lab page" data-page="home">
+<section class="lab">
   <div class="wrap">
     <div class="eyebrow"><span class="dot"></span>LIVE STATUS</div>
     <h2 class="section-title reveal">Arka's Security Lab</h2>
@@ -1019,8 +1010,33 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
 </section>
 
 <!-- ===================== CONTACT ===================== -->
-<section class="contact page" id="contact" data-page="contact">
+<section class="contact" id="contact">
   <div class="wrap">
+    <div class="robot-widget" aria-hidden="true" style="margin:0 auto 34px;">
+      <div class="r-label"><span class="dot"></span>AI COMPANION — dancing.sys</div>
+      <div class="robot-scene">
+        <div class="ai-particle" style="width:5px;height:5px;left:6%;top:18%;animation-delay:0s;"></div>
+        <div class="ai-particle" style="width:4px;height:4px;left:88%;top:12%;animation-delay:.9s;background:var(--green);box-shadow:0 0 8px var(--green),0 0 16px var(--green);"></div>
+        <div class="ai-particle" style="width:6px;height:6px;left:80%;top:62%;animation-delay:1.8s;"></div>
+        <div class="ai-particle" style="width:3px;height:3px;left:12%;top:68%;animation-delay:2.6s;background:var(--green);box-shadow:0 0 8px var(--green),0 0 16px var(--green);"></div>
+        <div class="ai-particle" style="width:4px;height:4px;left:50%;top:6%;animation-delay:1.2s;"></div>
+        <div class="robot">
+          <div class="r-antenna"><span></span></div>
+          <div class="r-head">
+            <div class="r-eye l"></div>
+            <div class="r-eye r"></div>
+          </div>
+          <div class="r-arm l"></div>
+          <div class="r-arm r"></div>
+          <div class="r-body">
+            <div class="r-chip"></div>
+          </div>
+          <div class="r-leg l"></div>
+          <div class="r-leg r"></div>
+        </div>
+        <div class="r-pad"></div>
+      </div>
+    </div>
     <div class="contact-box glass reveal">
       <div class="eyebrow" style="justify-content:center">LET'S CONNECT</div>
       <h2>Let's Build Something Secure</h2>
@@ -1418,30 +1434,32 @@ document.addEventListener('DOMContentLoaded', function(){
     hamburger.setAttribute('aria-expanded', false);
   }));
 
-  /* ---------- Page router (dashboard-style multi-page navigation) ---------- */
-  const pageEls = document.querySelectorAll('[data-page]');
+  /* ---------- Single-page nav: highlight the current section on scroll ---------- */
   const navA = document.querySelectorAll('.navlinks a, .mobile-menu a');
-  const validPages = new Set(Array.from(pageEls).map(el => el.dataset.page));
+  const sectionEls = document.querySelectorAll('section[id]');
 
-  function showPage(id, opts){
-    opts = opts || {};
-    if (!validPages.has(id)) id = 'home';
-    pageEls.forEach(el => el.classList.toggle('page-active', el.dataset.page === id));
+  function setActiveNav(id){
     navA.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
-    // reveal every 'reveal' element on the page we just switched to
-    document.querySelectorAll('[data-page="' + id + '"] .reveal').forEach(el => el.classList.add('visible'));
-    if (!opts.skipScroll) window.scrollTo({ top: 0, behavior: 'auto' });
-    header.classList.remove('scrolled');
-    navCta.style.display = 'none';
   }
 
-  function routeFromHash(opts){
-    const id = (location.hash || '#home').replace('#', '') || 'home';
-    showPage(id, opts);
-  }
+  const sectionIO = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting) setActiveNav(entry.target.id);
+    });
+  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+  sectionEls.forEach(el => sectionIO.observe(el));
 
-  window.addEventListener('hashchange', () => routeFromHash());
-  routeFromHash({ skipScroll: true });
+  /* ---------- Reveal-on-scroll ---------- */
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealIO = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting){
+        entry.target.classList.add('visible');
+        revealIO.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+  revealEls.forEach(el => revealIO.observe(el));
 
   /* ---------- Terminal typing animation ---------- */
   const termBody = document.getElementById('termBody');
