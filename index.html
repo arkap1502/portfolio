@@ -469,26 +469,6 @@ header.scrolled{
   font-size:0.78rem; color:#ffd9a0; display:flex; gap:8px;
 }
 
-/* ===================== CERTIFICATIONS ===================== */
-.certs{padding:100px 0;}
-.cert-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:22px;}
-.cert-card{ padding:26px; position:relative; overflow:hidden;}
-.cert-card::before{
-  content:''; position:absolute; inset:0; background: linear-gradient(120deg, transparent 30%, rgba(0,229,255,0.08) 45%, rgba(57,255,136,0.06) 55%, transparent 70%);
-  background-size:250% 250%; animation: holo 6s ease infinite; pointer-events:none;
-}
-@keyframes holo{ 0%{background-position:0% 0%;} 50%{background-position:100% 100%;} 100%{background-position:0% 0%;} }
-.cert-icon{ width:44px; height:44px; border-radius:10px; border:1px solid var(--border-strong); display:flex; align-items:center; justify-content:center; color:var(--cyan); margin-bottom:16px;}
-.cert-card h3{ font-size:1.1rem; margin-bottom:6px;}
-.cert-meta{ font-size:0.85rem; color:var(--text-dim); margin-bottom:4px;}
-.cert-meta span{color:var(--text);}
-.cert-empty{ text-align:center; padding:60px 20px; color:var(--text-dim); font-family:var(--font-mono); font-size:0.9rem;}
-.cert-card-link{ display:block; cursor:pointer; transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease; }
-.cert-card-link:hover{ transform:translateY(-3px); border-color:var(--border-strong); box-shadow:0 0 26px rgba(0,229,255,0.14); }
-.cert-view{ margin-top:16px; font-family:var(--font-mono); font-size:0.78rem; color:var(--cyan); display:flex; align-items:center; gap:6px; }
-.cert-view-arrow{ transition: transform .25s ease; }
-.cert-card-link:hover .cert-view-arrow{ transform:translate(2px,-2px); }
-
 /* ===================== TIMELINES ===================== */
 .timeline-section{padding:100px 0;}
 .timeline{ position:relative; padding-left:32px; border-left:1px solid var(--border);}
@@ -638,9 +618,9 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
     <a href="#home" class="logo"><span class="logo-mark">AP</span>arka<span class="bracket">.</span>patra</a>
     <div class="navlinks" id="navlinks">
       <a href="#home" class="active">DASHBOARD</a>
+      <a href="#education">EDUCATION</a>
       <a href="#skills">SKILLS</a>
       <a href="#projects">PROJECTS</a>
-      <a href="#certifications">CERTS</a>
       <a href="#journey">JOURNEY</a>
       <a href="#contact">CONTACT</a>
     </div>
@@ -653,9 +633,9 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
   </nav>
   <div class="mobile-menu" id="mobileMenu">
     <a href="#home">DASHBOARD</a>
+    <a href="#education">EDUCATION</a>
     <a href="#skills">SKILLS</a>
     <a href="#projects">PROJECTS</a>
-    <a href="#certifications">CERTIFICATIONS</a>
     <a href="#journey">JOURNEY</a>
     <a href="#contact">CONTACT</a>
   </div>
@@ -735,6 +715,33 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
     </div>
   </div>
   <div class="scroll-cue"><span class="line"></span>SCROLL</div>
+</section>
+
+<!-- ===================== EDUCATION ===================== -->
+<section class="timeline-section" id="education">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span>BACKGROUND</div>
+    <h2 class="section-title reveal">Education</h2>
+    <p class="section-sub reveal">Academic path so far.</p>
+
+    <div class="timeline reveal">
+      <div class="tl-item">
+        <div class="tl-year">2024 — Present</div>
+        <h4>B.Sc in Cyber Security</h4>
+        <p>Guru Nanak Institute of Technology</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2024</div>
+        <h4>Higher Secondary</h4>
+        <p>Madhyamgram APC Vidyayatan (Boys)</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2022</div>
+        <h4>Secondary Education</h4>
+        <p>Madhyamgram APC Vidyayatan (Boys)</p>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ===================== SKILLS ===================== -->
@@ -911,57 +918,6 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
   </div>
 </section>
 
-<!-- ===================== CERTIFICATIONS ===================== -->
-<section class="certs" id="certifications">
-  <div class="wrap">
-    <div class="eyebrow"><span class="dot"></span>CERTIFICATIONS</div>
-    <h2 class="section-title reveal">Verified Credentials</h2>
-    <p class="section-sub reveal">Only credentials I can confirm are shown here.</p>
-
-    <div class="cert-grid">
-      <a class="cert-card glass reveal cert-card-link" href="deloitte-cyber-job-simulation-certificate.pdf" target="_blank" rel="noopener" aria-label="View Deloitte Australia Cyber Job Simulation certificate (opens PDF in a new tab)">
-        <div class="cert-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 20 6v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4Z"/><path d="M9 12l2 2 4-4"/></svg>
-        </div>
-        <h3>Deloitte Australia Cyber Job Simulation</h3>
-        <div class="cert-meta">Platform: <span>Forage</span></div>
-        <div class="cert-meta">Category: <span>Cybersecurity</span></div>
-        <div class="cert-view">View Certificate <span class="cert-view-arrow">↗</span></div>
-      </a>
-
-      <a class="cert-card glass reveal cert-card-link" href="datacom-ai-workplace-certificate.pdf" target="_blank" rel="noopener" aria-label="View Datacom Partnering with AI in the Workplace certificate (opens PDF in a new tab)">
-        <div class="cert-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 20 6v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4Z"/><path d="M9 12l2 2 4-4"/></svg>
-        </div>
-        <h3>Datacom: Partnering with AI in the Workplace</h3>
-        <div class="cert-meta">Platform: <span>Forage</span></div>
-        <div class="cert-meta">Category: <span>AI &amp; Productivity</span></div>
-        <div class="cert-view">View Certificate <span class="cert-view-arrow">↗</span></div>
-      </a>
-
-      <a class="cert-card glass reveal cert-card-link" href="bclp-interview-success-certificate.pdf" target="_blank" rel="noopener" aria-label="View BCLP Interview Success Job Simulation certificate (opens PDF in a new tab)">
-        <div class="cert-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 20 6v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4Z"/><path d="M9 12l2 2 4-4"/></svg>
-        </div>
-        <h3>BCLP Interview Success Job Simulation</h3>
-        <div class="cert-meta">Platform: <span>Forage</span></div>
-        <div class="cert-meta">Category: <span>Career Readiness</span></div>
-        <div class="cert-view">View Certificate <span class="cert-view-arrow">↗</span></div>
-      </a>
-
-      <a class="cert-card glass reveal cert-card-link" href="commonwealth-bank-cybersecurity-certificate.pdf" target="_blank" rel="noopener" aria-label="View Commonwealth Bank Introduction to Cybersecurity certificate (opens PDF in a new tab)">
-        <div class="cert-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 20 6v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4Z"/><path d="M9 12l2 2 4-4"/></svg>
-        </div>
-        <h3>Commonwealth Bank: Introduction to Cybersecurity</h3>
-        <div class="cert-meta">Platform: <span>Forage</span></div>
-        <div class="cert-meta">Category: <span>Cybersecurity</span></div>
-        <div class="cert-view">View Certificate <span class="cert-view-arrow">↗</span></div>
-      </a>
-    </div>
-  </div>
-</section>
-
 <!-- ===================== CYBERSECURITY JOURNEY ===================== -->
 <section class="timeline-section" id="journey">
   <div class="wrap">
@@ -1004,10 +960,12 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
       </div>
       <div class="lab-grid">
         <div class="lab-stat green"><div class="label">System Status</div><div class="value">ONLINE</div></div>
-        <div class="lab-stat"><div class="label">Tools Built</div><div class="value">04</div></div>
+        <div class="lab-stat"><div class="label">Projects</div><div class="value">04</div></div>
         <div class="lab-stat"><div class="label">Security Focus</div><div class="value" style="font-size:1.05rem">WEB + APP SECURITY</div></div>
         <div class="lab-stat"><div class="label">Primary Language</div><div class="value">PYTHON</div></div>
         <div class="lab-stat"><div class="label">Environment</div><div class="value" style="font-size:1.05rem">LINUX</div></div>
+        <div class="lab-stat"><div class="label">Coding Tool</div><div class="value" style="font-size:1.05rem">VS CODE</div></div>
+        <div class="lab-stat"><div class="label">Deploy Tool</div><div class="value" style="font-size:1.05rem"><a href="https://github.com/arkap1502" target="_blank" rel="noopener" style="color:var(--cyan)">GITHUB</a></div></div>
       </div>
     </div>
   </div>
