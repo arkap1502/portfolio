@@ -67,22 +67,6 @@ body::after{
   z-index:0; pointer-events:none;
 }
 
-/* custom "water flow in space" cursor */
-#cursorCanvas{
-  position:fixed; inset:0;
-  width:100%; height:100%;
-  z-index:9999;
-  pointer-events:none;
-  mix-blend-mode:screen;
-}
-@media (hover:hover) and (pointer:fine){
-  html, body, a, button, .btn, input, textarea, .social-ic, .filter-btn, .details-toggle{
-    cursor:none !important;
-  }
-}
-
-
-
 a{color:inherit; text-decoration:none;}
 ul{list-style:none;}
 img{max-width:100%; display:block;}
@@ -240,145 +224,6 @@ header.scrolled{
 }
 .scroll-cue .line{width:1px; height:34px; background:linear-gradient(var(--cyan), transparent); animation: scrolldown 1.8s ease-in-out infinite;}
 @keyframes scrolldown{0%{transform:scaleY(0); transform-origin:top;} 50%{transform:scaleY(1); transform-origin:top;} 51%{transform-origin:bottom;} 100%{transform:scaleY(0); transform-origin:bottom;}}
-
-/* ===================== AI ROBOT (3D dancing companion) ===================== */
-.robot-widget{
-  position:relative;
-  display:flex; flex-direction:column; align-items:center;
-  margin-bottom:26px;
-  user-select:none;
-}
-.robot-widget .r-label{
-  font-family:var(--font-mono); font-size:0.7rem; letter-spacing:0.14em; color:var(--text-faint);
-  text-transform:uppercase; margin-bottom:8px; display:flex; align-items:center; gap:8px;
-}
-.robot-widget .r-label .dot{width:5px;height:5px;border-radius:50%;background:var(--cyan);box-shadow:0 0 6px var(--cyan);animation:pulse 1.6s ease-in-out infinite;}
-
-.robot-scene{
-  position:relative;
-  width:200px; height:196px;
-  perspective:900px;
-}
-.ai-particle{
-  position:absolute; border-radius:50%;
-  background: var(--cyan);
-  box-shadow:0 0 8px var(--cyan), 0 0 16px var(--cyan);
-  opacity:0.35;
-  animation: aiFloat 4.2s ease-in-out infinite;
-  pointer-events:none;
-}
-@keyframes aiFloat{
-  0%,100%{ transform:translateY(0) scale(1); opacity:0.25; }
-  50%{ transform:translateY(-18px) scale(1.35); opacity:0.85; }
-}
-
-.r-pad{
-  position:absolute; left:50%; bottom:4px; width:104px; height:18px; border-radius:50%;
-  transform:translateX(-50%);
-  background: radial-gradient(ellipse at center, rgba(0,229,255,0.35), rgba(0,229,255,0) 72%);
-  filter:blur(1px);
-  animation: padPulse 2.2s ease-in-out infinite;
-}
-@keyframes padPulse{
-  0%,100%{ opacity:.5; transform:translateX(-50%) scale(1); }
-  50%{ opacity:1; transform:translateX(-50%) scale(1.18); }
-}
-
-.robot{
-  position:absolute; left:50%; bottom:26px; width:100px; height:150px;
-  transform:translateX(-50%);
-  transform-style:preserve-3d;
-  animation: robotDance 2.1s ease-in-out infinite;
-}
-@keyframes robotDance{
-  0%,100%{ transform:translateX(-50%) translateY(0) rotateZ(-5deg) rotateY(-10deg); }
-  25%{ transform:translateX(-50%) translateY(-15px) rotateZ(5deg) rotateY(10deg); }
-  50%{ transform:translateX(-50%) translateY(-2px) rotateZ(-4deg) rotateY(-8deg); }
-  75%{ transform:translateX(-50%) translateY(-18px) rotateZ(6deg) rotateY(12deg); }
-}
-
-.r-antenna{
-  position:absolute; top:-16px; left:50%; width:2px; height:16px; background:var(--cyan);
-  transform:translateX(-50%); box-shadow:0 0 6px var(--cyan);
-}
-.r-antenna span{
-  position:absolute; top:-6px; left:50%; width:8px; height:8px; border-radius:50%;
-  transform:translateX(-50%); background:var(--green); box-shadow:0 0 10px var(--green);
-  animation: pulse 1s ease-in-out infinite;
-}
-
-.r-head{
-  position:absolute; top:0; left:50%; width:58px; height:50px; transform:translateX(-50%);
-  border-radius:16px;
-  background: linear-gradient(160deg, #16232c, #0b141a 70%);
-  border:1.5px solid var(--border-strong);
-  box-shadow: 0 0 18px rgba(0,229,255,0.25), inset 0 0 10px rgba(0,229,255,0.1);
-  animation: headBob 2.1s ease-in-out infinite;
-}
-@keyframes headBob{
-  0%,100%{ transform:translateX(-50%) rotate(-7deg); }
-  50%{ transform:translateX(-50%) rotate(7deg); }
-}
-.r-eye{
-  position:absolute; top:20px; width:10px; height:10px; border-radius:50%;
-  background: var(--cyan); box-shadow:0 0 8px var(--cyan), 0 0 16px var(--cyan);
-  animation: eyeBlink 3.4s ease-in-out infinite;
-}
-.r-eye.l{left:12px;} .r-eye.r{right:12px;}
-@keyframes eyeBlink{
-  0%,92%,100%{ transform:scaleY(1); }
-  96%{ transform:scaleY(0.15); }
-}
-
-.r-body{
-  position:absolute; top:46px; left:50%; width:64px; height:64px; transform:translateX(-50%);
-  border-radius:18px;
-  background: linear-gradient(160deg, #131f27, #0a1216 75%);
-  border:1.5px solid var(--border);
-  box-shadow: 0 8px 26px rgba(0,0,0,0.5), 0 0 20px rgba(0,229,255,0.14);
-}
-.r-chip{
-  position:absolute; top:50%; left:50%; width:22px; height:22px; border-radius:50%;
-  transform:translate(-50%,-50%);
-  background: radial-gradient(circle, var(--green), transparent 70%);
-  box-shadow:0 0 14px var(--green);
-  animation: pulse 1.4s ease-in-out infinite;
-}
-
-.r-arm{
-  position:absolute; top:50px; width:10px; height:44px; border-radius:6px;
-  background: linear-gradient(180deg, #17242c, #0b1216);
-  border:1px solid var(--border);
-  transform-origin: top center;
-  box-shadow: 0 0 10px rgba(0,229,255,0.08);
-}
-.r-arm.l{ left:12px; animation: armSwingL 2.1s ease-in-out infinite; }
-.r-arm.r{ right:12px; animation: armSwingR 2.1s ease-in-out infinite; }
-@keyframes armSwingL{
-  0%,100%{ transform:rotate(-32deg); }
-  50%{ transform:rotate(52deg); }
-}
-@keyframes armSwingR{
-  0%,100%{ transform:rotate(32deg); }
-  50%{ transform:rotate(-52deg); }
-}
-
-.r-leg{
-  position:absolute; bottom:0; width:12px; height:26px; border-radius:5px;
-  background: linear-gradient(180deg, #17242c, #0b1216);
-  border:1px solid var(--border);
-  transform-origin: top center;
-}
-.r-leg.l{ left:24px; animation: legKickL 2.1s ease-in-out infinite; }
-.r-leg.r{ right:24px; animation: legKickR 2.1s ease-in-out infinite; }
-@keyframes legKickL{
-  0%,100%{ transform:rotate(12deg); }
-  50%{ transform:rotate(-20deg); }
-}
-@keyframes legKickR{
-  0%,100%{ transform:rotate(-12deg); }
-  50%{ transform:rotate(20deg); }
-}
 
 /* ===================== REVEAL ===================== */
 .reveal{ opacity:0; transform: translateY(26px); transition: opacity .7s ease, transform .7s ease;}
@@ -579,7 +424,6 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
   .wrap{padding:0 20px;}
   .contact-box{padding:32px 22px;}
   .hero{padding-top:104px; padding-bottom:56px;}
-  .robot-scene{transform:scale(0.82); transform-origin:top center; margin-bottom:-24px;}
   .skill-groups, .cert-grid, .repo-grid{ grid-template-columns:1fr;}
   .project-grid{ grid-template-columns:1fr;}
   .lab-grid{ grid-template-columns:repeat(2,1fr);}
@@ -603,7 +447,6 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
 </head>
 <body>
 
-<canvas id="cursorCanvas" aria-hidden="true"></canvas>
 
 <!-- ===================== NAV ===================== -->
 <header id="siteHeader">
@@ -668,31 +511,6 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
     </div>
 
     <div>
-      <div class="robot-widget" aria-hidden="true">
-        <div class="r-label"><span class="dot"></span>AI COMPANION — dancing.sys</div>
-        <div class="robot-scene">
-          <div class="ai-particle" style="width:5px;height:5px;left:6%;top:18%;animation-delay:0s;"></div>
-          <div class="ai-particle" style="width:4px;height:4px;left:88%;top:12%;animation-delay:.9s;background:var(--green);box-shadow:0 0 8px var(--green),0 0 16px var(--green);"></div>
-          <div class="ai-particle" style="width:6px;height:6px;left:80%;top:62%;animation-delay:1.8s;"></div>
-          <div class="ai-particle" style="width:3px;height:3px;left:12%;top:68%;animation-delay:2.6s;background:var(--green);box-shadow:0 0 8px var(--green),0 0 16px var(--green);"></div>
-          <div class="ai-particle" style="width:4px;height:4px;left:50%;top:6%;animation-delay:1.2s;"></div>
-          <div class="robot">
-            <div class="r-antenna"><span></span></div>
-            <div class="r-head">
-              <div class="r-eye l"></div>
-              <div class="r-eye r"></div>
-            </div>
-            <div class="r-arm l"></div>
-            <div class="r-arm r"></div>
-            <div class="r-body">
-              <div class="r-chip"></div>
-            </div>
-            <div class="r-leg l"></div>
-            <div class="r-leg r"></div>
-          </div>
-          <div class="r-pad"></div>
-        </div>
-      </div>
       <div class="terminal">
         <div class="term-bar">
           <span class="term-dot r"></span><span class="term-dot y"></span><span class="term-dot g"></span>
@@ -967,31 +785,6 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
 <!-- ===================== CONTACT ===================== -->
 <section class="contact" id="contact">
   <div class="wrap">
-    <div class="robot-widget" aria-hidden="true" style="margin:0 auto 34px;">
-      <div class="r-label"><span class="dot"></span>AI COMPANION — dancing.sys</div>
-      <div class="robot-scene">
-        <div class="ai-particle" style="width:5px;height:5px;left:6%;top:18%;animation-delay:0s;"></div>
-        <div class="ai-particle" style="width:4px;height:4px;left:88%;top:12%;animation-delay:.9s;background:var(--green);box-shadow:0 0 8px var(--green),0 0 16px var(--green);"></div>
-        <div class="ai-particle" style="width:6px;height:6px;left:80%;top:62%;animation-delay:1.8s;"></div>
-        <div class="ai-particle" style="width:3px;height:3px;left:12%;top:68%;animation-delay:2.6s;background:var(--green);box-shadow:0 0 8px var(--green),0 0 16px var(--green);"></div>
-        <div class="ai-particle" style="width:4px;height:4px;left:50%;top:6%;animation-delay:1.2s;"></div>
-        <div class="robot">
-          <div class="r-antenna"><span></span></div>
-          <div class="r-head">
-            <div class="r-eye l"></div>
-            <div class="r-eye r"></div>
-          </div>
-          <div class="r-arm l"></div>
-          <div class="r-arm r"></div>
-          <div class="r-body">
-            <div class="r-chip"></div>
-          </div>
-          <div class="r-leg l"></div>
-          <div class="r-leg r"></div>
-        </div>
-        <div class="r-pad"></div>
-      </div>
-    </div>
     <div class="contact-box glass reveal">
       <div class="eyebrow" style="justify-content:center">LET'S CONNECT</div>
       <h2>Let's Build Something Secure</h2>
@@ -1080,189 +873,6 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
 </div>
 
 <script>
-/* ===================== "WATER FLOW IN SPACE" CURSOR ===================== */
-(function(){
-  const canvas = document.getElementById('cursorCanvas');
-  if (!canvas) return;
-  const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!isFinePointer || reduceMotion) { canvas.remove(); return; }
-
-  const ctx = canvas.getContext('2d');
-  let W = window.innerWidth, H = window.innerHeight;
-  canvas.width = W * (window.devicePixelRatio || 1);
-  canvas.height = H * (window.devicePixelRatio || 1);
-  canvas.style.width = W + 'px';
-  canvas.style.height = H + 'px';
-  ctx.scale(window.devicePixelRatio || 1, window.devicePixelRatio || 1);
-
-  window.addEventListener('resize', () => {
-    W = window.innerWidth; H = window.innerHeight;
-    canvas.width = W * (window.devicePixelRatio || 1);
-    canvas.height = H * (window.devicePixelRatio || 1);
-    canvas.style.width = W + 'px';
-    canvas.style.height = H + 'px';
-    ctx.scale(window.devicePixelRatio || 1, window.devicePixelRatio || 1);
-  });
-
-  let mouseX = W / 2, mouseY = H / 2;
-  let lastX = mouseX, lastY = mouseY;
-  let active = false;
-
-  // a chain of "flow" points that lag behind the real cursor, like current dragging water
-  const CHAIN_LEN = 14;
-  const chain = Array.from({ length: CHAIN_LEN }, () => ({ x: mouseX, y: mouseY }));
-
-  const colors = ['#00e5ff', '#39ff88', '#7ef9ff'];
-  const particles = [];
-  const stars = [];
-
-  function spawnFlowParticles(x, y, vx, vy) {
-    const speed = Math.min(Math.hypot(vx, vy), 40);
-    const count = Math.max(1, Math.min(3, Math.round(speed / 6)));
-    for (let i = 0; i < count; i++) {
-      const spread = (Math.random() - 0.5) * 0.9;
-      particles.push({
-        x, y,
-        vx: -vx * 0.12 + (Math.random() - 0.5) * 0.6,
-        vy: -vy * 0.12 + (Math.random() - 0.5) * 0.6,
-        life: 1,
-        decay: 0.018 + Math.random() * 0.018,
-        size: 1.4 + Math.random() * 2.2,
-        wavePhase: Math.random() * Math.PI * 2,
-        waveAmp: 0.4 + spread,
-        color: colors[Math.floor(Math.random() * colors.length)]
-      });
-    }
-    // occasional tiny "star" sparkle drifting off, for the space feel
-    if (Math.random() < 0.18) {
-      stars.push({
-        x: x + (Math.random() - 0.5) * 14,
-        y: y + (Math.random() - 0.5) * 14,
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.4,
-        life: 1,
-        decay: 0.006 + Math.random() * 0.01,
-        size: 0.6 + Math.random() * 1.1
-      });
-    }
-  }
-
-  window.addEventListener('pointermove', (e) => {
-    mouseX = e.clientX; mouseY = e.clientY;
-    active = true;
-  });
-  window.addEventListener('pointerdown', () => {
-    for (let i = 0; i < 10; i++) {
-      const a = (Math.PI * 2 * i) / 10;
-      particles.push({
-        x: mouseX, y: mouseY,
-        vx: Math.cos(a) * (1.5 + Math.random() * 1.5),
-        vy: Math.sin(a) * (1.5 + Math.random() * 1.5),
-        life: 1, decay: 0.02 + Math.random() * 0.015,
-        size: 1.8 + Math.random() * 2, wavePhase: Math.random() * Math.PI * 2,
-        waveAmp: 0.5, color: colors[Math.floor(Math.random() * colors.length)]
-      });
-    }
-  });
-  window.addEventListener('mouseleave', () => { active = false; });
-
-  let t = 0;
-  function frame() {
-    requestAnimationFrame(frame);
-    t += 1;
-
-    // fade the previous frame (canvas-local only, doesn't dim the page)
-    ctx.globalCompositeOperation = 'destination-out';
-    ctx.fillStyle = 'rgba(0,0,0,0.14)';
-    ctx.fillRect(0, 0, W, H);
-    ctx.globalCompositeOperation = 'lighter';
-
-    // advance the lagging "current" chain toward the real cursor
-    chain[0].x += (mouseX - chain[0].x) * 0.5;
-    chain[0].y += (mouseY - chain[0].y) * 0.5;
-    for (let i = 1; i < CHAIN_LEN; i++) {
-      chain[i].x += (chain[i - 1].x - chain[i].x) * 0.42;
-      chain[i].y += (chain[i - 1].y - chain[i].y) * 0.42;
-    }
-
-    const dx = mouseX - lastX, dy = mouseY - lastY;
-    if (active) spawnFlowParticles(mouseX, mouseY, dx, dy);
-    lastX = mouseX; lastY = mouseY;
-
-    // draw the flowing water ribbon through the chain, with a wavy perpendicular offset
-    ctx.beginPath();
-    for (let i = 0; i < CHAIN_LEN - 1; i++) {
-      const p0 = chain[i], p1 = chain[i + 1];
-      const nx = -(p1.y - p0.y), ny = (p1.x - p0.x);
-      const nl = Math.hypot(nx, ny) || 1;
-      const wobble = Math.sin(t * 0.12 + i * 0.6) * (1.6 - i * 0.06);
-      const ox = p0.x + (nx / nl) * wobble;
-      const oy = p0.y + (ny / nl) * wobble;
-      if (i === 0) ctx.moveTo(ox, oy); else ctx.lineTo(ox, oy);
-    }
-    const grad = ctx.createLinearGradient(chain[0].x, chain[0].y, chain[CHAIN_LEN - 1].x, chain[CHAIN_LEN - 1].y);
-    grad.addColorStop(0, 'rgba(0,229,255,0.55)');
-    grad.addColorStop(1, 'rgba(57,255,136,0)');
-    ctx.strokeStyle = grad;
-    ctx.lineWidth = 2;
-    ctx.lineCap = 'round';
-    ctx.shadowBlur = 12;
-    ctx.shadowColor = '#00e5ff';
-    ctx.stroke();
-    ctx.shadowBlur = 0;
-
-    // flow particles
-    for (let i = particles.length - 1; i >= 0; i--) {
-      const p = particles[i];
-      p.wavePhase += 0.15;
-      p.x += p.vx + Math.sin(p.wavePhase) * p.waveAmp * 0.3;
-      p.y += p.vy + Math.cos(p.wavePhase) * p.waveAmp * 0.3;
-      p.vx *= 0.96; p.vy *= 0.96;
-      p.life -= p.decay;
-      if (p.life <= 0) { particles.splice(i, 1); continue; }
-      ctx.beginPath();
-      ctx.fillStyle = p.color;
-      ctx.globalAlpha = Math.max(p.life, 0) * 0.9;
-      ctx.shadowBlur = 8;
-      ctx.shadowColor = p.color;
-      ctx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.shadowBlur = 0;
-      ctx.globalAlpha = 1;
-    }
-
-    // drifting star sparkles
-    for (let i = stars.length - 1; i >= 0; i--) {
-      const s = stars[i];
-      s.x += s.vx; s.y += s.vy;
-      s.life -= s.decay;
-      if (s.life <= 0) { stars.splice(i, 1); continue; }
-      ctx.beginPath();
-      ctx.fillStyle = '#ffffff';
-      ctx.globalAlpha = Math.max(s.life, 0) * 0.8;
-      ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.globalAlpha = 1;
-    }
-
-    // the visible cursor core: a bright glowing dot marking the real pointer position
-    ctx.beginPath();
-    ctx.fillStyle = '#e7fbff';
-    ctx.shadowBlur = 14;
-    ctx.shadowColor = '#00e5ff';
-    ctx.arc(mouseX, mouseY, 3.2, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.beginPath();
-    ctx.strokeStyle = 'rgba(0,229,255,0.55)';
-    ctx.lineWidth = 1;
-    ctx.shadowBlur = 0;
-    ctx.arc(mouseX, mouseY, 9 + Math.sin(t * 0.08) * 1.5, 0, Math.PI * 2);
-    ctx.stroke();
-  }
-  frame();
-})();
-
 document.addEventListener('DOMContentLoaded', function(){
 
   /* ---------- Header scroll state ---------- */
