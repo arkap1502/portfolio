@@ -1,59 +1,65 @@
 # Arka Patra — Portfolio
 
-Personal portfolio site for **Arka Patra**, a B.Sc. Cyber Security student building security-focused Python and web applications.
-
-🔗 Single-page, dark-themed site with a terminal-style hero, animated 3D background, and smooth in-page navigation.
+A single-page portfolio site for **Arka Patra**, a B.Sc. Cyber Security student (GNIT / MAKAUT) building security-focused Python and web tools. Built as one self-contained `index.html` file — no build step, no dependencies to install.
 
 ## Features
 
-- **Single-page layout** — all sections (Home, Skills, Projects, Certifications, Journey, GitHub, Contact) live on one scrollable page with smooth-scroll navigation and scroll-based active-link highlighting.
-- **Animated hero terminal** with a typing effect and a small animated 3D robot companion.
-- **Three.js background** — subtle animated network/particle scene behind the content.
-- **Custom cursor** — canvas-based "water flow" cursor effect on desktop/pointer devices.
-- **Project showcase** with category filtering (Cybersecurity / Web) and expandable technical detail panels.
-- **Scroll-reveal animations** for section content as you scroll down the page.
-- **Responsive design** with a mobile hamburger menu.
-- **Accessible** — respects `prefers-reduced-motion`, includes focus states and ARIA labels.
-
-## Tech Stack
-
-- HTML5, CSS3 (custom properties, no framework)
-- Vanilla JavaScript (no build step required)
-- [Three.js](https://threejs.org/) (r128) for the 3D background
-- Google Fonts: Space Grotesk, Inter, JetBrains Mono
+- Responsive single-page layout with smooth-scroll navigation and active-section highlighting
+- Animated typing terminal in the hero section
+- Filterable project grid (All / Security / Web / Tools, etc.)
+- Expandable "technical details" panels on project cards
+- Animated risk meter demo on the URL Scanner project card
+- Click-to-copy email button in the Contact section
+- Scroll-triggered reveal animations throughout
+- Mobile hamburger menu
+- Respects `prefers-reduced-motion` for users who want fewer animations
 
 ## Sections
 
-| Section | Description |
+| Section | Anchor |
 |---|---|
-| Home | Hero intro, terminal animation, status chips, socials |
-| Skills | Tools and concepts used across development and security work |
-| Projects | Featured builds (e.g. Altron Password Inspector, URL Threat Scanner, Phish·AI, Personal Portfolio) with filtering and tech details |
-| Certifications | Verified credentials |
-| Journey | Timeline of the cybersecurity learning path |
-| GitHub | Highlighted public repositories |
-| Contact | Contact form and direct contact options |
+| Hero | `#home` |
+| Education | `#education` |
+| Skills | `#skills` |
+| Projects | `#projects` |
+| Journey / Timeline | `#journey` |
+| Contact | `#contact` |
+
+## Tech Stack
+
+- Plain HTML5 + CSS3 (custom properties / design tokens, no framework)
+- Vanilla JavaScript (no libraries)
+- Google Fonts: Space Grotesk, Inter, JetBrains Mono
 
 ## Getting Started
 
-This is a static site with no dependencies or build process.
+No build tools required. Just open the file in a browser:
 
-1. Clone or download the repository.
-2. Open `index.html` directly in a browser, **or** serve it locally:
+```bash
+open index.html
+```
 
-   ```bash
-   python3 -m http.server 8000
-   ```
+Or serve it locally:
 
-   Then visit `http://localhost:8000`.
+```bash
+python3 -m http.server 8000
+```
+
+Then visit `http://localhost:8000`.
 
 ## Customization
 
-- **Colors / theme** — edit the CSS custom properties in the `:root` block at the top of `index.html` (`--cyan`, `--green`, `--bg`, etc.).
-- **Content** — update the relevant `<section>` blocks (Skills, Projects, Certifications, Journey, GitHub, Contact) directly in `index.html`.
-- **Resume/CV** — the "Download CV" button currently shows a placeholder alert; replace it with a real link to your PDF resume.
-- **Social links** — update the footer and hero social icons with your own profile URLs.
+Before deploying, update the following placeholders:
+
+- **CV / resume link** — the "Download CV" button (`#downloadCvBtn`) currently shows an alert; replace its `href` with a path to your PDF resume and remove the JS placeholder handler.
+- **Email address** — the copy-to-clipboard contact button uses `data-copy="your.email@example.com"`; replace with your real email.
+- **Social links** — GitHub, LinkedIn, Instagram, and Threads URLs are hardcoded in the hero, contact, and footer sections; update as needed.
+- **Project repos** — each project card links to a GitHub repo under `github.com/arkap1502`; update if repos move or new projects are added.
+
+## Browser Support
+
+Targets modern evergreen browsers (Chrome, Firefox, Safari, Edge). Uses CSS `backdrop-filter`, CSS custom properties, and `IntersectionObserver`.
 
 ## License
 
-This project is free to use and adapt for your own portfolio.
+Personal portfolio — content and branding belong to Arka Patra. Feel free to use the code structure as a template for your own portfolio.
