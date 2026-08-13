@@ -60,6 +60,3 @@ Before deploying, update the following placeholders:
 
 Targets modern evergreen browsers (Chrome, Firefox, Safari, Edge). Uses CSS `backdrop-filter`, CSS custom properties, and `IntersectionObserver`.
 
-## License
-
-Personal portfolio — content and branding belong to Arka Patra. Feel free to use the code structure as a template for your own portfolio.
