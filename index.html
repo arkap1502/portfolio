@@ -629,7 +629,6 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
         </div>
         <div class="project-actions">
           <a href="https://arkap1502.github.io/password-making/" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Live Demo</a>
-          <a href="https://github.com/arkap1502/password-making" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">GitHub</a>
         </div>
       </article>
 
@@ -653,41 +652,12 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
         <div class="tech-row">
           <span class="tech-chip">JavaScript</span><span class="tech-chip">HTML</span><span class="tech-chip">CSS</span>
         </div>
-        <div class="disclaimer-box">⚠ Analyzes URL structure only — it does not visit the site, query DNS, or check external blocklists.</div>
         <button class="details-toggle" data-target="td2"><span class="chev">▸</span> Technical Details</button>
         <div class="tech-details" id="td2">
           <p>Entirely client-side pattern analysis: the scanner inspects the URL string for structural red flags (raw IPs in place of a domain, uncommon TLDs, lookalike brand spelling, and common phishing keywords) and combines them into a 0–100 score with a plain-language verdict.</p>
         </div>
         <div class="project-actions">
           <a href="https://arkap1502.github.io/URL-Scanner/" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Live Demo</a>
-          <a href="https://github.com/arkap1502/URL-Scanner" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">GitHub</a>
-        </div>
-      </article>
-
-      <!-- PROJECT 3 -->
-      <article class="project-card glass reveal" data-cat="cybersecurity web">
-        <div class="project-top">
-          <span class="project-cat">Cybersecurity · Phishing Awareness</span>
-          <h3>Phish·AI</h3>
-          <p class="desc">A full-stack phishing-awareness simulator that lets users practice spotting phishing scenarios, track attempts, and view leaderboard stats.</p>
-        </div>
-        <ul class="feature-list">
-          <li>Registration, login/logout &amp; session management</li>
-          <li>Hashed password storage (Werkzeug security)</li>
-          <li>Phishing scenarios with attempt tracking</li>
-          <li>Accuracy calculation &amp; leaderboard</li>
-          <li>Protected API routes</li>
-        </ul>
-        <div class="tech-row">
-          <span class="tech-chip">Python</span><span class="tech-chip">Flask</span><span class="tech-chip">Flask-SQLAlchemy</span>
-          <span class="tech-chip">SQLite</span><span class="tech-chip">HTML/CSS/JS</span><span class="tech-chip">Werkzeug</span>
-        </div>
-        <button class="details-toggle" data-target="td3"><span class="chev">▸</span> Technical Details</button>
-        <div class="tech-details" id="td3">
-          <p>Built as a security-training dashboard: user credentials are hashed rather than stored in plaintext, sessions gate access to scenario and leaderboard routes, and each attempt is logged to compute a per-user accuracy score shown on a shared leaderboard.</p>
-        </div>
-        <div class="project-actions">
-          <a href="https://github.com/arkap1502/phishing-awareness" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">GitHub</a>
         </div>
       </article>
 
@@ -703,7 +673,31 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
         </div>
         <div class="project-actions">
           <a href="https://arkap1502.github.io/URL-Password-Checker/" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Live Demo</a>
-          <a href="https://github.com/arkap1502/URL-Password-Checker" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">GitHub</a>
+        </div>
+      </article>
+
+      <!-- PROJECT 5 -->
+      <article class="project-card glass reveal" data-cat="cybersecurity web">
+        <div class="project-top">
+          <span class="badge-featured">FEATURED</span>
+          <span class="project-cat">Cybersecurity · Data Protection</span>
+          <h3>NexVault</h3>
+          <p class="desc">A secure vault web application for storing and managing sensitive data, with user accounts and access control at its core.</p>
+        </div>
+        <ul class="feature-list">
+          <li>User registration &amp; authenticated login</li>
+          <li>Encrypted, access-controlled data storage</li>
+          <li>Personal vault dashboard per user</li>
+        </ul>
+        <div class="tech-row">
+          <span class="tech-chip">Web App</span><span class="tech-chip">Authentication</span><span class="tech-chip">Data Security</span>
+        </div>
+        <button class="details-toggle" data-target="td5"><span class="chev">▸</span> Technical Details</button>
+        <div class="tech-details" id="td5">
+          <p>NexVault follows a "your data, your vault, your control" model — users register and log in before any vault data becomes accessible, keeping stored information gated behind authentication rather than open access.</p>
+        </div>
+        <div class="project-actions">
+          <a href="https://secure-vault-system.onrender.com/" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Live Demo</a>
         </div>
       </article>
     </div>
