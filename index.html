@@ -259,6 +259,13 @@ header.scrolled{
 .feature-list li::before{ content:'▹'; position:absolute; left:0; color:var(--cyan);}
 .tech-row{ display:flex; flex-wrap:wrap; gap:6px; padding:0 24px; margin-bottom:20px;}
 .tech-chip{ font-family:var(--font-mono); font-size:0.68rem; padding:4px 9px; border-radius:5px; background:rgba(124,58,237,0.08); color:var(--cyan); border:1px solid var(--border);}
+.contributors-bar{ display:flex; align-items:center; gap:10px; margin:14px 0 4px; padding-top:14px; border-top:1px solid var(--border);}
+.contributors-label{ font-family:var(--font-mono); font-size:0.68rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.04em; margin-right:2px;}
+.contributor-avatars{ display:flex;}
+.contributor-avatars a{ margin-left:-8px; display:block; border-radius:50%; transition: transform .2s ease; }
+.contributor-avatars a:first-child{ margin-left:0; }
+.contributor-avatars a:hover{ transform: translateY(-3px); z-index:2; }
+.contributor-avatars img{ width:28px; height:28px; border-radius:50%; border:2px solid var(--bg, #0d0d14); display:block; background:var(--border);}
 .project-actions{ display:flex; gap:10px; padding:18px 24px; border-top:1px solid var(--border); background:#faf9fe; margin-top:auto; flex-wrap:wrap;}
 .details-toggle{ background:none; border:none; color:var(--cyan); font-family:var(--font-mono); font-size:0.78rem; padding:0 24px 20px; text-align:left; display:flex; align-items:center; gap:6px;}
 .details-toggle .chev{ transition: transform .25s ease;}
@@ -629,6 +636,7 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
         </div>
         <div class="project-actions">
           <a href="https://arkap1502.github.io/password-making/" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Live Demo</a>
+          <a href="https://github.com/arkap1502/password-making" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Code</a>
         </div>
       </article>
 
@@ -658,6 +666,7 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
         </div>
         <div class="project-actions">
           <a href="https://arkap1502.github.io/URL-Scanner/" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Live Demo</a>
+          <a href="https://github.com/arkap1502/URL-Scanner" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Code</a>
         </div>
       </article>
 
@@ -673,6 +682,7 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
         </div>
         <div class="project-actions">
           <a href="https://arkap1502.github.io/URL-Password-Checker/" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Live Demo</a>
+          <a href="https://github.com/arkap1502/URL-Password-Checker" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Code</a>
         </div>
       </article>
 
@@ -696,8 +706,38 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
         <div class="tech-details" id="td5">
           <p>NexVault follows a "your data, your vault, your control" model — users register and log in before any vault data becomes accessible, keeping stored information gated behind authentication rather than open access.</p>
         </div>
+        <div class="contributors-bar">
+          <span class="contributors-label">Group Project</span>
+        </div>
         <div class="project-actions">
           <a href="https://secure-vault-system.onrender.com/" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Live Demo</a>
+        </div>
+      </article>
+
+      <!-- PROJECT 6 -->
+      <article class="project-card glass reveal" data-cat="web">
+        <div class="project-top">
+          <span class="project-cat">Web Development · AI Text Tool</span>
+          <h3>Humanize AI</h3>
+          <p class="desc">A web application that converts AI-generated text into natural, human-like writing, with a client-side engine that also runs fully offline in the browser.</p>
+        </div>
+        <ul class="feature-list">
+          <li>Light, medium &amp; strong humanization intensity levels</li>
+          <li>Real-time text transformation with instant results</li>
+          <li>Pattern-recognition engine to identify AI-like phrasing</li>
+          <li>Word-count statistics comparing original vs. humanized text</li>
+          <li>One-click copy to clipboard</li>
+        </ul>
+        <div class="tech-row">
+          <span class="tech-chip">React</span><span class="tech-chip">Node.js</span><span class="tech-chip">Express</span><span class="tech-chip">JavaScript</span>
+        </div>
+        <button class="details-toggle" data-target="td6"><span class="chev">▸</span> Technical Details</button>
+        <div class="tech-details" id="td6">
+          <p>Built as a React frontend with an Express backend, but ships a zero-build, fully client-side fallback so it also runs entirely offline in the browser with no server dependency — the same humanizer engine is ported to plain JavaScript for static hosting on GitHub Pages.</p>
+        </div>
+        <div class="project-actions">
+          <a href="https://arkap1502.github.io/Humanize-AI/" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Live Demo</a>
+          <a href="https://github.com/arkap1502/Humanize-AI" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Code</a>
         </div>
       </article>
     </div>
@@ -728,6 +768,8 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
       <div class="journey-arrow reveal">↓</div>
       <div class="journey-node glass reveal">NexVault</div>
       <div class="journey-arrow reveal">↓</div>
+      <div class="journey-node glass reveal">Humanize AI</div>
+      <div class="journey-arrow reveal">↓</div>
       <div class="journey-node glass reveal" style="border-color:var(--border-strong)">Continuous cybersecurity learning</div>
     </div>
   </div>
@@ -748,10 +790,10 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
       </div>
       <div class="lab-grid">
         <div class="lab-stat green"><div class="label">System Status</div><div class="value">ONLINE</div></div>
-        <div class="lab-stat"><div class="label">Projects</div><div class="value">04</div></div>
+        <div class="lab-stat"><div class="label">Projects</div><div class="value">05</div></div>
         <div class="lab-stat"><div class="label">Security Focus</div><div class="value" style="font-size:1.05rem">WEB + APP SECURITY</div></div>
         <div class="lab-stat"><div class="label">Primary Language</div><div class="value" style="font-size:1.05rem">PYTHON (BACKEND) / JAVASCRIPT (FRONTEND)</div></div>
-        <div class="lab-stat"><div class="label">Environment</div><div class="value" style="font-size:1.05rem">LINUX</div></div>
+        <div class="lab-stat"><div class="label">Environment</div><div class="value" style="font-size:1.05rem">WINDOWS 11</div></div>
         <div class="lab-stat"><div class="label">Coding Tool</div><div class="value" style="font-size:1.05rem">VS CODE</div></div>
         <div class="lab-stat"><div class="label">Deploy Tool</div><div class="value" style="font-size:1.05rem"><a href="https://github.com/arkap1502" target="_blank" rel="noopener" style="color:var(--cyan)">GITHUB</a></div></div>
       </div>
