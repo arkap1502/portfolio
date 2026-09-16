@@ -9,26 +9,26 @@
 <meta property="og:title" content="Arka Patra — Cyber Security Student & Security-Focused Developer">
 <meta property="og:description" content="Building secure software. Exploring cybersecurity. Turning ideas into working tools.">
 <meta property="og:type" content="website">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23f5f4fb'/%3E%3Cpath d='M32 10 L52 18 V32 C52 44 44 52 32 56 C20 52 12 44 12 32 V18 Z' fill='none' stroke='%237c5cfa' stroke-width='3'/%3E%3Cpath d='M24 32 L29 37 L40 25' fill='none' stroke='%2310b981' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" type="image/svg+xml">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23131314'/%3E%3Cpath d='M32 10 L52 18 V32 C52 44 44 52 32 56 C20 52 12 44 12 32 V18 Z' fill='none' stroke='%23ff2e0e' stroke-width='3'/%3E%3Cpath d='M24 32 L29 37 L40 25' fill='none' stroke='%233dff88' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-/* ===================== TOKENS ===================== */
+/* ===================== TOKENS — CY FOCUS DARK + RED ===================== */
 :root{
-  --bg: #f5f4fb;
-  --bg-alt: #ffffff;
-  --surface: #ffffff;
-  --surface-solid: #ffffff;
-  --border: rgba(124,58,237,0.10);
-  --border-strong: rgba(124,58,237,0.35);
-  --cyan: #7c5cfa;
-  --cyan-dim: #a78bfa;
-  --green: #10b981;
-  --red: #ef4444;
-  --amber: #f59e0b;
-  --text: #221c3d;
-  --text-dim: #6b6485;
-  --text-faint: #a39cc0;
+  --bg: #131314;
+  --bg-alt: #1a1a1d;
+  --surface: #1c1c1f;
+  --surface-solid: #1c1c1f;
+  --border: rgba(255,255,255,0.09);
+  --border-strong: rgba(255,46,14,0.55);
+  --cyan: #ff2e0e;
+  --cyan-dim: #ff6a4d;
+  --green: #3dff88;
+  --red: #ff2e0e;
+  --amber: #ff5a1f;
+  --text: #f2efe9;
+  --text-dim: #b3aea6;
+  --text-faint: #6f6c66;
   --font-display: 'Space Grotesk', sans-serif;
   --font-body: 'Inter', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
@@ -46,6 +46,19 @@ body{
   overflow-x:hidden;
   position:relative;
 }
+body::before{
+  content:''; position:fixed; inset:0; z-index:0; pointer-events:none;
+  background:
+    radial-gradient(900px 500px at 85% 10%, rgba(255,46,14,0.10), transparent 60%),
+    radial-gradient(700px 500px at 10% 90%, rgba(255,46,14,0.06), transparent 60%),
+    linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+  background-size:auto,auto,44px 44px,44px 44px;
+}
+body::after{
+  content:''; position:fixed; inset:0; z-index:0; pointer-events:none; opacity:0.5;
+  background: radial-gradient(1000px 600px at 50% 40%, transparent 40%, rgba(0,0,0,0.5) 100%);
+}
 
 
 
@@ -55,7 +68,7 @@ img{max-width:100%; display:block;}
 button{font-family:inherit; cursor:pointer;}
 section{position:relative; z-index:1;}
 
-::selection{background: rgba(124,58,237,0.22); color:#221c3d;}
+::selection{background: rgba(255,46,14,0.4); color:#fff;}
 
 :focus-visible{
   outline: 2px solid var(--cyan);
@@ -70,38 +83,38 @@ section{position:relative; z-index:1;}
   margin-bottom:14px;
 }
 .eyebrow::before{content:'//'; color:var(--text-faint);}
-.eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--green); box-shadow:0 0 8px var(--green); display:inline-block;}
+.eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--cyan); box-shadow:0 0 8px var(--cyan); display:inline-block;}
 
 h1,h2,h3,h4{font-family:var(--font-display); font-weight:600; letter-spacing:-0.01em; color:var(--text);}
 .section-title{font-size: clamp(1.7rem, 3.2vw, 2.5rem); margin-bottom:10px;}
 .section-sub{color:var(--text-dim); max-width:620px; margin-bottom:48px; font-size:0.98rem;}
 
 .glass{
-  background: var(--surface);
+  background: linear-gradient(180deg, #202023, #171719);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  box-shadow: 0 1px 2px rgba(34,28,61,0.04), 0 10px 28px rgba(34,28,61,0.06);
+  box-shadow: 0 0 0 4px #0b0b0c, 0 18px 44px rgba(0,0,0,0.5);
 }
 
 .btn{
   display:inline-flex; align-items:center; gap:8px;
-  padding: 12px 22px; border-radius: 30px;
+  padding: 12px 22px; border-radius: 8px;
   font-family: var(--font-mono); font-size:0.85rem; font-weight:500;
-  border:1px solid var(--border-strong);
-  background: #ffffff; color: var(--text);
+  border:1px solid var(--border);
+  background: #232326; color: var(--text);
   transition: all .25s ease;
   white-space:nowrap;
 }
-.btn:hover{ background: rgba(124,58,237,0.06); box-shadow: 0 6px 18px rgba(124,58,237,0.16); transform: translateY(-1px); }
-.btn-primary{ background: var(--cyan); color:#ffffff; border-color:var(--cyan); font-weight:700;}
-.btn-primary:hover{ background:#6c47e6; box-shadow: 0 8px 22px rgba(124,58,237,0.35); }
-.btn-ghost{border-color: rgba(124,58,237,0.16); background:transparent;}
+.btn:hover{ background: #2b2b2f; box-shadow: 0 6px 18px rgba(255,46,14,0.25); transform: translateY(-1px); border-color:var(--border-strong);}
+.btn-primary{ background: var(--cyan); color:#fff; border-color:#a31300; font-weight:700;}
+.btn-primary:hover{ background:#ff3f1e; box-shadow: 0 8px 26px rgba(255,46,14,0.5); }
+.btn-ghost{border-color: rgba(255,255,255,0.16); background:transparent;}
 .btn-ghost:hover{border-color:var(--border-strong);}
 .btn-sm{padding:8px 14px; font-size:0.78rem;}
 
 .pill{
   font-family:var(--font-mono); font-size:0.72rem; padding:4px 10px; border-radius:20px;
-  border:1px solid var(--border); color:var(--cyan); background:rgba(124,58,237,0.08);
+  border:1px solid var(--border); color:var(--cyan); background:rgba(255,46,14,0.10);
 }
 
 /* ===================== NAV ===================== */
@@ -111,11 +124,21 @@ header{
   transition: all .3s ease;
 }
 header.scrolled{
-  background: rgba(255,255,255,0.88);
+  background: rgba(19,19,20,0.88);
   backdrop-filter: blur(14px);
   border-bottom:1px solid var(--border);
-  box-shadow: 0 1px 12px rgba(34,28,61,0.05);
+  box-shadow: 0 1px 12px rgba(0,0,0,0.6);
 }
+/* Nav stays light-on-dark for the dark theme */
+header .logo{color:#f2efe9;}
+.navlinks a{color:rgba(242,239,233,0.65);}
+.navlinks a:hover,
+.navlinks a.active{color:#ff4a24;}
+header:not(.scrolled) .logo{color:#f2efe9;}
+header:not(.scrolled) .navlinks a{color:rgba(242,239,233,0.65);}
+header:not(.scrolled) .navlinks a:hover,
+header:not(.scrolled) .navlinks a.active{color:#ff4a24;}
+header:not(.scrolled) .hamburger span{background:#ff4a24;}
 .navbar{ max-width:var(--maxw); margin:0 auto; padding:16px 28px; display:flex; align-items:center; justify-content:space-between;}
 .logo{ font-family:var(--font-mono); font-weight:700; font-size:1.05rem; display:flex; align-items:center; gap:10px; color:var(--text);}
 .logo .bracket{color:var(--cyan);}
@@ -126,11 +149,11 @@ header.scrolled{
 }
 .navlinks{display:flex; gap:2px; align-items:center;}
 .navlinks a{
-  font-family:var(--font-mono); font-size:0.78rem; letter-spacing:0.04em; color:var(--text-dim);
+  font-family:var(--font-mono); font-size:0.78rem; letter-spacing:0.04em; color:rgba(242,239,233,0.65);
   padding:9px 14px; border-radius:6px; transition: all .2s ease; position:relative;
 }
-.navlinks a:hover{color:var(--text);}
-.navlinks a.active{color:var(--cyan);}
+.navlinks a:hover{color:#fff;}
+.navlinks a.active{color:#ff4a24;}
 .navlinks a.active::after{
   content:''; position:absolute; left:14px; right:14px; bottom:2px; height:1px; background:var(--cyan);
   box-shadow:0 0 6px var(--cyan);
@@ -141,39 +164,125 @@ header.scrolled{
 }
 .hamburger span{width:22px; height:2px; background:var(--cyan); display:block; transition: all .25s ease;}
 .mobile-menu{
-  position:fixed; inset:0; top:64px; background:rgba(255,255,255,0.98); z-index:99;
+  position:fixed; inset:0; top:64px; background:rgba(19,19,20,0.98); z-index:99;
   transform: translateX(100%); transition: transform .3s ease; padding:32px 28px; backdrop-filter: blur(20px);
 }
 .mobile-menu.open{transform:translateX(0);}
 .mobile-menu a{display:block; font-family:var(--font-mono); font-size:1.1rem; padding:16px 0; color:var(--text-dim); border-bottom:1px solid var(--border);}
 .mobile-menu a.active{color:var(--cyan);}
 
-/* ===================== HERO ===================== */
-.hero{ min-height:100vh; display:flex; align-items:center; padding:120px 0 60px; position:relative;}
-.hero-grid{ display:grid; grid-template-columns: 1.15fr 0.95fr; gap:60px; align-items:center;}
+/* ===================== HERO — CY FOCUS RED PANEL ===================== */
+.hero{
+  min-height:100vh; display:flex; align-items:center; padding:132px 0 70px; position:relative;
+  background: transparent;
+  overflow:hidden;
+}
+.hero::before{
+  content:''; position:absolute; inset:0; pointer-events:none; opacity:0.9;
+  background:
+    radial-gradient(800px 420px at 70% 30%, rgba(255,46,14,0.12), transparent 65%),
+    repeating-linear-gradient(115deg, transparent 0 46px, rgba(255,255,255,0.025) 46px 47px);
+}
+.hero-grid{ display:grid; grid-template-columns: 1fr 1.1fr; gap:48px; align-items:center; position:relative; z-index:2;}
+.hero-eyebrow-cyber{
+  font-family:var(--font-mono); font-size:0.7rem; letter-spacing:0.28em; color:var(--cyan);
+  margin-bottom:14px; display:flex; align-items:center; gap:10px;
+}
+.hero-eyebrow-cyber::before{content:''; width:26px; height:2px; background:var(--cyan); display:inline-block;}
 .hero-name{
-  font-size: clamp(2.6rem, 6.2vw, 4.6rem); line-height:1.02; font-weight:700;
-  background: linear-gradient(180deg, #2b2350 20%, #7c5cfa 100%);
-  -webkit-background-clip:text; background-clip:text; color:transparent;
-  margin-bottom:16px;
+  font-size: clamp(2.2rem, 5vw, 3.6rem); line-height:1.02; font-weight:700;
+  color:#fff; letter-spacing:-0.02em; text-transform:none;
+  margin-bottom:14px;
+}
+.hero-name .accent{color:var(--cyan);}
+.hero-sub{
+  font-family:var(--font-mono); font-size:clamp(0.75rem,1.4vw,0.85rem);
+  letter-spacing:0.22em; color:var(--text-dim); font-weight:500; margin-bottom:18px;
 }
 .hero-role{
-  font-family:var(--font-mono); color:var(--cyan); font-size: clamp(0.95rem,1.6vw,1.15rem);
-  margin-bottom:22px; letter-spacing:0.01em;
+  font-family:var(--font-body); color:var(--text); font-size: clamp(1rem,1.8vw,1.2rem); font-weight:600;
+  margin-bottom:14px; letter-spacing:-0.01em;
 }
-.hero-headline{
-  font-size: clamp(1.15rem, 2vw, 1.5rem); color:#dce7ee; font-weight:500; margin-bottom:20px; max-width:560px;
+.hero-intro{ color:var(--text-dim); max-width:520px; margin-bottom:28px; font-size:0.95rem; line-height:1.7;}
+.hero-actions{ display:flex; flex-wrap:wrap; gap:12px; margin-bottom:30px;}
+.hero .btn-primary{
+  background:var(--cyan); border-color:#8f1200; color:#fff;
+  border-radius:8px; padding:12px 26px; font-weight:700; letter-spacing:0.02em;
+  box-shadow:0 8px 26px rgba(255,46,14,0.45);
 }
-.hero-intro{ color:var(--text-dim); max-width:540px; margin-bottom:32px; font-size:0.98rem;}
-.hero-actions{ display:flex; flex-wrap:wrap; gap:12px; margin-bottom:36px;}
-.hero-socials{ display:flex; gap:14px; align-items:center;}
+.hero .btn-primary:hover{background:#ff401c; box-shadow:0 10px 30px rgba(255,46,14,0.55); color:#fff;}
+.hero .btn-ghost{border-color:rgba(255,255,255,0.2); color:#f2efe9; background:rgba(255,255,255,0.04); border-radius:8px;}
+.hero .btn-ghost:hover{border-color:var(--border-strong); background:rgba(255,46,14,0.12); box-shadow:0 6px 18px rgba(255,46,14,0.25);}
+.hero-socials{ display:flex; gap:12px; align-items:center;}
 .social-ic{
-  width:38px; height:38px; border-radius:8px; border:1px solid var(--border); background:#fff; display:flex; align-items:center;
+  width:38px; height:38px; border-radius:8px; border:1px solid var(--border); background:#1e1e21; display:flex; align-items:center;
   justify-content:center; color:var(--text-dim); transition: all .2s ease;
 }
-.social-ic:hover{ color:var(--cyan); border-color:var(--border-strong); box-shadow:0 4px 14px rgba(124,58,237,0.18);}
+.social-ic:hover{ color:#fff; border-color:var(--border-strong); box-shadow:0 4px 14px rgba(255,46,14,0.35); background:rgba(255,46,14,0.12);}
+.hero .social-ic{background:#1e1e21; border-color:rgba(255,255,255,0.1); color:#cfcbc2;}
+.hero .social-ic:hover{ color:#fff; border-color:var(--border-strong); box-shadow:0 4px 16px rgba(255,46,14,0.35);}
+.hero .eyebrow{color:var(--cyan);}
+.hero .eyebrow::before{color:var(--text-faint);}
 
-/* terminal */
+/* --- Right visual: red device panel like reference --- */
+.cyber-visual{position:relative; display:flex; align-items:center; justify-content:center; min-height:440px;}
+.device-frame{
+  position:relative; width:min(560px,100%); border-radius:22px; padding:10px;
+  background:#0a0a0b; border:1px solid rgba(255,255,255,0.12);
+  box-shadow:0 0 0 1px #000, 0 30px 80px rgba(0,0,0,0.6);
+}
+.device-screen{
+  position:relative; border-radius:14px; overflow:hidden; min-height:380px;
+  background: linear-gradient(135deg, #f22d0c 0%, #d61f02 55%, #a31300 100%);
+  display:flex; flex-direction:column; justify-content:flex-end; padding:26px;
+}
+.device-screen::before{
+  content:''; position:absolute; inset:0;
+  background:
+    linear-gradient(rgba(255,255,255,0.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.14) 1px, transparent 1px);
+  background-size:34px 34px;
+  mask-image: radial-gradient(500px 340px at 60% 20%, #000 30%, transparent 75%);
+}
+.wire-globe{position:absolute; right:-40px; top:-30px; width:420px; opacity:0.5;}
+.device-topbar{display:flex; align-items:center; gap:8px; position:absolute; top:14px; left:16px; right:16px; z-index:3;}
+.device-url{margin-left:8px; flex:1; font-family:var(--font-mono); font-size:0.62rem; color:rgba(255,255,255,0.75); background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:5px 10px; text-decoration:none; display:block; transition:border-color .2s ease;}
+.device-url:hover{border-color:rgba(255,255,255,0.55); color:#fff;}
+.device-headline{position:relative; z-index:2; color:#fff; font-family:var(--font-display); font-weight:700; font-size:clamp(1.2rem,2.4vw,1.7rem); line-height:1.15; letter-spacing:-0.02em; max-width:340px; margin-bottom:16px; text-shadow:0 2px 18px rgba(0,0,0,0.35);}
+.device-row{position:relative; z-index:2; display:flex; gap:10px; align-items:center;}
+.device-btn{font-family:var(--font-mono); font-size:0.7rem; font-weight:700; padding:9px 16px; border-radius:6px; border:1px solid rgba(0,0,0,0.2); cursor:pointer; text-decoration:none; display:inline-block;}
+.device-btn.light{background:#f2efe9; color:#1a1a1a;}
+.device-btn.dark{background:rgba(0,0,0,0.55); color:#fff; border-color:rgba(255,255,255,0.25);}
+.device-sidecard{
+  position:absolute; right:18px; top:64px; width:150px; z-index:3;
+  background:rgba(10,10,11,0.82); border:1px solid rgba(255,255,255,0.14); border-radius:10px; padding:12px;
+  font-family:var(--font-mono); font-size:0.6rem; color:#d8d4cc; line-height:1.5; backdrop-filter:blur(8px);
+  text-decoration:none; display:block; transition:border-color .2s ease;
+}
+.device-sidecard:hover{border-color:rgba(255,255,255,0.45);}
+.device-sidecard b{color:#fff; display:block; font-size:0.62rem; margin-bottom:6px;}
+.device-sidecard .bar{height:4px; border-radius:3px; background:rgba(255,255,255,0.15); margin-top:8px; overflow:hidden;}
+.device-sidecard .bar i{display:block; height:100%; width:68%; background:var(--cyan);}
+.silhouette{position:absolute; left:0; bottom:0; height:82%; z-index:1; opacity:0.92; filter:contrast(1.1) brightness(0.9);}
+.cyber-mini-term{
+  position:absolute; bottom:-16px; left:50%; transform:translateX(-50%); z-index:4;
+  font-family:var(--font-mono); font-size:0.68rem; color:#ffd9a8; background:rgba(10,10,11,0.9);
+  border:1px solid rgba(255,46,14,0.4); border-radius:8px; padding:7px 12px;
+  display:flex; gap:8px; align-items:center; white-space:nowrap;
+}
+.cyber-mini-term .pulse{width:6px;height:6px;border-radius:50%;background:#3dff88;box-shadow:0 0 8px #3dff88; animation: pulse 1.6s ease-in-out infinite;}
+@keyframes floaty{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+
+/* tape dividers like reference */
+.tape-wrap{position:relative; z-index:2; overflow:hidden; padding:26px 0; transform:rotate(-1.2deg); margin:10px -20px;}
+.tape{display:flex; gap:34px; white-space:nowrap; font-family:var(--font-mono); font-weight:700; letter-spacing:0.18em; font-size:0.8rem; padding:10px 0; overflow:hidden;}
+.tape.white{background:#f2efe9; color:#131314; transform:rotate(0.8deg);}
+.tape.red{background:var(--cyan); color:#fff; transform:rotate(-0.8deg); margin-top:-8px;}
+.tape span{padding:0 18px;}
+.tape-track{display:flex; animation: tapescroll 22s linear infinite;}
+@keyframes tapescroll{to{transform:translateX(-50%);}}
+
+/* terminal (kept for JS compat, hidden — mini status shown instead) */
 .terminal{
   border-radius:16px; overflow:hidden; border:1px solid #1c1730;
   box-shadow: 0 20px 50px rgba(34,28,61,0.18);
@@ -399,9 +508,62 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
 .modal-close{ position:absolute; top:18px; right:18px; background:none; border:1px solid var(--border); color:var(--text-dim); width:34px; height:34px; border-radius:8px;}
 .modal-close:hover{color:var(--cyan); border-color:var(--border-strong);}
 
+/* ===================== CY FOCUS DARK OVERRIDES ===================== */
+.skill-card:hover{ border-color:var(--border-strong); box-shadow:0 14px 34px rgba(255,46,14,0.18); transform: translateY(-3px);}
+.skill-tag{
+  font-size:0.8rem; padding:7px 12px; border-radius:7px; background:#242427;
+  border:1px solid rgba(255,255,255,0.08); color:var(--text-dim); transition: all .2s ease;
+}
+.skill-tag:hover{ color:#fff; border-color:var(--border-strong); background:rgba(255,46,14,0.12);}
+.filter-btn.active{ background:var(--cyan); color:#fff; border-color:var(--cyan); font-weight:600;}
+.project-card:hover{ border-color:var(--border-strong); box-shadow:0 14px 40px rgba(255,46,14,0.18); transform: translateY(-4px);}
+.tech-chip{ font-family:var(--font-mono); font-size:0.68rem; padding:4px 9px; border-radius:5px; background:rgba(255,46,14,0.12); color:#ff7a5c; border:1px solid var(--border);}
+.project-actions{ display:flex; gap:10px; padding:18px 24px; border-top:1px solid var(--border); background:#171719; margin-top:auto; flex-wrap:wrap;}
+.tech-details p{ font-size:0.85rem; color:var(--text-dim); background:rgba(255,46,14,0.07); border-left:2px solid var(--cyan); padding:12px 14px; border-radius:0 8px 8px 0;}
+.tl-item::before{
+  content:''; position:absolute; left:-41px; top:4px; width:12px; height:12px; border-radius:50%;
+  background:#131314; border:2px solid var(--cyan); box-shadow:0 0 0 3px rgba(255,46,14,0.18);
+}
+.repo-card:hover{ border-color:var(--border-strong); box-shadow:0 10px 26px rgba(255,46,14,0.16); transform: translateY(-2px);}
+.lab-header{ padding:16px 24px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:10px; background:#171719;}
+.lab-stat{ background:#1e1e21; padding:28px 24px;}
+.contact-box::before{
+  content:''; position:absolute; inset:0; background: radial-gradient(circle at 50% 0%, rgba(255,46,14,0.14), transparent 60%); pointer-events:none;
+}
+.contact-method{
+  display:flex; align-items:center; gap:10px; padding:12px 20px; border-radius:9px;
+  border:1px solid var(--border); font-family:var(--font-mono); font-size:0.85rem; transition: all .2s ease; position:relative;
+  background:#1e1e21; color:var(--text);
+}
+.contact-method:hover{ border-color:var(--border-strong); box-shadow:0 8px 20px rgba(255,46,14,0.2);}
+.form-group input, .form-group textarea{
+  width:100%; background:#171719; border:1px solid var(--border); border-radius:9px;
+  padding:12px 14px; color:var(--text); font-family:inherit; font-size:0.92rem; resize:vertical;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+.form-group input:focus, .form-group textarea:focus{
+  outline:none; border-color:var(--cyan); box-shadow:0 0 0 3px rgba(255,46,14,0.2);
+}
+.form-group input::placeholder, .form-group textarea::placeholder{color:var(--text-faint);}
+.status-chip{
+  font-family:var(--font-mono); font-size:0.7rem; padding:6px 10px; border-radius:6px; border:1px solid var(--border);
+  color:var(--green); background:#1e1e21; display:flex; align-items:center; gap:6px;
+}
+.risk-track{ height:8px; border-radius:6px; background:#2a2a2e; overflow:hidden; position:relative;}
+code{background:rgba(255,46,14,0.12); padding:1px 6px; border-radius:4px; font-size:0.82em;}
+a{color:inherit;}
+.journey-node.glass{color:var(--text-dim);}
+.modal-box{background:#1c1c1f !important;}
+.modal-close{background:#242427; color:var(--text-dim);}
+.contributor-avatars img{border-color:#0b0b0c;}
+
 /* ===================== RESPONSIVE ===================== */
 @media (max-width: 900px){
   .hero-grid{ grid-template-columns:1fr; gap:44px;}
+  .cyber-visual{min-height:340px;}
+  .device-frame{width:min(560px,100%);}
+  .device-sidecard{display:none;}
+  .tape-wrap{margin:0 -10px;}
   .about-grid{ grid-template-columns:1fr;}
   .navlinks{display:none;}
   .nav-cta{display:flex; align-items:center; gap:12px;}
@@ -470,12 +632,13 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
 <section class="hero" id="home">
   <div class="wrap hero-grid">
     <div>
-      <div class="eyebrow"><span class="dot"></span>AVAILABLE FOR INTERNSHIPS &amp; OPPORTUNITIES</div>
-      <h1 class="hero-name">ARKA PATRA</h1>
+      <div class="hero-eyebrow-cyber">CY • FOCUS — SECURITY PORTFOLIO</div>
+      <h1 class="hero-name">Focused Cybersecurity Services That Deliver Results. <span class="accent">We Secure What Matters.</span></h1>
+      <div class="hero-sub">ARKA PATRA — B.SC CYBER SECURITY</div>
       <div class="hero-role">Cyber Security Student &amp; Security-Focused Developer</div>
-      <p class="hero-intro">I am a Cyber Security student passionate about building practical security-focused applications, web tools, and developer projects. I enjoy exploring cybersecurity concepts, developing useful security utilities, and continuously improving my programming and problem-solving skills.</p>
+      <p class="hero-intro">I build practical security-focused applications, web tools, and developer projects — exploring real cybersecurity concepts through working code.</p>
       <div class="hero-actions">
-        <a href="#projects" class="btn btn-primary">View Projects</a>
+        <a href="#projects" class="btn btn-primary">View Work</a>
         <a href="#" class="btn btn-ghost" id="downloadCvBtn">Download CV</a>
         <a href="#contact" class="btn btn-ghost">Contact Me</a>
       </div>
@@ -498,23 +661,40 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
       </div>
     </div>
 
-    <div>
-      <div class="terminal">
-        <div class="term-bar">
-          <span class="term-dot r"></span><span class="term-dot y"></span><span class="term-dot g"></span>
-          <span class="term-title">security-lab — zsh — 80x24</span>
+    <div class="cyber-visual" aria-hidden="true">
+      <div class="device-frame">
+        <div class="device-screen">
+          <svg class="wire-globe" viewBox="0 0 400 300" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1">
+            <ellipse cx="200" cy="130" rx="150" ry="90"/>
+            <ellipse cx="200" cy="130" rx="110" ry="90"/>
+            <ellipse cx="200" cy="130" rx="70" ry="90"/>
+            <ellipse cx="200" cy="130" rx="30" ry="90"/>
+            <path d="M50 130 H350 M60 90 H340 M60 170 H340 M90 55 H310 M90 205 H310"/>
+            <path d="M60 90 C140 120 260 120 340 90 M60 170 C140 140 260 140 340 170"/>
+            <rect x="240" y="60" width="70" height="50" stroke-width="1.2"/>
+            <line x1="240" y1="73" x2="310" y2="73"/><line x1="240" y1="86" x2="310" y2="86"/><line x1="240" y1="99" x2="310" y2="99"/>
+          </svg>
+          <svg class="silhouette" viewBox="0 0 120 200" fill="#0d0d0f"><path d="M20 200 C20 140 35 120 45 105 C50 85 55 70 70 65 C85 60 95 70 92 85 C90 95 85 100 88 110 C95 115 105 125 108 145 C110 165 108 185 108 200 Z"/></svg>
+          <div class="device-topbar">
+            <span class="term-dot r"></span><span class="term-dot y"></span><span class="term-dot g"></span>
+            <a href="#lab" class="device-url">arka.patra — security-lab</a>
+          </div>
+          <a href="#lab" class="device-sidecard"><b>Threat Monitor</b>Active scans: 06<br>Status: SECURE<div class="bar"><i></i></div></a>
+          <div class="device-headline">Focused Cybersecurity Services That Deliver Results.</div>
+          <div class="device-row"><a href="#projects" class="device-btn light">View Projects</a><a href="#contact" class="device-btn dark">Get in Touch</a></div>
         </div>
-        <div class="term-body" id="termBody"></div>
       </div>
-      <div class="hero-status-row">
-        <div class="status-chip"><span class="pulse"></span>SYSTEM ONLINE</div>
-        <div class="status-chip"><span class="pulse"></span>4 TOOLS BUILT</div>
-        <div class="status-chip"><span class="pulse"></span>PYTHON · FLASK</div>
-      </div>
+      <div class="cyber-mini-term"><span class="pulse"></span><span id="miniTermText">arka@security-lab:~$ SYSTEM ONLINE</span></div>
+      <div class="terminal" style="display:none"><div class="term-body" id="termBody"></div></div>
     </div>
   </div>
-  <div class="scroll-cue"><span class="line"></span>SCROLL</div>
+  <div class="scroll-cue" style="color:rgba(242,239,233,0.55)"><span class="line" style="background:linear-gradient(#ff2e0e, transparent)"></span>SCROLL</div>
 </section>
+
+<div class="tape-wrap" aria-hidden="true">
+  <div class="tape white"><div class="tape-track"><span>CY • FOCUS</span><span>ARKA PATRA</span><span>SECURITY LAB</span><span>CY • FOCUS</span><span>ARKA PATRA</span><span>SECURITY LAB</span><span>CY • FOCUS</span><span>ARKA PATRA</span><span>SECURITY LAB</span></div></div>
+  <div class="tape red"><div class="tape-track"><span>CY • FOCUS</span><span>WEB SECURITY</span><span>PASSWORD SECURITY</span><span>CY • FOCUS</span><span>WEB SECURITY</span><span>PASSWORD SECURITY</span><span>CY • FOCUS</span><span>WEB SECURITY</span><span>PASSWORD SECURITY</span></div></div>
+</div>
 
 <!-- ===================== EDUCATION ===================== -->
 <section class="timeline-section" id="education">
@@ -670,6 +850,33 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
         </div>
       </article>
 
+      <!-- PROJECT 3 -->
+      <article class="project-card glass reveal" data-cat="cybersecurity">
+        <div class="project-top">
+          <span class="project-cat">Cybersecurity · Network Security</span>
+          <h3>WiFi Password Finder</h3>
+          <p class="desc">A web UI for recovering your own saved Wi-Fi passwords straight from your PC or phone's network settings.</p>
+        </div>
+        <ul class="feature-list">
+          <li>Lists saved networks parsed from <code>netsh</code>, <code>nmcli</code> &amp; macOS Keychain output</li>
+          <li>Live mode via a local Python app, or paste mode for static hosting</li>
+          <li>100% in-browser parsing on the GitHub Pages build — nothing is uploaded</li>
+          <li>Android support via Wi-Fi sharing QR text or QR screenshot upload</li>
+          <li>One-click reveal &amp; copy for the extracted password</li>
+        </ul>
+        <div class="tech-row">
+          <span class="tech-chip">Python</span><span class="tech-chip">JavaScript</span><span class="tech-chip">HTML</span><span class="tech-chip">CSS</span>
+        </div>
+        <button class="details-toggle" data-target="td3"><span class="chev">▸</span> Technical Details</button>
+        <div class="tech-details" id="td3">
+          <p>Ships two modes: a local <code>app.py</code> that shells out to <code>netsh wlan show profiles</code> / <code>nmcli</code> / <code>security find-generic-password</code> for live results, and a static "paste mode" for the GitHub Pages build — since browsers can't run OS commands directly, the user pastes the command output (or a Wi-Fi sharing QR) and the same parsing logic runs entirely client-side.</p>
+        </div>
+        <div class="project-actions">
+          <a href="https://arkap1502.github.io/Wifi-password-founder/" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Live Demo</a>
+          <a href="https://github.com/arkap1502/Wifi-password-founder.git" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Code</a>
+        </div>
+      </article>
+
       <!-- PROJECT 4 -->
       <article class="project-card glass reveal" data-cat="cybersecurity web">
         <div class="project-top">
@@ -770,13 +977,15 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
       <div class="journey-arrow reveal">↓</div>
       <div class="journey-node glass reveal">Humanize AI</div>
       <div class="journey-arrow reveal">↓</div>
+      <div class="journey-node glass reveal">WiFi Password Finder</div>
+      <div class="journey-arrow reveal">↓</div>
       <div class="journey-node glass reveal" style="border-color:var(--border-strong)">Continuous cybersecurity learning</div>
     </div>
   </div>
 </section>
 
 <!-- ===================== SECURITY LAB ===================== -->
-<section class="lab">
+<section class="lab" id="lab">
   <div class="wrap">
     <div class="eyebrow"><span class="dot"></span>LIVE STATUS</div>
     <h2 class="section-title reveal">Arka's Security Lab</h2>
@@ -790,7 +999,7 @@ footer{ padding:36px 0; border-top:1px solid var(--border);}
       </div>
       <div class="lab-grid">
         <div class="lab-stat green"><div class="label">System Status</div><div class="value">ONLINE</div></div>
-        <div class="lab-stat"><div class="label">Projects</div><div class="value">05</div></div>
+        <div class="lab-stat"><div class="label">Projects</div><div class="value">06</div></div>
         <div class="lab-stat"><div class="label">Security Focus</div><div class="value" style="font-size:1.05rem">WEB + APP SECURITY</div></div>
         <div class="lab-stat"><div class="label">Primary Language</div><div class="value" style="font-size:1.05rem">PYTHON (BACKEND) / JAVASCRIPT (FRONTEND)</div></div>
         <div class="lab-stat"><div class="label">Environment</div><div class="value" style="font-size:1.05rem">WINDOWS 11</div></div>
@@ -941,8 +1150,9 @@ document.addEventListener('DOMContentLoaded', function(){
   }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
   revealEls.forEach(el => revealIO.observe(el));
 
-  /* ---------- Terminal typing animation ---------- */
+  /* ---------- Terminal typing animation (hidden terminal kept for compat) ---------- */
   const termBody = document.getElementById('termBody');
+  if(termBody){
   const termLines = [
     { p: true, t: 'whoami' },
     { p: false, t: 'arka-patra' },
@@ -992,6 +1202,7 @@ document.addEventListener('DOMContentLoaded', function(){
     typeChar();
   }
   typeLine(0);
+  } // end if(termBody)
 
   /* ---------- Project filter ---------- */
   const filterBtns = document.querySelectorAll('.filter-btn');
