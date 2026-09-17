@@ -620,6 +620,7 @@ img,svg,video{max-width:100%; height:auto;}
   .section-sub{max-width:720px;}
 }
 @media (max-width: 900px){
+  .navbar{grid-template-columns:auto 1fr; column-gap:10px;}
   .hero-grid{ grid-template-columns:1fr; gap:44px;}
   .cyber-visual{min-height:340px;}
   .device-frame{width:min(560px,100%);}
@@ -627,8 +628,11 @@ img,svg,video{max-width:100%; height:auto;}
   .tape-wrap{width:110vw; margin:10px 0 10px -5vw;}
   .about-grid{ grid-template-columns:1fr;}
   .navlinks{display:none;}
-  .nav-cta{display:flex; align-items:center; gap:10px; justify-self:end;}
-  .hamburger{display:flex;}
+  .nav-cta{display:flex; align-items:center; gap:8px; justify-self:end; flex-shrink:0;}
+  .nav-cta .nav-contact-btn{padding:8px 14px; font-size:0.72rem;}
+  .logo{font-size:0.9rem; gap:8px; white-space:nowrap;}
+  .logo-mark{width:28px; height:28px; font-size:0.65rem; flex-shrink:0;}
+  .hamburger{display:flex; flex-shrink:0;}
   .skills, .projects, .certs, .timeline-section, .github-sec, .lab, .contact{ padding:72px 0;}
   .footer-inner{ justify-content:center; text-align:center;}
 }
@@ -695,7 +699,6 @@ img,svg,video{max-width:100%; height:auto;}
     <a href="#skills">SKILLS</a>
     <a href="#projects">PROJECTS</a>
     <a href="#journey">JOURNEY</a>
-    <a href="#contact" class="nav-contact">CONTACT</a>
   </div>
 </header>
 
