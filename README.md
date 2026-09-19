@@ -10,6 +10,7 @@
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](./index.html)
 [![No Build](https://img.shields.io/badge/NO_BUILD-3DFF88?style=for-the-badge&logo=terminal&logoColor=black)](./index.html)
 [![Responsive](https://img.shields.io/badge/RESPONSIVE-131314?style=for-the-badge&logo=mobile&logoColor=white)](./index.html)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 
 `B.Sc Cyber Security @ GNIT` · `Python / JS` · `Web Security` · `System: ONLINE`
 
@@ -57,12 +58,20 @@ Not another generic template. This is a **threat-monitor styled portfolio**:
 
 | # | Project | Type | Live | Code |
 |---|---------|------|------|------|
+| 00 | **Website Security Copilot** `FEATURED` | Browser Extension + Web Security | [Live Demo](https://website-security-copilot-3m0hij8jl-arkap1502-9053s-projects.vercel.app/) | [Code](https://github.com/arkap1502/Website-Security-Copilot) |
 | 01 | **Altron Password Inspector** `FEATURED` | Password Security | [Live Demo](https://arkap1502.github.io/password-making/) | [Code](https://github.com/arkap1502/password-making) |
 | 02 | **URL Threat Scanner** | Phishing Detection | [Live Demo](https://arkap1502.github.io/URL-Scanner/) | [Code](https://github.com/arkap1502/URL-Scanner) |
 | 03 | **WiFi Password Finder** | Network Security | [Live Demo](https://arkap1502.github.io/Wifi-password-founder/) | [Code](https://github.com/arkap1502/Wifi-password-founder) |
 | 04 | **URL & Password Checker** | Web Security Combo | [Live Demo](https://arkap1502.github.io/URL-Password-Checker/) | [Code](https://github.com/arkap1502/URL-Password-Checker) |
 | 05 | **NexVault** `FEATURED · GROUP · IN PROGRESS` | Secure Vault Web App | [Live Demo](https://secure-vault-system.onrender.com/) | — |
 | 06 | **Humanize AI** `IN PROGRESS` | AI Text Tool | [Live Demo](https://arkap1502.github.io/Humanize-AI/) | [Code](https://github.com/arkap1502/Humanize-AI) |
+
+### 00 — Website Security Copilot ◈ Featured
+AI-powered assistant that scans, explains, and helps fix website security issues — plus an Always-On browser guard.
+- 🧩 **Primarily a browser extension** — the live demo shows the UI & lets you test a URL; full auto-guard needs Load unpacked (`extension/` folder)
+- Manual Scan Mode: URL input → headers, SSL/TLS, cookies, misconfig checks + AI risk score & plain-English fixes
+- Always-On Guard Mode: ON/OFF toggle → auto-watches every site, instant verdict `Safe ✅ / Suspicious ⚠️ / Blocked ⛔`, auto-blocks harmful sites (force-open only when OFF)
+- Stack: Next.js + Tailwind, FastAPI, Python scanners, MV3 extension
 
 ### 01 — Altron Password Inspector
 Futuristic HUD for password generation + strength checking.
@@ -127,7 +136,8 @@ React + Express app with **zero-build offline fallback** — same engine ported 
 fundamentals → Python → web dev → security projects
   → phishing awareness → URL threat analysis
     → password security → NexVault → Humanize AI
-      → WiFi Password Finder → ∞ continuous learning
+      → WiFi Password Finder → Website Security Copilot
+        → ∞ continuous learning
 ```
 
 ---
@@ -137,7 +147,7 @@ fundamentals → Python → web dev → security projects
 | Metric | Value |
 |--------|-------|
 | System Status | `ONLINE` |
-| Projects | `06` |
+| Projects | `07` |
 | Security Focus | `WEB + APP SECURITY` |
 | Primary Language | `PYTHON (backend) / JAVASCRIPT (frontend)` |
 | Environment | `WINDOWS 11` |
@@ -220,6 +230,12 @@ Respects `prefers-reduced-motion` — animations collapse to instant render.
 📞 `+91 97488 13115` · 📍 Madhyamgram, North 24 Parganas, Kolkata 700130
 
 </div>
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License - see [LICENSE](./LICENSE) for details.
 
 ---
 
