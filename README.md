@@ -70,9 +70,11 @@ Not another generic template. This is a **threat-monitor styled portfolio**:
 ### 00 — Website Security Copilot ◈ Featured
 AI-powered assistant that scans, explains, and helps fix website security issues — plus an Always-On browser guard.
 - 🧩 **Primarily a browser extension** — the live demo shows the UI & lets you test a URL; full auto-guard needs Load unpacked (`extension/` folder)
-- Manual Scan Mode: URL input → headers, SSL/TLS, cookies, misconfig checks + AI risk score & plain-English fixes
+- Manual Scan Mode: URL input → headers (`CSP`, `HSTS`, `X-Frame-Options`), SSL/TLS, cookies, open ports / fingerprinting, DNS-email (`SPF`, `DMARC`, `DKIM`) + AI risk score & plain-English fixes
 - Always-On Guard Mode: ON/OFF toggle → auto-watches every site, instant verdict `Safe ✅ / Suspicious ⚠️ / Blocked ⛔`, auto-blocks harmful sites (force-open only when OFF)
-- Stack: Next.js + Tailwind, FastAPI, Python scanners, MV3 extension
+- Every finding ships severity + evidence + why-it-matters + copy-paste fix (Nginx / Apache / Next.js); risk score `100 - min(100, 10*C + 5*H + 2*M + 1*L)`, grades A–F
+- Passive-safe by default (normal requests only, `robots.txt` respected); AI only explains tool output, never invents findings
+- Stack: Next.js + Tailwind, FastAPI, Python (`httpx`, `ssl`, `dnspython`), SQLite → Postgres, Docker, MV3 extension
 
 ### 01 — Altron Password Inspector
 Futuristic HUD for password generation + strength checking.
@@ -117,7 +119,8 @@ Scans `PDF`, `DOCX`, `TXT`, `MD`, `HTML` for hidden prompt-injection attacks aim
 #home       → DASHBOARD  (hero + terminal + device panel + tapes)
 #education  → EDUCATION  (2024-Present B.Sc, 2024 HS, 2022 Secondary)
 #skills     → SKILL MATRIX
-#projects   → THINGS I'VE BUILT (filter: All / Cybersecurity / Web)
+#projects   → SPOTLIGHT (1 featured build + View All tile → projects.html)
+projects.html → ARCHIVE (all 08 builds, filter: All / Cybersecurity / Web)
 #journey    → CYBERSECURITY JOURNEY (vertical flow)
 #lab        → SECURITY LAB (status.sh dashboard)
 #contact    → LET'S BUILD SOMETHING SECURE (copy-email + form)
@@ -185,8 +188,9 @@ python3 -m http.server 8000
 ### File structure
 ```
 portfolio/
-├── index.html   → everything (markup + CSS + JS in one file)
-└── README.md    → you are here
+├── index.html      → main site (spotlight project + View All tile)
+├── projects.html   → full archive, all 08 builds with filters
+└── README.md       → you are here
 ```
 
 ---
