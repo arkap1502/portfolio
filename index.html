@@ -1056,6 +1056,32 @@ img,svg,video{max-width:100%; height:auto;}
           <a href="https://github.com/arkap1502/Humanize-AI" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Code</a>
         </div>
       </article>
+
+      <!-- PROJECT 7 -->
+      <article class="project-card glass reveal" data-cat="cybersecurity web">
+        <div class="project-top">
+          <span class="badge-featured">FEATURED</span>
+          <span class="project-cat">Cybersecurity · Prompt Injection Detection</span>
+          <h3>Hidden-Prompt Scanner for Documents</h3>
+          <p class="desc">Scans PDF, DOCX, TXT, MD &amp; HTML for hidden prompt-injection attacks targeting LLMs.</p>
+        </div>
+        <ul class="feature-list">
+          <li>Detects white-on-white, zero-size, transparent &amp; off-page hidden text</li>
+          <li>Flags injection phrases + metadata, comments &amp; annotation scan</li>
+          <li>LOW / MEDIUM / HIGH risk score with CLI + JSON report &amp; web UI</li>
+        </ul>
+        <div class="tech-row">
+          <span class="tech-chip">Python</span><span class="tech-chip">Flask</span><span class="tech-chip">PyPDF2</span><span class="tech-chip">python-docx</span><span class="tech-chip">BeautifulSoup</span>
+        </div>
+        <button class="details-toggle" data-target="td7"><span class="chev">▸</span> Technical Details</button>
+        <div class="tech-details" id="td7">
+          <p>Extracts visible text plus layout signals (color, font size, opacity, position) to flag <code>color ≈ background</code>, <code>size ≤ 1.5pt</code>, <code>opacity == 0</code> and off-page content, including zero-width chars (<code>U+200B/C/D, U+FEFF</code>); checks PDF metadata, DOCX properties, comments &amp; footnotes, then regex-matches injection phrases like <code>ignore previous instructions</code> into a combined risk score — fully local via <code>scanner.py</code> CLI and Flask web UI.</p>
+        </div>
+        <div class="project-actions">
+          <a href="https://hidden-prompt-scanner-for-documents.onrender.com/" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Live Demo</a>
+          <a href="https://github.com/arkap1502/Hidden-prompt-scanner-for-documents." target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Code</a>
+        </div>
+      </article>
     </div>
   </div>
 </section>
@@ -1090,6 +1116,8 @@ img,svg,video{max-width:100%; height:auto;}
       <div class="journey-arrow reveal">↓</div>
       <div class="journey-node glass reveal">Website Security Copilot</div>
       <div class="journey-arrow reveal">↓</div>
+      <div class="journey-node glass reveal">Hidden-Prompt Scanner for Documents</div>
+      <div class="journey-arrow reveal">↓</div>
       <div class="journey-node glass reveal" style="border-color:var(--border-strong)">Continuous cybersecurity learning</div>
     </div>
   </div>
@@ -1110,7 +1138,7 @@ img,svg,video{max-width:100%; height:auto;}
       </div>
       <div class="lab-grid">
         <div class="lab-stat green"><div class="label">System Status</div><div class="value">ONLINE</div></div>
-        <div class="lab-stat"><div class="label">Projects</div><div class="value">07</div></div>
+        <div class="lab-stat"><div class="label">Projects</div><div class="value">08</div></div>
         <div class="lab-stat"><div class="label">Security Focus</div><div class="value" style="font-size:1.05rem">WEB + APP SECURITY</div></div>
         <div class="lab-stat"><div class="label">Primary Language</div><div class="value" style="font-size:1.05rem">PYTHON (BACKEND) / JAVASCRIPT (FRONTEND)</div></div>
         <div class="lab-stat"><div class="label">Environment</div><div class="value" style="font-size:1.05rem">WINDOWS 11</div></div>

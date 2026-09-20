@@ -65,6 +65,7 @@ Not another generic template. This is a **threat-monitor styled portfolio**:
 | 04 | **URL & Password Checker** | Web Security Combo | [Live Demo](https://arkap1502.github.io/URL-Password-Checker/) | [Code](https://github.com/arkap1502/URL-Password-Checker) |
 | 05 | **NexVault** `FEATURED · GROUP · IN PROGRESS` | Secure Vault Web App | [Live Demo](https://secure-vault-system.onrender.com/) | — |
 | 06 | **Humanize AI** `IN PROGRESS` | AI Text Tool | [Live Demo](https://arkap1502.github.io/Humanize-AI/) | [Code](https://github.com/arkap1502/Humanize-AI) |
+| 07 | **Hidden-Prompt Scanner for Documents** `FEATURED` | Document Security · Prompt Injection Detection | [Live Demo](https://hidden-prompt-scanner-for-documents.onrender.com/) | [Code](https://github.com/arkap1502/Hidden-prompt-scanner-for-documents.) |
 
 ### 00 — Website Security Copilot ◈ Featured
 AI-powered assistant that scans, explains, and helps fix website security issues — plus an Always-On browser guard.
@@ -100,6 +101,13 @@ Combo tool: 4-model heuristic URL engine (domain, structural, lexical, encoding)
 
 ### 06 — Humanize AI
 React + Express app with **zero-build offline fallback** — same engine ported to vanilla JS for GitHub Pages. Light / Medium / Strong modes, real-time transform, word-count diff.
+
+### 07 — Hidden-Prompt Scanner for Documents ◈ Featured
+Scans `PDF`, `DOCX`, `TXT`, `MD`, `HTML` for hidden prompt-injection attacks aimed at LLMs.
+- Invisible-text heuristics — white-on-white, `< 2pt` / zero-size fonts, transparent text, off-page content, zero-width chars (`U+200B/C/D, U+FEFF`)
+- Metadata / comments / footnotes / annotations scan + injection-phrase match (`ignore previous instructions`, `disregard system prompt`, `you are now ...`, etc.)
+- `LOW / MEDIUM / HIGH` risk scoring · CLI + JSON report · Flask web UI · Fully local scan
+- Stack: Python, Flask, PyPDF2, python-docx, BeautifulSoup — deployed on Render
 
 ---
 
@@ -137,7 +145,7 @@ fundamentals → Python → web dev → security projects
   → phishing awareness → URL threat analysis
     → password security → NexVault → Humanize AI
       → WiFi Password Finder → Website Security Copilot
-        → ∞ continuous learning
+        → Hidden-Prompt Scanner → ∞ continuous learning
 ```
 
 ---
@@ -147,7 +155,7 @@ fundamentals → Python → web dev → security projects
 | Metric | Value |
 |--------|-------|
 | System Status | `ONLINE` |
-| Projects | `07` |
+| Projects | `08` |
 | Security Focus | `WEB + APP SECURITY` |
 | Primary Language | `PYTHON (backend) / JAVASCRIPT (frontend)` |
 | Environment | `WINDOWS 11` |
