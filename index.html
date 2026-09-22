@@ -365,6 +365,10 @@ header:not(.scrolled) .navlinks a.nav-contact{color:#fff !important;}
 .skill-card:hover{ border-color:var(--border-strong); box-shadow:0 14px 34px rgba(124,58,237,0.10); transform: translateY(-3px);}
 .skill-card h4{ font-family:var(--font-mono); font-size:0.78rem; color:var(--cyan); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:16px; display:flex; align-items:center; gap:8px;}
 .skill-tags{ display:flex; flex-wrap:wrap; gap:8px;}
+/* Soft Skills — full-width closing strip with centered pills */
+.skill-card:last-child{grid-column:1 / -1;}
+.skill-card:last-child h4{justify-content:center;}
+.skill-card:last-child .skill-tags{justify-content:center;}
 .skill-tag{
   font-size:0.8rem; padding:7px 12px; border-radius:7px; background:#f6f4fd;
   border:1px solid rgba(124,58,237,0.08); color:var(--text-dim); transition: all .2s ease;
@@ -504,6 +508,21 @@ header:not(.scrolled) .navlinks a.nav-contact{color:#fff !important;}
 .journey-flow{ display:flex; flex-direction:column; gap:0; max-width:560px; margin:0 auto;}
 .journey-node{ padding:16px 20px; text-align:center; font-family:var(--font-mono); font-size:0.88rem;}
 .journey-arrow{ text-align:center; color:var(--cyan); font-size:1.1rem; padding:2px 0; opacity:0.7;}
+
+/* --- Education — unique dossier design (scoped, centered) --- */
+#education .timeline{border-left:none; padding-left:0; padding-top:6px; display:flex; flex-direction:column; gap:16px; position:relative;}
+#education .tl-item::before{display:none;}
+#education .tl-item{margin:0; padding:22px 20px 20px; background:linear-gradient(180deg,#202023,#171719); border:1px solid var(--border); border-radius:14px; box-shadow:0 0 0 4px #0b0b0c, 0 18px 44px rgba(0,0,0,0.5); overflow:hidden; position:relative; text-align:center; transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease;}
+#education .tl-item:hover{transform:translateY(-3px); border-color:var(--border-strong); box-shadow:0 0 0 4px #0b0b0c, 0 18px 44px rgba(255,46,14,0.22);}
+#education .tl-item h4{font-size:1.05rem; margin-bottom:4px;}
+#education .tl-year{display:inline-flex; align-items:center; gap:7px; font-family:var(--font-mono); color:#ff7a5c; font-size:0.7rem; letter-spacing:0.06em; background:rgba(255,46,14,0.10); border:1px solid var(--border); padding:4px 10px; border-radius:20px; margin-bottom:0;}
+#education .tl-year::before{content:''; width:6px; height:6px; border-radius:50%; background:var(--cyan); box-shadow:0 0 8px var(--cyan); flex-shrink:0;}
+.edu-row{display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap; margin-bottom:10px;}
+.edu-ico{width:34px; height:34px; flex-shrink:0; border-radius:10px; display:inline-flex; align-items:center; justify-content:center; font-size:0.95rem; color:var(--cyan); background:rgba(255,46,14,0.12); border:1px solid var(--border);}
+.edu-meta{display:flex; justify-content:center; gap:8px; flex-wrap:wrap; margin-bottom:26px;}
+.edu-meta span{font-family:var(--font-mono); font-size:0.68rem; letter-spacing:0.08em; color:var(--text-dim); border:1px solid var(--border); background:#1e1e21; padding:6px 12px; border-radius:20px;}
+.edu-meta b{color:var(--cyan); font-weight:700;}
+@media (max-width:640px){#education .tl-item{padding:18px 16px;}}
 
 /* ===================== GITHUB ===================== */
 .github-sec{padding:100px 0;}
@@ -842,23 +861,27 @@ img,svg,video{max-width:100%; height:auto;}
 <!-- ===================== EDUCATION ===================== -->
 <section class="timeline-section" id="education">
   <div class="wrap">
-    <div class="eyebrow"><span class="dot"></span>BACKGROUND</div>
-    <h2 class="section-title reveal">Education</h2>
-    <p class="section-sub reveal">Academic path so far.</p>
+    <div class="eyebrow" style="justify-content:center"><span class="dot"></span>BACKGROUND</div>
+    <h2 class="section-title reveal" style="text-align:center">Education</h2>
+    <p class="section-sub reveal" style="margin-left:auto;margin-right:auto;text-align:center">Academic path so far — verified dossier.</p>
 
-    <div class="timeline reveal">
+    <div class="edu-meta reveal">
+      <span><b>03</b>&nbsp;RECORDS</span><span><b>01</b>&nbsp;DEGREE IN PROGRESS</span><span>WEST BENGAL · IN</span>
+    </div>
+
+    <div class="timeline reveal" style="max-width:560px;margin:0 auto">
       <div class="tl-item">
-        <div class="tl-year">2024 — Present</div>
+        <div class="edu-row"><span class="edu-ico">◉</span><span class="tl-year">2024 — Present</span></div>
         <h4>B.Sc in Cyber Security</h4>
         <p>Guru Nanak Institute of Technology</p>
       </div>
       <div class="tl-item">
-        <div class="tl-year">2024</div>
+        <div class="edu-row"><span class="edu-ico">⬢</span><span class="tl-year">2024</span></div>
         <h4>Higher Secondary</h4>
         <p>Madhyamgram APC Vidyayatan (Boys)</p>
       </div>
       <div class="tl-item">
-        <div class="tl-year">2022</div>
+        <div class="edu-row"><span class="edu-ico">✦</span><span class="tl-year">2022</span></div>
         <h4>Secondary Education</h4>
         <p>Madhyamgram APC Vidyayatan (Boys)</p>
       </div>
