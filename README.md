@@ -66,6 +66,7 @@ Not another generic template. This is a **threat-monitor styled portfolio**:
 | 05 | **NexVault** `FEATURED · GROUP · IN PROGRESS` | Secure Vault Web App | [Live Demo](https://secure-vault-system.onrender.com/) | — |
 | 06 | **Humanize AI** `IN PROGRESS` | AI Text Tool | [Live Demo](https://arkap1502.github.io/Humanize-AI/) | [Code](https://github.com/arkap1502/Humanize-AI) |
 | 07 | **Hidden-Prompt Scanner for Documents** `FEATURED` | Document Security · Prompt Injection Detection | [Live Demo](https://hidden-prompt-scanner-for-documents.onrender.com/) | [Code](https://github.com/arkap1502/Hidden-prompt-scanner-for-documents.) |
+| 08 | **Prototype Safety Check** | Prototype Safety · Web Security | [Live Demo](https://prototype-safety-check.onrender.com/) | [Code](https://github.com/arkap1502/prototype-safety-check) |
 
 ### 00 — Website Security Copilot ◈ Featured
 AI-powered assistant that scans, explains, and helps fix website security issues — plus an Always-On browser guard.
@@ -111,6 +112,13 @@ Scans `PDF`, `DOCX`, `TXT`, `MD`, `HTML` for hidden prompt-injection attacks aim
 - `LOW / MEDIUM / HIGH` risk scoring · CLI + JSON report · Flask web UI · Fully local scan
 - Stack: Python, Flask, PyPDF2, python-docx, BeautifulSoup — deployed on Render
 
+### 08 — Prototype Safety Check
+Passive safety scanner for **deployed** prototypes (never repo links).
+- 6 checks — SQLi, XSS, malware, phishing, DoS exposure, MitM (HTTPS / HSTS / TLS)
+- Safe / Risky / Critical verdict with reasons + fix suggestions
+- Web UI + `scanner.py` CLI + `GET /api/scan?url=...` API + re-scan history
+- Stack: Python, Flask, HTML / JS — deployed on Render
+
 ---
 
 ## 🗺️ Site Map
@@ -120,7 +128,7 @@ Scans `PDF`, `DOCX`, `TXT`, `MD`, `HTML` for hidden prompt-injection attacks aim
 #education  → EDUCATION  (2024-Present B.Sc, 2024 HS, 2022 Secondary)
 #skills     → SKILL MATRIX
 #projects   → SPOTLIGHT (1 featured build + View All tile → projects.html)
-projects.html → ARCHIVE (all 08 builds, filter: All / Cybersecurity / Web)
+projects.html → ARCHIVE (all 09 builds, filter: All / Cybersecurity / Web)
 #journey    → CYBERSECURITY JOURNEY (vertical flow)
 #lab        → SECURITY LAB (status.sh dashboard)
 #contact    → LET'S BUILD SOMETHING SECURE (copy-email + form)
@@ -148,7 +156,7 @@ fundamentals → Python → web dev → security projects
   → phishing awareness → URL threat analysis
     → password security → NexVault → Humanize AI
       → WiFi Password Finder → Website Security Copilot
-        → Hidden-Prompt Scanner → ∞ continuous learning
+        → Hidden-Prompt Scanner → Prototype Safety Check → ∞ continuous learning
 ```
 
 ---
@@ -158,7 +166,7 @@ fundamentals → Python → web dev → security projects
 | Metric | Value |
 |--------|-------|
 | System Status | `ONLINE` |
-| Projects | `08` |
+| Projects | `09` |
 | Security Focus | `WEB + APP SECURITY` |
 | Primary Language | `PYTHON (backend) / JAVASCRIPT (frontend)` |
 | Environment | `WINDOWS 11` |
@@ -189,7 +197,7 @@ python3 -m http.server 8000
 ```
 portfolio/
 ├── index.html      → main site (spotlight project + View All tile)
-├── projects.html   → full archive, all 08 builds with filters
+├── projects.html   → full archive, all 09 builds with filters
 └── README.md       → you are here
 ```
 

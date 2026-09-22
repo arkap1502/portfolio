@@ -250,7 +250,7 @@ footer{padding:36px 0; border-top:1px solid var(--border); position:relative; z-
   <div class="wrap">
     <a href="index.html#projects" class="back-link">← Back to Portfolio</a>
     <div class="eyebrow"><span class="dot"></span>PROJECT ARCHIVE</div>
-    <h1 class="section-title reveal">All Projects<span class="count-pill">08 BUILDS</span></h1>
+    <h1 class="section-title reveal">All Projects<span class="count-pill">09 BUILDS</span></h1>
     <p class="section-sub reveal">Educational and demo security tools built to explore real concepts — not production security products.</p>
 
     <div class="filter-row reveal">
@@ -473,6 +473,31 @@ footer{padding:36px 0; border-top:1px solid var(--border); position:relative; z-
           <a href="https://github.com/arkap1502/Hidden-prompt-scanner-for-documents." target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Code</a>
         </div>
       </article>
+
+      <!-- PROJECT 8 -->
+      <article class="project-card glass reveal" data-cat="cybersecurity web" data-num="08">
+        <div class="project-top">
+          <span class="project-cat">Cybersecurity · Prototype Safety</span>
+          <h3>Prototype Safety Check</h3>
+          <p class="desc">Passive safety scanner for deployed prototypes — SQLi, XSS, malware, phishing, DoS & MitM checks.</p>
+        </div>
+        <ul class="feature-list">
+          <li>6 passive checks: SQLi, XSS, malware, phishing, DoS & MitM</li>
+          <li>Safe / Risky / Critical verdict with reasons + fixes</li>
+          <li>Web UI + CLI + JSON API with re-scan history</li>
+        </ul>
+        <div class="tech-row">
+          <span class="tech-chip">Python</span><span class="tech-chip">Flask</span><span class="tech-chip">HTML</span><span class="tech-chip">JavaScript</span><span class="tech-chip">Render</span>
+        </div>
+        <button class="details-toggle" data-target="td8"><span class="chev">▸</span> Technical Details</button>
+        <div class="tech-details" id="td8">
+          <p>Scans only <code>deployed links</code> (never repo links) with passive checks — exposed params &amp; DB errors, missing <code>CSP / X-XSS-Protection</code>, suspicious scripts &amp; iframes, spoof &amp; HTTPS signals, rate-limit / CDN / HSTS headers. Ships as <code>app.py</code> web UI, <code>scanner.py</code> CLI and <code>GET /api/scan?url=...</code> API — no exploitation, permission-only.</p>
+        </div>
+        <div class="project-actions">
+          <a href="https://prototype-safety-check.onrender.com/" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Live Demo</a>
+          <a href="https://github.com/arkap1502/prototype-safety-check" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Code</a>
+        </div>
+      </article>
     </div>
 
     <div class="github-banner reveal">
@@ -581,7 +606,8 @@ document.addEventListener('DOMContentLoaded', function(){
     '04': 'Checker combo: link safety plus password strength in one.',
     '05': 'NexVault: your encrypted vault — your keys, your control.',
     '06': 'Humanize AI: turns robotic AI text into human writing.',
-    '07': 'Hidden-Prompt Scanner: hunts invisible injections in docs.'
+    '07': 'Hidden-Prompt Scanner: hunts invisible injections in docs.',
+    '08': 'Safety Check: passive scan of deployed prototypes for 6 risks.'
   };
   const DEFAULT_TIP = 'Hover any project — I will brief you in one line.';
   function say(msg){
