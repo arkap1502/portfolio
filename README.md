@@ -61,12 +61,10 @@ Not another generic template. This is a **threat-monitor styled portfolio**:
 | 00 | **Website Security Copilot** `FEATURED` | Browser Extension + Web Security | [Live Demo](https://website-security-copilot-3m0hij8jl-arkap1502-9053s-projects.vercel.app/) | [Code](https://github.com/arkap1502/Website-Security-Copilot) |
 | 01 | **Altron Password Inspector** `FEATURED` | Password Security | [Live Demo](https://arkap1502.github.io/password-making/) | [Code](https://github.com/arkap1502/password-making) |
 | 02 | **URL Threat Scanner** | Phishing Detection | [Live Demo](https://arkap1502.github.io/URL-Scanner/) | [Code](https://github.com/arkap1502/URL-Scanner) |
-| 03 | **WiFi Password Finder** | Network Security | [Live Demo](https://arkap1502.github.io/Wifi-password-founder/) | [Code](https://github.com/arkap1502/Wifi-password-founder) |
-| 04 | **URL & Password Checker** | Web Security Combo | [Live Demo](https://arkap1502.github.io/URL-Password-Checker/) | [Code](https://github.com/arkap1502/URL-Password-Checker) |
-| 05 | **NexVault** `FEATURED · GROUP · IN PROGRESS` | Secure Vault Web App | [Live Demo](https://secure-vault-system.onrender.com/) | — |
-| 06 | **Humanize AI** `IN PROGRESS` | AI Text Tool | [Live Demo](https://arkap1502.github.io/Humanize-AI/) | [Code](https://github.com/arkap1502/Humanize-AI) |
-| 07 | **Hidden-Prompt Scanner for Documents** `FEATURED` | Document Security · Prompt Injection Detection | [Live Demo](https://hidden-prompt-scanner-for-documents.onrender.com/) | [Code](https://github.com/arkap1502/Hidden-prompt-scanner-for-documents.) |
-| 08 | **Prototype Safety Check** | Prototype Safety · Web Security | [Live Demo](https://prototype-safety-check.onrender.com/) | [Code](https://github.com/arkap1502/prototype-safety-check) |
+| 03 | **NexVault** `FEATURED · GROUP · IN PROGRESS` | Secure Vault Web App | [Live Demo](https://secure-vault-system.onrender.com/) | — |
+| 04 | **Humanize AI** `IN PROGRESS` | AI Text Tool | [Live Demo](https://arkap1502.github.io/Humanize-AI/) | [Code](https://github.com/arkap1502/Humanize-AI) |
+| 05 | **Hidden-Prompt Scanner for Documents** `FEATURED` | Document Security · Prompt Injection Detection | [Live Demo](https://hidden-prompt-scanner-for-documents.onrender.com/) | [Code](https://github.com/arkap1502/Hidden-prompt-scanner-for-documents.) |
+| 06 | **Prototype Safety Check** | Prototype Safety · Web Security | [Live Demo](https://prototype-safety-check.onrender.com/) | [Code](https://github.com/arkap1502/prototype-safety-check) |
 
 ### 00 — Website Security Copilot ◈ Featured
 AI-powered assistant that scans, explains, and helps fix website security issues — plus an Always-On browser guard.
@@ -88,31 +86,22 @@ Browser-based URL risk analyzer (0–100).
 - Raw-IP, shady-TLD, brand-misspelling, phishing-keyword detection
 - Per-finding explanations + verdict · Animated risk meter in-card
 
-### 03 — WiFi Password Finder
-Recover **your own** saved Wi-Fi passwords.
-- Parses `netsh` / `nmcli` / macOS Keychain output 100% in-browser
-- Live mode via local `app.py` + Paste mode for GitHub Pages
-- Android Wi-Fi QR text / screenshot support · One-click reveal & copy
-
-### 04 — URL & Password Checker
-Combo tool: 4-model heuristic URL engine (domain, structural, lexical, encoding) + password analyzer with scan history & copyable report.
-
-### 05 — NexVault ◈ Group Project
+### 03 — NexVault ◈ Group Project
 > *Your data, your vault, your control.*
 - Auth-gated vault dashboard, encrypted access-controlled storage
 - Green-glow `group-card` highlight + pulsing `IN PROGRESS` pill
 
-### 06 — Humanize AI
+### 04 — Humanize AI
 React + Express app with **zero-build offline fallback** — same engine ported to vanilla JS for GitHub Pages. Light / Medium / Strong modes, real-time transform, word-count diff.
 
-### 07 — Hidden-Prompt Scanner for Documents ◈ Featured
+### 05 — Hidden-Prompt Scanner for Documents ◈ Featured
 Scans `PDF`, `DOCX`, `TXT`, `MD`, `HTML` for hidden prompt-injection attacks aimed at LLMs.
 - Invisible-text heuristics — white-on-white, `< 2pt` / zero-size fonts, transparent text, off-page content, zero-width chars (`U+200B/C/D, U+FEFF`)
 - Metadata / comments / footnotes / annotations scan + injection-phrase match (`ignore previous instructions`, `disregard system prompt`, `you are now ...`, etc.)
 - `LOW / MEDIUM / HIGH` risk scoring · CLI + JSON report · Flask web UI · Fully local scan
 - Stack: Python, Flask, PyPDF2, python-docx, BeautifulSoup — deployed on Render
 
-### 08 — Prototype Safety Check
+### 06 — Prototype Safety Check
 Passive safety scanner for **deployed** prototypes (never repo links).
 - 6 checks — SQLi, XSS, malware, phishing, DoS exposure, MitM (HTTPS / HSTS / TLS)
 - Safe / Risky / Critical verdict with reasons + fix suggestions
@@ -128,7 +117,7 @@ Passive safety scanner for **deployed** prototypes (never repo links).
 #education  → EDUCATION  (2024-Present B.Sc, 2024 HS, 2022 Secondary)
 #skills     → SKILL MATRIX
 #projects   → SPOTLIGHT (1 featured build + View All tile → projects.html)
-projects.html → ARCHIVE (all 09 builds, filter: All / Cybersecurity / Web)
+projects.html → ARCHIVE (all 07 builds, filter: All / Cybersecurity / Web)
 #journey    → CYBERSECURITY JOURNEY (vertical flow)
 #lab        → SECURITY LAB (status.sh dashboard)
 #contact    → LET'S BUILD SOMETHING SECURE (copy-email + form)
@@ -155,7 +144,7 @@ projects.html → ARCHIVE (all 09 builds, filter: All / Cybersecurity / Web)
 fundamentals → Python → web dev → security projects
   → phishing awareness → URL threat analysis
     → password security → NexVault → Humanize AI
-      → WiFi Password Finder → Website Security Copilot
+      → Website Security Copilot
         → Hidden-Prompt Scanner → Prototype Safety Check → ∞ continuous learning
 ```
 
@@ -166,7 +155,7 @@ fundamentals → Python → web dev → security projects
 | Metric | Value |
 |--------|-------|
 | System Status | `ONLINE` |
-| Projects | `09` |
+| Projects | `07` |
 | Security Focus | `WEB + APP SECURITY` |
 | Primary Language | `PYTHON (backend) / JAVASCRIPT (frontend)` |
 | Environment | `WINDOWS 11` |
@@ -197,7 +186,7 @@ python3 -m http.server 8000
 ```
 portfolio/
 ├── index.html      → main site (spotlight project + View All tile)
-├── projects.html   → full archive, all 09 builds with filters
+├── projects.html   → full archive, all 07 builds with filters
 └── README.md       → you are here
 ```
 

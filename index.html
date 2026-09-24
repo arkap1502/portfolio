@@ -949,7 +949,7 @@ img,svg,video{max-width:100%; height:auto;}
   <div class="wrap">
     <div class="eyebrow"><span class="dot"></span>FEATURED PROJECT</div>
     <h2 class="section-title reveal">Things I've Built</h2>
-    <p class="section-sub reveal">Spotlight build — the full archive of 09 projects lives one click away.</p>
+    <p class="section-sub reveal">Spotlight build — the full archive of 07 projects lives one click away.</p>
 
     <div class="flag-panel reveal">
       <!-- PROJECT 0 — FLAGSHIP SPOTLIGHT -->
@@ -1019,8 +1019,6 @@ img,svg,video{max-width:100%; height:auto;}
       <div class="journey-arrow reveal">↓</div>
       <div class="journey-node glass reveal">Humanize AI</div>
       <div class="journey-arrow reveal">↓</div>
-      <div class="journey-node glass reveal">WiFi Password Finder</div>
-      <div class="journey-arrow reveal">↓</div>
       <div class="journey-node glass reveal">Website Security Copilot</div>
       <div class="journey-arrow reveal">↓</div>
       <div class="journey-node glass reveal">Hidden-Prompt Scanner for Documents</div>
@@ -1047,7 +1045,7 @@ img,svg,video{max-width:100%; height:auto;}
       </div>
       <div class="lab-grid">
         <div class="lab-stat green"><div class="label">System Status</div><div class="value">ONLINE</div></div>
-        <div class="lab-stat"><div class="label">Projects</div><div class="value" id="labProjectCount" data-count="9">09</div></div>
+        <div class="lab-stat"><div class="label">Projects</div><div class="value" id="labProjectCount" data-count="7">07</div></div>
         <div class="lab-stat"><div class="label">Security Focus</div><div class="value" style="font-size:1.05rem">WEB + APP SECURITY</div></div>
         <div class="lab-stat"><div class="label">Primary Language</div><div class="value" style="font-size:1.05rem">PYTHON (BACKEND) / JAVASCRIPT (FRONTEND)</div></div>
         <div class="lab-stat"><div class="label">Environment</div><div class="value" style="font-size:1.05rem">WINDOWS 11</div></div>
@@ -1293,7 +1291,7 @@ document.addEventListener('DOMContentLoaded', function(){
   /* ---------- Security Lab: count-up + log ticker ---------- */
   const labCount = document.getElementById('labProjectCount');
   if (labCount){
-    const target = parseInt(labCount.dataset.count, 10) || 9;
+    const target = parseInt(labCount.dataset.count, 10) || 7;
     const reduceMotionLab = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const paint = n => { labCount.textContent = (n < 10 ? '0' : '') + n; };
     if (reduceMotionLab){ paint(target); }
@@ -1319,7 +1317,7 @@ document.addEventListener('DOMContentLoaded', function(){
     labLogLine.style.transition = 'opacity .22s ease';
     const lines = [
       '> guard: perimeter clear — 0 intrusions today',
-      '> monitor: 09 builds under watch',
+      '> monitor: 07 builds under watch',
       '> headers: CSP + HSTS enforced on portfolio',
       '> focus: web + app security — learning in progress'
     ];

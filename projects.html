@@ -85,38 +85,46 @@ header.scrolled{background:rgba(19,19,20,0.88); backdrop-filter:blur(14px); bord
 .filter-btn{font-family:var(--font-mono); font-size:0.65rem; padding:5px 10px; border-radius:20px; border:1px solid var(--border); color:var(--text-dim); background:transparent; transition:all .2s ease;}
 .filter-btn:hover{color:var(--text);}
 .filter-btn.active{background:var(--cyan); color:#fff; border-color:var(--cyan); font-weight:600;}
-.project-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr)); gap:16px; align-items:stretch;}
-.project-card{position:relative; padding:0; overflow:hidden; display:flex; flex-direction:column; transition:all .3s ease; border-radius:12px; align-self:stretch; height:100%;}
+.project-grid{display:grid; grid-template-columns:1fr; gap:24px; align-items:stretch;}
+.project-card{position:relative; padding:clamp(22px,4vw,44px); overflow:hidden; display:flex; flex-direction:column; transition:all .3s ease; border-radius:22px; align-self:stretch; height:auto; background:linear-gradient(180deg,#1e1e22,#141416); border:1px solid var(--border); box-shadow:0 0 0 4px #0b0b0c, 0 24px 60px rgba(0,0,0,0.55); counter-increment:readout;}
+.project-card::before{content:''; position:absolute; inset:0; pointer-events:none; background:radial-gradient(700px 320px at 80% 0%, rgba(255,46,14,0.12), transparent 65%);}
+.project-card > *{position:relative; z-index:1;}
 .project-card.hidden{display:none;}
-.project-top{padding:18px 18px 0; position:relative;}
-.project-cat{font-family:var(--font-mono); font-size:0.68rem; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:6px; display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
-.project-card h3{font-size:1.1rem; margin-bottom:6px; line-height:1.25; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; min-height:2.4em;}
-.project-card p.desc{color:var(--text-dim); font-size:0.85rem; line-height:1.5; margin-bottom:10px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; min-height:2.8em;}
-.feature-list{margin:0 0 10px; padding:0 18px; flex:1 1 auto;}
-.feature-list li{font-size:0.82rem; line-height:1.5; color:var(--text-dim); padding:3px 0 3px 16px; position:relative;}
-.feature-list li::before{content:'▹'; position:absolute; left:0;}
-.tech-row{display:flex; flex-wrap:wrap; gap:6px; padding:0 18px; margin-bottom:12px;}
-.tech-chip{font-family:var(--font-mono); font-size:0.68rem; padding:4px 10px; border-radius:6px; background:rgba(255,46,14,0.12); color:#ff7a5c; border:1px solid var(--border);}
-.project-actions{display:flex; gap:10px; padding:16px 18px; border-top:1px solid var(--border); background:#171719; margin-top:auto; flex-wrap:wrap;}
-.details-toggle{background:none; border:none; font-family:var(--font-mono); font-size:0.75rem; padding:0 18px 12px; text-align:left; display:flex; align-items:center; gap:6px;}
-.details-toggle .chev{transition:transform .25s ease;}
+.project-top{padding:0; position:relative; margin-bottom:8px;}
+.project-cat{font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:10px; display:block;}
+.project-card h3{font-size:clamp(1.8rem,4vw,2.6rem); font-weight:700; letter-spacing:-0.02em; margin-bottom:8px; line-height:1.15;}
+.project-card p.desc{color:var(--text-dim); font-size:0.95rem; line-height:1.7; margin-bottom:24px; max-width:860px;}
+.feature-list{margin:0 0 24px; padding:0; flex:1 1 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px;}
+.feature-list li{font-size:0.85rem; line-height:1.55; color:var(--text-dim); padding:16px; position:relative; background:#1e1e21; border:1px solid var(--border); border-radius:12px;}
+.feature-list li::before{content:'▹'; position:static; margin-right:8px;}
+.tech-row{display:flex; flex-wrap:wrap; gap:8px; padding:0; margin-bottom:26px;}
+.tech-chip{font-family:var(--font-mono); font-size:0.72rem; padding:6px 12px; border-radius:8px; background:#242427; color:var(--text-dim); border:1px solid rgba(255,255,255,0.08);}
+.project-actions{display:flex; gap:12px; padding:0; border-top:none; background:transparent; margin-top:auto; flex-wrap:wrap;}
+.project-actions .btn{padding:13px 26px; font-size:0.88rem;}
+.project-grid{counter-reset:readout;}
+.details-toggle{background:transparent; border:none; width:100%; display:flex; align-items:center; gap:12px; padding:2px 0 16px; font-family:var(--font-mono); font-size:0.7rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--text-dim);}
+.details-toggle::before,.details-toggle::after{content:''; flex:1; height:1px; background:var(--border);}
+.details-toggle .chev{width:26px; height:26px; flex-shrink:0; border:1px solid var(--border); border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:0.7rem; transition:transform .25s ease;}
 .details-toggle.open .chev{transform:rotate(90deg);}
-.tech-details{max-height:0; overflow:hidden; transition:max-height .35s ease; padding:0 18px;}
-.tech-details.open{max-height:500px; padding-bottom:14px;}
-.tech-details p{font-size:0.8rem; line-height:1.55; color:var(--text-dim); background:rgba(255,46,14,0.07); padding:10px 12px; border-radius:0 8px 8px 0; border-left:2px solid var(--cyan);}
-.badge-featured{position:absolute; top:12px; right:12px; font-family:var(--font-mono); font-size:0.62rem; color:var(--amber); border:1px solid rgba(255,176,46,0.4); background:rgba(255,176,46,0.08); padding:3px 8px; border-radius:6px;}
+.tech-details{max-height:0; overflow:hidden; opacity:0; transform:scaleY(0.96); transform-origin:top; transition:max-height .45s ease, opacity .3s ease, transform .3s ease; padding:0; border:1px solid transparent; border-radius:12px;}
+.tech-details.open{max-height:900px; opacity:1; transform:none; padding-bottom:14px; border-color:transparent;}
+.tech-details::before{content:'● ● ●   readout.log  —  LIVE'; display:block; font-family:var(--font-mono); font-size:0.64rem; letter-spacing:0.18em; color:var(--text-faint); background:#1e1e21; border:1px solid var(--border); border-bottom:none; border-radius:12px 12px 0 0; padding:9px 16px;}
+.tech-details p{position:relative; font-family:var(--font-mono); font-size:0.78rem; line-height:1.8; color:var(--text-dim); background:#171719; border:1px solid var(--border); border-top:none; border-radius:0 0 12px 12px; padding:16px 18px 14px 58px; overflow:hidden;}
+.tech-details p::before{content:counter(readout, decimal-leading-zero); position:absolute; left:0; top:0; bottom:0; width:40px; display:flex; align-items:flex-start; justify-content:center; padding-top:16px; font-size:0.68rem; letter-spacing:0.08em; color:var(--text-faint); border-right:1px solid var(--border);}
+.tech-details p::after{content:'— EOF · PUBLIC CLEARANCE ·'; display:block; margin-top:12px; font-size:0.6rem; letter-spacing:0.16em; text-align:right; color:var(--text-faint);}
+.badge-featured{position:absolute; top:22px; right:22px; font-family:var(--font-mono); font-size:0.72rem; font-weight:700; color:var(--amber); border:1px solid rgba(255,176,46,0.45); background:rgba(255,176,46,0.08); padding:5px 12px; border-radius:20px;}
 .working-tag{font-family:var(--font-mono); font-size:0.68rem; font-weight:500; color:var(--amber); letter-spacing:0.02em; white-space:nowrap;}
-.group-badge-row{display:flex; gap:8px; flex-wrap:wrap; align-items:center; padding:0 18px; margin:0 0 12px;}
+.group-badge-row{display:flex; gap:8px; flex-wrap:wrap; align-items:center; padding:0; margin:0 0 16px;}
 .group-pill{font-family:var(--font-mono); font-size:0.6rem; letter-spacing:0.06em; text-transform:uppercase; color:var(--green); border:1px solid rgba(61,255,136,0.4); background:rgba(61,255,136,0.08); padding:3px 8px; border-radius:20px; display:inline-flex; align-items:center; gap:6px;}
 .working-pill{font-family:var(--font-mono); font-size:0.6rem; letter-spacing:0.06em; text-transform:uppercase; color:var(--amber); border:1px solid rgba(255,176,46,0.45); background:rgba(255,176,46,0.08); padding:3px 8px; border-radius:20px; display:inline-flex; align-items:center; gap:7px;}
 .working-pill .pulse-dot{width:7px; height:7px; border-radius:50%; background:var(--amber); box-shadow:0 0 8px var(--amber); animation:pulse 1.6s ease-in-out infinite;}
 @keyframes pulse{0%,100%{opacity:1;} 50%{opacity:0.3;}}
-.group-card{background:linear-gradient(180deg,rgba(61,255,136,0.07),#171719 42%) !important;}
-.group-card:hover{border-color:var(--border-strong) !important; box-shadow:0 14px 40px rgba(255,46,14,0.18) !important;}
-.risk-meter{margin:0 18px 12px;}
-.risk-track{height:8px; border-radius:6px; background:#2a2a2e; overflow:hidden; position:relative;}
-.risk-fill{height:100%; width:0%; border-radius:6px; background:linear-gradient(90deg,var(--green),var(--amber) 60%,var(--red)); transition:width 1.4s ease;}
-.risk-labels{display:flex; justify-content:space-between; font-family:var(--font-mono); font-size:0.58rem; color:var(--text-faint); margin-top:4px;}
+.group-card{background:linear-gradient(180deg,#1e1e22,#141416) !important;}
+.group-card:hover{border-color:var(--border-strong) !important; box-shadow:0 0 0 4px #0b0b0c, 0 24px 60px rgba(0,0,0,0.55), 0 14px 40px rgba(255,46,14,0.18) !important;}
+.risk-meter{margin:0 0 20px; max-width:100%; width:100%;}
+.risk-track{height:18px; border-radius:12px; background:#2a2a2e; overflow:hidden; position:relative; border:1px solid var(--border);}
+.risk-fill{height:100%; width:0%; border-radius:12px; background:linear-gradient(90deg,var(--green),var(--amber) 60%,var(--red)); transition:width 1.4s ease;}
+.risk-labels{display:flex; justify-content:space-between; font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.06em; color:var(--text-faint); margin-top:8px;}
 
 /* unified card design — theme red, flagship reference look */
 .project-card .project-cat::before{content:'◉ '; color:var(--cyan);}
@@ -124,7 +132,6 @@ header.scrolled{background:rgba(19,19,20,0.88); backdrop-filter:blur(14px); bord
 .project-card .feature-list li::before{color:var(--cyan);}
 .project-card .tech-chip:first-child{background:var(--cyan); border-color:var(--cyan); color:#fff; font-weight:700;}
 .project-card .details-toggle{color:var(--cyan);}
-.project-card .tech-details p{border-left-color:var(--cyan);}
 .project-card:hover{border-color:var(--border-strong); box-shadow:0 14px 40px rgba(255,46,14,0.18); transform:translateY(-4px);}
 
 /* github banner — same CY•FOCUS dark + red theme */
@@ -191,7 +198,7 @@ footer{padding:36px 0; border-top:1px solid var(--border); position:relative; z-
 @media (min-width:901px){
   .wrap{padding:0 48px;}
   .navbar{padding:16px 48px;}
-  .project-grid{grid-template-columns:repeat(3,1fr); gap:16px; align-items:stretch;}
+  .project-grid{grid-template-columns:1fr; gap:24px; align-items:stretch;}
 }
 @media (min-width:1600px){ .wrap{padding:0 72px;} .navbar{padding:18px 72px;} }
 @media (max-width:900px){
@@ -209,6 +216,11 @@ footer{padding:36px 0; border-top:1px solid var(--border); position:relative; z-
   .wrap{padding:0 20px;}
   .navbar{padding:14px 20px;}
   .project-grid{grid-template-columns:1fr;}
+  .feature-list{grid-template-columns:1fr;}
+  .project-actions .btn{flex:1 1 100%; justify-content:center;}
+  .badge-featured{top:16px; right:16px;}
+  .tech-details::before{letter-spacing:0.08em; font-size:0.6rem; padding:8px 12px;}
+  .tech-details p{padding:14px 14px 12px 50px; font-size:0.75rem;}
   .footer-links{justify-content:center; gap:14px;}
 }
 @media (prefers-reduced-motion:reduce){
@@ -249,7 +261,7 @@ footer{padding:36px 0; border-top:1px solid var(--border); position:relative; z-
   <div class="wrap">
     <a href="index.html#projects" class="back-link">← Back to Portfolio</a>
     <div class="eyebrow"><span class="dot"></span>PROJECT ARCHIVE</div>
-    <h1 class="section-title reveal">All Projects<span class="count-pill">09 BUILDS</span></h1>
+    <h1 class="section-title reveal">All Projects<span class="count-pill">07 BUILDS</span></h1>
     <p class="section-sub reveal">Educational and demo security tools built to explore real concepts — not production security products.</p>
 
     <div class="filter-row reveal">
@@ -265,19 +277,22 @@ footer{padding:36px 0; border-top:1px solid var(--border); position:relative; z-
           <span class="badge-featured">FEATURED</span>
           <span class="project-cat">Cybersecurity · Browser Extension</span>
           <h3>Website Security Copilot</h3>
-          <p class="desc">AI assistant that scans & explains website security issues — with Always-On guard.</p>
+          <p class="desc">AI-powered assistant that scans, explains, and helps fix website security issues — plus an Always-On browser guard.</p>
         </div>
         <ul class="feature-list">
-          <li>Manual Scan — headers, SSL/TLS, cookies & misconfig checks</li>
-          <li>Always-On Guard with Safe / Suspicious / Blocked verdict</li>
-          <li>AI report with risk score + plain-English fixes</li>
+          <li>It is a browser add-on — the live demo shows how it looks, full protection starts after you add it to your browser</li>
+          <li>One-click website check — it checks safety settings, site lock, cookies, open doors and email safety</li>
+          <li>Simple ON/OFF guard — when ON, it watches every page you open, marks it Safe, Doubtful or Blocked, and blocks bad sites by itself</li>
+          <li>For each problem, it shows how serious it is, gives proof, explains in easy words, and gives a ready fix plus A to F grade</li>
+          <li>Fully safe to use — it only looks, never harms any site, follows site rules, and the AI only explains what it found</li>
+          <li>Gives a simple 0 to 100 safety score with clear fixes anyone can follow</li>
         </ul>
         <div class="tech-row">
-          <span class="tech-chip">Next.js</span><span class="tech-chip">FastAPI</span><span class="tech-chip">Python</span><span class="tech-chip">JavaScript</span><span class="tech-chip">MV3 Extension</span>
+          <span class="tech-chip">Next.js</span><span class="tech-chip">Tailwind CSS</span><span class="tech-chip">FastAPI</span><span class="tech-chip">Python</span><span class="tech-chip">dnspython</span><span class="tech-chip">SQLite</span><span class="tech-chip">Docker</span><span class="tech-chip">MV3 Extension</span>
         </div>
         <button class="details-toggle" data-target="td0"><span class="chev">▸</span> Technical Details</button>
         <div class="tech-details" id="td0">
-          <p>FastAPI scan engine (<code>httpx</code>, <code>ssl</code>, <code>dnspython</code>) checks security headers (<code>CSP</code>, <code>HSTS</code>, <code>X-Frame-Options</code>), cert expiry, cookie flags &amp; phishing signals; MV3 extension (<code>webNavigation</code> + tabs) runs passive verdicts in background. LLM only explains tool output — risk score <code>100 - min(100, 10*C + 5*H + 2*M + 1*L)</code>.</p>
+          <p>FastAPI scan engine (<code>httpx</code>, <code>ssl</code>, <code>dnspython</code>) checks security headers (<code>CSP</code>, <code>HSTS</code>, <code>X-Frame-Options</code>), cert expiry, cookie flags, open ports / fingerprinting, DNS-email (<code>SPF</code>, <code>DMARC</code>, <code>DKIM</code>) &amp; phishing signals; MV3 extension (<code>webNavigation</code> + tabs) runs passive verdicts in background. LLM only explains tool output — risk score <code>100 - min(100, 10*C + 5*H + 2*M + 1*L)</code>, grades A–F. Stack: Next.js + Tailwind, FastAPI, Python, SQLite → Postgres, Docker, MV3 extension.</p>
         </div>
         <div class="project-actions">
           <a href="https://website-security-copilot-3m0hij8jl-arkap1502-9053s-projects.vercel.app/" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Live Demo</a>
@@ -291,12 +306,13 @@ footer{padding:36px 0; border-top:1px solid var(--border); position:relative; z-
           <span class="badge-featured">FEATURED</span>
           <span class="project-cat">Cybersecurity · Password Security</span>
           <h3>Altron Password Inspector</h3>
-          <p class="desc">Browser-based password generator and strength checker with HUD interface.</p>
+          <p class="desc">A simple tool that makes strong passwords and tells you how safe they are.</p>
         </div>
         <ul class="feature-list">
-          <li>Secure generation via <code>crypto.getRandomValues()</code></li>
-          <li>Adjustable length, character sets &amp; punctuation</li>
-          <li>Live strength checking with animated HUD</li>
+          <li>Makes truly random strong passwords that hackers cannot guess</li>
+          <li>You can choose length, letters, numbers and symbols, plus show, copy and clear buttons</li>
+          <li>Shows live password power — weak, medium or strong — right away</li>
+          <li>Works fully in your browser — your passwords never go anywhere</li>
         </ul>
         <div class="tech-row">
           <span class="tech-chip">JavaScript</span><span class="tech-chip">HTML</span><span class="tech-chip">CSS</span><span class="tech-chip">Web Crypto API</span>
@@ -316,16 +332,17 @@ footer{padding:36px 0; border-top:1px solid var(--border); position:relative; z-
         <div class="project-top">
           <span class="project-cat">Web Security · Phishing Detection</span>
           <h3>URL Threat Scanner</h3>
-          <p class="desc">Browser-based URL threat analysis tool with 0–100 risk score.</p>
+          <p class="desc">Paste any link and it tells you if it is safe or a fake trap — with a 0 to 100 score.</p>
         </div>
         <div class="risk-meter">
           <div class="risk-track"><div class="risk-fill" id="riskFill"></div></div>
           <div class="risk-labels"><span>LOW RISK</span><span>MEDIUM RISK</span><span>HIGH RISK</span></div>
         </div>
         <ul class="feature-list">
-          <li>Risk scoring from 0–100 with clear verdict</li>
-          <li>Suspicious IP &amp; TLD detection</li>
-          <li>Brand misspelling &amp; phishing keyword detection</li>
+          <li>Gives a simple 0 to 100 danger score with a clear safe-or-not answer</li>
+          <li>Catches fake links — wrong numbers in place of names and short hidden links</li>
+          <li>Catches copy-cat brand names and common fraud words</li>
+          <li>Shows a colour bar for risk and works fully in your browser</li>
         </ul>
         <div class="tech-row">
           <span class="tech-chip">JavaScript</span><span class="tech-chip">HTML</span><span class="tech-chip">CSS</span>
@@ -341,74 +358,25 @@ footer{padding:36px 0; border-top:1px solid var(--border); position:relative; z-
       </article>
 
       <!-- PROJECT 3 -->
-      <article class="project-card glass reveal" data-cat="cybersecurity" data-num="03">
-        <div class="project-top">
-          <span class="project-cat">Cybersecurity · Network Security</span>
-          <h3>WiFi Password Finder</h3>
-          <p class="desc">Web UI for recovering your own saved Wi-Fi passwords.</p>
-        </div>
-        <ul class="feature-list">
-          <li>Lists saved networks from <code>netsh</code>, <code>nmcli</code> &amp; Keychain</li>
-          <li>Live mode via local Python app, or paste mode</li>
-          <li>One-click reveal &amp; copy for the password</li>
-        </ul>
-        <div class="tech-row">
-          <span class="tech-chip">Python</span><span class="tech-chip">JavaScript</span><span class="tech-chip">HTML</span><span class="tech-chip">CSS</span>
-        </div>
-        <button class="details-toggle" data-target="td3"><span class="chev">▸</span> Technical Details</button>
-        <div class="tech-details" id="td3">
-          <p>Ships two modes: a local <code>app.py</code> that shells out to <code>netsh wlan show profiles</code> / <code>nmcli</code> / <code>security find-generic-password</code> for live results, and a static "paste mode" for the GitHub Pages build — since browsers can't run OS commands directly, the user pastes the command output (or a Wi-Fi sharing QR) and the same parsing logic runs entirely client-side.</p>
-        </div>
-        <div class="project-actions">
-          <a href="https://arkap1502.github.io/Wifi-password-founder/" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Live Demo</a>
-          <a href="https://github.com/arkap1502/Wifi-password-founder.git" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Code</a>
-        </div>
-      </article>
-
-      <!-- PROJECT 4 -->
-      <article class="project-card glass reveal" data-cat="cybersecurity web" data-num="04">
-        <div class="project-top">
-          <span class="project-cat">Cybersecurity · Web Security</span>
-          <h3>URL &amp; Password Checker with QR Scanner</h3>
-          <p class="desc">A combined client-side tool for checking URL safety and password strength.</p>
-        </div>
-        <ul class="feature-list">
-          <li>0–100 risk score with verdict &amp; confidence level</li>
-          <li>4-model heuristic engine: domain, structural &amp; lexical signals</li>
-          <li>Built-in password strength analyzer</li>
-        </ul>
-        <div class="tech-row">
-          <span class="tech-chip">HTML</span><span class="tech-chip">CSS</span><span class="tech-chip">JavaScript</span>
-        </div>
-        <button class="details-toggle" data-target="td4"><span class="chev">▸</span> Technical Details</button>
-        <div class="tech-details" id="td4">
-          <p>Parses the URL string locally and scores weighted signals — brand impersonation, suspicious TLDs, shorteners, raw IPs, open redirects, phishing keywords, punycode / double-encoding and more — capped at 100 with a deterministic summary. Passwords are evaluated for length, composition, predictability and exposure risk, fully in-browser.</p>
-        </div>
-        <div class="project-actions">
-          <a href="https://arkap1502.github.io/URL-Password-Checker/" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Live Demo</a>
-          <a href="https://github.com/arkap1502/URL-Password-Checker" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Code</a>
-        </div>
-      </article>
-
-      <!-- PROJECT 5 -->
-      <article class="project-card glass reveal group-card" data-cat="cybersecurity web" data-num="05">
+      <article class="project-card glass reveal group-card" data-cat="cybersecurity web" data-num="03">
         <div class="project-top">
           <span class="badge-featured">FEATURED</span>
           <span class="project-cat">Cybersecurity · Data Protection</span>
           <h3>NexVault <span class="working-tag">(Working)</span></h3>
-          <p class="desc">Secure vault web app for storing sensitive data.</p>
+          <p class="desc">Your own safe locker on the web — only you can open it.</p>
         </div>
         <ul class="feature-list">
-          <li>User registration &amp; authenticated login</li>
-          <li>Encrypted, access-controlled data storage</li>
-          <li>Personal vault dashboard per user</li>
+          <li>You create an account and log in — no login, no entry</li>
+          <li>Saves your private notes and data with lock and safety</li>
+          <li>Each person gets their own private locker page</li>
+          <li>A team project — still being built, so marked In Progress</li>
         </ul>
         <div class="tech-row">
-          <span class="tech-chip">Web App</span><span class="tech-chip">Authentication</span><span class="tech-chip">Data Security</span>
+          <span class="tech-chip">Web App</span><span class="tech-chip">Authentication</span><span class="tech-chip">Data Security</span><span class="tech-chip">Vault Dashboard</span>
         </div>
-        <button class="details-toggle" data-target="td5"><span class="chev">▸</span> Technical Details</button>
-        <div class="tech-details" id="td5">
-          <p>NexVault follows a "your data, your vault, your control" model — users register and log in before any vault data becomes accessible, keeping stored information gated behind authentication rather than open access.</p>
+        <button class="details-toggle" data-target="td3"><span class="chev">▸</span> Technical Details</button>
+        <div class="tech-details" id="td3">
+          <p>NexVault follows a "your data, your vault, your control" model — users register and log in before any vault data becomes accessible, keeping stored information gated behind authentication rather than open access. Encrypted, access-controlled storage with a personal vault dashboard per user.</p>
         </div>
         <div class="group-badge-row">
           <span class="group-pill">◈ Group Project</span>
@@ -419,24 +387,25 @@ footer{padding:36px 0; border-top:1px solid var(--border); position:relative; z-
         </div>
       </article>
 
-      <!-- PROJECT 6 -->
-      <article class="project-card glass reveal" data-cat="web" data-num="06">
+      <!-- PROJECT 4 -->
+      <article class="project-card glass reveal" data-cat="web" data-num="04">
         <div class="project-top">
           <span class="project-cat">Web Development · AI Text Tool</span>
           <h3>Humanize AI <span class="working-tag">(Working)</span></h3>
-          <p class="desc">Converts AI-generated text into natural, human-like writing.</p>
+          <p class="desc">Turns robot-sounding AI writing into natural human writing.</p>
         </div>
         <ul class="feature-list">
-          <li>Light, medium &amp; strong intensity levels</li>
-          <li>Real-time text transformation</li>
-          <li>One-click copy to clipboard</li>
+          <li>Three choices — light, medium or strong change</li>
+          <li>Changes your text at once and shows word count change</li>
+          <li>One click to copy your new text</li>
+          <li>Works even without internet — runs fully in your browser</li>
         </ul>
         <div class="tech-row">
-          <span class="tech-chip">React</span><span class="tech-chip">Node.js</span><span class="tech-chip">Express</span><span class="tech-chip">JavaScript</span>
+          <span class="tech-chip">React</span><span class="tech-chip">Node.js</span><span class="tech-chip">Express</span><span class="tech-chip">JavaScript</span><span class="tech-chip">Offline Fallback</span>
         </div>
-        <button class="details-toggle" data-target="td6"><span class="chev">▸</span> Technical Details</button>
-        <div class="tech-details" id="td6">
-          <p>Built as a React frontend with an Express backend, but ships a zero-build, fully client-side fallback so it also runs entirely offline in the browser with no server dependency — the same humanizer engine is ported to plain JavaScript for static hosting on GitHub Pages.</p>
+        <button class="details-toggle" data-target="td4"><span class="chev">▸</span> Technical Details</button>
+        <div class="tech-details" id="td4">
+          <p>Built as a React frontend with an Express backend, but ships a zero-build, fully client-side fallback so it also runs entirely offline in the browser with no server dependency — the same humanizer engine is ported to plain JavaScript for static hosting on GitHub Pages. Light / Medium / Strong modes, real-time transform, word-count diff.</p>
         </div>
         <div class="group-badge-row">
           <span class="working-pill"><span class="pulse-dot"></span>In Progress</span>
@@ -447,25 +416,26 @@ footer{padding:36px 0; border-top:1px solid var(--border); position:relative; z-
         </div>
       </article>
 
-      <!-- PROJECT 7 -->
-      <article class="project-card glass reveal" data-cat="cybersecurity web" data-num="07">
+      <!-- PROJECT 5 -->
+      <article class="project-card glass reveal" data-cat="cybersecurity web" data-num="05">
         <div class="project-top">
           <span class="badge-featured">FEATURED</span>
           <span class="project-cat">Cybersecurity · Prompt Injection Detection</span>
           <h3>Hidden-Prompt Scanner for Documents</h3>
-          <p class="desc">Scans PDF, DOCX, TXT, MD &amp; HTML for hidden prompt-injection attacks targeting LLMs.</p>
+          <p class="desc">Finds hidden cheat messages in files that try to fool AI — all checked safely on your side.</p>
         </div>
         <ul class="feature-list">
-          <li>Detects white-on-white, zero-size, transparent &amp; off-page hidden text</li>
-          <li>Flags injection phrases + metadata, comments &amp; annotation scan</li>
-          <li>LOW / MEDIUM / HIGH risk score with CLI + JSON report &amp; web UI</li>
+          <li>Finds hidden text — white text on white page, too-small or see-through text, text outside the page, and secret blank letters</li>
+          <li>Checks file details, notes and comments for trick lines like “forget old orders”</li>
+          <li>Gives Low, Medium or High danger level with a clear report on web and computer</li>
+          <li>Everything is checked privately — nothing is sent outside</li>
         </ul>
         <div class="tech-row">
-          <span class="tech-chip">Python</span><span class="tech-chip">Flask</span><span class="tech-chip">PyPDF2</span><span class="tech-chip">python-docx</span><span class="tech-chip">BeautifulSoup</span>
+          <span class="tech-chip">Python</span><span class="tech-chip">Flask</span><span class="tech-chip">PyPDF2</span><span class="tech-chip">python-docx</span><span class="tech-chip">BeautifulSoup</span><span class="tech-chip">Render</span>
         </div>
-        <button class="details-toggle" data-target="td7"><span class="chev">▸</span> Technical Details</button>
-        <div class="tech-details" id="td7">
-          <p>Extracts visible text plus layout signals (color, font size, opacity, position) to flag <code>color ≈ background</code>, <code>size ≤ 1.5pt</code>, <code>opacity == 0</code> and off-page content, including zero-width chars (<code>U+200B/C/D, U+FEFF</code>); checks PDF metadata, DOCX properties, comments &amp; footnotes, then regex-matches injection phrases like <code>ignore previous instructions</code> into a combined risk score — fully local via <code>scanner.py</code> CLI and Flask web UI.</p>
+        <button class="details-toggle" data-target="td5"><span class="chev">▸</span> Technical Details</button>
+        <div class="tech-details" id="td5">
+          <p>Extracts visible text plus layout signals (color, font size, opacity, position) to flag <code>color ≈ background</code>, <code>size ≤ 1.5pt</code>, <code>opacity == 0</code> and off-page content, including zero-width chars (<code>U+200B/C/D, U+FEFF</code>); checks PDF metadata, DOCX properties, comments &amp; footnotes, then regex-matches injection phrases like <code>ignore previous instructions</code> into a combined <code>LOW / MEDIUM / HIGH</code> risk score — fully local via <code>scanner.py</code> CLI and Flask web UI. Stack: Python, Flask, PyPDF2, python-docx, BeautifulSoup — deployed on Render.</p>
         </div>
         <div class="project-actions">
           <a href="https://hidden-prompt-scanner-for-documents.onrender.com/" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Live Demo</a>
@@ -473,24 +443,25 @@ footer{padding:36px 0; border-top:1px solid var(--border); position:relative; z-
         </div>
       </article>
 
-      <!-- PROJECT 8 -->
-      <article class="project-card glass reveal" data-cat="cybersecurity web" data-num="08">
+      <!-- PROJECT 6 -->
+      <article class="project-card glass reveal" data-cat="cybersecurity web" data-num="06">
         <div class="project-top">
           <span class="project-cat">Cybersecurity · Prototype Safety</span>
           <h3>Prototype Safety Check</h3>
-          <p class="desc">Passive safety scanner for deployed prototypes — SQLi, XSS, malware, phishing, DoS & MitM checks.</p>
+          <p class="desc">A simple health check for your live website link — tells if it is Safe, Risky or in Danger.</p>
         </div>
         <ul class="feature-list">
-          <li>6 passive checks: SQLi, XSS, malware, phishing, DoS & MitM</li>
-          <li>Safe / Risky / Critical verdict with reasons + fixes</li>
-          <li>Web UI + CLI + JSON API with re-scan history</li>
+          <li>Does 6 gentle safety checks — checks for hacking tricks, bad files, fake pages, overload risk and lock problems</li>
+          <li>Gives a clear answer — Safe, Risky or Danger — with reason and easy fix</li>
+          <li>Use on web, on computer, or by link — and see your old checks again</li>
+          <li>Only looks with permission — never breaks or attacks any site</li>
         </ul>
         <div class="tech-row">
-          <span class="tech-chip">Python</span><span class="tech-chip">Flask</span><span class="tech-chip">HTML</span><span class="tech-chip">JavaScript</span><span class="tech-chip">Render</span>
+          <span class="tech-chip">Python</span><span class="tech-chip">Flask</span><span class="tech-chip">HTML</span><span class="tech-chip">JavaScript</span><span class="tech-chip">REST API</span><span class="tech-chip">Render</span>
         </div>
-        <button class="details-toggle" data-target="td8"><span class="chev">▸</span> Technical Details</button>
-        <div class="tech-details" id="td8">
-          <p>Scans only <code>deployed links</code> (never repo links) with passive checks — exposed params &amp; DB errors, missing <code>CSP / X-XSS-Protection</code>, suspicious scripts &amp; iframes, spoof &amp; HTTPS signals, rate-limit / CDN / HSTS headers. Ships as <code>app.py</code> web UI, <code>scanner.py</code> CLI and <code>GET /api/scan?url=...</code> API — no exploitation, permission-only.</p>
+        <button class="details-toggle" data-target="td6"><span class="chev">▸</span> Technical Details</button>
+        <div class="tech-details" id="td6">
+          <p>Scans only <code>deployed links</code> (never repo links) with passive checks — exposed params &amp; DB errors, missing <code>CSP / X-XSS-Protection</code>, suspicious scripts &amp; iframes, spoof &amp; HTTPS signals, rate-limit / CDN / HSTS headers. Ships as <code>app.py</code> web UI, <code>scanner.py</code> CLI and <code>GET /api/scan?url=...</code> API + re-scan history — no exploitation, permission-only. Stack: Python, Flask, HTML / JS — deployed on Render.</p>
         </div>
         <div class="project-actions">
           <a href="https://prototype-safety-check.onrender.com/" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Live Demo</a>
@@ -601,12 +572,10 @@ document.addEventListener('DOMContentLoaded', function(){
     '00': 'Copilot: an AI guard that scans sites & blocks the shady ones.',
     '01': 'Altron: forges unbreakable passwords & checks their muscle.',
     '02': 'URL Scanner: sniffs phishing links, scores danger 0-100.',
-    '03': 'WiFi Finder: recovers your own saved Wi-Fi keys in seconds.',
-    '04': 'Checker combo: link safety plus password strength in one.',
-    '05': 'NexVault: your encrypted vault — your keys, your control.',
-    '06': 'Humanize AI: turns robotic AI text into human writing.',
-    '07': 'Hidden-Prompt Scanner: hunts invisible injections in docs.',
-    '08': 'Safety Check: passive scan of deployed prototypes for 6 risks.'
+    '03': 'NexVault: your encrypted vault — your keys, your control.',
+    '04': 'Humanize AI: turns robotic AI text into human writing.',
+    '05': 'Hidden-Prompt Scanner: hunts invisible injections in docs.',
+    '06': 'Safety Check: passive scan of deployed prototypes for 6 risks.'
   };
   const DEFAULT_TIP = 'Hover any project — I will brief you in one line.';
   function say(msg){
