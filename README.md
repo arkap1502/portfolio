@@ -45,7 +45,7 @@ Not another generic template. This is a **threat-monitor styled portfolio**:
 - 🔴 **Red Device Panel Hero** — wire-globe, silhouette, Threat Monitor side-card, marquee tape (`CY•FOCUS / PASSWORD SECURITY / WEB SECURITY`)
 - 🎞️ **Dual Infinite Marquee** — white + red tapes scrolling opposite directions, tilted -1.2deg
 - 🧪 **Interactive Demos inside cards** — animated risk-meter, expandable technical breakdowns, filterable grid
-- 👤 **About page** — personal essay, education dossier, cybersecurity journey in one essay-style box
+- 👤 **About page** — two-column essay + sidebar, work history, 8 certificates with PDFs, certificate-based journey story
 - 📬 **Standalone Contact page** — two-card layout (info rail + message form with validation)
 - 📱 **Device-friendly Full Screen** — 100vw layout, `100svh` hero, hamburger + fullscreen mobile menu, scroll-spy nav
 - 👁️ **Reveal-on-scroll + scroll cue** — IntersectionObserver everywhere, zero libraries
@@ -117,8 +117,7 @@ index.html      → DASHBOARD (hero + device panel + tapes)
                   #skills   → SKILL MATRIX
                   #projects → SPOTLIGHT (flagship build + View All tile → projects.html)
 projects.html   → ARCHIVE (all 07 builds, filter: All / Cybersecurity / Web)
-about.html      → ABOUT (personal essay + education dossier + cybersecurity journey, one-box story)
-                  + WORK HISTORY (Forage virtual experience) + 08 CERTIFICATES with notes
+about.html      → ABOUT (essay + sidebar) + WORK HISTORY (internship + simulations) + 08 CERTIFICATES with PDFs + JOURNEY
 contact.html    → CONTACT (info rail + validated message form, no backend — mailto fallback)
 ```
 
@@ -143,11 +142,11 @@ Global nav on every page: `DASHBOARD → ABOUT → PROJECTS` + red `CONTACT` but
 
 `about.html` holds the personal side in the same theme:
 
-- **Essay** — interests (Cybersecurity, AI, Web Security, Software Engineering), project areas, toolbox chips
-- **Education** — B.Sc Cyber Security @ GNIT (2024 — Present), Higher Secondary (2024), Secondary (2022)
-- **Cybersecurity Journey** — full story condensed into one essay-style box + route chips
-- **Work History** — Thiranex Cyber Security internship (Aug–Sept 2026, verified) + Forage virtual experience (6 job simulations) + open-to-work card
-- **Certificates (08)** — Forage Technical Interviews · Cisco Intro to Cybersecurity · Cisco Hardware Basics · Deloitte Cyber · NUL Career Readiness · BCLP Interview Success · CommBank Cybersecurity · Datacom AI at Work
+- **Essay** — two-column layout: full essay + focus/toolbox chips + CTAs (left, stretches to match), sidebar with Education dossier + Quick Info incl. email (right)
+- **Education** — lives in the sidebar: B.Sc Cyber Security @ GNIT (2024 — Present), Higher Secondary (2024), Secondary (2022)
+- **Cybersecurity Journey** — one essay-style box rewritten around the certificates, trimmed route chips
+- **Work History** — 3 cards in one row: Thiranex Cyber Security internship (Aug–Sept 2026, verified PDF) + Forage virtual experience (6 job simulations) + open-to-work card
+- **Certificates (08)** — each with a short note + View PDF button: Forage Technical Interviews · Cisco Intro to Cybersecurity · Cisco Hardware Basics · Deloitte Cyber · NUL Career Readiness · BCLP Interview Success · CommBank Cybersecurity · Datacom AI at Work (files: `cert-*.pdf` + Thiranex PDF, same folder)
 - CTA banner → `projects.html`
 
 ---
@@ -185,8 +184,10 @@ python3 -m http.server 8000
 portfolio/
 ├── index.html      → dashboard (hero, skills, flagship spotlight)
 ├── projects.html   → full archive, all 07 builds with filters
-├── about.html      → essay + education + cybersecurity journey
-├── contact.html    → contact channels + message form
+├── about.html      → essay + sidebar + work history + certificates + journey
+├── contact.html    → contact channels + message form (two-card layout)
+├── cert-*.pdf (×8) → certificate PDFs linked from about page cards
+├── Thiranex_Certificate_Arka_Patra_THX-AUG0426-563.pdf → internship proof
 ├── README.md       → you are here
 └── LICENSE         → MIT
 ```
