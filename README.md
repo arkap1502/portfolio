@@ -1,7 +1,15 @@
 <div align="center">
 
-# 🛡️ ARKA PATRA — `~/security-lab`
-### Cyber Security Student · Security-Focused Developer · West Bengal, India
+```
+╔══════════════════════════════════════════════╗
+║                                              ║
+║   ARKA PATRA  —  ~/security-lab              ║
+║   Cyber Security · Security-Focused Dev      ║
+║                                              ║
+╚══════════════════════════════════════════════╝
+```
+
+### `~/security-lab` — Cyber Security Student · Security-Focused Developer · West Bengal, India
 
 **Building secure software. Exploring cybersecurity. Turning ideas into working tools.**
 
@@ -14,27 +22,55 @@
 
 `B.Sc Cyber Security @ GNIT` · `Python / JS` · `Web Security` · `System: ONLINE`
 
-[🚀 View Work](./projects.html) · [🧬 About](./about.html) · [📬 Contact](./contact.html)
-
 </div>
 
 ---
 
+## 🖥️ Boot Sequence
+
 ```bash
 arka@security-lab:~$ whoami
-> arka-patra
+> arka-patra — cyber_security_student
 
 arka@security-lab:~$ focus
-> cybersecurity + development
+> cybersecurity + artificial-intelligence + web-security + software-engineering
 
-arka@security-lab:~$ ls
+arka@security-lab:~$ ls --pages
 > index.html  projects.html  about.html  contact.html
+
+arka@security-lab:~$ ls --proof
+> cert-*.pdf (x8) + internship-certificate + profile-photo
+
+arka@security-lab:~$ deploy --target=vercel
+> https://portfolio-ten-gold-16.vercel.app/  ● LIVE
 
 arka@security-lab:~$ status
 > SYSTEM ONLINE ██████████ 100%
 ```
 
 > A zero-dependency, dark-red **CY•FOCUS** portfolio. Four static HTML files. No framework. No build step. No backend. Just open and run.
+
+---
+
+## 🎛️ Control Deck — Live Pages
+
+| Module | Route | Payload |
+|---|---|---|
+| 🟥 DASHBOARD | [`index.html`](./index.html) / [live](https://portfolio-ten-gold-16.vercel.app/) | Red device-panel hero, skill matrix, flagship spotlight |
+| 🟧 ARCHIVE | [`projects.html`](./projects.html) / [live](https://portfolio-ten-gold-16.vercel.app/projects.html) | All 07 builds, filters, technical readouts |
+| 🟨 DOSSIER | [`about.html`](./about.html) / [live](https://portfolio-ten-gold-16.vercel.app/about.html) | Essay, education, work history, 08 certificates + PDFs, journey |
+| 🟩 UPLINK | [`contact.html`](./contact.html) / [live](https://portfolio-ten-gold-16.vercel.app/contact.html) | Info rail + validated message form |
+
+### 📊 System Readout
+
+| Metric | Value |
+|---|---|
+| Pages | `04` |
+| Live builds | `07` (04 featured) |
+| Certificates | `08` + verified internship |
+| PDF proofs | `09` files, one click away |
+| Backend | `NONE` — pure static |
+| Theme | `CY•FOCUS DARK + RED` |
 
 ---
 
@@ -45,8 +81,8 @@ Not another generic template. This is a **threat-monitor styled portfolio**:
 - 🔴 **Red Device Panel Hero** — wire-globe, silhouette, Threat Monitor side-card, marquee tape (`CY•FOCUS / PASSWORD SECURITY / WEB SECURITY`)
 - 🎞️ **Dual Infinite Marquee** — white + red tapes scrolling opposite directions, tilted -1.2deg
 - 🧪 **Interactive Demos inside cards** — animated risk-meter, expandable technical breakdowns, filterable grid
-- 👤 **About page** — two-column essay + sidebar, work history, 8 certificates with PDFs, certificate-based journey story
-- 📬 **Standalone Contact page** — two-card layout (info rail + message form with validation)
+- 👤 **Dossier-style About** — plain-text essay, photo card with fade, education + Quick Info rail, work history, 8 certificates with real PDFs
+- 📬 **Two-card Contact** — info rail + validated form (mailto fallback, no backend)
 - 📱 **Device-friendly Full Screen** — 100vw layout, `100svh` hero, hamburger + fullscreen mobile menu, scroll-spy nav
 - 👁️ **Reveal-on-scroll + scroll cue** — IntersectionObserver everywhere, zero libraries
 
@@ -66,7 +102,9 @@ Not another generic template. This is a **threat-monitor styled portfolio**:
 | 05 | **Hidden-Prompt Scanner for Documents** `FEATURED` | Document Security · Prompt Injection Detection | [Live Demo](https://hidden-prompt-scanner-for-documents.onrender.com/) | [Code](https://github.com/arkap1502/Hidden-prompt-scanner-for-documents.) |
 | 06 | **Prototype Safety Check** | Prototype Safety · Web Security | [Live Demo](https://prototype-safety-check.onrender.com/) | [Code](https://github.com/arkap1502/prototype-safety-check) |
 
-### 00 — Website Security Copilot ◈ Featured
+<details>
+<summary><b>00 — Website Security Copilot ◈ Featured (click to expand)</b></summary>
+
 AI-powered assistant that scans, explains, and helps fix website security issues — plus an Always-On browser guard.
 - 🧩 **Primarily a browser extension** — the live demo shows the UI & lets you test a URL; full auto-guard needs Load unpacked (`extension/` folder)
 - Manual Scan Mode: URL input → headers (`CSP`, `HSTS`, `X-Frame-Options`), SSL/TLS, cookies, open ports / fingerprinting, DNS-email (`SPF`, `DMARC`, `DKIM`) + AI risk score & plain-English fixes
@@ -74,51 +112,68 @@ AI-powered assistant that scans, explains, and helps fix website security issues
 - Every finding ships severity + evidence + why-it-matters + copy-paste fix (Nginx / Apache / Next.js); risk score `100 - min(100, 10*C + 5*H + 2*M + 1*L)`, grades A–F
 - Passive-safe by default (normal requests only, `robots.txt` respected); AI only explains tool output, never invents findings
 - Stack: Next.js + Tailwind, FastAPI, Python (`httpx`, `ssl`, `dnspython`), SQLite → Postgres, Docker, MV3 extension
+</details>
 
-### 01 — Altron Password Inspector
-Futuristic HUD for password generation + strength checking.
+<details>
+<summary><b>01 — Altron Password Inspector (click to expand)</b></summary>
+
 - `crypto.getRandomValues()` — never `Math.random()`
 - Length / charset / punctuation controls, show-hide, copy, clear
 - Live strength HUD · Fully client-side
+</details>
 
-### 02 — URL Threat Scanner
-Browser-based URL risk analyzer (0–100).
+<details>
+<summary><b>02 — URL Threat Scanner (click to expand)</b></summary>
+
 - Raw-IP, shady-TLD, brand-misspelling, phishing-keyword detection
 - Per-finding explanations + verdict · Animated risk meter in-card
+</details>
 
-### 03 — NexVault ◈ Group Project
+<details>
+<summary><b>03 — NexVault ◈ Group Project (click to expand)</b></summary>
+
 > *Your data, your vault, your control.*
 - Auth-gated vault dashboard, encrypted access-controlled storage
 - Green-glow `group-card` highlight + pulsing `IN PROGRESS` pill
+</details>
 
-### 04 — Humanize AI
+<details>
+<summary><b>04 — Humanize AI (click to expand)</b></summary>
+
 React + Express app with **zero-build offline fallback** — same engine ported to vanilla JS for GitHub Pages. Light / Medium / Strong modes, real-time transform, word-count diff.
+</details>
 
-### 05 — Hidden-Prompt Scanner for Documents ◈ Featured
-Scans `PDF`, `DOCX`, `TXT`, `MD`, `HTML` for hidden prompt-injection attacks aimed at LLMs.
+<details>
+<summary><b>05 — Hidden-Prompt Scanner for Documents ◈ Featured (click to expand)</b></summary>
+
 - Invisible-text heuristics — white-on-white, `< 2pt` / zero-size fonts, transparent text, off-page content, zero-width chars (`U+200B/C/D, U+FEFF`)
-- Metadata / comments / footnotes / annotations scan + injection-phrase match (`ignore previous instructions`, `disregard system prompt`, `you are now ...`, etc.)
+- Metadata / comments / footnotes / annotations scan + injection-phrase match
 - `LOW / MEDIUM / HIGH` risk scoring · CLI + JSON report · Flask web UI · Fully local scan
-- Stack: Python, Flask, PyPDF2, python-docx, BeautifulSoup — deployed on Render
+</details>
 
-### 06 — Prototype Safety Check
-Passive safety scanner for **deployed** prototypes (never repo links).
+<details>
+<summary><b>06 — Prototype Safety Check (click to expand)</b></summary>
+
 - 6 checks — SQLi, XSS, malware, phishing, DoS exposure, MitM (HTTPS / HSTS / TLS)
 - Safe / Risky / Critical verdict with reasons + fix suggestions
 - Web UI + `scanner.py` CLI + `GET /api/scan?url=...` API + re-scan history
-- Stack: Python, Flask, HTML / JS — deployed on Render
+</details>
 
 ---
 
 ## 🗺️ Site Map
 
-```
-index.html      → DASHBOARD (hero + device panel + tapes)
-                  #skills   → SKILL MATRIX
-                  #projects → SPOTLIGHT (flagship build + View All tile → projects.html)
-projects.html   → ARCHIVE (all 07 builds, filter: All / Cybersecurity / Web)
-about.html      → ABOUT (essay + sidebar) + WORK HISTORY (internship + simulations) + 08 CERTIFICATES with PDFs + JOURNEY
-contact.html    → CONTACT (info rail + validated message form, no backend — mailto fallback)
+```mermaid
+flowchart LR
+    HOME[index.html<br/>DASHBOARD] --> SKILLS[Skill Matrix]
+    HOME --> SPOT[Flagship Spotlight]
+    SPOT --> ARCH[projects.html<br/>07 builds]
+    HOME --> ABOUT[about.html<br/>Essay + Photo]
+    ABOUT --> EDU[Education]
+    ABOUT --> WORK[Work History]
+    ABOUT --> CERT[08 Certificates + PDFs]
+    ABOUT --> JOURNEY[Journey]
+    HOME --> CONTACT[contact.html<br/>Info + Form]
 ```
 
 Global nav on every page: `DASHBOARD → ABOUT → PROJECTS` + red `CONTACT` button → `contact.html`.
@@ -142,12 +197,11 @@ Global nav on every page: `DASHBOARD → ABOUT → PROJECTS` + red `CONTACT` but
 
 `about.html` holds the personal side in the same theme:
 
-- **Essay** — two-column layout: full essay + focus/toolbox chips + CTAs (left, stretches to match), sidebar with Education dossier + Quick Info incl. email (right)
-- **Education** — lives in the sidebar: B.Sc Cyber Security @ GNIT (2024 — Present), Higher Secondary (2024), Secondary (2022)
-- **Cybersecurity Journey** — one essay-style box rewritten around the certificates, trimmed route chips
-- **Work History** — 3 cards in one row: Thiranex Cyber Security internship (Aug–Sept 2026, verified PDF) + Forage virtual experience (6 job simulations) + open-to-work card
-- **Certificates (08)** — each with a short note + View PDF button: Forage Technical Interviews · Cisco Intro to Cybersecurity · Cisco Hardware Basics · Deloitte Cyber · NUL Career Readiness · BCLP Interview Success · CommBank Cybersecurity · Datacom AI at Work (files: `cert-*.pdf` + Thiranex PDF, same folder)
-- CTA banner → `projects.html`
+- **Essay** — plain-text narrative + photo card with fade, `// cyber_security_student`, socials; focus/toolbox chips + CTAs
+- **Education** — dossier cards: B.Sc Cyber Security @ GNIT (2024 — Present), Higher Secondary (2024), Secondary (2022)
+- **Work History** — 3 cards in one row: Thiranex internship (verified PDF) + Forage simulations + open-to-work
+- **Certificates (08)** — short notes + View PDF buttons (`cert-*.pdf`, same folder)
+- **Journey** — one essay-style box rewritten around the certificates
 
 ---
 
@@ -184,13 +238,19 @@ python3 -m http.server 8000
 portfolio/
 ├── index.html      → dashboard (hero, skills, flagship spotlight)
 ├── projects.html   → full archive, all 07 builds with filters
-├── about.html      → essay + sidebar + work history + certificates + journey
-├── contact.html    → contact channels + message form (two-card layout)
+├── about.html      → essay + photo + education + work + certs + journey
+├── contact.html    → info rail + message form (two-card layout)
+├── arka-patra.jpg  → profile photo (about page)
 ├── cert-*.pdf (×8) → certificate PDFs linked from about page cards
 ├── Thiranex_Certificate_Arka_Patra_THX-AUG0426-563.pdf → internship proof
 ├── README.md       → you are here
 └── LICENSE         → MIT
 ```
+
+### ☁️ Deploy notes (Vercel)
+- Framework preset: **Other** · Root Directory: `./` (files live at repo root)
+- No build command, no env vars · Every push auto-redeploys
+- PDFs + photo must be committed or their buttons 404
 
 ---
 
@@ -232,13 +292,14 @@ Respects `prefers-reduced-motion` — animations collapse to instant render.
 
 <div align="center">
 
+[![Portfolio](https://img.shields.io/badge/Portfolio-Live-ff2e0e?style=for-the-badge&logo=vercel&logoColor=white)](https://portfolio-ten-gold-16.vercel.app/)
 [![GitHub](https://img.shields.io/badge/GitHub-arkap1502-181717?style=for-the-badge&logo=github)](https://github.com/arkap1502)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Arka_Patra-0A66C2?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/arka-patra-579110422/)
 [![X](https://img.shields.io/badge/X-arkap1502-000000?style=for-the-badge&logo=x)](https://x.com/arkap1502)
 [![Instagram](https://img.shields.io/badge/Instagram-_its_me_chikuuuu-E4405F?style=for-the-badge&logo=instagram)](https://www.instagram.com/_its_me_chikuuuu/?hl=en)
 [![Threads](https://img.shields.io/badge/Threads-_here_chikuu_005-000000?style=for-the-badge&logo=threads)](https://www.threads.com/@_here_chikuu_005)
 
-📞 `+91 97488 13115` · 📍 Madhyamgram, North 24 Parganas, Kolkata 700130
+📞 `+91 97488 13115` · ✉️ `arkap1502@gmail.com` · 📍 Madhyamgram, North 24 Parganas, Kolkata 700130
 
 </div>
 
@@ -253,6 +314,8 @@ This project is licensed under the MIT License - see [LICENSE](./LICENSE) for de
 <div align="center">
 
 © 2026 Arka Patra. Built with curiosity, code & security in mind. 🛡️
+
+`whoami → arka-patra` · `focus → cybersecurity + development` · `status → STILL BUILDING`
 
 `// END OF TRANSMISSION`
 
