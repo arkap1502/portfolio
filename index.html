@@ -50,10 +50,7 @@ body::before{
   content:''; position:fixed; inset:0; z-index:0; pointer-events:none;
   background:
     radial-gradient(900px 500px at 85% 10%, rgba(255,46,14,0.10), transparent 60%),
-    radial-gradient(700px 500px at 10% 90%, rgba(255,46,14,0.06), transparent 60%),
-    linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
-  background-size:auto,auto,44px 44px,44px 44px;
+    radial-gradient(700px 500px at 10% 90%, rgba(255,46,14,0.06), transparent 60%);
 }
 body::after{
   content:''; position:fixed; inset:0; z-index:0; pointer-events:none; opacity:0.5;
@@ -203,8 +200,7 @@ header:not(.scrolled) .navlinks a.nav-contact{color:#fff !important;}
 .hero::before{
   content:''; position:absolute; inset:0; pointer-events:none; opacity:0.9;
   background:
-    radial-gradient(800px 420px at 70% 30%, rgba(255,46,14,0.12), transparent 65%),
-    repeating-linear-gradient(115deg, transparent 0 46px, rgba(255,255,255,0.025) 46px 47px);
+    radial-gradient(800px 420px at 70% 30%, rgba(255,46,14,0.12), transparent 65%);
 }
 .hero-grid{ display:grid; grid-template-columns: 1fr 1.1fr; gap:48px; align-items:center; position:relative; z-index:2;}
 .hero-eyebrow-cyber{
@@ -292,11 +288,7 @@ header:not(.scrolled) .navlinks a.nav-contact{color:#fff !important;}
 }
 .device-screen::before{
   content:''; position:absolute; inset:0;
-  background:
-    linear-gradient(rgba(255,255,255,0.14) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.14) 1px, transparent 1px);
-  background-size:34px 34px;
-  mask-image: radial-gradient(500px 340px at 60% 20%, #000 30%, transparent 75%);
+  background: radial-gradient(500px 340px at 60% 20%, rgba(255,255,255,0.08), transparent 75%);
 }
 .wire-globe{position:absolute; right:-40px; top:-30px; width:420px; opacity:0.5;}
 .device-topbar{display:flex; align-items:center; gap:8px; position:absolute; top:14px; left:16px; right:16px; z-index:3;}
