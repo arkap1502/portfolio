@@ -57,7 +57,7 @@ arka@security-lab:~$ status
 | Module | Route | Payload |
 |---|---|---|
 | 🟥 DASHBOARD | [`index.html`](./index.html) / [live](https://portfolio-ten-gold-16.vercel.app/) | Red device-panel hero, skill matrix, flagship spotlight |
-| 🟧 ARCHIVE | [`projects.html`](./projects.html) / [live](https://portfolio-ten-gold-16.vercel.app/projects.html) | All 08 builds, filters, technical readouts |
+| 🟧 ARCHIVE | [`projects.html`](./projects.html) / [live](https://portfolio-ten-gold-16.vercel.app/projects.html) | All 08 builds, filters (All / Cybersecurity / Web Security), technical readouts |
 | 🟨 DOSSIER | [`about.html`](./about.html) / [live](https://portfolio-ten-gold-16.vercel.app/about.html) | Essay, education, work history, 08 certificates + PDFs, journey |
 | 🟩 UPLINK | [`contact.html`](./contact.html) / [live](https://portfolio-ten-gold-16.vercel.app/contact.html) | Info rail + validated message form |
 
@@ -78,7 +78,8 @@ arka@security-lab:~$ status
 
 Not another generic template. This is a **threat-monitor styled portfolio**:
 
-- 🔴 **Red Device Panel Hero** — wire-globe, silhouette, Threat Monitor side-card, marquee tape (`CY•FOCUS / PASSWORD SECURITY / WEB SECURITY`)
+- 🔴 **Red Device Panel Hero** — canvas-rendered spinning wireframe globe (black on red, true Y-axis rotation, zero deps), silhouette, left-side Threat Monitor card, marquee tape (`CY•FOCUS / PASSWORD SECURITY / WEB SECURITY`)
+- ⬛ **Flat official finish** — zero neon/glow anywhere: solid red-on-black, neutral depth shadows, crisp status colors; `prefers-reduced-motion` respected
 - 🎞️ **Dual Infinite Marquee** — white + red tapes scrolling opposite directions, tilted -1.2deg
 - 🧪 **Interactive Demos inside cards** — animated risk-meter, expandable technical breakdowns, filterable grid
 - 👤 **Dossier-style About** — plain-text essay, photo card with fade, education + Quick Info rail, work history, 8 certificates with real PDFs
@@ -275,7 +276,7 @@ portfolio/
 --font-mono: 'JetBrains Mono';
 ```
 
-Glass cards: `linear-gradient(180deg, #202023, #171719)` + `0 0 0 4px #0b0b0c` ring + deep shadow. Selection: `rgba(255,46,14,0.4)`.
+Glass cards: `linear-gradient(180deg, #202023, #171719)` + `0 0 0 4px #0b0b0c` ring + neutral black depth shadows (no colored glow anywhere). Selection: `rgba(255,46,14,0.4)`.
 
 ---
 
