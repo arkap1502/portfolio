@@ -57,7 +57,7 @@ arka@security-lab:~$ status
 | Module | Route | Payload |
 |---|---|---|
 | 🟥 DASHBOARD | [`index.html`](./index.html) / [live](https://portfolio-ten-gold-16.vercel.app/) | Red device-panel hero, skill matrix, flagship spotlight |
-| 🟧 ARCHIVE | [`projects.html`](./projects.html) / [live](https://portfolio-ten-gold-16.vercel.app/projects.html) | All 07 builds, filters, technical readouts |
+| 🟧 ARCHIVE | [`projects.html`](./projects.html) / [live](https://portfolio-ten-gold-16.vercel.app/projects.html) | All 08 builds, filters, technical readouts |
 | 🟨 DOSSIER | [`about.html`](./about.html) / [live](https://portfolio-ten-gold-16.vercel.app/about.html) | Essay, education, work history, 08 certificates + PDFs, journey |
 | 🟩 UPLINK | [`contact.html`](./contact.html) / [live](https://portfolio-ten-gold-16.vercel.app/contact.html) | Info rail + validated message form |
 
@@ -66,7 +66,7 @@ arka@security-lab:~$ status
 | Metric | Value |
 |---|---|
 | Pages | `04` |
-| Live builds | `07` (04 featured) |
+| Live builds | `08` (05 featured) |
 | Certificates | `08` + verified internship |
 | PDF proofs | `09` files, one click away |
 | Backend | `NONE` — pure static |
@@ -101,6 +101,7 @@ Not another generic template. This is a **threat-monitor styled portfolio**:
 | 04 | **Humanize AI** `IN PROGRESS` | AI Text Tool | [Live Demo](https://arkap1502.github.io/Humanize-AI/) | [Code](https://github.com/arkap1502/Humanize-AI) |
 | 05 | **Hidden-Prompt Scanner for Documents** `FEATURED` | Document Security · Prompt Injection Detection | [Live Demo](https://hidden-prompt-scanner-for-documents.onrender.com/) | [Code](https://github.com/arkap1502/Hidden-prompt-scanner-for-documents.) |
 | 06 | **Prototype Safety Check** | Prototype Safety · Web Security | [Live Demo](https://prototype-safety-check.onrender.com/) | [Code](https://github.com/arkap1502/prototype-safety-check) |
+| 07 | **Laptop Antivirus** `FEATURED` | Real-Time Protection · System Security | — (desktop app) | [Code](https://github.com/arkap1502/Antivirus) |
 
 <details>
 <summary><b>00 — Website Security Copilot ◈ Featured (click to expand)</b></summary>
@@ -159,6 +160,15 @@ React + Express app with **zero-build offline fallback** — same engine ported 
 - Web UI + `scanner.py` CLI + `GET /api/scan?url=...` API + re-scan history
 </details>
 
+<details>
+<summary><b>07 — Laptop Antivirus ◈ Featured (click to expand)</b></summary>
+
+- Auto ON at boot / OFF at shutdown + manual toggle with 15-min auto re-enable
+- Real-time watch: apps, websites, images, videos, files, folders, USB
+- Severity engine `CRITICAL / HIGH / MEDIUM / LOW` with Quarantine / Delete / Block + encrypted vault
+- Stack: Python stdlib, Tkinter dashboard, `SHA-256` signatures, URL shield, `watchdog` / `plyer` optional
+</details>
+
 ---
 
 ## 🗺️ Site Map
@@ -167,7 +177,7 @@ React + Express app with **zero-build offline fallback** — same engine ported 
 flowchart LR
     HOME[index.html<br/>DASHBOARD] --> SKILLS[Skill Matrix]
     HOME --> SPOT[Flagship Spotlight]
-    SPOT --> ARCH[projects.html<br/>07 builds]
+    SPOT --> ARCH[projects.html<br/>08 builds]
     HOME --> ABOUT[about.html<br/>Essay + Photo]
     ABOUT --> EDU[Education]
     ABOUT --> WORK[Work History]
@@ -237,7 +247,7 @@ python3 -m http.server 8000
 ```
 portfolio/
 ├── index.html      → dashboard (hero, skills, flagship spotlight)
-├── projects.html   → full archive, all 07 builds with filters
+├── projects.html   → full archive, all 08 builds with filters
 ├── about.html      → essay + photo + education + work + certs + journey
 ├── contact.html    → info rail + message form (two-card layout)
 ├── arka-patra.jpg  → profile photo (about page)
