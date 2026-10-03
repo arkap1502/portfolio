@@ -72,9 +72,11 @@ header.scrolled{background:rgba(19,19,20,0.88); backdrop-filter:blur(14px); bord
 
 /* archive head */
 .archive{padding:132px 0 90px;}
+.archive .section-title{text-align:center;}
+.archive .section-sub{margin-left:auto; margin-right:auto; text-align:center;}
 .back-link{display:inline-flex; align-items:center; gap:8px; font-family:var(--font-mono); font-size:0.78rem; color:var(--text-dim); margin-bottom:26px; transition:color .2s ease;}
 .back-link:hover{color:var(--cyan);}
-.count-pill{font-family:var(--font-mono); font-size:0.72rem; padding:4px 10px; border-radius:20px; border:1px solid var(--border); color:var(--cyan); background:rgba(255,46,14,0.10); margin-left:10px; vertical-align:middle;}
+
 .avail-badge{
   display:inline-flex; align-items:center; gap:10px;
   font-family:var(--font-mono); font-size:0.76rem; font-weight:600; letter-spacing:0.12em;
@@ -87,16 +89,8 @@ header.scrolled{background:rgba(19,19,20,0.88); backdrop-filter:blur(14px); bord
 .avail-badge .pulse{width:8px; height:8px; border-radius:50%; background:#3dff88; box-shadow:none; animation:pulse 1.6s ease-in-out infinite; flex-shrink:0;}
 @media (max-width:640px){ .avail-badge{font-size:0.62rem; letter-spacing:0.08em; padding:10px 16px; white-space:normal; text-align:center; border-radius:16px;} }
 
-/* archive actions — View Projects + Get in Touch (matches home hero panel) */
-.archive-actions{display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin:0 0 22px;}
-.archive-actions .device-btn{font-family:var(--font-mono); font-size:0.78rem; font-weight:700; padding:11px 20px; border-radius:8px; border:1px solid rgba(0,0,0,0.2); cursor:pointer; text-decoration:none; display:inline-block; transition:transform .2s ease, box-shadow .2s ease;}
-.archive-actions .device-btn.light{background:#f2efe9; color:#1a1a1a;}
-.archive-actions .device-btn.light:hover{transform:translateY(-1px); box-shadow:0 8px 18px rgba(0,0,0,0.4);}
-.archive-actions .device-btn.dark{background:rgba(0,0,0,0.55); color:#fff; border-color:rgba(255,255,255,0.25);}
-.archive-actions .device-btn.dark:hover{border-color:var(--border-strong); box-shadow:0 6px 14px rgba(0,0,0,0.35); transform:translateY(-1px);}
-
 /* filters + grid (same sizing as index) */
-.filter-row{display:flex; gap:6px; flex-wrap:wrap; margin-bottom:14px;}
+.filter-row{display:flex; gap:6px; flex-wrap:wrap; justify-content:center; margin-bottom:14px;}
 .filter-btn{font-family:var(--font-mono); font-size:0.65rem; padding:5px 10px; border-radius:20px; border:1px solid var(--border); color:var(--text-dim); background:transparent; transition:all .2s ease;}
 .filter-btn:hover{color:var(--text);}
 .filter-btn.active{background:var(--cyan); color:#fff; border-color:var(--cyan); font-weight:600;}
@@ -255,6 +249,7 @@ footer{padding:36px 0; border-top:1px solid var(--border); position:relative; z-
     <div class="navlinks" id="navlinks">
       <a href="index.html#home">DASHBOARD</a>
       <a href="about.html">ABOUT</a>
+      <a href="certificates.html">CERTIFICATES</a>
       <a href="projects.html" class="active">PROJECTS</a>
     </div>
     <div class="nav-cta">
@@ -267,6 +262,7 @@ footer{padding:36px 0; border-top:1px solid var(--border); position:relative; z-
   <div class="mobile-menu" id="mobileMenu">
     <a href="index.html#home">DASHBOARD</a>
     <a href="about.html">ABOUT</a>
+    <a href="certificates.html">CERTIFICATES</a>
     <a href="projects.html" class="active">PROJECTS</a>
     <a href="contact.html">CONTACT</a>
   </div>
@@ -275,13 +271,9 @@ footer{padding:36px 0; border-top:1px solid var(--border); position:relative; z-
 <section class="archive" id="all-projects">
   <div class="wrap">
     <a href="index.html#projects" class="back-link">← Back to Portfolio</a>
-    <div class="eyebrow"><span class="dot"></span>PROJECT ARCHIVE</div>
-    <h1 class="section-title reveal">All Projects<span class="count-pill">08 BUILDS</span></h1>
+    
+    <h1 class="section-title reveal">All Projects</h1>
     <p class="section-sub reveal">Educational and demo security tools built to explore real concepts — not production security products.</p>
-
-    <div class="archive-actions reveal">
-      <a href="contact.html" class="device-btn dark">Get in Touch</a>
-    </div>
 
     <div class="filter-row reveal">
       <button class="filter-btn active" data-filter="all">All</button>
