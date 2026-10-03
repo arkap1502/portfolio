@@ -277,7 +277,7 @@ footer{padding:36px 0; border-top:1px solid var(--border); position:relative; z-
   <div class="wrap">
     <a href="index.html#projects" class="back-link">← Back to Portfolio</a>
     <div class="eyebrow"><span class="dot"></span>PROJECT ARCHIVE</div>
-    <h1 class="section-title reveal">All Projects<span class="count-pill">07 BUILDS</span></h1>
+    <h1 class="section-title reveal">All Projects<span class="count-pill">08 BUILDS</span></h1>
     <p class="section-sub reveal">Educational and demo security tools built to explore real concepts — not production security products.</p>
 
     <div class="archive-actions reveal">
@@ -488,6 +488,33 @@ footer{padding:36px 0; border-top:1px solid var(--border); position:relative; z-
           <a href="https://github.com/arkap1502/prototype-safety-check" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Code</a>
         </div>
       </article>
+
+      <!-- PROJECT 7 -->
+      <article class="project-card glass reveal" data-cat="cybersecurity" data-num="07">
+        <div class="project-top">
+          <span class="badge-featured">FEATURED</span>
+          <span class="project-cat">Cybersecurity · Real-Time Protection</span>
+          <h3>Laptop Antivirus</h3>
+          <p class="desc">Always-on guard that turns ON with your laptop and scans apps, sites, images, videos and files — with one-click fix.</p>
+        </div>
+        <ul class="feature-list">
+          <li>Auto ON at laptop start, auto OFF at shutdown — plus a big manual ON/OFF button with 15-min auto re-enable</li>
+          <li>Watches apps, websites, images, videos, files, folders and USB drives in real time</li>
+          <li>Instant alert with threat name, severity and location — one click to Quarantine, Delete or Block</li>
+          <li>Ransomware, USB, phishing and gaming-mode shields with an encrypted quarantine vault</li>
+          <li>Lightweight and offline-first — 1–3% CPU, local signature DB, safe demo test files included</li>
+        </ul>
+        <div class="tech-row">
+          <span class="tech-chip">Python</span><span class="tech-chip">Tkinter</span><span class="tech-chip">File Watcher</span><span class="tech-chip">SHA-256 Signatures</span><span class="tech-chip">URL Shield</span><span class="tech-chip">Quarantine Vault</span>
+        </div>
+        <button class="details-toggle" data-target="td7"><span class="chev">▸</span> Technical Details</button>
+        <div class="tech-details" id="td7">
+          <p>Python stdlib system (<code>main.py</code> service + <code>scanner_engine.py</code> signature + heuristic scan + <code>file_watcher.py</code> real-time monitor for Desktop / Downloads / Documents / USB) with Tkinter dashboard (<code>dashboard.py</code> ON/OFF toggle, Scan Now, history), <code>url_checker.py</code> phishing shield, <code>notifier.py</code> severity engine (<code>CRITICAL / HIGH / MEDIUM / LOW</code>) with Quarantine / Delete / Block actions into an encrypted <code>quarantine/</code> vault, <code>SHA-256</code> + filename + keyword signatures in <code>signatures.json</code>, autostart via Startup folder / Task Scheduler (<code>autostart.py</code>); logs to <code>protection.log</code> + <code>threat-history.json</code>. Optional <code>watchdog</code> / <code>plyer</code>, chunk-scans large media.</p>
+        </div>
+        <div class="project-actions">
+          <a href="https://github.com/arkap1502/Antivirus" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Code</a>
+        </div>
+      </article>
     </div>
 
     <div class="github-banner reveal">
@@ -595,7 +622,8 @@ document.addEventListener('DOMContentLoaded', function(){
     '03': 'NexVault: your encrypted vault — your keys, your control.',
     '04': 'Humanize AI: turns robotic AI text into human writing.',
     '05': 'Hidden-Prompt Scanner: hunts invisible injections in docs.',
-    '06': 'Safety Check: passive scan of deployed prototypes for 6 risks.'
+    '06': 'Safety Check: passive scan of deployed prototypes for 6 risks.',
+    '07': 'Antivirus: always-on guard for apps, sites, images & files.'
   };
   const DEFAULT_TIP = 'Hover any project — I will brief you in one line.';
   function say(msg){
