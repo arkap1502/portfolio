@@ -36,7 +36,7 @@ arka@security-lab:~$ focus
 > cybersecurity + artificial-intelligence + web-security + software-engineering
 
 arka@security-lab:~$ ls --pages
-> index.html  projects.html  about.html  contact.html
+> index.html  projects.html  about.html  contact.html  certificates.html
 
 arka@security-lab:~$ ls --proof
 > cert-*.pdf (x8) + internship-certificate + profile-photo
@@ -57,15 +57,16 @@ arka@security-lab:~$ status
 | Module | Route | Payload |
 |---|---|---|
 | 🟥 DASHBOARD | [`index.html`](./index.html) / [live](https://portfolio-ten-gold-16.vercel.app/) | Red device-panel hero, skill matrix, flagship spotlight |
-| 🟧 ARCHIVE | [`projects.html`](./projects.html) / [live](https://portfolio-ten-gold-16.vercel.app/projects.html) | All 08 builds, filters, technical readouts |
-| 🟨 DOSSIER | [`about.html`](./about.html) / [live](https://portfolio-ten-gold-16.vercel.app/about.html) | Essay, education, work history, 08 certificates + PDFs, journey |
+| 🟧 ARCHIVE | [`projects.html`](./projects.html) / [live](https://portfolio-ten-gold-16.vercel.app/projects.html) | All 08 builds, filters (All / Cybersecurity / Web Security), technical readouts |
+| 🟨 DOSSIER | [`about.html`](./about.html) / [live](https://portfolio-ten-gold-16.vercel.app/about.html) | Essay, education, work history, journey, certificate spotlight |
 | 🟩 UPLINK | [`contact.html`](./contact.html) / [live](https://portfolio-ten-gold-16.vercel.app/contact.html) | Info rail + validated message form |
+| 🟪 PROOF | [`certificates.html`](./certificates.html) | All 09 certificates + verified internship PDF |
 
 ### 📊 System Readout
 
 | Metric | Value |
 |---|---|
-| Pages | `04` |
+| Pages | `05` |
 | Live builds | `08` (05 featured) |
 | Certificates | `08` + verified internship |
 | PDF proofs | `09` files, one click away |
@@ -78,7 +79,8 @@ arka@security-lab:~$ status
 
 Not another generic template. This is a **threat-monitor styled portfolio**:
 
-- 🔴 **Red Device Panel Hero** — wire-globe, silhouette, Threat Monitor side-card, marquee tape (`CY•FOCUS / PASSWORD SECURITY / WEB SECURITY`)
+- 🔴 **Red Device Panel Hero** — canvas-rendered spinning wireframe globe (black on red, true Y-axis rotation, zero deps), silhouette, left-side Threat Monitor card, marquee tape (`CY•FOCUS / PASSWORD SECURITY / WEB SECURITY`)
+- ⬛ **Flat official finish** — zero neon/glow anywhere: solid red-on-black, neutral depth shadows, crisp status colors; `prefers-reduced-motion` respected
 - 🎞️ **Dual Infinite Marquee** — white + red tapes scrolling opposite directions, tilted -1.2deg
 - 🧪 **Interactive Demos inside cards** — animated risk-meter, expandable technical breakdowns, filterable grid
 - 👤 **Dossier-style About** — plain-text essay, photo card with fade, education + Quick Info rail, work history, 8 certificates with real PDFs
@@ -181,12 +183,12 @@ flowchart LR
     HOME --> ABOUT[about.html<br/>Essay + Photo]
     ABOUT --> EDU[Education]
     ABOUT --> WORK[Work History]
-    ABOUT --> CERT[08 Certificates + PDFs]
+    ABOUT --> CERTPAGE[certificates.html<br/>09 proofs]
     ABOUT --> JOURNEY[Journey]
     HOME --> CONTACT[contact.html<br/>Info + Form]
 ```
 
-Global nav on every page: `DASHBOARD → ABOUT → PROJECTS` + red `CONTACT` button → `contact.html`.
+Global nav on every page: `DASHBOARD → ABOUT → CERTIFICATES → PROJECTS` + red `CONTACT` button → `contact.html`.
 
 ---
 
@@ -209,8 +211,8 @@ Global nav on every page: `DASHBOARD → ABOUT → PROJECTS` + red `CONTACT` but
 
 - **Essay** — plain-text narrative + photo card with fade, `// cyber_security_student`, socials; focus/toolbox chips + CTAs
 - **Education** — dossier cards: B.Sc Cyber Security @ GNIT (2024 — Present), Higher Secondary (2024), Secondary (2022)
-- **Work History** — 3 cards in one row: Thiranex internship (verified PDF) + Forage simulations + open-to-work
-- **Certificates (08)** — short notes + View PDF buttons (`cert-*.pdf`, same folder)
+- **Work History** — one essay-style box: Thiranex internship (verified PDF) + Forage simulations + open-to-work in a single paragraph
+- **Certificate spotlight (01)** — Thiranex internship card + `View All Certificates` button → [`certificates.html`](./certificates.html) (all 09 with PDF proofs)
 - **Journey** — one essay-style box rewritten around the certificates
 
 ---
@@ -248,7 +250,8 @@ python3 -m http.server 8000
 portfolio/
 ├── index.html      → dashboard (hero, skills, flagship spotlight)
 ├── projects.html   → full archive, all 08 builds with filters
-├── about.html      → essay + photo + education + work + certs + journey
+├── about.html      → essay + photo + education + work + cert spotlight + journey
+├── certificates.html → all 09 certificates + verified internship PDF
 ├── contact.html    → info rail + message form (two-card layout)
 ├── arka-patra.jpg  → profile photo (about page)
 ├── cert-*.pdf (×8) → certificate PDFs linked from about page cards
@@ -275,7 +278,7 @@ portfolio/
 --font-mono: 'JetBrains Mono';
 ```
 
-Glass cards: `linear-gradient(180deg, #202023, #171719)` + `0 0 0 4px #0b0b0c` ring + deep shadow. Selection: `rgba(255,46,14,0.4)`.
+Glass cards: `linear-gradient(180deg, #202023, #171719)` + `0 0 0 4px #0b0b0c` ring + neutral black depth shadows (no colored glow anywhere). Selection: `rgba(255,46,14,0.4)`.
 
 ---
 

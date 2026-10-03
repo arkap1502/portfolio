@@ -352,14 +352,6 @@ header:not(.scrolled) .navlinks a.nav-contact{color:#fff !important;}
 .status-chip .pulse{width:6px; height:6px; border-radius:50%; background:var(--green); box-shadow:none; animation: pulse 1.6s ease-in-out infinite;}
 @keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:0.3;} }
 
-.scroll-cue{
-  position:absolute; bottom:20px; left:50%; transform:translateX(-50%);
-  font-family:var(--font-mono); font-size:0.68rem; color:var(--text-faint); text-align:center;
-  display:flex; flex-direction:column; align-items:center; gap:8px;
-}
-.scroll-cue .line{width:1px; height:34px; background:linear-gradient(var(--cyan), transparent); animation: scrolldown 1.8s ease-in-out infinite;}
-@keyframes scrolldown{0%{transform:scaleY(0); transform-origin:top;} 50%{transform:scaleY(1); transform-origin:top;} 51%{transform-origin:bottom;} 100%{transform:scaleY(0); transform-origin:bottom;}}
-
 /* ===================== REVEAL ===================== */
 .reveal{ opacity:0; transform: translateY(26px); transition: opacity .7s ease, transform .7s ease;}
 .reveal.visible{ opacity:1; transform:none;}
@@ -795,6 +787,7 @@ img,svg,video{max-width:100%; height:auto;}
     <div class="navlinks" id="navlinks">
       <a href="#home" class="active">DASHBOARD</a>
       <a href="about.html">ABOUT</a>
+      <a href="certificates.html">CERTIFICATES</a>
       <a href="projects.html">PROJECTS</a>
     </div>
     <div class="nav-cta">
@@ -807,6 +800,7 @@ img,svg,video{max-width:100%; height:auto;}
   <div class="mobile-menu" id="mobileMenu">
     <a href="#home">DASHBOARD</a>
     <a href="about.html">ABOUT</a>
+    <a href="certificates.html">CERTIFICATES</a>
     <a href="projects.html">PROJECTS</a>
   </div>
 </header>
@@ -855,7 +849,6 @@ img,svg,video{max-width:100%; height:auto;}
       <div class="terminal" style="display:none"><div class="term-body" id="termBody"></div></div>
     </div>
   </div>
-  <div class="scroll-cue" style="color:rgba(242,239,233,0.55)"><span class="line" style="background:linear-gradient(#ff2e0e, transparent)"></span>SCROLL</div>
 </section>
 
 <div class="tape-wrap" aria-hidden="true">
@@ -866,7 +859,7 @@ img,svg,video{max-width:100%; height:auto;}
 <!-- ===================== SKILLS ===================== -->
 <section class="skills" id="skills">
   <div class="wrap">
-    <div class="eyebrow"><span class="dot"></span>SKILL MATRIX</div>
+    
     <h2 class="section-title reveal">What I Work With</h2>
     <p class="section-sub reveal">Tools and concepts I actively use across development and security work.</p>
 
@@ -921,7 +914,7 @@ img,svg,video{max-width:100%; height:auto;}
 <!-- ===================== PROJECTS ===================== -->
 <section class="projects" id="projects">
   <div class="wrap">
-    <div class="eyebrow"><span class="dot"></span>FEATURED PROJECT</div>
+    
     <h2 class="section-title reveal">Things I've Built</h2>
     <p class="section-sub reveal">Spotlight build — the full archive of 08 projects lives one click away.</p>
 
