@@ -284,7 +284,7 @@ Glass cards: `linear-gradient(180deg, #202023, #171719)` + `0 0 0 4px #0b0b0c` r
 
 ## 🔧 Make it yours — 5-min checklist
 
-- [ ] **CV button** — `#downloadCvBtn` in `index.html` currently fires an `alert()`; point `href` to your PDF and delete the placeholder handler
+- [x] **CV button** — `#downloadCvBtn` in `index.html` → `Arka_Patra_CV.pdf` (committed, downloads directly)
 - [ ] **Email** — `data-copy="your.email@example.com"` on `#emailBtn` in `contact.html` → your real email
 - [ ] **Phone** — `tel:+919748813115` in `contact.html` → your number
 - [ ] **Socials** — hero + contact + footer URLs (GitHub / LinkedIn / X / Instagram / Threads)
