@@ -39,7 +39,7 @@ arka@security-lab:~$ ls --pages
 > index.html  projects.html  about.html  contact.html  certificates.html
 
 arka@security-lab:~$ ls --proof
-> cert-*.pdf (x8) + internship-certificate + profile-photo
+> assets/ holds all media: cert-*.pdf (x8) + internship-certificate + CV + profile-photo
 
 arka@security-lab:~$ deploy --target=vercel
 > https://portfolio-ten-gold-16.vercel.app/  ● LIVE
@@ -60,7 +60,7 @@ arka@security-lab:~$ status
 | 🟧 ARCHIVE | [`projects.html`](./projects.html) / [live](https://portfolio-ten-gold-16.vercel.app/projects.html) | All 08 builds, filters (All / Cybersecurity / Web Security), technical readouts |
 | 🟨 DOSSIER | [`about.html`](./about.html) / [live](https://portfolio-ten-gold-16.vercel.app/about.html) | Essay, education, work history, journey, certificate spotlight |
 | 🟩 UPLINK | [`contact.html`](./contact.html) / [live](https://portfolio-ten-gold-16.vercel.app/contact.html) | Info rail + validated message form |
-| 🟪 PROOF | [`certificates.html`](./certificates.html) | All 09 certificates + verified internship PDF |
+| 🟪 PROOF | [`certificates.html`](./certificates.html) | Internship spotlight + 08 course certificates, all with PDF proofs and View Certificate buttons |
 
 ### 📊 System Readout
 
@@ -83,10 +83,10 @@ Not another generic template. This is a **threat-monitor styled portfolio**:
 - ⬛ **Flat official finish** — zero neon/glow anywhere: solid red-on-black, neutral depth shadows, crisp status colors; `prefers-reduced-motion` respected
 - 🎞️ **Dual Infinite Marquee** — white + red tapes scrolling opposite directions, tilted -1.2deg
 - 🧪 **Interactive Demos inside cards** — animated risk-meter, expandable technical breakdowns, filterable grid
-- 👤 **Dossier-style About** — plain-text essay, photo card with fade, education + Quick Info rail, work history, 8 certificates with real PDFs
+- 👤 **Dossier-style About** — plain-text essay, profile card with photo + socials + Download CV button, education dossier, boxless work-history and journey essays, Thiranex certificate spotlight
 - 📬 **Two-card Contact** — info rail + validated form (mailto fallback, no backend)
 - 📱 **Device-friendly Full Screen** — 100vw layout, `100svh` hero, hamburger + fullscreen mobile menu, scroll-spy nav
-- 👁️ **Reveal-on-scroll + scroll cue** — IntersectionObserver everywhere, zero libraries
+- 👁️ **Reveal-on-scroll** — IntersectionObserver everywhere, zero libraries
 
 ---
 
@@ -209,7 +209,7 @@ Global nav on every page: `DASHBOARD → ABOUT → CERTIFICATES → PROJECTS` + 
 
 `about.html` holds the personal side in the same theme:
 
-- **Essay** — plain-text narrative + photo card with fade, `// cyber_security_student`, socials; focus/toolbox chips + CTAs
+- **Essay + profile card** — plain-text narrative with focus/toolbox chips + CTAs; profile card with photo, `// cyber_security_student`, socials, and a Download CV button
 - **Education** — dossier cards: B.Sc Cyber Security @ GNIT (2024 — Present), Higher Secondary (2024), Secondary (2022)
 - **Work History** — one essay-style box: Thiranex internship (verified PDF) + Forage simulations + open-to-work in a single paragraph
 - **Certificate spotlight (01)** — Thiranex internship card + `View All Certificates` button → [`certificates.html`](./certificates.html) (all 09 with PDF proofs)
@@ -221,9 +221,8 @@ Global nav on every page: `DASHBOARD → ABOUT → CERTIFICATES → PROJECTS` + 
 
 `contact.html` is a standalone two-card layout:
 
-- **Left rail** — `REPLIES WITHIN 24 HOURS` badge, channel rows (Email click-to-copy, Phone, LinkedIn, GitHub), address card
+- **Left rail** — `REPLIES WITHIN 24 HOURS` badge, channel rows (Email click-to-copy set to `arkap1502@gmail.com`, Phone, LinkedIn, GitHub), address card
 - **Right card** — validated message form (name / email / message required); on submit it opens the visitor's mail app with a pre-filled email — **no backend**
-- Set your real address in `data-copy="your.email@example.com"` (`contact.html` → `#emailBtn`)
 
 ---
 
@@ -253,17 +252,19 @@ portfolio/
 ├── about.html      → essay + photo + education + work + cert spotlight + journey
 ├── certificates.html → all 09 certificates + verified internship PDF
 ├── contact.html    → info rail + message form (two-card layout)
-├── arka-patra.jpg  → profile photo (about page)
-├── cert-*.pdf (×8) → certificate PDFs linked from about page cards
-├── Thiranex_Certificate_Arka_Patra_THX-AUG0426-563.pdf → internship proof
+├── assets/         → all media in one folder, linked from the pages above
+│   ├── arka-patra.jpg  → profile photo (about page)
+│   ├── Arka_Patra_CV.pdf → CV download (dashboard + about buttons)
+│   ├── cert-*.pdf (×8) → linked from certificates page cards
+│   └── Thiranex_Certificate_Arka_Patra_THX-AUG0426-563.pdf → internship proof
 ├── README.md       → you are here
 └── LICENSE         → MIT
 ```
 
 ### ☁️ Deploy notes (Vercel)
-- Framework preset: **Other** · Root Directory: `./` (files live at repo root)
+- Framework preset: **Other** · Root Directory: `./` (pages at repo root, media in `assets/`)
 - No build command, no env vars · Every push auto-redeploys
-- PDFs + photo must be committed or their buttons 404
+- `assets/` must be committed or the PDF / photo / CV buttons 404
 
 ---
 
@@ -284,8 +285,8 @@ Glass cards: `linear-gradient(180deg, #202023, #171719)` + `0 0 0 4px #0b0b0c` r
 
 ## 🔧 Make it yours — 5-min checklist
 
-- [x] **CV button** — `#downloadCvBtn` in `index.html` → `Arka_Patra_CV.pdf` (committed, downloads directly)
-- [ ] **Email** — `data-copy="your.email@example.com"` on `#emailBtn` in `contact.html` → your real email
+- [x] **CV button** — `#downloadCvBtn` in `index.html` → `assets/Arka_Patra_CV.pdf` (committed, downloads directly)
+- [x] **Email** — `data-copy` on `#emailBtn` in `contact.html` set to `arkap1502@gmail.com`
 - [ ] **Phone** — `tel:+919748813115` in `contact.html` → your number
 - [ ] **Socials** — hero + contact + footer URLs (GitHub / LinkedIn / X / Instagram / Threads)
 - [ ] **Projects** — update Live Demo / Code links under `github.com/arkap1502` as repos move
