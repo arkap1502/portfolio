@@ -815,7 +815,7 @@ img,svg,video{max-width:100%; height:auto;}
       <p class="hero-intro">I build practical security-focused applications, web tools, and developer projects — exploring real cybersecurity concepts through working code.</p>
       <div class="hero-actions">
         <a href="projects.html" class="btn btn-primary">View Work</a>
-        <a href="#" class="btn btn-ghost" id="downloadCvBtn">Download CV</a>
+        <a href="Arka_Patra_CV.pdf" download class="btn btn-ghost" id="downloadCvBtn">Download CV</a>
       </div>
       <div class="hero-socials">
         <a href="https://github.com/arkap1502" target="_blank" rel="noopener" class="social-ic" aria-label="GitHub">
@@ -1221,15 +1221,6 @@ document.addEventListener('DOMContentLoaded', function(){
       requestAnimationFrame(spin);
     })();
   })();
-
-  /* ---------- Download CV placeholder ---------- */
-  const downloadCvBtn = document.getElementById('downloadCvBtn');
-  if (downloadCvBtn){
-  downloadCvBtn.addEventListener('click', function(e){
-    e.preventDefault();
-    alert('Add your CV file link here — replace the #downloadCvBtn href with a path to your PDF resume.');
-  });
-  }
 
 });
 </script>
