@@ -207,6 +207,8 @@ header:not(.scrolled) .navlinks a.nav-contact{color:#fff !important;}
   margin-bottom:14px; display:flex; align-items:center; gap:10px;
 }
 .hero-eyebrow-cyber::before{content:''; width:26px; height:2px; background:var(--cyan); display:inline-block;}
+.back-link{display:inline-flex; align-items:center; gap:8px; font-family:var(--font-mono); font-size:0.78rem; color:var(--text-dim); margin-bottom:18px; transition:color .2s ease;}
+.back-link:hover{color:var(--cyan);}
 .hero-name{
   font-size: clamp(3rem, 7vw, 5.2rem); line-height:0.98; font-weight:800;
   color:#fff; letter-spacing:-0.03em; text-transform:uppercase;
@@ -809,7 +811,8 @@ img,svg,video{max-width:100%; height:auto;}
 <section class="hero" id="home">
   <div class="wrap hero-grid">
     <div>
-      <h1 class="hero-name">ARKA <span class="accent">PATRA</span></h1>
+      <a href="index.html" class="back-link">← Back to Landing</a>
+      <h1 class="hero-name">Hello I'm<br>ARKA <span class="accent">PATRA</span></h1>
       <div class="hero-sub">CYBER SECURITY STUDENT — B.SC, GNIT</div>
       <div class="hero-role">Security-Focused Developer · Python · Web Security</div>
       <p class="hero-intro">I build practical security-focused applications, web tools, and developer projects — exploring real cybersecurity concepts through working code.</p>

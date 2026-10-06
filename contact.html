@@ -128,7 +128,7 @@ button.c-method{cursor:pointer;}
 .c-right{padding:clamp(26px,4vw,44px); background:linear-gradient(180deg,#202023,#171719); border:1px solid var(--border); border-radius:var(--radius); box-shadow:0 0 0 4px #0b0b0c, 0 18px 44px rgba(0,0,0,0.5); position:relative; overflow:hidden;}
 .c-right::before{content:''; position:absolute; inset:0; pointer-events:none; background:none;}
 .c-right > *{position:relative; z-index:1;}
-.c-form-title{font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.18em; color:var(--cyan); margin-bottom:4px;}
+
 .c-right h3{font-size:1.2rem; margin-bottom:6px;}
 .c-right .c-sub{color:var(--text-faint); font-size:0.84rem; margin-bottom:22px;}
 @media (max-width:900px){ .contact-box{grid-template-columns:1fr;} .c-left::after{left:0; right:0; top:0; bottom:auto; width:auto; height:3px; background:linear-gradient(90deg, var(--cyan), transparent 70%);} }
@@ -198,8 +198,7 @@ footer{padding:36px 0; border-top:1px solid var(--border); position:relative; z-
 <section class="contact-head" id="contact-head">
   <div class="wrap">
     <a href="dashboard.html#home" class="back-link">← Back to Portfolio</a>
-    <h1 class="section-title reveal">Contact <span class="accent">Me</span></h1>
-    <p class="section-sub reveal">Internships, collaboration, security projects — my inbox is open.</p>
+    <h1 class="section-title reveal" style="text-align:center">Internships, collaboration, security projects — <span class="accent">my inbox is open.</span></h1>
   </div>
 </section>
 
@@ -239,7 +238,6 @@ footer{padding:36px 0; border-top:1px solid var(--border); position:relative; z-
         </div>
       </div>
       <div class="c-right">
-        <div class="c-form-title">// SEND A MESSAGE</div>
         <h3>Drop me a line</h3>
         <p class="c-sub">Tell me about the opportunity or idea — I reply within a day.</p>
         <form class="contact-form" id="contactForm" novalidate>
@@ -338,7 +336,7 @@ document.addEventListener('DOMContentLoaded', function(){
     });
   }
 
-  /* message form — validate then open mail client */
+  /* message form — validate then send directly to Gmail via FormSubmit */
   const form = document.getElementById('contactForm');
   if (form){
     form.addEventListener('submit', function(e){
@@ -348,6 +346,7 @@ document.addEventListener('DOMContentLoaded', function(){
       const subject = document.getElementById('cfSubject');
       const message = document.getElementById('cfMessage');
       const status = document.getElementById('cfStatus');
+      const submitBtn = document.getElementById('cfSubmit');
       let ok = true;
       function setErr(input, errId, msg){
         const err = document.getElementById(errId);
@@ -358,13 +357,33 @@ document.addEventListener('DOMContentLoaded', function(){
       setErr(email, 'cfEmailError', /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim()) ? '' : 'Enter a valid email.');
       setErr(message, 'cfMessageError', message.value.trim() ? '' : 'Please write a message.');
       if (!ok){ status.textContent = ''; status.classList.add('error'); return; }
-      const to = (emailBtn && emailBtn.dataset.copy && emailBtn.dataset.copy.includes('@')) ? emailBtn.dataset.copy : '';
-      const sub = encodeURIComponent((subject.value.trim() || 'Portfolio contact') + ' — from ' + name.value.trim());
-      const body = encodeURIComponent(message.value.trim() + '\n\n— ' + name.value.trim() + ' (' + email.value.trim() + ')');
+      const inbox = 'f3400068730008743ebb2c550435c41d';
       status.classList.remove('error');
-      status.textContent = 'Opening your mail app…';
-      window.location.href = 'mailto:' + to + '?subject=' + sub + '&body=' + body;
-      setTimeout(() => { status.textContent = 'If nothing opened, email me directly via the Email button above.'; }, 2500);
+      status.textContent = 'Sending…';
+      if (submitBtn) submitBtn.disabled = true;
+      fetch('https://formsubmit.co/ajax/' + inbox, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          name: name.value.trim(),
+          email: email.value.trim(),
+          subject: subject.value.trim() || 'Portfolio contact',
+          message: message.value.trim(),
+          _subject: 'Portfolio contact — from ' + name.value.trim()
+        })
+      }).then(function(res){
+        if (!res.ok) throw new Error('send failed');
+        return res.json();
+      }).then(function(){
+        status.classList.remove('error');
+        status.textContent = 'Message sent — I reply within 24 hours.';
+        form.reset();
+      }).catch(function(){
+        status.classList.add('error');
+        status.textContent = 'Could not send just now — email me directly via the Email button above.';
+      }).finally(function(){
+        if (submitBtn) submitBtn.disabled = false;
+      });
     });
   }
 });
