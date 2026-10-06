@@ -85,7 +85,7 @@ Not another generic template. This is a **threat-monitor styled portfolio**:
 - 🎞️ **Dual Infinite Marquee** — white + red tapes scrolling opposite directions, tilted -1.2deg
 - 🧪 **Interactive Demos inside cards** — animated risk-meter, expandable technical breakdowns, filterable grid
 - 👤 **Dossier-style About** — plain-text essay, profile card with photo + socials + Download CV button, education dossier, boxless work-history and journey essays, Thiranex certificate spotlight
-- 📬 **Two-card Contact** — info rail + validated form (mailto fallback, no backend)
+- 📬 **Two-card Contact** — info rail + validated form (direct-to-Gmail delivery, no backend)
 - 📱 **Device-friendly Full Screen** — 100vw layout, `100svh` hero, hamburger + fullscreen mobile menu, scroll-spy nav
 - 👁️ **Reveal-on-scroll** — IntersectionObserver everywhere, zero libraries
 
@@ -224,7 +224,7 @@ Global nav on every page: `DASHBOARD → ABOUT → CERTIFICATES → PROJECTS` + 
 `contact.html` is a standalone two-card layout:
 
 - **Left rail** — `REPLIES WITHIN 24 HOURS` badge, channel rows (Email click-to-copy set to `arkap1502@gmail.com`, Phone, LinkedIn, GitHub), address card
-- **Right card** — validated message form (name / email / message required); on submit it opens the visitor's mail app with a pre-filled email — **no backend**
+- **Right card** — validated message form (name / email / message required); on submit it sends straight to Gmail via FormSubmit (activated, private token endpoint — address hidden from page source) — **no backend, no mail app needed**
 
 ---
 
