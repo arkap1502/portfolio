@@ -36,7 +36,7 @@ arka@security-lab:~$ focus
 > cybersecurity + artificial-intelligence + web-security + software-engineering
 
 arka@security-lab:~$ ls --pages
-> index.html  projects.html  about.html  contact.html  certificates.html  landing.html
+> index.html(entry)  dashboard.html  projects.html  about.html  contact.html  certificates.html
 
 arka@security-lab:~$ ls --proof
 > assets/ holds all media: cert-*.pdf (x8) + internship-certificate + CV + profile-photo
@@ -56,8 +56,8 @@ arka@security-lab:~$ status
 
 | Module | Route | Payload |
 |---|---|---|
-| 🟥 DASHBOARD | [`index.html`](./index.html) / [live](https://portfolio-ten-gold-16.vercel.app/) | Red device-panel hero, skill matrix, flagship spotlight |
-| ⬜ LANDING | [`landing.html`](./landing.html) / [live](https://portfolio-ten-gold-16.vercel.app/landing.html) | Entry hero + View Portfolio → dashboard, contact only |
+| 🟥 DASHBOARD | [`dashboard.html`](./dashboard.html) / [live](https://portfolio-ten-gold-16.vercel.app/dashboard.html) | Red device-panel hero, skill matrix, flagship spotlight |
+| ⬜ LANDING | [`index.html`](./index.html) / [live](https://portfolio-ten-gold-16.vercel.app/) | Entry hero + View Portfolio → dashboard, contact only |
 | 🟧 ARCHIVE | [`projects.html`](./projects.html) / [live](https://portfolio-ten-gold-16.vercel.app/projects.html) | All 08 builds, filters (All / Cybersecurity / Web Security), technical readouts |
 | 🟨 DOSSIER | [`about.html`](./about.html) / [live](https://portfolio-ten-gold-16.vercel.app/about.html) | Essay, education, work history, journey, certificate spotlight |
 | 🟩 UPLINK | [`contact.html`](./contact.html) / [live](https://portfolio-ten-gold-16.vercel.app/contact.html) | Info rail + validated message form |
@@ -178,7 +178,8 @@ React + Express app with **zero-build offline fallback** — same engine ported 
 
 ```mermaid
 flowchart LR
-    HOME[index.html<br/>DASHBOARD] --> SKILLS[Skill Matrix]
+    LAND[index.html<br/>ENTRY] --> HOME[dashboard.html<br/>DASHBOARD]
+    HOME --> SKILLS[Skill Matrix]
     HOME --> SPOT[Flagship Spotlight]
     SPOT --> ARCH[projects.html<br/>08 builds]
     HOME --> ABOUT[about.html<br/>Essay + Photo]
@@ -248,8 +249,8 @@ python3 -m http.server 8000
 ### File structure
 ```
 portfolio/
-├── landing.html    → entry hero + View Portfolio → dashboard
-├── index.html      → dashboard (hero, skills, flagship spotlight)
+├── index.html      → entry hero + View Portfolio → dashboard
+├── dashboard.html  → dashboard (hero, skills, flagship spotlight)
 ├── projects.html   → full archive, all 08 builds with filters
 ├── about.html      → essay + photo + education + work + cert spotlight + journey
 ├── certificates.html → all 09 certificates + verified internship PDF
@@ -287,7 +288,7 @@ Glass cards: `linear-gradient(180deg, #202023, #171719)` + `0 0 0 4px #0b0b0c` r
 
 ## 🔧 Make it yours — 5-min checklist
 
-- [x] **CV button** — `#downloadCvBtn` in `index.html` → `assets/Arka_Patra_CV.pdf` (committed, downloads directly)
+- [x] **CV button** — `#downloadCvBtn` in `dashboard.html` → `assets/Arka_Patra_CV.pdf` (committed, downloads directly)
 - [x] **Email** — `data-copy` on `#emailBtn` in `contact.html` set to `arkap1502@gmail.com`
 - [ ] **Phone** — `tel:+919748813115` in `contact.html` → your number
 - [ ] **Socials** — hero + contact + footer URLs (GitHub / LinkedIn / X / Instagram / Threads)
