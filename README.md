@@ -36,7 +36,7 @@ arka@security-lab:~$ focus
 > cybersecurity + artificial-intelligence + web-security + software-engineering
 
 arka@security-lab:~$ ls --pages
-> index.html  projects.html  about.html  contact.html  certificates.html
+> index.html  projects.html  about.html  contact.html  certificates.html  landing.html
 
 arka@security-lab:~$ ls --proof
 > assets/ holds all media: cert-*.pdf (x8) + internship-certificate + CV + profile-photo
@@ -57,6 +57,7 @@ arka@security-lab:~$ status
 | Module | Route | Payload |
 |---|---|---|
 | 🟥 DASHBOARD | [`index.html`](./index.html) / [live](https://portfolio-ten-gold-16.vercel.app/) | Red device-panel hero, skill matrix, flagship spotlight |
+| ⬜ LANDING | [`landing.html`](./landing.html) / [live](https://portfolio-ten-gold-16.vercel.app/landing.html) | Entry hero + View Portfolio → dashboard, contact only |
 | 🟧 ARCHIVE | [`projects.html`](./projects.html) / [live](https://portfolio-ten-gold-16.vercel.app/projects.html) | All 08 builds, filters (All / Cybersecurity / Web Security), technical readouts |
 | 🟨 DOSSIER | [`about.html`](./about.html) / [live](https://portfolio-ten-gold-16.vercel.app/about.html) | Essay, education, work history, journey, certificate spotlight |
 | 🟩 UPLINK | [`contact.html`](./contact.html) / [live](https://portfolio-ten-gold-16.vercel.app/contact.html) | Info rail + validated message form |
@@ -66,7 +67,7 @@ arka@security-lab:~$ status
 
 | Metric | Value |
 |---|---|
-| Pages | `05` |
+| Pages | `06` |
 | Live builds | `08` (05 featured) |
 | Certificates | `08` + verified internship |
 | PDF proofs | `09` files, one click away |
@@ -247,6 +248,7 @@ python3 -m http.server 8000
 ### File structure
 ```
 portfolio/
+├── landing.html    → entry hero + View Portfolio → dashboard
 ├── index.html      → dashboard (hero, skills, flagship spotlight)
 ├── projects.html   → full archive, all 08 builds with filters
 ├── about.html      → essay + photo + education + work + cert spotlight + journey
