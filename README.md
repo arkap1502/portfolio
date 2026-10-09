@@ -61,7 +61,7 @@ arka@security-lab:~$ status
 | 🟧 ARCHIVE | [`projects.html`](./projects.html) / [live](https://portfolio-ten-gold-16.vercel.app/projects.html) | All 08 builds, filters (All / Cybersecurity / Web Security), technical readouts |
 | 🟨 DOSSIER | [`about.html`](./about.html) / [live](https://portfolio-ten-gold-16.vercel.app/about.html) | Essay, education, work history, journey, certificate spotlight |
 | 🟩 UPLINK | [`contact.html`](./contact.html) / [live](https://portfolio-ten-gold-16.vercel.app/contact.html) | Info rail + validated message form |
-| 🟪 PROOF | [`certificates.html`](./certificates.html) | Internship spotlight + 08 course certificates, all with PDF proofs and View Certificate buttons |
+| 🟪 PROOF | [`certificates.html`](./certificates.html) | Internship spotlight + 09 course certificates, all with PDF proofs and View Certificate buttons |
 
 ### 📊 System Readout
 
@@ -70,7 +70,7 @@ arka@security-lab:~$ status
 | Pages | `06` |
 | Live builds | `08` (05 featured) |
 | Certificates | `08` + verified internship |
-| PDF proofs | `09` files, one click away |
+| PDF proofs | `10` files, one click away |
 | Backend | `NONE` — pure static |
 | Theme | `CY•FOCUS DARK + RED` |
 
@@ -185,7 +185,7 @@ flowchart LR
     HOME --> ABOUT[about.html<br/>Essay + Photo]
     ABOUT --> EDU[Education]
     ABOUT --> WORK[Work History]
-    ABOUT --> CERTPAGE[certificates.html<br/>09 proofs]
+    ABOUT --> CERTPAGE[certificates.html<br/>10 proofs]
     ABOUT --> JOURNEY[Journey]
     HOME --> CONTACT[contact.html<br/>Info + Form]
 ```
@@ -214,7 +214,7 @@ Global nav on every page: `DASHBOARD → ABOUT → CERTIFICATES → PROJECTS` + 
 - **Essay + profile card** — plain-text narrative with focus/toolbox chips + CTAs; profile card with photo, `// cyber_security_student`, socials, and a Download CV button
 - **Education** — dossier cards: B.Sc Cyber Security @ GNIT (2024 — Present), Higher Secondary (2024), Secondary (2022)
 - **Work History** — one essay-style box: Thiranex internship (verified PDF) + Forage simulations + open-to-work in a single paragraph
-- **Certificate spotlight (01)** — Thiranex internship card + `View All Certificates` button → [`certificates.html`](./certificates.html) (all 09 with PDF proofs)
+- **Certificate spotlight (01)** — Thiranex internship card + `View All Certificates` button → [`certificates.html`](./certificates.html) (all 10 with PDF proofs)
 - **Journey** — one essay-style box rewritten around the certificates
 
 ---
@@ -253,12 +253,12 @@ portfolio/
 ├── dashboard.html  → dashboard (hero, skills, flagship spotlight)
 ├── projects.html   → full archive, all 08 builds with filters
 ├── about.html      → essay + photo + education + work + cert spotlight + journey
-├── certificates.html → all 09 certificates + verified internship PDF
+├── certificates.html → all 10 certificates + verified internship PDF
 ├── contact.html    → info rail + message form (two-card layout)
 ├── assets/         → all media in one folder, linked from the pages above
 │   ├── arka-patra.jpg  → profile photo (about page)
 │   ├── Arka_Patra_CV.pdf → CV download (dashboard + about buttons)
-│   ├── cert-*.pdf (×8) → linked from certificates page cards
+│   ├── cert-*.pdf (×9) → linked from certificates page cards
 │   └── Thiranex_Certificate_Arka_Patra_THX-AUG0426-563.pdf → internship proof
 ├── README.md       → you are here
 └── LICENSE         → MIT
