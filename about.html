@@ -95,10 +95,9 @@ header.scrolled{background:rgba(19,19,20,0.88); backdrop-filter:blur(14px); bord
 /* --- about layout: essay + stats left, profile + quick info right (same theme) --- */
 .about-layout{display:grid; grid-template-columns:1.55fr 1fr; gap:22px; align-items:stretch;}
 .a-main{display:flex; flex-direction:column;}
-.a-main .essay-panel{flex:1;}
-.a-main .essay-panel.glass{background:none; border:none; box-shadow:none; padding:6px 2px;}
-.a-main .essay-panel.glass::before{display:none;}
-.a-main .essay-panel p{font-size:1.02rem; line-height:1.8;}
+.a-main .about-copy{flex:1; background:transparent; border:0; box-shadow:none; padding:6px 2px; overflow:visible;}
+.a-main .about-copy p{font-size:1.02rem; line-height:1.8;}
+.a-main .about-copy .tech-chip{color:#173a27!important; -webkit-text-fill-color:#173a27!important; background:#e3ebe5!important; border-color:#9bad9f!important;}
 .a-stats{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:18px;}
 .a-stat{padding:22px; transition:border-color .25s ease, transform .25s ease;}
 .a-stat:hover{border-color:var(--border-strong); transform:translateY(-3px);}
@@ -284,7 +283,7 @@ footer{padding:36px 0; border-top:1px solid var(--border); position:relative; z-
 
     <div class="about-layout">
       <div class="a-main">
-    <div class="essay-panel glass reveal">
+    <div class="about-copy reveal">
       <p>I am a passionate and curious Cyber security student with a strong interest in <strong>Cybersecurity, Artificial Intelligence, Web Security, and Software Engineering</strong>. I enjoy learning how technology works and, more importantly, turning what I learn into practical projects that can solve real-world problems.</p>
       <p>My journey in technology has involved working on projects related to <strong class="hl">phishing detection, website security, secure applications, password generation, email threat detection, and AI-based security systems</strong>. Through these projects, I have gained practical experience with technologies such as <strong>Python, Flask, JavaScript, HTML, CSS, SQL, Git, and modern web development tools</strong>.</p>
       <p>I am particularly interested in cybersecurity because it combines problem-solving, creativity, and continuous learning. I enjoy understanding how attacks happen and developing systems that can detect, analyze, and prevent potential threats. I also explore Artificial Intelligence and Machine Learning to understand how intelligent systems can improve cybersecurity and automation.</p>

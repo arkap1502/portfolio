@@ -55,6 +55,10 @@ body :is(.glass,article,[class*="card"],[class*="panel"],[class*="box"],[class*=
   background:var(--mist)!important; border-color:var(--line)!important; box-shadow:none!important;
 }
 .skill-tag:hover,.j-chap .mini-tags span { background:var(--blush)!important; }
+html body[data-page="about"] .a-main .chip-row > .tech-chip {
+  color:#173a27!important; -webkit-text-fill-color:#173a27!important;
+  background:#e3ebe5!important; border-color:#9bad9f!important;
+}
 .pill,.interest-chip,.status-badge,.cert-badge,.pdf-badge,.project-cat,.badge-featured {
   color:var(--crimson)!important; -webkit-text-fill-color:var(--crimson)!important;
   background:var(--blush)!important; border-color:#ebc9cd!important;
