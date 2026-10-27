@@ -69,8 +69,8 @@ header.scrolled{background:rgba(19,19,20,0.88); backdrop-filter:blur(14px); bord
 .mobile-menu a.active{color:var(--cyan);}
 
 /* page head */
-.about-head{padding:132px 0 40px;}
-.back-link{display:inline-flex; align-items:center; gap:8px; font-family:var(--font-mono); font-size:0.78rem; color:var(--text-dim); margin-bottom:26px; transition:color .2s ease;}
+.about-head{padding:112px 0 24px;}
+.back-link{display:inline-flex; align-items:center; gap:8px; font-family:var(--font-mono); font-size:0.78rem; color:var(--text-dim); margin-bottom:16px; transition:color .2s ease;}
 .back-link:hover{color:var(--cyan);}
 .avail-badge{display:inline-flex; align-items:center; gap:10px; font-family:var(--font-mono); font-size:0.76rem; font-weight:600; letter-spacing:0.12em; color:#e8f5e9; background:rgba(6,18,12,0.9); border:1px solid rgba(61,255,136,0.55); border-radius:999px; padding:11px 24px; margin-bottom:22px; box-shadow:0 0 0 1px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.06); white-space:nowrap; max-width:100%;}
 .avail-badge .pulse{width:8px; height:8px; border-radius:50%; background:#3dff88; box-shadow:none; animation:pulse 1.6s ease-in-out infinite; flex-shrink:0;}
@@ -93,7 +93,7 @@ header.scrolled{background:rgba(19,19,20,0.88); backdrop-filter:blur(14px); bord
 .essay-cta{display:flex; gap:12px; flex-wrap:wrap;}
 
 /* --- about layout: essay + stats left, profile + quick info right (same theme) --- */
-.about-layout{display:grid; grid-template-columns:1.55fr 1fr; gap:22px; align-items:stretch;}
+.about-layout{display:grid; grid-template-columns:1.55fr 1fr; gap:16px; align-items:stretch;}
 .a-main{display:flex; flex-direction:column;}
 .a-main .about-copy{flex:1; background:transparent; border:0; box-shadow:none; padding:6px 2px; overflow:visible;}
 .a-main .about-copy p{font-size:1.02rem; line-height:1.8;}
@@ -103,18 +103,18 @@ header.scrolled{background:rgba(19,19,20,0.88); backdrop-filter:blur(14px); bord
 .a-stat:hover{border-color:var(--border-strong); transform:translateY(-3px);}
 .a-stat b{display:block; font-family:var(--font-display); font-size:1.9rem; font-weight:700; color:var(--cyan); line-height:1.1;}
 .a-stat span{color:var(--text-faint); font-size:0.82rem;}
-.a-side{display:flex; flex-direction:column; gap:18px; position:sticky; top:96px;}
-.profile-card{overflow:hidden; text-align:center; padding-bottom:26px;}
-.a-photo{height:360px; border-bottom:1px solid var(--border); background:#141416; position:relative; overflow:hidden; line-height:0;}
-.a-photo::after{content:''; position:absolute; left:0; right:0; bottom:0; height:42%; background:linear-gradient(transparent, #171719 92%); pointer-events:none;}
+.a-side{display:flex; flex-direction:column; gap:12px; position:sticky; top:88px;}
+.profile-card{overflow:hidden; text-align:center; padding-bottom:18px;}
+.a-photo{height:340px; border-bottom:1px solid var(--border); background:#141416; position:relative; overflow:hidden; line-height:0;}
+.a-photo::after{content:none;}
 .a-photo span{font-family:var(--font-display); font-weight:700; font-size:4.4rem; letter-spacing:-0.03em; color:#fff; background:var(--cyan); width:124px; height:124px; display:flex; align-items:center; justify-content:center; border-radius:28px; box-shadow:0 12px 28px rgba(0,0,0,0.45), 0 0 0 4px #0b0b0c; text-shadow:0 3px 14px rgba(0,0,0,0.4);}
-.a-photo img{width:100%; height:100%; object-fit:cover; object-position:center 15%; display:block;}
-.a-name{font-size:1.4rem; margin:20px 0 4px;}
-.a-handle{font-family:var(--font-mono); font-size:0.78rem; color:var(--cyan); margin-bottom:18px;}
+.a-photo img{width:100%; height:100%; object-fit:cover; object-position:center 80%; display:block;}
+.a-name{font-size:1.4rem; margin:14px 0 4px;}
+.a-handle{font-family:var(--font-mono); font-size:0.78rem; color:var(--cyan); margin-bottom:12px;}
 .a-socials{display:flex; justify-content:center; gap:10px;}
 .a-socials a{width:38px; height:38px; border-radius:9px; border:1px solid var(--border); background:#1e1e21; display:flex; align-items:center; justify-content:center; color:var(--text-dim); transition:all .2s ease;}
 .a-socials a:hover{color:#fff; border-color:var(--border-strong); background:rgba(255,46,14,0.12); box-shadow:0 4px 12px rgba(0,0,0,0.35); transform:translateY(-2px);}
-.quick-info{padding:24px;}
+.quick-info{padding:18px;}
 .quick-info h4{font-size:1.02rem; margin-bottom:8px;}
 .q-row{display:flex; gap:12px; align-items:flex-start; padding:11px 0; border-top:1px solid var(--border); font-size:0.86rem; color:var(--text-dim); line-height:1.55;}
 .q-row svg{flex-shrink:0; margin-top:3px; color:var(--cyan);}
@@ -227,12 +227,13 @@ footer{padding:36px 0; border-top:1px solid var(--border); position:relative; z-
   .logo-mark{width:28px; height:28px; font-size:0.65rem; flex-shrink:0;}
   .hamburger{display:flex; flex-shrink:0;}
   .nav-cta{display:flex; align-items:center; gap:8px; justify-self:end; flex-shrink:0;}
-  .about-head{padding:104px 0 32px;}
+  .about-head{padding:96px 0 24px;}
   .footer-inner{justify-content:center; text-align:center;}
 }
 @media (max-width:640px){
   .wrap{padding:0 20px;}
   .navbar{padding:14px 20px;}
+  .a-photo{height:300px;}
   .essay-cta .btn{flex:1 1 100%; justify-content:center;}
   .cta-row .btn{flex:1 1 100%; justify-content:center;}
   .footer-links{justify-content:center; gap:14px;}
@@ -309,7 +310,7 @@ footer{padding:36px 0; border-top:1px solid var(--border); position:relative; z-
       </div>
       <div class="a-side">
         <div class="profile-card glass reveal">
-          <div class="a-photo"><img src="assets/arka-patra.jpg" alt="Arka Patra"></div>
+          <div class="a-photo"><img src="assets/arka-patra-about.jpeg" alt="Arka Patra"></div>
           <div class="a-name">Arka Patra</div>
           <div class="a-handle">// cyber_security_student</div>
           <div class="a-socials">
