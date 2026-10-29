@@ -68,6 +68,7 @@ html body[data-page="about"] .a-main .chip-row > .tech-chip {
 .essay-quote,.j-pull { color:var(--ink)!important; background:#edf4ef!important; border-color:#ceded2!important; }
 .j-pull em { color:#365c43!important; }
 .a-photo { background:var(--mist)!important; }
+.profile-card { width:100%; max-width:540px; margin-inline:auto; border-radius:28px!important; }
 .a-photo::after { background:linear-gradient(transparent,#fff 92%)!important; }
 .a-photo span { color:#fff!important; background:var(--crimson)!important; }
 .social-ic,.a-socials a { color:var(--slate)!important; background:#fff!important; border-color:var(--line)!important; }
