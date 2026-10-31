@@ -1,0 +1,229 @@
+{
+  "menu": {
+    "menuOpen": {
+      "expanded": "true",
+      "hidden": "false",
+      "open": true,
+      "visible": "visible",
+      "links": 5
+    },
+    "menuCloseEscape": {
+      "expanded": "false",
+      "open": false,
+      "focused": true
+    }
+  },
+  "projects": {
+    "initial": {
+      "cards": 8,
+      "visible": 8,
+      "count": "08 builds",
+      "filters": [
+        "All",
+        "Cybersecurity",
+        "Web Security",
+        "Web Development"
+      ]
+    },
+    "filters": {
+      "cyber": {
+        "hidden": 2,
+        "visible": 6,
+        "count": "06 builds",
+        "first": "Website Security Copilot",
+        "active": "cyber",
+        "pressed": [
+          "false",
+          "true",
+          "false",
+          "false"
+        ]
+      },
+      "web": {
+        "hidden": 7,
+        "visible": 1,
+        "count": "01 build",
+        "first": "URL Threat Scanner",
+        "active": "web",
+        "pressed": [
+          "false",
+          "false",
+          "true",
+          "false"
+        ]
+      },
+      "dev": {
+        "hidden": 7,
+        "visible": 1,
+        "count": "01 build",
+        "first": "Humanize AI",
+        "active": "dev",
+        "pressed": [
+          "false",
+          "false",
+          "false",
+          "true"
+        ]
+      },
+      "all": {
+        "hidden": 0,
+        "visible": 8,
+        "count": "08 builds",
+        "first": "Website Security Copilot",
+        "active": "all",
+        "pressed": [
+          "true",
+          "false",
+          "false",
+          "false"
+        ]
+      }
+    },
+    "details": {
+      "initialOpen": true,
+      "bodyDisplay": "block",
+      "closedWhenFilteredOut": true,
+      "cardHidden": true
+    }
+  },
+  "contact": {
+    "emptySubmit": {
+      "errors": [
+        "Please enter your name.",
+        "Enter a valid email address.",
+        "Please write a short message."
+      ],
+      "invalid": [
+        "cfName",
+        "cfEmail",
+        "cfMessage"
+      ],
+      "focused": "cfName",
+      "status": ""
+    },
+    "filled": {
+      "badEmail": "Enter a valid email address.",
+      "status": "Message sent — I reply within 24 hours.",
+      "errors": [
+        "",
+        "",
+        ""
+      ],
+      "name": "",
+      "submitDisabled": false
+    },
+    "copy": {
+      "status": "Press Ctrl/Cmd+C to copy"
+    }
+  },
+  "pages": {
+    "index": {
+      "h1": 1,
+      "internalLinks": [
+        "index.html",
+        "contact.html",
+        "dashboard.html",
+        "assets/Arka_Patra_CV.pdf"
+      ],
+      "externalBlank": [],
+      "images": [],
+      "current": 0,
+      "overflow": false
+    },
+    "dashboard": {
+      "h1": 1,
+      "internalLinks": [
+        "dashboard.html",
+        "about.html",
+        "certificates.html",
+        "projects.html",
+        "contact.html",
+        "assets/Arka_Patra_CV.pdf"
+      ],
+      "externalBlank": [],
+      "images": [],
+      "current": 2,
+      "overflow": false
+    },
+    "projects": {
+      "h1": 1,
+      "internalLinks": [
+        "dashboard.html",
+        "about.html",
+        "certificates.html",
+        "projects.html",
+        "contact.html"
+      ],
+      "externalBlank": [],
+      "images": [],
+      "current": 2,
+      "overflow": false
+    },
+    "about": {
+      "h1": 1,
+      "internalLinks": [
+        "dashboard.html",
+        "about.html",
+        "certificates.html",
+        "projects.html",
+        "contact.html",
+        "assets/Arka_Patra_CV.pdf",
+        "assets/Thiranex_Certificate_Arka_Patra_THX-AUG0426-563.pdf"
+      ],
+      "externalBlank": [],
+      "images": [
+        {
+          "src": "assets/arka-patra.jpg",
+          "alt": "Portrait of Arka Patra",
+          "ok": true
+        }
+      ],
+      "current": 2,
+      "overflow": false
+    },
+    "certificates": {
+      "h1": 1,
+      "internalLinks": [
+        "dashboard.html",
+        "about.html",
+        "certificates.html",
+        "projects.html",
+        "contact.html",
+        "assets/Thiranex_Certificate_Arka_Patra_THX-AUG0426-563.pdf",
+        "assets/cert-wscube-ethical-hacker-2026.pdf",
+        "assets/cert-forage-technical-interviews.pdf",
+        "assets/cert-cisco-intro-cybersecurity.pdf",
+        "assets/cert-cisco-hardware-basics.pdf",
+        "assets/cert-deloitte-cyber.pdf",
+        "assets/cert-commbank-cybersecurity.pdf",
+        "assets/cert-datacom-ai-workplace.pdf",
+        "assets/cert-nul-career-readiness.pdf",
+        "assets/cert-bclp-interview-success.pdf"
+      ],
+      "externalBlank": [],
+      "images": [],
+      "current": 2,
+      "overflow": false
+    },
+    "contact": {
+      "h1": 1,
+      "internalLinks": [
+        "dashboard.html",
+        "about.html",
+        "certificates.html",
+        "projects.html",
+        "contact.html"
+      ],
+      "externalBlank": [],
+      "images": [],
+      "current": 2,
+      "overflow": false
+    }
+  },
+  "desktopNav": {
+    "linksDisplay": "flex",
+    "toggleDisplay": "none"
+  },
+  "networkFailures": [],
+  "exceptions": []
+}
