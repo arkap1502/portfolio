@@ -39,18 +39,8 @@
     </div>
 
     <div class="landing-visual" data-reveal style="--delay:140ms">
-      <svg class="orb" viewBox="0 0 520 520" fill="none" aria-hidden="true" focusable="false">
-        <circle cx="260" cy="252" r="196" stroke="#FFFFFF" stroke-opacity=".22"/>
-        <ellipse cx="260" cy="252" rx="196" ry="148" stroke="#FFFFFF" stroke-opacity=".1"/>
-        <ellipse cx="260" cy="252" rx="196" ry="88" stroke="#FFFFFF" stroke-opacity=".1"/>
-        <ellipse cx="260" cy="252" rx="196" ry="26" stroke="#FFFFFF" stroke-opacity=".1"/>
-        <ellipse cx="260" cy="252" rx="148" ry="196" stroke="#FFFFFF" stroke-opacity=".1"/>
-        <ellipse cx="260" cy="252" rx="88" ry="196" stroke="#FFFFFF" stroke-opacity=".1"/>
-        <ellipse cx="260" cy="252" rx="26" ry="196" stroke="#FFFFFF" stroke-opacity=".1"/>
-        <ellipse cx="260" cy="252" rx="228" ry="112" transform="rotate(-22 260 252)" stroke="#FFFFFF" stroke-opacity=".15" stroke-dasharray="3 9"/>
-        <circle cx="392" cy="198" r="7" fill="#B5303C"/>
-        <circle cx="392" cy="198" r="16" stroke="#B5303C" stroke-opacity=".28"/>
-      </svg>
+      <canvas class="orb" id="landingGlobe" width="1000" height="1000" aria-hidden="true">A wireframe globe of Earth.</canvas>
+      <span class="globe-hint" aria-hidden="true">Drag to rotate</span>
 
       <div class="monitor-card landing-monitor">
         <div class="monitor-head">
@@ -70,6 +60,7 @@
   </div>
 </main>
 
+<script src="assets/globe.js"></script>
 <script src="assets/site.js"></script>
 </body>
 </html>

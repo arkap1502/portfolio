@@ -38,6 +38,7 @@ The design follows the supplied concept deck:
 - Flat cards with rounded corners, soft grey shadows and no glow
 - Gentle fade-in on scroll and a small hover lift; `prefers-reduced-motion` is respected
 - One shared stylesheet (`assets/site.css`) and one shared script (`assets/site.js`) across all pages
+- The landing globe is a canvas wireframe that auto-spins, supports drag-to-rotate with release momentum, and stops spinning under `prefers-reduced-motion`
 
 ---
 
@@ -45,7 +46,7 @@ The design follows the supplied concept deck:
 
 | Page | What it holds |
 |---|---|
-| [`index.html`](./index.html) | Ink landing hero, wireframe globe, threat-monitor card, CV and portfolio actions, crimson ticker |
+| [`index.html`](./index.html) | Ink landing hero, draggable wireframe globe, threat-monitor card, CV and portfolio actions, crimson ticker |
 | [`dashboard.html`](./dashboard.html) | Mist hero, live threat-monitor card, six skill tiles, dark flagship spotlight |
 | [`projects.html`](./projects.html) | Eight builds, four filters, expandable technical details, stack chips and GitHub strip |
 | [`about.html`](./about.html) | Essay, profile card, education, work history and the longer story |
@@ -126,6 +127,7 @@ portfolio/
 ├── assets/
 │   ├── site.css          → shared design system and responsive styles
 │   ├── site.js           → nav, reveals, filters, copy, form validation
+│   ├── globe.js          → interactive landing globe
 │   ├── arka-patra.jpg    → profile photo
 │   ├── Arka_Patra_CV.pdf → downloadable CV
 │   ├── Thiranex_Certificate_Arka_Patra_THX-AUG0426-563.pdf
