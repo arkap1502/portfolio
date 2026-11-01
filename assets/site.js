@@ -1,6 +1,6 @@
 /* ==========================================================================
    Arka Patra — shared site behaviour
-   Header state · mobile menu · scroll reveals · project filters
+   Header state · mobile menu · scroll reveals · project filters & details
    email copy · contact form
    ========================================================================== */
 
@@ -17,7 +17,7 @@
     /* Header shadow after scrolling -------------------------------------- */
     if (header) {
       var syncHeader = function () {
-        header.classList.toggle('is-scrolled', window.scrollY > 12);
+        header.classList.toggle('is-scrolled', window.scrollY > 10);
       };
       syncHeader();
       window.addEventListener('scroll', syncHeader, { passive: true });
@@ -28,6 +28,7 @@
       if (!menu || !toggle) return;
       menu.classList.remove('is-open');
       toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Open menu');
       menu.setAttribute('aria-hidden', 'true');
     }
 
@@ -35,6 +36,7 @@
       toggle.addEventListener('click', function () {
         var open = toggle.getAttribute('aria-expanded') !== 'true';
         toggle.setAttribute('aria-expanded', String(open));
+        toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
         menu.classList.toggle('is-open', open);
         menu.setAttribute('aria-hidden', String(!open));
       });
@@ -57,7 +59,7 @@
       });
 
       window.addEventListener('resize', function () {
-        if (window.innerWidth > 980) closeMenu();
+        if (window.innerWidth > 1080) closeMenu();
       });
     }
 
@@ -71,7 +73,7 @@
           entry.target.classList.add('is-visible');
           revealObserver.unobserve(entry.target);
         });
-      }, { threshold: .12, rootMargin: '0px 0px -6% 0px' });
+      }, { threshold: .1, rootMargin: '0px 0px -5% 0px' });
 
       revealItems.forEach(function (item) { revealObserver.observe(item); });
     } else {
@@ -84,6 +86,70 @@
     var buildCount = document.getElementById('buildCount');
     var emptyState = document.getElementById('buildEmpty');
 
+    /* Project details ---------------------------------------------------- */
+    var buildToggles = Array.prototype.slice.call(document.querySelectorAll('.build-toggle'));
+
+    function setCardOpen(card, button, open) {
+      var panel = document.getElementById(button.getAttribute('aria-controls'));
+      var title = card.querySelector('.build-title');
+      if (!panel) return;
+
+      card.classList.toggle('is-open', open);
+      button.setAttribute('aria-expanded', String(open));
+      panel.setAttribute('aria-hidden', String(!open));
+      if ('inert' in panel) panel.inert = !open;
+      button.setAttribute('aria-label', (open ? 'Hide' : 'Show') + ' technical details for ' + (title ? title.textContent.trim() : 'this project'));
+
+      if (open && !reducedMotion) {
+        window.setTimeout(function () {
+          if (!card.classList.contains('is-open')) return;
+          var rect = card.getBoundingClientRect();
+          if (rect.bottom > window.innerHeight) {
+            card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        }, 380);
+      }
+    }
+
+    function closeAllCards() {
+      buildToggles.forEach(function (button) {
+        var card = button.closest('.build-card');
+        if (card && card.classList.contains('is-open')) setCardOpen(card, button, false);
+      });
+    }
+
+    buildToggles.forEach(function (button) {
+      var card = button.closest('.build-card');
+      var panel = document.getElementById(button.getAttribute('aria-controls'));
+      if (panel && 'inert' in panel) panel.inert = true;
+
+      button.addEventListener('click', function () {
+        if (!card) return;
+        var willOpen = button.getAttribute('aria-expanded') !== 'true';
+        if (willOpen) {
+          buildToggles.forEach(function (other) {
+            if (other === button) return;
+            var otherCard = other.closest('.build-card');
+            if (otherCard) setCardOpen(otherCard, other, false);
+          });
+        }
+        setCardOpen(card, button, willOpen);
+      });
+    });
+
+    /* Open the matching project when arriving from the home preview */
+    function openHashProject() {
+      var hash = window.location.hash;
+      if (!hash || hash.indexOf('#build-') !== 0) return;
+      var target = document.querySelector(hash);
+      if (!target || !target.classList.contains('build-card')) return;
+      var button = target.querySelector('.build-toggle');
+      if (button) setCardOpen(target, button, true);
+    }
+
+    window.addEventListener('hashchange', openHashProject);
+    openHashProject();
+
     if (filterButtons.length && buildCards.length) {
       filterButtons.forEach(function (button) {
         button.addEventListener('click', function () {
@@ -95,15 +161,13 @@
             item.setAttribute('aria-pressed', String(active));
           });
 
+          closeAllCards();
+
           var shown = 0;
           buildCards.forEach(function (card) {
             var match = filter === 'all' || card.dataset.category === filter;
             card.hidden = !match;
             if (match) shown += 1;
-            if (!match) {
-              var details = card.querySelector('details');
-              if (details) details.open = false;
-            }
           });
 
           if (buildCount) {
@@ -116,8 +180,10 @@
 
     /* Click-to-copy email ------------------------------------------------ */
     document.querySelectorAll('[data-copy]').forEach(function (button) {
-      var status = button.parentElement.querySelector('.copy-status');
+      var row = button.closest('.contact-row');
+      var status = row ? row.querySelector('.copy-status') : null;
       var resetTimer;
+      var buttonTimer;
 
       function legacyCopy(value) {
         var input = document.createElement('textarea');
@@ -138,7 +204,7 @@
       }
 
       function selectEmail() {
-        var value = button.querySelector('.method-value');
+        var value = row ? row.querySelector('.contact-value') : null;
         if (!value || !window.getSelection) return false;
         var range = document.createRange();
         range.selectNodeContents(value);
@@ -148,15 +214,23 @@
         return true;
       }
 
+      function setButtonLabel(label) {
+        button.textContent = label;
+        clearTimeout(buttonTimer);
+        buttonTimer = setTimeout(function () { button.textContent = 'Copy'; }, 2600);
+      }
+
       button.addEventListener('click', function () {
         var value = button.dataset.copy;
         if (!value) return;
 
         function confirmCopy(message) {
-          if (!status) return;
-          status.textContent = message;
-          clearTimeout(resetTimer);
-          resetTimer = setTimeout(function () { status.textContent = ''; }, 2600);
+          if (status) {
+            status.textContent = message;
+            clearTimeout(resetTimer);
+            resetTimer = setTimeout(function () { status.textContent = ''; }, 2600);
+          }
+          setButtonLabel('Copied');
         }
 
         function fallbackCopy() {
@@ -188,10 +262,12 @@
       var messageInput = document.getElementById('cfMessage');
       var status = document.getElementById('cfStatus');
       var submit = document.getElementById('cfSubmit');
+      var submitLabel = submit ? submit.querySelector('.btn-label') : null;
 
       function fieldOf(input) { return input.closest('.field'); }
 
       function setError(input, message) {
+        if (!input) return;
         var field = fieldOf(input);
         var error = field ? field.querySelector('.field-error') : null;
         if (field) field.classList.toggle('has-error', Boolean(message));
@@ -236,7 +312,7 @@
         status.textContent = 'Sending…';
         if (submit) {
           submit.disabled = true;
-          submit.textContent = 'Sending…';
+          if (submitLabel) submitLabel.textContent = 'Sending…';
         }
 
         fetch('https://formsubmit.co/ajax/' + inbox, {
@@ -266,7 +342,7 @@
           .finally(function () {
             if (submit) {
               submit.disabled = false;
-              submit.textContent = 'Send message';
+              if (submitLabel) submitLabel.textContent = 'Send message';
             }
           });
       });

@@ -4,63 +4,171 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Arka Patra — Cyber Security Student</title>
-<meta name="description" content="Arka Patra — B.Sc Cyber Security student from West Bengal, building secure software and practical security tools.">
+<meta name="description" content="Welcome to the portfolio of Arka Patra — a cyber security student and security-focused developer from West Bengal.">
 <meta property="og:title" content="Arka Patra — Cyber Security Student">
-<meta property="og:description" content="Building secure software. Exploring cybersecurity and turning ideas into working tools.">
+<meta property="og:description" content="Cybersecurity & innovation. Pick your screen and step into the portfolio.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2318202E'/%3E%3Cpath d='M32 12 L50 19 V31 C50 43 42 50 32 54 C22 50 14 43 14 31 V19 Z' fill='none' stroke='%23FFFFFF' stroke-width='3'/%3E%3Ccircle cx='32' cy='32' r='4' fill='%23B5303C'/%3E%3C/svg%3E" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<script>document.documentElement.classList.add('js');</script>
+<script>
+document.documentElement.classList.add('js');
+(function () {
+  var wide = window.matchMedia('(min-width: 1025px)');
+  var fine = window.matchMedia('(hover: hover) and (pointer: fine)');
+  function syncEntry() {
+    var desktop = wide.matches && fine.matches;
+    document.documentElement.classList.toggle('entry-desktop', desktop);
+    document.documentElement.classList.toggle('entry-touch', !desktop);
+  }
+  syncEntry();
+  if (wide.addEventListener) {
+    wide.addEventListener('change', syncEntry);
+    fine.addEventListener('change', syncEntry);
+  }
+})();
+</script>
 <link rel="stylesheet" href="assets/site.css">
 </head>
-<body class="landing-page">
+<body class="entry-page">
 
-<a class="skip-link" href="#main">Skip to content</a>
+<a class="skip-link" href="#entryMain">Skip to portfolio entry</a>
 
-<header class="landing-header">
-  <div class="container nav nav--landing">
-    <a class="brand" href="index.html" aria-label="Arka Patra — home">ARKA PATRA</a>
-    <a class="landing-contact" href="contact.html">Contact</a>
-  </div>
-</header>
+<main id="entryMain" class="entry">
+  <div class="entry-blob" aria-hidden="true"></div>
+  <div class="entry-blob entry-blob--soft" aria-hidden="true"></div>
+  <div class="entry-blob entry-blob--bar" aria-hidden="true"></div>
 
-<main id="main" class="landing">
-  <div class="container landing-grid">
-    <div class="landing-copy" data-reveal>
-      <p class="eyebrow eyebrow--light">Cyber security student · West Bengal</p>
-      <h1>Building secure software.</h1>
-      <p class="landing-lead">Exploring cybersecurity and turning ideas into working tools.</p>
-      <div class="landing-actions">
-        <a class="btn btn-primary" href="dashboard.html">View Portfolio <span aria-hidden="true">→</span></a>
-        <a class="btn btn-outline-light" href="assets/Arka_Patra_CV.pdf" download>Download CV</a>
-      </div>
+  <div class="entry-inner">
+    <div class="entry-top">
+      <a class="entry-brand" href="dashboard.html" aria-label="Arka Patra — portfolio home">Arka Patra<sup>®</sup></a>
+      <span class="entry-availability"><span class="status-dot"></span>Open to internships · 2026</span>
     </div>
 
-    <div class="landing-visual" data-reveal style="--delay:140ms">
-      <canvas class="orb" id="landingGlobe" width="1000" height="1000" aria-hidden="true">A wireframe globe of Earth.</canvas>
-      <span class="globe-hint" aria-hidden="true">Drag to rotate</span>
+    <div class="entry-main">
+      <div class="entry-copy" data-reveal>
+        <p class="entry-kicker">Cyber security student · West Bengal</p>
+        <p class="entry-welcome">Welcome to My World of</p>
+        <h1 class="entry-title">Cybersecurity<br><span class="amp">&amp;</span> Innovation.</h1>
 
-      <div class="monitor-card landing-monitor">
-        <div class="monitor-head">
-          <h2>Threat Monitor</h2>
-          <span class="monitor-live"><span class="status-dot"></span>System online</span>
+        <div class="entry-dots" aria-hidden="true">
+          <i></i><i></i><i></i><i></i>
         </div>
-        <div class="monitor-bar"><i style="width:68%"></i></div>
+
+        <p class="entry-hint entry-hint--laptop" id="entryHintLaptop">
+          <span class="hint-dot" aria-hidden="true"></span>
+          You're on a laptop — click the laptop to enter.
+          <span class="hint-arrow" aria-hidden="true">→</span>
+        </p>
+        <p class="entry-hint entry-hint--mobile" id="entryHintMobile">
+          <span class="hint-dot" aria-hidden="true"></span>
+          You're on a phone — tap the phone to enter.
+          <span class="hint-arrow" aria-hidden="true">→</span>
+        </p>
+      </div>
+
+      <div class="entry-devices" data-reveal style="--delay:120ms">
+        <a class="device device--laptop" href="dashboard.html" aria-label="Open the portfolio — desktop view" aria-describedby="entryHintLaptop">
+          <span class="laptop-frame">
+            <span class="laptop-screen">
+              <span class="mini-site" aria-hidden="true">
+                <span class="mini-nav">
+                  <span class="mini-brand">Arka Patra<sup>®</sup></span>
+                  <span class="mini-links">
+                    <span class="is-active">Home</span>
+                    <span>Projects</span>
+                    <span>About</span>
+                    <span>Certificates</span>
+                    <span>Contact</span>
+                  </span>
+                  <span class="mini-cta">Let's Talk →</span>
+                </span>
+
+                <span class="mini-headline">Cybersecurity<br><span class="amp">&amp;</span> Secure Code</span>
+
+                <span class="mini-lower">
+                  <span>
+                    <span class="mini-scroll">SCROLL DOWN ↓</span>
+                    <span class="mini-copy">Hi, I'm Arka, a cyber security student and security-focused developer from West Bengal. I build tools that turn real threats into working demos.</span>
+                  </span>
+                  <span class="mini-globe-wrap">
+                    <svg class="mini-globe" viewBox="0 0 220 220" fill="none" aria-hidden="true">
+                      <circle cx="110" cy="110" r="88" stroke="#cfd6e1" stroke-width="1.1"/>
+                      <g stroke="#cfd6e1" stroke-width=".85">
+                        <ellipse cx="110" cy="110" rx="88" ry="34"/>
+                        <ellipse cx="110" cy="110" rx="88" ry="64"/>
+                        <ellipse cx="110" cy="110" rx="34" ry="88"/>
+                        <ellipse cx="110" cy="110" rx="64" ry="88"/>
+                        <path d="M22 110h176M110 22v176" opacity=".55"/>
+                      </g>
+                      <path d="M42 62C82 20 158 27 188 86" stroke="#b5303c" stroke-width="1.6" opacity=".8"/>
+                      <path d="M28 135C72 190 160 186 192 130" stroke="#b5303c" stroke-width="1" opacity=".38"/>
+                      <circle cx="172" cy="58" r="3.4" fill="#b5303c"/>
+                      <circle cx="64" cy="147" r="2.8" fill="#b5303c"/>
+                      <circle cx="146" cy="156" r="3" fill="#b5303c" opacity=".55"/>
+                    </svg>
+                    <span class="mini-live"><i></i>Live threat monitor</span>
+                  </span>
+                </span>
+
+                <span class="mini-foot">
+                  <span class="mini-contact"><span>Let's Talk</span><strong>arkap1502@gmail.com</strong></span>
+                  <span class="mini-stats">
+                    <span class="mini-stat"><strong>08</strong><span>Builds</span></span>
+                    <span class="mini-stat"><strong>10</strong><span>Certificates</span></span>
+                    <span class="mini-stat"><strong>01</strong><span>Internship</span></span>
+                  </span>
+                </span>
+              </span>
+
+              <span class="device-overlay" aria-hidden="true">
+                <span class="device-enter">Enter portfolio <span class="arrow">→</span></span>
+              </span>
+            </span>
+          </span>
+          <span class="laptop-base" aria-hidden="true"></span>
+        </a>
+
+        <a class="device device--phone" href="dashboard.html" aria-label="Open the portfolio — mobile view" aria-describedby="entryHintMobile">
+          <span class="phone-screen">
+            <span class="phone-ui" aria-hidden="true">
+              <span class="phone-top">
+                <span class="phone-brand">Arka Patra<sup>®</sup></span>
+                <span class="phone-burger"><i></i><i></i><i></i></span>
+              </span>
+              <span class="phone-headline">Cybersecurity<br><span class="amp">&amp;</span> Secure Code</span>
+              <span class="phone-copy">Cyber security student and security-focused developer from West Bengal.</span>
+              <span class="phone-cta">Let's Talk</span>
+              <svg class="phone-globe" viewBox="0 0 220 220" fill="none" aria-hidden="true">
+                <circle cx="110" cy="110" r="88" stroke="#cfd6e1" stroke-width="1.1"/>
+                <g stroke="#cfd6e1" stroke-width=".85">
+                  <ellipse cx="110" cy="110" rx="88" ry="34"/>
+                  <ellipse cx="110" cy="110" rx="88" ry="64"/>
+                  <ellipse cx="110" cy="110" rx="34" ry="88"/>
+                  <ellipse cx="110" cy="110" rx="64" ry="88"/>
+                  <path d="M22 110h176M110 22v176" opacity=".55"/>
+                </g>
+                <path d="M42 62C82 20 158 27 188 86" stroke="#b5303c" stroke-width="1.6" opacity=".8"/>
+                <circle cx="172" cy="58" r="3.4" fill="#b5303c"/>
+                <circle cx="64" cy="147" r="2.8" fill="#b5303c"/>
+              </svg>
+            </span>
+            <span class="device-overlay" aria-hidden="true">
+              <span class="device-enter">Enter <span class="arrow">→</span></span>
+            </span>
+          </span>
+        </a>
       </div>
     </div>
-  </div>
 
-  <div class="landing-ticker" aria-hidden="true">
-    <div class="ticker-track">
-      <span>CY•FOCUS</span><span>·</span><span>Password security</span><span>·</span><span>Web security</span><span>·</span><span>Phishing detection</span><span>·</span><span>CY•FOCUS</span><span>·</span><span>Password security</span><span>·</span><span>Web security</span><span>·</span><span>Phishing detection</span><span>·</span>
-      <span>CY•FOCUS</span><span>·</span><span>Password security</span><span>·</span><span>Web security</span><span>·</span><span>Phishing detection</span><span>·</span><span>CY•FOCUS</span><span>·</span><span>Password security</span><span>·</span><span>Web security</span><span>·</span><span>Phishing detection</span><span>·</span>
+    <div class="entry-foot">
+      <span>Arka Patra · Cyber security · West Bengal</span>
+      <span>Portfolio 2026 · Light mode</span>
     </div>
   </div>
 </main>
 
-<script src="assets/globe.js"></script>
 <script src="assets/site.js"></script>
 </body>
 </html>

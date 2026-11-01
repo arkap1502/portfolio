@@ -21,89 +21,85 @@
 
 <header class="site-header" id="siteHeader">
   <div class="container nav">
-    <a class="brand" href="dashboard.html" aria-label="Arka Patra — dashboard">ARKA PATRA</a>
-    <nav class="nav-links" aria-label="Primary">
-      <a href="dashboard.html">Dashboard</a>
+    <a class="brand" href="dashboard.html" aria-label="Arka Patra — home">Arka Patra<sup>®</sup></a>
+    <nav class="nav-pill" aria-label="Primary">
+      <a href="dashboard.html">Home</a>
+      <a href="projects.html">Projects</a>
       <a href="about.html">About</a>
       <a href="certificates.html">Certificates</a>
-      <a href="projects.html">Projects</a>
+      <a href="contact.html" aria-current="page">Contact</a>
     </nav>
-    <div class="nav-right">
-      <a class="btn btn-primary btn-sm" href="contact.html" aria-current="page">Contact</a>
+    <div class="nav-actions">
+      <a class="btn btn--crimson" href="contact.html">Let's Talk <span class="arrow">→</span></a>
       <button class="nav-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
   </div>
   <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile" aria-hidden="true">
-    <a href="dashboard.html">Dashboard <span aria-hidden="true">→</span></a>
+    <a href="dashboard.html">Home <span aria-hidden="true">→</span></a>
+    <a href="projects.html">Projects <span aria-hidden="true">→</span></a>
     <a href="about.html">About <span aria-hidden="true">→</span></a>
     <a href="certificates.html">Certificates <span aria-hidden="true">→</span></a>
-    <a href="projects.html">Projects <span aria-hidden="true">→</span></a>
-    <a class="btn btn-primary" href="contact.html" aria-current="page">Contact</a>
+    <a href="contact.html" aria-current="page">Contact <span aria-hidden="true">→</span></a>
+    <a class="btn btn--crimson" href="contact.html">Let's Talk <span class="arrow">→</span></a>
   </nav>
 </header>
 
 <main id="main">
   <div class="container contact-layout">
-    <aside class="contact-rail" aria-label="Contact details">
-      <span class="reply-badge"><span class="status-dot"></span>Replies within 24 hours</span>
+    <section class="contact-copy" data-reveal aria-labelledby="contactTitle">
+      <h1 id="contactTitle">Let's build<br>something<br><span class="text-crimson">secure.</span></h1>
+      <p class="contact-sub">Internships, collaborations or a security question — tell me what you are working on. I read everything and reply within a day.</p>
+      <span class="reply-badge"><span class="dot dot--green"></span>Replies within 24 hours</span>
 
-      <div class="contact-method-wrap">
-        <button class="contact-method" type="button" data-copy="arkap1502@gmail.com" aria-label="Copy email address arkap1502@gmail.com">
-          <span class="method-icon" aria-hidden="true">
+      <div class="contact-list">
+        <div class="contact-row">
+          <span class="contact-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/></svg>
           </span>
-          <span class="method-copy">
-            <span class="method-label">Email — click to copy</span>
-            <span class="method-value">arkap1502@gmail.com</span>
+          <span class="contact-label">Email</span>
+          <a class="contact-value" href="mailto:arkap1502@gmail.com">arkap1502@gmail.com</a>
+          <button class="copy-btn" type="button" data-copy="arkap1502@gmail.com" aria-label="Copy email address arkap1502@gmail.com">Copy</button>
+          <p class="copy-status" role="status" aria-live="polite"></p>
+        </div>
+
+        <a class="contact-row" href="tel:+919748813115">
+          <span class="contact-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6.6 3.5 9 3l1.6 4.2-1.7 1.3a13 13 0 0 0 6.6 6.6l1.3-1.7L21 15l-.5 2.4a2.4 2.4 0 0 1-2.5 1.9C10.9 18.5 5.5 13.1 4.7 6A2.4 2.4 0 0 1 6.6 3.5Z" stroke-linejoin="round"/></svg>
           </span>
-          <span class="method-arrow" aria-hidden="true">⧉</span>
-        </button>
-        <p class="copy-status" role="status" aria-live="polite"></p>
+          <span class="contact-label">Phone</span>
+          <span class="contact-value">+91 97488 13115</span>
+        </a>
+
+        <a class="contact-row" href="https://www.linkedin.com/in/arka-patra-579110422/" target="_blank" rel="noopener">
+          <span class="contact-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.8 0 0 .78 0 1.75v20.5C0 23.22.8 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.75V1.75C24 .78 23.2 0 22.22 0Z"/></svg>
+          </span>
+          <span class="contact-label">LinkedIn</span>
+          <span class="contact-value">arka-patra</span>
+        </a>
+
+        <a class="contact-row" href="https://github.com/arkap1502" target="_blank" rel="noopener">
+          <span class="contact-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.87-1.36-3.87-1.36-.53-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.58.24 2.75.12 3.04.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14 0 1.55-.01 2.79-.01 3.17 0 .3.2.66.79.55A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+          </span>
+          <span class="contact-label">GitHub</span>
+          <span class="contact-value">@arkap1502</span>
+        </a>
+
+        <div class="contact-row">
+          <span class="contact-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-5.1 7-11a7 7 0 1 0-14 0c0 5.9 7 11 7 11Z" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.5"/></svg>
+          </span>
+          <span class="contact-label">Location</span>
+          <span class="contact-value">Madhyamgram, Kolkata 700130 · West Bengal</span>
+        </div>
       </div>
+    </section>
 
-      <a class="contact-method" href="https://www.linkedin.com/in/arka-patra-579110422/" target="_blank" rel="noopener">
-        <span class="method-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.8 0 0 .78 0 1.75v20.5C0 23.22.8 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.75V1.75C24 .78 23.2 0 22.22 0Z"/></svg>
-        </span>
-        <span class="method-copy">
-          <span class="method-label">LinkedIn</span>
-          <span class="method-value">arka-patra</span>
-        </span>
-        <span class="method-arrow" aria-hidden="true">→</span>
-      </a>
-
-      <a class="contact-method" href="https://github.com/arkap1502" target="_blank" rel="noopener">
-        <span class="method-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.87-1.36-3.87-1.36-.53-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.58.24 2.75.12 3.04.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14 0 1.55-.01 2.79-.01 3.17 0 .3.2.66.79.55A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
-        </span>
-        <span class="method-copy">
-          <span class="method-label">GitHub</span>
-          <span class="method-value">@arkap1502</span>
-        </span>
-        <span class="method-arrow" aria-hidden="true">→</span>
-      </a>
-
-      <a class="contact-method" href="tel:+919748813115">
-        <span class="method-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6.6 3.5 9 3l1.6 4.2-1.7 1.3a13 13 0 0 0 6.6 6.6l1.3-1.7L21 15l-.5 2.4a2.4 2.4 0 0 1-2.5 1.9C10.9 18.5 5.5 13.1 4.7 6A2.4 2.4 0 0 1 6.6 3.5Z" stroke-linejoin="round"/></svg>
-        </span>
-        <span class="method-copy">
-          <span class="method-label">Phone</span>
-          <span class="method-value">+91 97488 13115</span>
-        </span>
-        <span class="method-arrow" aria-hidden="true">→</span>
-      </a>
-
-      <div class="location-card">
-        <span class="method-label">Location</span>
-        <p>Madhyamgram, Kolkata 700130 <span>West Bengal, India</span></p>
-      </div>
-    </aside>
-
-    <div class="contact-form-card" data-reveal>
-      <h1>Send a message</h1>
+    <section class="contact-form-card" data-reveal style="--delay:100ms" aria-labelledby="formTitle">
+      <h2 id="formTitle">Send a message</h2>
       <p class="form-intro">Tell me about the opportunity or idea — I read everything and reply within a day.</p>
 
       <form id="contactForm" novalidate>
@@ -121,31 +117,30 @@
 
         <div class="field">
           <label for="cfMessage">Message</label>
-          <textarea id="cfMessage" name="message" rows="5" placeholder="How can I help?" aria-describedby="cfMessageError"></textarea>
+          <textarea id="cfMessage" name="message" rows="5" placeholder="Tell me what you are building" aria-describedby="cfMessageError"></textarea>
           <p class="field-error" id="cfMessageError" aria-live="polite"></p>
         </div>
 
-        <div class="form-footer">
-          <button class="btn btn-primary" id="cfSubmit" type="submit">Send message</button>
-          <p class="form-status" id="cfStatus" role="status" aria-live="polite"></p>
-        </div>
+        <button class="btn btn--crimson btn--block" id="cfSubmit" type="submit"><span class="btn-label">Send message</span> <span class="arrow" aria-hidden="true">→</span></button>
+        <p class="form-status" id="cfStatus" role="status" aria-live="polite"></p>
       </form>
-    </div>
+    </section>
   </div>
 </main>
 
 <footer class="site-footer">
   <div class="container footer-inner">
     <div>
-      <p class="footer-brand">ARKA PATRA</p>
-      <p class="footer-copy">© 2026 Arka Patra. Built with curiosity, code &amp; security in mind.</p>
+      <p class="footer-brand">Arka Patra<sup>®</sup></p>
+      <p class="footer-copy">© 2026 Arka Patra. Cyber security student and security-focused developer in West Bengal, India.</p>
     </div>
     <nav class="footer-links" aria-label="Footer">
-      <a href="dashboard.html">Dashboard</a>
+      <a href="dashboard.html">Home</a>
+      <a href="projects.html">Projects</a>
       <a href="about.html">About</a>
       <a href="certificates.html">Certificates</a>
-      <a href="projects.html">Projects</a>
       <a href="https://github.com/arkap1502" target="_blank" rel="noopener">GitHub</a>
+      <a href="index.html">Cover</a>
     </nav>
   </div>
 </footer>

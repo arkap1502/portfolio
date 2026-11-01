@@ -18,7 +18,7 @@
   var DEG = Math.PI / 180;
   var ROTATE_PER_PX = 0.0055;
   var TILT_PER_PX = 0.004;
-  var INK = 'rgba(255, 255, 255, ';
+  var INK = 'rgba(90, 101, 120, ';
   var CRIMSON = '#B5303C';
   var MARKER_LAT = 22.57 * DEG;
   var MARKER_LON = 88.36 * DEG;
@@ -101,9 +101,9 @@
       path.lineTo(b[0], b[1]);
     }
 
-    ctx.strokeStyle = INK + '.16)';
+    ctx.strokeStyle = INK + '.34)';
     ctx.stroke(front);
-    ctx.strokeStyle = INK + '.05)';
+    ctx.strokeStyle = INK + '.1)';
     ctx.stroke(back);
   }
 
@@ -139,8 +139,8 @@
     ctx.beginPath();
     ctx.ellipse(0, 0, radius * 1.163, radius * 0.571, 0, 0, TWO_PI);
     ctx.setLineDash([3 * scale, 9 * scale]);
-    ctx.lineWidth = 1;
-    ctx.strokeStyle = INK + '.15)';
+    ctx.lineWidth = 1.2;
+    ctx.strokeStyle = 'rgba(181, 48, 60, .34)';
     ctx.stroke();
     ctx.restore();
     ctx.setLineDash([]);
@@ -188,7 +188,7 @@
     ctx.beginPath();
     ctx.arc(centerX, centerY, radius, 0, TWO_PI);
     ctx.lineWidth = 1;
-    ctx.strokeStyle = INK + '.22)';
+    ctx.strokeStyle = INK + '.46)';
     ctx.stroke();
 
     drawGraticule();

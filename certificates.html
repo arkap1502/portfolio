@@ -21,156 +21,141 @@
 
 <header class="site-header" id="siteHeader">
   <div class="container nav">
-    <a class="brand" href="dashboard.html" aria-label="Arka Patra — dashboard">ARKA PATRA</a>
-    <nav class="nav-links" aria-label="Primary">
-      <a href="dashboard.html">Dashboard</a>
+    <a class="brand" href="dashboard.html" aria-label="Arka Patra — home">Arka Patra<sup>®</sup></a>
+    <nav class="nav-pill" aria-label="Primary">
+      <a href="dashboard.html">Home</a>
+      <a href="projects.html">Projects</a>
       <a href="about.html">About</a>
       <a href="certificates.html" aria-current="page">Certificates</a>
-      <a href="projects.html">Projects</a>
+      <a href="contact.html">Contact</a>
     </nav>
-    <div class="nav-right">
-      <a class="btn btn-primary btn-sm" href="contact.html">Contact</a>
+    <div class="nav-actions">
+      <a class="btn btn--crimson" href="contact.html">Let's Talk <span class="arrow">→</span></a>
       <button class="nav-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
   </div>
   <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile" aria-hidden="true">
-    <a href="dashboard.html">Dashboard <span aria-hidden="true">→</span></a>
+    <a href="dashboard.html">Home <span aria-hidden="true">→</span></a>
+    <a href="projects.html">Projects <span aria-hidden="true">→</span></a>
     <a href="about.html">About <span aria-hidden="true">→</span></a>
     <a href="certificates.html" aria-current="page">Certificates <span aria-hidden="true">→</span></a>
-    <a href="projects.html">Projects <span aria-hidden="true">→</span></a>
-    <a class="btn btn-primary" href="contact.html">Contact</a>
+    <a href="contact.html">Contact <span aria-hidden="true">→</span></a>
+    <a class="btn btn--crimson" href="contact.html">Let's Talk <span class="arrow">→</span></a>
   </nav>
 </header>
 
-<main id="main">
+<main id="main" class="page-main">
   <div class="container">
     <header class="page-head">
-      <p class="eyebrow">Proof of work</p>
-      <div class="page-head-row">
+      <div>
+        <span class="eyebrow">Credentials</span>
         <h1>Certificates</h1>
-        <p class="page-count">10 certificates</p>
       </div>
-      <p class="page-intro">Courses, simulations and a verified internship — every credential with proof one click away.</p>
+      <div class="page-head__aside">
+        <p class="page-intro">Courses, simulations and a verified internship — every credential with proof one click away. PDFs open in a new tab.</p>
+      </div>
     </header>
 
-    <section class="cert-spotlight" data-reveal aria-label="Verified internship certificate">
-      <span class="pdf-mark">PDF</span>
-      <div>
-        <h2>Thiranex internship certificate</h2>
-        <p>Cyber Security Intern · Aug — Sept 2026 · Certificate ID THX-AUG0426-563</p>
-      </div>
-      <span class="badge badge--green">Verified</span>
-      <a class="btn btn-light btn-sm" href="assets/Thiranex_Certificate_Arka_Patra_THX-AUG0426-563.pdf" target="_blank" rel="noopener">View Certificate</a>
-    </section>
-
-    <section class="cert-grid" aria-label="Course and simulation certificates">
-      <article class="cert-card" data-reveal>
-        <span class="pdf-badge">PDF</span>
-        <p class="cert-issuer">WsCube Tech</p>
-        <h3>How to Become a Certified Ethical Hacker in 2026</h3>
-        <p class="cert-date">Oct 2026</p>
-        <div class="cert-links">
-          <a class="link-arrow" href="assets/cert-wscube-ethical-hacker-2026.pdf" target="_blank" rel="noopener">View certificate ↗</a>
+    <div class="cert-layout">
+      <article class="cert-spotlight" data-reveal aria-label="Verified internship certificate">
+        <div class="cert-spotlight__top">
+          <span class="cert-shield" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2.6 20 6v5.4c0 4.6-3.2 8.1-8 10-4.8-1.9-8-5.4-8-10V6l8-3.4Z" stroke-linejoin="round"/><path d="m8.7 12 2.2 2.2 4.4-4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="status-pill status-pill--soft">Verified</span>
         </div>
+        <h2>Cyber Security Intern</h2>
+        <p class="cert-spotlight__meta">Thiranex · Aug — Sept 2026</p>
+        <p class="cert-spotlight__id">THX-AUG0426-563</p>
+        <a class="btn btn--crimson" href="assets/Thiranex_Certificate_Arka_Patra_THX-AUG0426-563.pdf" target="_blank" rel="noopener">Open PDF <span class="arrow" aria-hidden="true">↗</span></a>
       </article>
 
-      <article class="cert-card" data-reveal style="--delay:50ms">
-        <span class="pdf-badge">PDF</span>
-        <p class="cert-issuer">Forage · Job simulation</p>
-        <h3>Mastering Technical Interviews</h3>
-        <p class="cert-date">Jul 2026</p>
-        <div class="cert-links">
-          <a class="link-arrow" href="assets/cert-forage-technical-interviews.pdf" target="_blank" rel="noopener">View certificate ↗</a>
+      <section class="cert-collection" aria-label="Course and simulation certificates">
+        <div class="cert-collection__head" data-reveal>
+          <h2>9 course &amp; simulation certificates</h2>
+          <span>8 providers</span>
         </div>
-      </article>
 
-      <article class="cert-card" data-reveal style="--delay:100ms">
-        <span class="pdf-badge">PDF</span>
-        <p class="cert-issuer">Cisco Networking Academy</p>
-        <h3>Introduction to Cybersecurity</h3>
-        <p class="cert-date">Jul 2025</p>
-        <div class="cert-links">
-          <a class="link-arrow" href="assets/cert-cisco-intro-cybersecurity.pdf" target="_blank" rel="noopener">View certificate ↗</a>
-        </div>
-      </article>
+        <div class="provider-grid">
+          <a class="provider-tile" href="assets/cert-wscube-ethical-hacker-2026.pdf" target="_blank" rel="noopener" data-reveal aria-label="View WsCube Tech certificate: How to Become a Certified Ethical Hacker in 2026">
+            <span class="provider-mark">W</span>
+            <span class="provider-name">WsCube Tech</span>
+            <span class="provider-cert">Certified Ethical Hacker · Oct 2026</span>
+            <span class="provider-foot">View PDF ↗</span>
+          </a>
 
-      <article class="cert-card" data-reveal>
-        <span class="pdf-badge">PDF</span>
-        <p class="cert-issuer">Cisco Networking Academy</p>
-        <h3>Computer Hardware Basics</h3>
-        <p class="cert-date">Jun — Jul 2025</p>
-        <div class="cert-links">
-          <a class="link-arrow" href="assets/cert-cisco-hardware-basics.pdf" target="_blank" rel="noopener">View certificate ↗</a>
-        </div>
-      </article>
+          <a class="provider-tile" href="assets/cert-forage-technical-interviews.pdf" target="_blank" rel="noopener" data-reveal style="--delay:40ms" aria-label="View Forage certificate: Mastering Technical Interviews">
+            <span class="provider-mark">F</span>
+            <span class="provider-name">Forage</span>
+            <span class="provider-cert">Mastering Technical Interviews · Jul 2026</span>
+            <span class="provider-foot">View PDF ↗</span>
+          </a>
 
-      <article class="cert-card" data-reveal style="--delay:50ms">
-        <span class="pdf-badge">PDF</span>
-        <p class="cert-issuer">Deloitte · Forage</p>
-        <h3>Cyber Job Simulation</h3>
-        <p class="cert-date">Jun — Jul 2026</p>
-        <div class="cert-links">
-          <a class="link-arrow" href="assets/cert-deloitte-cyber.pdf" target="_blank" rel="noopener">View certificate ↗</a>
-        </div>
-      </article>
+          <article class="provider-tile" data-reveal style="--delay:80ms" aria-label="Cisco Networking Academy certificates">
+            <span class="provider-mark">C</span>
+            <span class="provider-name">Cisco Networking Academy</span>
+            <span class="provider-links">
+              <a href="assets/cert-cisco-intro-cybersecurity.pdf" target="_blank" rel="noopener">Introduction to Cybersecurity ↗</a>
+              <a href="assets/cert-cisco-hardware-basics.pdf" target="_blank" rel="noopener">Computer Hardware Basics ↗</a>
+            </span>
+            <span class="provider-foot">2 PDFs</span>
+          </article>
 
-      <article class="cert-card" data-reveal style="--delay:100ms">
-        <span class="pdf-badge">PDF</span>
-        <p class="cert-issuer">Commonwealth Bank · Forage</p>
-        <h3>Introduction to Cybersecurity Job Simulation</h3>
-        <p class="cert-date">Jul 2026</p>
-        <div class="cert-links">
-          <a class="link-arrow" href="assets/cert-commbank-cybersecurity.pdf" target="_blank" rel="noopener">View certificate ↗</a>
-        </div>
-      </article>
+          <a class="provider-tile" href="assets/cert-deloitte-cyber.pdf" target="_blank" rel="noopener" data-reveal style="--delay:120ms" aria-label="View Deloitte certificate: Cyber Job Simulation">
+            <span class="provider-mark">D</span>
+            <span class="provider-name">Deloitte</span>
+            <span class="provider-cert">Cyber Job Simulation · Jun–Jul 2026</span>
+            <span class="provider-foot">View PDF ↗</span>
+          </a>
 
-      <article class="cert-card" data-reveal>
-        <span class="pdf-badge">PDF</span>
-        <p class="cert-issuer">Datacom · Forage</p>
-        <h3>Partnering with AI in the Workplace</h3>
-        <p class="cert-date">Jul 2026</p>
-        <div class="cert-links">
-          <a class="link-arrow" href="assets/cert-datacom-ai-workplace.pdf" target="_blank" rel="noopener">View certificate ↗</a>
-        </div>
-      </article>
+          <a class="provider-tile" href="assets/cert-commbank-cybersecurity.pdf" target="_blank" rel="noopener" data-reveal aria-label="View Commonwealth Bank certificate: Introduction to Cybersecurity Job Simulation">
+            <span class="provider-mark">C</span>
+            <span class="provider-name">Commonwealth Bank</span>
+            <span class="provider-cert">Cybersecurity Job Simulation · Jul 2026</span>
+            <span class="provider-foot">View PDF ↗</span>
+          </a>
 
-      <article class="cert-card" data-reveal style="--delay:50ms">
-        <span class="pdf-badge">PDF</span>
-        <p class="cert-issuer">National Urban League · Forage</p>
-        <h3>Career Readiness Job Simulation</h3>
-        <p class="cert-date">Jul 2026</p>
-        <div class="cert-links">
-          <a class="link-arrow" href="assets/cert-nul-career-readiness.pdf" target="_blank" rel="noopener">View certificate ↗</a>
-        </div>
-      </article>
+          <a class="provider-tile" href="assets/cert-datacom-ai-workplace.pdf" target="_blank" rel="noopener" data-reveal style="--delay:40ms" aria-label="View Datacom certificate: Partnering with AI in the Workplace">
+            <span class="provider-mark">D</span>
+            <span class="provider-name">Datacom</span>
+            <span class="provider-cert">Partnering with AI in the Workplace · Jul 2026</span>
+            <span class="provider-foot">View PDF ↗</span>
+          </a>
 
-      <article class="cert-card" data-reveal style="--delay:100ms">
-        <span class="pdf-badge">PDF</span>
-        <p class="cert-issuer">BCLP · Forage</p>
-        <h3>Interview Success Job Simulation</h3>
-        <p class="cert-date">Jul 2026</p>
-        <div class="cert-links">
-          <a class="link-arrow" href="assets/cert-bclp-interview-success.pdf" target="_blank" rel="noopener">View certificate ↗</a>
+          <a class="provider-tile" href="assets/cert-nul-career-readiness.pdf" target="_blank" rel="noopener" data-reveal style="--delay:80ms" aria-label="View National Urban League certificate: Career Readiness Job Simulation">
+            <span class="provider-mark">N</span>
+            <span class="provider-name">National Urban League</span>
+            <span class="provider-cert">Career Readiness Job Simulation · Jul 2026</span>
+            <span class="provider-foot">View PDF ↗</span>
+          </a>
+
+          <a class="provider-tile" href="assets/cert-bclp-interview-success.pdf" target="_blank" rel="noopener" data-reveal style="--delay:120ms" aria-label="View BCLP certificate: Interview Success Job Simulation">
+            <span class="provider-mark">B</span>
+            <span class="provider-name">BCLP</span>
+            <span class="provider-cert">Interview Success Job Simulation · Jul 2026</span>
+            <span class="provider-foot">View PDF ↗</span>
+          </a>
         </div>
-      </article>
-    </section>
+      </section>
+    </div>
   </div>
 </main>
 
 <footer class="site-footer">
   <div class="container footer-inner">
     <div>
-      <p class="footer-brand">ARKA PATRA</p>
-      <p class="footer-copy">© 2026 Arka Patra. Built with curiosity, code &amp; security in mind.</p>
+      <p class="footer-brand">Arka Patra<sup>®</sup></p>
+      <p class="footer-copy">© 2026 Arka Patra. Cyber security student and security-focused developer in West Bengal, India.</p>
     </div>
     <nav class="footer-links" aria-label="Footer">
-      <a href="dashboard.html">Dashboard</a>
-      <a href="about.html">About</a>
+      <a href="dashboard.html">Home</a>
       <a href="projects.html">Projects</a>
+      <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
       <a href="https://github.com/arkap1502" target="_blank" rel="noopener">GitHub</a>
+      <a href="index.html">Cover</a>
     </nav>
   </div>
 </footer>

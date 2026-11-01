@@ -21,237 +21,266 @@
 
 <header class="site-header" id="siteHeader">
   <div class="container nav">
-    <a class="brand" href="dashboard.html" aria-label="Arka Patra — dashboard">ARKA PATRA</a>
-    <nav class="nav-links" aria-label="Primary">
-      <a href="dashboard.html">Dashboard</a>
+    <a class="brand" href="dashboard.html" aria-label="Arka Patra — home">Arka Patra<sup>®</sup></a>
+    <nav class="nav-pill" aria-label="Primary">
+      <a href="dashboard.html">Home</a>
+      <a href="projects.html" aria-current="page">Projects</a>
       <a href="about.html">About</a>
       <a href="certificates.html">Certificates</a>
-      <a href="projects.html" aria-current="page">Projects</a>
+      <a href="contact.html">Contact</a>
     </nav>
-    <div class="nav-right">
-      <a class="btn btn-primary btn-sm" href="contact.html">Contact</a>
+    <div class="nav-actions">
+      <a class="btn btn--crimson" href="contact.html">Let's Talk <span class="arrow">→</span></a>
       <button class="nav-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
   </div>
   <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile" aria-hidden="true">
-    <a href="dashboard.html">Dashboard <span aria-hidden="true">→</span></a>
+    <a href="dashboard.html">Home <span aria-hidden="true">→</span></a>
+    <a href="projects.html" aria-current="page">Projects <span aria-hidden="true">→</span></a>
     <a href="about.html">About <span aria-hidden="true">→</span></a>
     <a href="certificates.html">Certificates <span aria-hidden="true">→</span></a>
-    <a href="projects.html" aria-current="page">Projects <span aria-hidden="true">→</span></a>
-    <a class="btn btn-primary" href="contact.html">Contact</a>
+    <a href="contact.html">Contact <span aria-hidden="true">→</span></a>
+    <a class="btn btn--crimson" href="contact.html">Let's Talk <span class="arrow">→</span></a>
   </nav>
 </header>
 
-<main id="main">
+<main id="main" class="page-main">
   <div class="container">
     <header class="page-head">
-      <p class="eyebrow">Archive</p>
-      <div class="page-head-row">
-        <h1>All builds</h1>
-        <p class="page-count" id="buildCount" aria-live="polite">08 builds</p>
+      <div>
+        <span class="eyebrow">Archive</span>
+        <h1>Selected builds</h1>
       </div>
-      <p class="page-intro">Educational and demo security tools built to explore real concepts — not production security products.</p>
+      <div class="page-head__aside">
+        <p class="page-intro">Educational and demo security tools built to explore real concepts — not production security products. Open a card for the technical details, source and live demos.</p>
+      </div>
     </header>
 
-    <div class="filter-bar" role="group" aria-label="Filter projects">
-      <button class="filter-pill is-active" type="button" data-filter="all" aria-pressed="true">All</button>
-      <button class="filter-pill" type="button" data-filter="cyber" aria-pressed="false">Cybersecurity</button>
-      <button class="filter-pill" type="button" data-filter="web" aria-pressed="false">Web Security</button>
-      <button class="filter-pill" type="button" data-filter="dev" aria-pressed="false">Web Development</button>
+    <div class="filter-bar">
+      <div class="filter-pills" role="group" aria-label="Filter projects">
+        <button class="filter-pill is-active" type="button" data-filter="all" aria-pressed="true">All</button>
+        <button class="filter-pill" type="button" data-filter="cyber" aria-pressed="false">Cybersecurity</button>
+        <button class="filter-pill" type="button" data-filter="web" aria-pressed="false">Web security</button>
+        <button class="filter-pill" type="button" data-filter="dev" aria-pressed="false">Web development</button>
+      </div>
+      <p class="build-count" id="buildCount" aria-live="polite">08 builds</p>
     </div>
 
     <div class="build-grid" id="buildGrid">
-      <article class="build-card" data-category="cyber" data-reveal>
-        <div class="build-head">
+      <article class="build-card build-card--featured" id="build-copilot" data-category="cyber" data-reveal>
+        <div class="build-top">
           <span class="build-num">00</span>
-          <span class="badge badge--blush">Featured</span>
+          <span class="status-pill status-pill--solid">Featured</span>
         </div>
-        <h3>Website Security Copilot</h3>
-        <p class="build-cat">Cybersecurity · Browser extension</p>
-        <p class="build-desc">Scans websites, explains security risks and blocks harmful pages in the browser.</p>
-        <details class="build-details">
-          <summary>Technical details</summary>
-          <div class="details-body">
-            <p>A FastAPI engine checks security headers, TLS certificates, cookie flags, DNS email records, open ports and phishing signals. The MV3 extension watches tabs and blocks harmful pages before they load. AI explains the tool output — it never invents findings.</p>
-            <ul class="stack"><li>Next.js</li><li>FastAPI</li><li>Python</li><li>SQLite</li><li>Docker</li><li>MV3</li></ul>
-          </div>
-        </details>
-        <div class="build-actions">
-          <div class="build-links">
-            <a class="link-arrow" href="https://website-security-copilot-3m0hij8jl-arkap1502-9053s-projects.vercel.app/" target="_blank" rel="noopener">Live demo ↗</a>
-            <a class="link-arrow" href="https://github.com/arkap1502/Website-Security-Copilot" target="_blank" rel="noopener">Code</a>
+        <h3 class="build-title">Website Security Copilot</h3>
+        <div class="build-foot">
+          <p class="build-cat">Cybersecurity · Browser extension</p>
+          <button class="build-toggle" type="button" aria-expanded="false" aria-controls="panel-copilot" aria-label="Show technical details for Website Security Copilot">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 18 18 6M8 6h10v10"/></svg>
+          </button>
+        </div>
+        <div class="build-panel" id="panel-copilot" aria-hidden="true">
+          <div class="build-panel__inner">
+            <div class="build-panel__content">
+              <p>A FastAPI engine checks security headers, TLS certificates, cookie flags, DNS email records, open ports and phishing signals. The MV3 extension watches tabs and blocks harmful pages before they load. AI explains the tool output — it never invents findings.</p>
+              <ul class="stack"><li>Next.js</li><li>FastAPI</li><li>Python</li><li>SQLite</li><li>Docker</li><li>MV3</li></ul>
+              <div class="build-links">
+                <a class="link-arrow" href="https://website-security-copilot-3m0hij8jl-arkap1502-9053s-projects.vercel.app/" target="_blank" rel="noopener">Live demo ↗</a>
+                <a class="link-arrow" href="https://github.com/arkap1502/Website-Security-Copilot" target="_blank" rel="noopener">Source code</a>
+              </div>
+            </div>
           </div>
         </div>
       </article>
 
-      <article class="build-card" data-category="cyber" data-reveal style="--delay:50ms">
-        <div class="build-head">
+      <article class="build-card build-card--featured" id="build-password" data-category="cyber" data-reveal style="--delay:50ms">
+        <div class="build-top">
           <span class="build-num">01</span>
-          <span class="badge badge--blush">Featured</span>
+          <span class="status-pill status-pill--solid">Featured</span>
         </div>
-        <h3>Altron Password Inspector</h3>
-        <p class="build-cat">Cybersecurity · Password security</p>
-        <p class="build-desc">Creates random passwords and checks their strength locally in your browser.</p>
-        <details class="build-details">
-          <summary>Technical details</summary>
-          <div class="details-body">
-            <p>Passwords are generated with <code>crypto.getRandomValues()</code>, never <code>Math.random()</code>. Strength scoring checks character classes and a 15+ character length threshold. Everything runs in the browser.</p>
-            <ul class="stack"><li>JavaScript</li><li>Web Crypto API</li></ul>
-          </div>
-        </details>
-        <div class="build-actions">
-          <div class="build-links">
-            <a class="link-arrow" href="https://arkap1502.github.io/password-making/" target="_blank" rel="noopener">Live demo ↗</a>
-            <a class="link-arrow" href="https://github.com/arkap1502/password-making" target="_blank" rel="noopener">Code</a>
+        <h3 class="build-title">Altron Password Inspector</h3>
+        <div class="build-foot">
+          <p class="build-cat">Password security</p>
+          <button class="build-toggle" type="button" aria-expanded="false" aria-controls="panel-password" aria-label="Show technical details for Altron Password Inspector">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 18 18 6M8 6h10v10"/></svg>
+          </button>
+        </div>
+        <div class="build-panel" id="panel-password" aria-hidden="true">
+          <div class="build-panel__inner">
+            <div class="build-panel__content">
+              <p>Passwords are generated with <code>crypto.getRandomValues()</code>, never <code>Math.random()</code>. Strength scoring checks character classes and a 15+ character length threshold. Everything runs in the browser.</p>
+              <ul class="stack"><li>JavaScript</li><li>Web Crypto API</li></ul>
+              <div class="build-links">
+                <a class="link-arrow" href="https://arkap1502.github.io/password-making/" target="_blank" rel="noopener">Live demo ↗</a>
+                <a class="link-arrow" href="https://github.com/arkap1502/password-making" target="_blank" rel="noopener">Source code</a>
+              </div>
+            </div>
           </div>
         </div>
       </article>
 
-      <article class="build-card" data-category="web" data-reveal style="--delay:100ms">
-        <div class="build-head">
+      <article class="build-card" id="build-url" data-category="web" data-reveal style="--delay:100ms">
+        <div class="build-top">
           <span class="build-num">02</span>
         </div>
-        <h3>URL Threat Scanner</h3>
-        <p class="build-cat">Web security · Phishing detection</p>
-        <p class="build-desc">Scores suspicious URLs using phishing signals such as IP addresses and lookalike domains.</p>
-        <details class="build-details">
-          <summary>Technical details</summary>
-          <div class="details-body">
-            <p>Client-side URL analysis flags raw IPs, uncommon TLDs, lookalike brand spellings and phishing keywords, then combines them into a 0–100 risk score with a plain-language verdict.</p>
-            <ul class="stack"><li>JavaScript</li><li>HTML</li><li>CSS</li></ul>
-          </div>
-        </details>
-        <div class="build-actions">
-          <div class="build-links">
-            <a class="link-arrow" href="https://arkap1502.github.io/URL-Scanner/" target="_blank" rel="noopener">Live demo ↗</a>
-            <a class="link-arrow" href="https://github.com/arkap1502/URL-Scanner" target="_blank" rel="noopener">Code</a>
+        <h3 class="build-title">URL Threat Scanner</h3>
+        <div class="build-foot">
+          <p class="build-cat">Phishing detection</p>
+          <button class="build-toggle" type="button" aria-expanded="false" aria-controls="panel-url" aria-label="Show technical details for URL Threat Scanner">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 18 18 6M8 6h10v10"/></svg>
+          </button>
+        </div>
+        <div class="build-panel" id="panel-url" aria-hidden="true">
+          <div class="build-panel__inner">
+            <div class="build-panel__content">
+              <p>Client-side URL analysis flags raw IPs, uncommon TLDs, lookalike brand spellings and phishing keywords, then combines them into a 0–100 risk score with a plain-language verdict.</p>
+              <ul class="stack"><li>JavaScript</li><li>HTML</li><li>CSS</li></ul>
+              <div class="build-links">
+                <a class="link-arrow" href="https://arkap1502.github.io/URL-Scanner/" target="_blank" rel="noopener">Live demo ↗</a>
+                <a class="link-arrow" href="https://github.com/arkap1502/URL-Scanner" target="_blank" rel="noopener">Source code</a>
+              </div>
+            </div>
           </div>
         </div>
       </article>
 
-      <article class="build-card" data-category="cyber" data-reveal style="--delay:150ms">
-        <div class="build-head">
+      <article class="build-card" id="build-nexvault" data-category="cyber" data-reveal style="--delay:150ms">
+        <div class="build-top">
           <span class="build-num">03</span>
-          <span class="badge badge--blush">In progress</span>
+          <span class="status-pill">In progress</span>
         </div>
-        <h3>NexVault</h3>
-        <p class="build-cat">Cybersecurity · Data protection</p>
-        <p class="build-desc">A team-built web vault with account login and private notes. In progress.</p>
-        <details class="build-details">
-          <summary>Technical details</summary>
-          <div class="details-body">
-            <p>A group-built vault following a “your data, your vault, your control” model. Vault data is gated behind authentication, with encrypted, access-controlled storage and a personal dashboard per user.</p>
-            <ul class="stack"><li>Web App</li><li>Authentication</li><li>Data Security</li></ul>
-          </div>
-        </details>
-        <div class="build-actions">
-          <div class="build-links">
-            <a class="link-arrow" href="https://secure-vault-system.onrender.com/" target="_blank" rel="noopener">Live demo ↗</a>
+        <h3 class="build-title">NexVault</h3>
+        <div class="build-foot">
+          <p class="build-cat">Data protection</p>
+          <button class="build-toggle" type="button" aria-expanded="false" aria-controls="panel-nexvault" aria-label="Show technical details for NexVault">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 18 18 6M8 6h10v10"/></svg>
+          </button>
+        </div>
+        <div class="build-panel" id="panel-nexvault" aria-hidden="true">
+          <div class="build-panel__inner">
+            <div class="build-panel__content">
+              <p>A group-built web vault following a “your data, your vault, your control” model. Vault data is gated behind authentication, with encrypted, access-controlled storage and a personal dashboard per user.</p>
+              <ul class="stack"><li>Web App</li><li>Authentication</li><li>Data Security</li></ul>
+              <div class="build-links">
+                <a class="link-arrow" href="https://secure-vault-system.onrender.com/" target="_blank" rel="noopener">Live demo ↗</a>
+              </div>
+            </div>
           </div>
         </div>
       </article>
 
-      <article class="build-card" data-category="dev" data-reveal>
-        <div class="build-head">
+      <article class="build-card" id="build-humanize" data-category="dev" data-reveal>
+        <div class="build-top">
           <span class="build-num">04</span>
-          <span class="badge badge--blush">In progress</span>
+          <span class="status-pill">In progress</span>
         </div>
-        <h3>Humanize AI</h3>
-        <p class="build-cat">Web development · AI text tool</p>
-        <p class="build-desc">Rewrites AI-generated text with adjustable intensity and an offline browser fallback.</p>
-        <details class="build-details">
-          <summary>Technical details</summary>
-          <div class="details-body">
-            <p>A React frontend with an Express backend, plus a zero-build client-side fallback so it runs offline. Light, Medium and Strong modes transform text in real time with a word-count diff.</p>
-            <ul class="stack"><li>React</li><li>Express</li><li>JavaScript</li></ul>
-          </div>
-        </details>
-        <div class="build-actions">
-          <div class="build-links">
-            <a class="link-arrow" href="https://arkap1502.github.io/Humanize-AI/" target="_blank" rel="noopener">Live demo ↗</a>
-            <a class="link-arrow" href="https://github.com/arkap1502/Humanize-AI" target="_blank" rel="noopener">Code</a>
+        <h3 class="build-title">Humanize AI</h3>
+        <div class="build-foot">
+          <p class="build-cat">AI text tool</p>
+          <button class="build-toggle" type="button" aria-expanded="false" aria-controls="panel-humanize" aria-label="Show technical details for Humanize AI">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 18 18 6M8 6h10v10"/></svg>
+          </button>
+        </div>
+        <div class="build-panel" id="panel-humanize" aria-hidden="true">
+          <div class="build-panel__inner">
+            <div class="build-panel__content">
+              <p>A React frontend with an Express backend, plus a zero-build client-side fallback so it runs offline. Light, Medium and Strong modes transform text in real time with a word-count diff.</p>
+              <ul class="stack"><li>React</li><li>Express</li><li>JavaScript</li></ul>
+              <div class="build-links">
+                <a class="link-arrow" href="https://arkap1502.github.io/Humanize-AI/" target="_blank" rel="noopener">Live demo ↗</a>
+                <a class="link-arrow" href="https://github.com/arkap1502/Humanize-AI" target="_blank" rel="noopener">Source code</a>
+              </div>
+            </div>
           </div>
         </div>
       </article>
 
-      <article class="build-card" data-category="cyber" data-reveal style="--delay:50ms">
-        <div class="build-head">
+      <article class="build-card build-card--featured" id="build-prompt" data-category="cyber" data-reveal style="--delay:50ms">
+        <div class="build-top">
           <span class="build-num">05</span>
-          <span class="badge badge--blush">Featured</span>
+          <span class="status-pill status-pill--solid">Featured</span>
         </div>
-        <h3>Hidden-Prompt Scanner for Documents</h3>
-        <p class="build-cat">Cybersecurity · Prompt injection detection</p>
-        <p class="build-desc">Finds hidden prompt-injection text in PDF, DOCX and web content.</p>
-        <details class="build-details">
-          <summary>Technical details</summary>
-          <div class="details-body">
-            <p>Extracts visible text and layout signals — colour, font size, opacity, position — to flag hidden text, zero-width characters, metadata, comments and injection phrases. Ships as a CLI and Flask UI, fully local.</p>
-            <ul class="stack"><li>Python</li><li>Flask</li><li>PyPDF2</li><li>python-docx</li></ul>
-          </div>
-        </details>
-        <div class="build-actions">
-          <div class="build-links">
-            <a class="link-arrow" href="https://hidden-prompt-scanner-for-documents.onrender.com/" target="_blank" rel="noopener">Live demo ↗</a>
-            <a class="link-arrow" href="https://github.com/arkap1502/Hidden-prompt-scanner-for-documents%2E" target="_blank" rel="noopener">Code</a>
+        <h3 class="build-title">Hidden-Prompt Scanner</h3>
+        <div class="build-foot">
+          <p class="build-cat">Prompt injection detection</p>
+          <button class="build-toggle" type="button" aria-expanded="false" aria-controls="panel-prompt" aria-label="Show technical details for Hidden-Prompt Scanner">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 18 18 6M8 6h10v10"/></svg>
+          </button>
+        </div>
+        <div class="build-panel" id="panel-prompt" aria-hidden="true">
+          <div class="build-panel__inner">
+            <div class="build-panel__content">
+              <p>Extracts visible text and layout signals — colour, font size, opacity, position — to flag hidden text, zero-width characters, metadata, comments and injection phrases. Ships as a CLI and Flask UI, fully local.</p>
+              <ul class="stack"><li>Python</li><li>Flask</li><li>PyPDF2</li><li>python-docx</li></ul>
+              <div class="build-links">
+                <a class="link-arrow" href="https://hidden-prompt-scanner-for-documents.onrender.com/" target="_blank" rel="noopener">Live demo ↗</a>
+                <a class="link-arrow" href="https://github.com/arkap1502/Hidden-prompt-scanner-for-documents%2E" target="_blank" rel="noopener">Source code</a>
+              </div>
+            </div>
           </div>
         </div>
       </article>
 
-      <article class="build-card" data-category="cyber" data-reveal style="--delay:100ms">
-        <div class="build-head">
+      <article class="build-card" id="build-prototype" data-category="web" data-reveal style="--delay:100ms">
+        <div class="build-top">
           <span class="build-num">06</span>
         </div>
-        <h3>Prototype Safety Check</h3>
-        <p class="build-cat">Cybersecurity · Prototype safety</p>
-        <p class="build-desc">Passively checks websites for common security issues and suggests fixes.</p>
-        <details class="build-details">
-          <summary>Technical details</summary>
-          <div class="details-body">
-            <p>Passive checks for exposed parameters, database errors, missing security headers, suspicious scripts and HTTPS signals. Ships a web UI, CLI and REST API — no exploitation.</p>
-            <ul class="stack"><li>Python</li><li>Flask</li><li>REST API</li></ul>
-          </div>
-        </details>
-        <div class="build-actions">
-          <div class="build-links">
-            <a class="link-arrow" href="https://prototype-safety-check.onrender.com/" target="_blank" rel="noopener">Live demo ↗</a>
-            <a class="link-arrow" href="https://github.com/arkap1502/prototype-safety-check" target="_blank" rel="noopener">Code</a>
+        <h3 class="build-title">Prototype Safety Check</h3>
+        <div class="build-foot">
+          <p class="build-cat">Prototype safety</p>
+          <button class="build-toggle" type="button" aria-expanded="false" aria-controls="panel-prototype" aria-label="Show technical details for Prototype Safety Check">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 18 18 6M8 6h10v10"/></svg>
+          </button>
+        </div>
+        <div class="build-panel" id="panel-prototype" aria-hidden="true">
+          <div class="build-panel__inner">
+            <div class="build-panel__content">
+              <p>Passive checks for exposed parameters, database errors, missing security headers, suspicious scripts and HTTPS signals. Ships a web UI, CLI and REST API — no exploitation.</p>
+              <ul class="stack"><li>Python</li><li>Flask</li><li>REST API</li></ul>
+              <div class="build-links">
+                <a class="link-arrow" href="https://prototype-safety-check.onrender.com/" target="_blank" rel="noopener">Live demo ↗</a>
+                <a class="link-arrow" href="https://github.com/arkap1502/prototype-safety-check" target="_blank" rel="noopener">Source code</a>
+              </div>
+            </div>
           </div>
         </div>
       </article>
 
-      <article class="build-card" data-category="cyber" data-reveal style="--delay:150ms">
-        <div class="build-head">
+      <article class="build-card" id="build-antivirus" data-category="cyber" data-reveal style="--delay:150ms">
+        <div class="build-top">
           <span class="build-num">07</span>
-          <span class="badge badge--blush">Featured</span>
+          <span class="status-pill">Local build</span>
         </div>
-        <h3>Laptop Antivirus</h3>
-        <p class="build-cat">Cybersecurity · Real-time protection</p>
-        <p class="build-desc">Desktop antivirus with real-time file monitoring, alerts and quarantine.</p>
-        <details class="build-details">
-          <summary>Technical details</summary>
-          <div class="details-body">
-            <p>Real-time monitoring across Desktop, Downloads, Documents and USB drives, with SHA-256 signatures, heuristic scans, severity alerts and an encrypted quarantine vault. Includes a Tkinter dashboard and phishing shield.</p>
-            <ul class="stack"><li>Python</li><li>Tkinter</li><li>SHA-256</li></ul>
-          </div>
-        </details>
-        <div class="build-actions">
-          <div class="build-links">
-            <span class="build-note">Local build</span>
+        <h3 class="build-title">Laptop Antivirus</h3>
+        <div class="build-foot">
+          <p class="build-cat">Real-time protection</p>
+          <button class="build-toggle" type="button" aria-expanded="false" aria-controls="panel-antivirus" aria-label="Show technical details for Laptop Antivirus">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 18 18 6M8 6h10v10"/></svg>
+          </button>
+        </div>
+        <div class="build-panel" id="panel-antivirus" aria-hidden="true">
+          <div class="build-panel__inner">
+            <div class="build-panel__content">
+              <p>Real-time monitoring across Desktop, Downloads, Documents and USB drives, with SHA-256 signatures, heuristic scans, severity alerts and an encrypted quarantine vault. Includes a Tkinter dashboard and phishing shield.</p>
+              <ul class="stack"><li>Python</li><li>Tkinter</li><li>SHA-256</li></ul>
+              <div class="build-links"><span class="build-note">Runs locally · no public demo</span></div>
+            </div>
           </div>
         </div>
       </article>
     </div>
 
-    <p class="empty-state" id="buildEmpty" hidden>No builds in this category yet.</p>
+    <p class="empty-state build-empty" id="buildEmpty" hidden>No builds in this category yet.</p>
 
     <aside class="github-strip" data-reveal>
       <div>
-        <strong>Visit my GitHub</strong>
-        <p>More experiments, contributions and ongoing work.</p>
+        <span class="section-eyebrow">Open source</span>
+        <h2>More experiments live on GitHub.</h2>
+        <p>Source code, contributions and the work still in progress.</p>
       </div>
-      <a class="btn btn-secondary btn-sm" href="https://github.com/arkap1502" target="_blank" rel="noopener">github.com/arkap1502 ↗</a>
+      <a class="btn btn--outline" href="https://github.com/arkap1502" target="_blank" rel="noopener">github.com/arkap1502 ↗</a>
     </aside>
   </div>
 </main>
@@ -259,15 +288,16 @@
 <footer class="site-footer">
   <div class="container footer-inner">
     <div>
-      <p class="footer-brand">ARKA PATRA</p>
-      <p class="footer-copy">© 2026 Arka Patra. Built with curiosity, code &amp; security in mind.</p>
+      <p class="footer-brand">Arka Patra<sup>®</sup></p>
+      <p class="footer-copy">© 2026 Arka Patra. Cyber security student and security-focused developer in West Bengal, India.</p>
     </div>
     <nav class="footer-links" aria-label="Footer">
-      <a href="dashboard.html">Dashboard</a>
+      <a href="dashboard.html">Home</a>
       <a href="about.html">About</a>
       <a href="certificates.html">Certificates</a>
       <a href="contact.html">Contact</a>
       <a href="https://github.com/arkap1502" target="_blank" rel="noopener">GitHub</a>
+      <a href="index.html">Cover</a>
     </nav>
   </div>
 </footer>
