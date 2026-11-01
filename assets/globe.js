@@ -17,6 +17,7 @@
   var TWO_PI = Math.PI * 2;
   var DEG = Math.PI / 180;
   var ROTATE_PER_PX = 0.0055;
+  var TILT_PER_PX = 0.004;
   var INK = 'rgba(255, 255, 255, ';
   var CRIMSON = '#B5303C';
   var MARKER_LAT = 22.57 * DEG;
@@ -41,6 +42,8 @@
   var lastMoveTime = 0;
   var moveVelocity = 0;
   var spinVelocity = 0;
+  var tiltVelocity = 0;
+  var tiltSpinVelocity = 0;
   var lastInteraction = 0;
   var hintDismissed = false;
   var onScreen = true;
@@ -208,7 +211,9 @@
     lastY = event.clientY;
     lastMoveTime = performance.now();
     moveVelocity = 0;
+    tiltVelocity = 0;
     spinVelocity = 0;
+    tiltSpinVelocity = 0;
     lastInteraction = performance.now();
 
     canvas.classList.add('is-dragging');
@@ -226,8 +231,9 @@
     var elapsed = Math.max(8, now - lastMoveTime) / 1000;
 
     yaw += dx * ROTATE_PER_PX;
-    pitch = clamp(pitch + dy * 0.004, -0.85, 0.85);
+    pitch = (pitch + dy * TILT_PER_PX) % TWO_PI;
     moveVelocity = (dx * ROTATE_PER_PX) / elapsed;
+    tiltVelocity = (dy * TILT_PER_PX) / elapsed;
 
     lastX = event.clientX;
     lastY = event.clientY;
@@ -243,6 +249,7 @@
     activePointer = null;
     lastInteraction = performance.now();
     spinVelocity = reducedMotion ? 0 : clamp(moveVelocity, -4, 4);
+    tiltSpinVelocity = reducedMotion ? 0 : clamp(tiltVelocity, -4, 4);
 
     canvas.classList.remove('is-dragging');
     if (canvas.releasePointerCapture && canvas.hasPointerCapture && canvas.hasPointerCapture(event.pointerId)) {
@@ -258,7 +265,10 @@
   if (motionQuery) {
     var onMotionChange = function (event) {
       reducedMotion = event.matches;
-      if (reducedMotion) spinVelocity = 0;
+      if (reducedMotion) {
+        spinVelocity = 0;
+        tiltSpinVelocity = 0;
+      }
     };
     if (motionQuery.addEventListener) motionQuery.addEventListener('change', onMotionChange);
     else if (motionQuery.addListener) motionQuery.addListener(onMotionChange);
@@ -286,7 +296,7 @@
     lastFrame = now;
 
     var visible = onScreen && document.visibilityState !== 'hidden';
-    var animating = !reducedMotion || dragging || spinVelocity !== 0;
+    var animating = !reducedMotion || dragging || spinVelocity !== 0 || tiltSpinVelocity !== 0;
 
     if (visible && (animating || dirty)) {
       if (!dragging) {
@@ -294,6 +304,12 @@
           yaw += spinVelocity * delta;
           spinVelocity *= Math.exp(-3.2 * delta);
           if (Math.abs(spinVelocity) < 0.003) spinVelocity = 0;
+        }
+
+        if (tiltSpinVelocity) {
+          pitch = (pitch + tiltSpinVelocity * delta) % TWO_PI;
+          tiltSpinVelocity *= Math.exp(-3.2 * delta);
+          if (Math.abs(tiltSpinVelocity) < 0.003) tiltSpinVelocity = 0;
         }
 
         if (!reducedMotion && now - lastInteraction > 2200) {

@@ -38,7 +38,9 @@ The design follows the supplied concept deck:
 - Flat cards with rounded corners, soft grey shadows and no glow
 - Gentle fade-in on scroll and a small hover lift; `prefers-reduced-motion` is respected
 - One shared stylesheet (`assets/site.css`) and one shared script (`assets/site.js`) across all pages
-- The landing globe is a canvas wireframe that auto-spins, supports drag-to-rotate with release momentum, and stops spinning under `prefers-reduced-motion`
+- Full-bleed layout on every page: the content uses the whole viewport with fluid gutters instead of a fixed-width column
+- `dashboard.html` opens with a full-height **ARKA PATRA** hero that fills the first screen
+- The landing globe is a canvas wireframe that auto-spins, supports full 360° drag-to-rotate in every direction (including upside down) with release momentum, and stops spinning under `prefers-reduced-motion`
 
 ---
 
@@ -47,7 +49,7 @@ The design follows the supplied concept deck:
 | Page | What it holds |
 |---|---|
 | [`index.html`](./index.html) | Ink landing hero, draggable wireframe globe, threat-monitor card, CV and portfolio actions, crimson ticker |
-| [`dashboard.html`](./dashboard.html) | Mist hero, live threat-monitor card, six skill tiles, dark flagship spotlight |
+| [`dashboard.html`](./dashboard.html) | Full-height ARKA PATRA hero, live threat-monitor card, six skill tiles, dark flagship spotlight |
 | [`projects.html`](./projects.html) | Eight builds, four filters, expandable technical details, stack chips and GitHub strip |
 | [`about.html`](./about.html) | Essay, profile card, education, work history and the longer story |
 | [`certificates.html`](./certificates.html) | Verified Thiranex internship spotlight plus nine certificate cards with PDF proofs |
