@@ -37,10 +37,11 @@ The design follows the supplied concept deck:
 - **Labels and UI:** JetBrains Mono
 - Flat cards with rounded corners, soft grey shadows and no glow
 - Gentle fade-in on scroll and a small hover lift; `prefers-reduced-motion` is respected
-- One shared stylesheet (`assets/site.css`) and one shared script (`assets/site.js`) across all pages
+- One shared stylesheet (`assets/site.css`) and a shared core script (`assets/site.js`) across all pages, plus small page-specific scripts for the interactive globes and the entry-dot playground
 - Full-bleed layout on every page: the content uses the whole viewport with fluid gutters instead of a fixed-width column
 - `dashboard.html` opens with a full-height **ARKA PATRA** hero that fills the first screen
 - The landing globe is a canvas wireframe that auto-spins, supports full 360° drag-to-rotate in every direction (including upside down) with release momentum, and stops spinning under `prefers-reduced-motion`
+- The entry screen's four ink dots live in a small pill-shaped ball pit: drag, fling or tap them and they bounce, collide and settle; reduced motion keeps them still
 
 ---
 
@@ -130,6 +131,8 @@ portfolio/
 │   ├── site.css          → shared design system and responsive styles
 │   ├── site.js           → nav, reveals, filters, copy, form validation
 │   ├── globe.js          → interactive landing globe
+│   ├── phone-globe.js    → interactive globe inside the entry phone mockup
+│   ├── entry-balls.js    → draggable bouncing dots on the entry screen
 │   ├── arka-patra.jpg    → profile photo
 │   ├── Arka_Patra_CV.pdf → downloadable CV
 │   ├── Thiranex_Certificate_Arka_Patra_THX-AUG0426-563.pdf

@@ -52,7 +52,7 @@ document.documentElement.classList.add('js');
         <p class="entry-welcome">Welcome to My World of</p>
         <h1 class="entry-title">Cybersecurity<br><span class="amp">&amp;</span> Innovation.</h1>
 
-        <div class="entry-dots" aria-hidden="true">
+        <div class="entry-dots" data-entry-dots aria-hidden="true">
           <i></i><i></i><i></i><i></i>
         </div>
 
@@ -140,19 +140,23 @@ document.documentElement.classList.add('js');
               <span class="phone-headline">Cybersecurity<br><span class="amp">&amp;</span> Secure Code</span>
               <span class="phone-copy">Cyber security student and security-focused developer from West Bengal.</span>
               <span class="phone-cta">Let's Talk</span>
-              <svg class="phone-globe" viewBox="0 0 220 220" fill="none" aria-hidden="true">
-                <circle cx="110" cy="110" r="88" stroke="#cfd6e1" stroke-width="1.1"/>
-                <g stroke="#cfd6e1" stroke-width=".85">
-                  <ellipse cx="110" cy="110" rx="88" ry="34"/>
-                  <ellipse cx="110" cy="110" rx="88" ry="64"/>
-                  <ellipse cx="110" cy="110" rx="34" ry="88"/>
-                  <ellipse cx="110" cy="110" rx="64" ry="88"/>
-                  <path d="M22 110h176M110 22v176" opacity=".55"/>
-                </g>
-                <path d="M42 62C82 20 158 27 188 86" stroke="#b5303c" stroke-width="1.6" opacity=".8"/>
-                <circle cx="172" cy="58" r="3.4" fill="#b5303c"/>
-                <circle cx="64" cy="147" r="2.8" fill="#b5303c"/>
-              </svg>
+              <span class="phone-globe-wrap">
+                <svg class="phone-globe" viewBox="0 0 220 220" fill="none" aria-hidden="true">
+                  <circle cx="110" cy="110" r="88" stroke="#cfd6e1" stroke-width="1.1"/>
+                  <g stroke="#cfd6e1" stroke-width=".85">
+                    <ellipse cx="110" cy="110" rx="88" ry="34"/>
+                    <ellipse cx="110" cy="110" rx="88" ry="64"/>
+                    <ellipse cx="110" cy="110" rx="34" ry="88"/>
+                    <ellipse cx="110" cy="110" rx="64" ry="88"/>
+                    <path d="M22 110h176M110 22v176" opacity=".55"/>
+                  </g>
+                  <path d="M42 62C82 20 158 27 188 86" stroke="#b5303c" stroke-width="1.6" opacity=".8"/>
+                  <circle cx="172" cy="58" r="3.4" fill="#b5303c"/>
+                  <circle cx="64" cy="147" r="2.8" fill="#b5303c"/>
+                </svg>
+                <canvas class="phone-globe phone-globe--canvas" id="entryPhoneGlobe" width="440" height="440" aria-hidden="true"></canvas>
+                <span class="phone-globe-hint" aria-hidden="true">Drag to rotate</span>
+              </span>
             </span>
             <span class="device-overlay" aria-hidden="true">
               <span class="device-enter">Enter <span class="arrow">→</span></span>
@@ -170,5 +174,7 @@ document.documentElement.classList.add('js');
 </main>
 
 <script src="assets/site.js"></script>
+<script src="assets/entry-balls.js"></script>
+<script src="assets/phone-globe.js"></script>
 </body>
 </html>

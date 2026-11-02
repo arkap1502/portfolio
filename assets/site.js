@@ -63,6 +63,38 @@
       });
     }
 
+    /* Entry screen — the inactive device is a visual preview only -------- */
+    var entryLaptop = document.querySelector('.entry-devices .device--laptop');
+    var entryPhone = document.querySelector('.entry-devices .device--phone');
+    var compactEntry = window.matchMedia('(max-width: 1024px)');
+
+    function setDevicePreview(device, previewOnly) {
+      if (!device) return;
+      device.classList.toggle('is-static', previewOnly);
+
+      if (previewOnly) {
+        device.setAttribute('tabindex', '-1');
+        device.setAttribute('aria-hidden', 'true');
+      } else {
+        device.removeAttribute('tabindex');
+        device.removeAttribute('aria-hidden');
+      }
+    }
+
+    function syncEntryDevices() {
+      /* Phone screens open with the phone; larger screens open with the laptop. */
+      setDevicePreview(entryLaptop, compactEntry.matches);
+      setDevicePreview(entryPhone, !compactEntry.matches);
+    }
+
+    syncEntryDevices();
+
+    if (compactEntry.addEventListener) {
+      compactEntry.addEventListener('change', syncEntryDevices);
+    } else if (compactEntry.addListener) {
+      compactEntry.addListener(syncEntryDevices);
+    }
+
     /* Scroll reveals ----------------------------------------------------- */
     var revealItems = document.querySelectorAll('[data-reveal]');
 
