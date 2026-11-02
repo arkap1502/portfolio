@@ -2474,7 +2474,7 @@ html.entry-touch .entry-hint--mobile { display: inline-flex; }
 
 .contact-row {
   display: grid;
-  grid-template-columns: 52px 92px minmax(0, 1fr) auto;
+  grid-template-columns: 52px 92px minmax(0, max-content) max-content;
   align-items: center;
   gap: 16px;
   padding: 13px 0;
@@ -2790,7 +2790,7 @@ html.entry-touch .entry-hint--mobile { display: inline-flex; }
   .work-period { padding-top: 0; }
   .work-link { padding-top: 7px; }
 
-  .contact-row { grid-template-columns: 48px 1fr auto; gap: 12px 14px; }
+  .contact-row { grid-template-columns: 48px max-content max-content; gap: 12px 14px; }
   .contact-label { display: none; }
   .contact-value { grid-column: 2; }
   .contact-icon { grid-row: 1 / span 2; width: 48px; height: 48px; }
