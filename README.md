@@ -19,6 +19,10 @@ python -m http.server 8000
 
 Then open <http://localhost:8000>.
 
+## Credits
+
+- The home-page Earth texture (`assets/earth-atlas.png`) is rendered from [Natural Earth](https://www.naturalearthdata.com/) 1:110m country and lake data, which is in the public domain.
+
 ## Links
 
 - [GitHub](https://github.com/arkap1502)
