@@ -673,11 +673,11 @@ p { margin: 0; }
 }
 
 .entry-title {
-  max-width: 8ch;
+  max-width: 6.2em;
   margin-top: 7px;
   color: var(--ink);
   font-family: var(--font-display);
-  font-size: clamp(3rem, 5.4vw, 5.1rem);
+  font-size: clamp(3rem, 5.3vw, 4.8rem);
   font-weight: 700;
   letter-spacing: -.06em;
   line-height: .91;

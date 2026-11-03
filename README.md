@@ -66,11 +66,11 @@ The design follows the supplied concept deck:
 |---|---|---|---|---|
 | 00 | **Website Security Copilot** | Cybersecurity · Browser extension | Featured | [Live](https://website-security-copilot-3m0hij8jl-arkap1502-9053s-projects.vercel.app/) · [Code](https://github.com/arkap1502/Website-Security-Copilot) |
 | 01 | **Altron Password Inspector** | Cybersecurity · Password security | Featured | [Live](https://arkap1502.github.io/password-making/) · [Code](https://github.com/arkap1502/password-making) |
-| 02 | **URL Threat Scanner** | Web security · Phishing detection | — | [Live](https://arkap1502.github.io/URL-Scanner/) · [Code](https://github.com/arkap1502/URL-Scanner) |
+| 02 | **URL Threat Scanner** | Web security · Phishing detection | Featured | [Live](https://arkap1502.github.io/URL-Scanner/) · [Code](https://github.com/arkap1502/URL-Scanner) |
 | 03 | **NexVault** | Cybersecurity · Data protection | In progress | [Live](https://secure-vault-system.onrender.com/) |
 | 04 | **Humanize AI** | Web development · AI text tool | In progress | [Live](https://arkap1502.github.io/Humanize-AI/) · [Code](https://github.com/arkap1502/Humanize-AI) |
 | 05 | **Hidden-Prompt Scanner for Documents** | Cybersecurity · Prompt injection detection | Featured | [Live](https://hidden-prompt-scanner-for-documents.onrender.com/) · [Code](https://github.com/arkap1502/Hidden-prompt-scanner-for-documents%2E) |
-| 06 | **Prototype Safety Check** | Cybersecurity · Prototype safety | — | [Live](https://prototype-safety-check.onrender.com/) · [Code](https://github.com/arkap1502/prototype-safety-check) |
+| 06 | **Prototype Safety Check** | Cybersecurity · Prototype safety | In progress | [Live](https://prototype-safety-check.onrender.com/) · [Code](https://github.com/arkap1502/prototype-safety-check) |
 | 07 | **Laptop Antivirus** | Cybersecurity · Real-time protection | Featured · local build | — |
 
 Each project card opens a short technical breakdown with its stack, so the archive stays readable without loading extra pages.
@@ -133,7 +133,8 @@ portfolio/
 │   ├── globe.js          → interactive landing globe
 │   ├── phone-globe.js    → interactive globe inside the entry phone mockup
 │   ├── entry-balls.js    → draggable bouncing dots on the entry screen
-│   ├── arka-patra.jpg    → profile photo
+│   ├── arka-patra-portrait.jpg → about-page profile photo
+│   ├── arka-patra.jpg    → full-body profile photo
 │   ├── Arka_Patra_CV.pdf → downloadable CV
 │   ├── Thiranex_Certificate_Arka_Patra_THX-AUG0426-563.pdf
 │   └── cert-*.pdf        → nine course / simulation certificates
