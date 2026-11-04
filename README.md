@@ -21,7 +21,7 @@ Then open <http://localhost:8000>.
 
 ## Credits
 
-- The home-page Earth texture (`assets/earth-atlas.png`) is rendered from [Natural Earth](https://www.naturalearthdata.com/) 1:110m country and lake data, which is in the public domain.
+- The home-page particle Earth is generated from [Natural Earth](https://www.naturalearthdata.com/) 1:110m country and lake data (public domain). `assets/earth-atlas.png` is the rendered atlas, and `assets/land-mask.js` is the compact land mask sampled from it by the globe canvas.
 
 ## Links
 

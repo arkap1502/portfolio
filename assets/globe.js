@@ -1,43 +1,41 @@
 /* ==========================================================================
-   Arka Patra — landing globe
-   A real Earth on the home hero: an equirectangular atlas texture sampled by
-   a WebGL sphere shader, with drag rotation and momentum. A transparent 2D
-   overlay carries the atmosphere, orbit ring and the West Bengal marker.
+   Arka Patra — home globe
+   A night-side Earth built from points: the land mask is sampled into a
+   rotating dot sphere, then wrapped in atmospheric bloom, orbit rings and
+   live connection arcs. Canvas 2D, no dependencies.
 
-   The atlas texture is rendered from Natural Earth 1:110m admin-0 country
-   and lake data (public domain) into assets/earth-atlas.png.
+   The point mask in assets/land-mask.js is generated from Natural Earth
+   1:110m country data (public domain) via assets/earth-atlas.png.
    ========================================================================== */
 
 (function () {
   'use strict';
 
   var canvas = document.getElementById('landingGlobe');
-  var overlay = document.getElementById('landingGlobeOverlay');
-  if (!canvas || !overlay || !overlay.getContext) return;
+  if (!canvas || !canvas.getContext) return;
 
-  var ctx = overlay.getContext('2d');
+  var ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
   var hint = document.querySelector('.globe-hint');
   var motionQuery = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
 
-  if (!ctx) return;
-
   var TWO_PI = Math.PI * 2;
   var DEG = Math.PI / 180;
-  var ROTATE_PER_PX = 0.0055;
-  var TILT_PER_PX = 0.004;
-  var CRIMSON = '#B5303C';
+  var ROTATE_PER_PX = 0.0062;
+  var TILT_PER_PX = 0.0045;
+  var CRIMSON = '#ff6474';
   var MARKER_LAT = 22.57 * DEG;
   var MARKER_LON = 88.36 * DEG;
-  var TEXTURE_URL = 'assets/earth-atlas.png';
 
   var reducedMotion = motionQuery ? motionQuery.matches : false;
-  var dpr = 1;
   var size = 0;
+  var dpr = 1;
   var centerX = 0;
   var centerY = 0;
   var radius = 0;
-  var yaw = -1.25;
-  var pitch = 0.2;
+  var yaw = -0.34;
+  var pitch = 0.24;
   var dragging = false;
   var activePointer = null;
   var lastX = 0;
@@ -52,388 +50,752 @@
   var onScreen = true;
   var dirty = true;
 
+  var points = [];
+  var pointStep = 0;
+  var rays = [];
+  var rings = [];
+  var arcs = [];
+  var cities = {};
+
   function clamp(value, min, max) {
     return Math.min(max, Math.max(min, value));
   }
 
-  /* WebGL sphere ---------------------------------------------------------- */
-
-  var gl = null;
-  try {
-    gl = canvas.getContext('webgl', {
-      alpha: true,
-      antialias: true,
-      premultipliedAlpha: false,
-      preserveDrawingBuffer: false
-    }) || canvas.getContext('experimental-webgl');
-  } catch (error) {
-    gl = null;
+  function randomFactory(seed) {
+    var state = seed >>> 0;
+    return function () {
+      state = (state + 0x6D2B79F5) >>> 0;
+      var t = state;
+      t = Math.imul(t ^ (t >>> 15), t | 1);
+      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
   }
 
-  var program = null;
-  var texture = null;
-  var uniforms = {};
+  /* Land mask ------------------------------------------------------------- */
 
-  var VERTEX_SHADER = [
-    'attribute vec2 aPosition;',
-    'void main() {',
-    '  gl_Position = vec4(aPosition, 0.0, 1.0);',
-    '}'
-  ].join('\n');
+  function decodeMask(spec) {
+    if (!spec || typeof spec.data !== 'string' || !window.atob) return null;
 
-  var FRAGMENT_SHADER = [
-    '#ifdef GL_FRAGMENT_PRECISION_HIGH',
-    'precision highp float;',
-    '#else',
-    'precision mediump float;',
-    '#endif',
-    '',
-    'uniform vec2 uResolution;',
-    'uniform float uRadius;',
-    'uniform float uYaw;',
-    'uniform float uPitch;',
-    'uniform vec3 uLight;',
-    'uniform sampler2D uTexture;',
-    '',
-    'const float PI = 3.141592653589793;',
-    '',
-    'void main() {',
-    '  vec2 p = (gl_FragCoord.xy - 0.5 * uResolution) / uRadius;',
-    '  float r2 = dot(p, p);',
-    '  float edge = 1.4 / uRadius;',
-    '  if (r2 > (1.0 + edge) * (1.0 + edge)) discard;',
-    '',
-    '  float z = sqrt(max(0.0, 1.0 - r2));',
-    '  float cp = cos(uPitch);',
-    '  float sp = sin(uPitch);',
-    '  float cy = cos(uYaw);',
-    '  float sy = sin(uYaw);',
-    '',
-    '  // View space back to Earth-fixed coordinates.',
-    '  vec3 v = vec3(p.x, p.y * cp + z * sp, -p.y * sp + z * cp);',
-    '  vec3 e = vec3(v.x * cy - v.z * sy, v.y, v.x * sy + v.z * cy);',
-    '',
-    '  float lat = asin(clamp(e.y, -1.0, 1.0));',
-    '  float lon = atan(e.x, e.z);',
-    '  vec2 uv = vec2(lon / (2.0 * PI) + 0.5, 0.5 - lat / PI);',
-    '',
-    '  vec3 color = texture2D(uTexture, uv).rgb;',
-    '',
-    '  // Gentle upper-left light and a soft limb, so the map reads as a sphere.',
-    '  vec3 normal = vec3(p.x, p.y, z);',
-    '  float diffuse = max(dot(normal, normalize(uLight)), 0.0);',
-    '  float rim = smoothstep(0.55, 1.0, sqrt(r2));',
-    '  float shade = (0.9 + 0.15 * diffuse) * (1.0 - 0.13 * rim);',
-    '  color *= shade;',
-    '  color = mix(color, vec3(0.54, 0.65, 0.79), 0.16 * smoothstep(0.86, 1.0, sqrt(r2)));',
-    '',
-    '  float alpha = 1.0 - smoothstep(1.0 - edge, 1.0, sqrt(r2));',
-    '  gl_FragColor = vec4(color, alpha);',
-    '}'
-  ].join('\n');
-
-  function compileShader(type, source) {
-    var shader = gl.createShader(type);
-    gl.shaderSource(shader, source);
-    gl.compileShader(shader);
-    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-      gl.deleteShader(shader);
+    try {
+      var binary = window.atob(spec.data);
+      var bytes = new Uint8Array(binary.length);
+      for (var i = 0; i < binary.length; i += 1) {
+        bytes[i] = binary.charCodeAt(i);
+      }
+      return {
+        width: spec.width | 0,
+        height: spec.height | 0,
+        bytes: bytes
+      };
+    } catch (error) {
       return null;
     }
-    return shader;
   }
 
-  function initGL() {
-    if (!gl) return false;
+  var mask = decodeMask(window.ARKA_LAND_MASK);
 
-    var vertex = compileShader(gl.VERTEX_SHADER, VERTEX_SHADER);
-    var fragment = compileShader(gl.FRAGMENT_SHADER, FRAGMENT_SHADER);
-    if (!vertex || !fragment) return false;
+  function isLand(lat, lon) {
+    if (!mask) return false;
 
-    program = gl.createProgram();
-    gl.attachShader(program, vertex);
-    gl.attachShader(program, fragment);
-    gl.linkProgram(program);
-    gl.deleteShader(vertex);
-    gl.deleteShader(fragment);
+    var x = Math.floor(((lon + 180) / 360) * mask.width);
+    var y = Math.floor(((90 - lat) / 180) * mask.height);
+    x %= mask.width;
+    if (x < 0) x += mask.width;
+    y = clamp(y, 0, mask.height - 1);
 
-    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-      program = null;
-      return false;
+    var index = y * mask.width + x;
+    return (mask.bytes[index >> 3] & (1 << (7 - (index & 7)))) !== 0;
+  }
+
+  function buildPoints() {
+    if (!size) return;
+
+    var step = size < 380 ? 1.55 : size < 460 ? 1.35 : 1.18;
+    if (step === pointStep && points.length) return;
+    pointStep = step;
+
+    var list = [];
+    var rows = Math.round(176 / step);
+    var random = randomFactory(0x41524b41);
+
+    for (var row = 0; row < rows; row += 1) {
+      var lat = -88 + (row + 0.5) * (176 / rows);
+      var latRad = lat * DEG;
+      var cosLat = Math.cos(latRad);
+      var count = Math.max(8, Math.round((360 / step) * cosLat));
+
+      for (var col = 0; col < count; col += 1) {
+        var lon = -180 + (col + 0.5) * (360 / count);
+        var lonRad = lon * DEG;
+        var land = isLand(lat, lon);
+        var roll = random();
+        var phase = random() * TWO_PI;
+
+        list.push({
+          x: cosLat * Math.sin(lonRad),
+          y: Math.sin(latRad),
+          z: cosLat * Math.cos(lonRad),
+          land: land,
+          spark: land && roll > 0.962,
+          phase: phase
+        });
+      }
     }
 
-    gl.useProgram(program);
-
-    var buffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
-      -1, -1, 1, -1, -1, 1,
-      -1, 1, 1, -1, 1, 1
-    ]), gl.STATIC_DRAW);
-
-    var position = gl.getAttribLocation(program, 'aPosition');
-    gl.enableVertexAttribArray(position);
-    gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
-
-    uniforms.resolution = gl.getUniformLocation(program, 'uResolution');
-    uniforms.radius = gl.getUniformLocation(program, 'uRadius');
-    uniforms.yaw = gl.getUniformLocation(program, 'uYaw');
-    uniforms.pitch = gl.getUniformLocation(program, 'uPitch');
-    uniforms.light = gl.getUniformLocation(program, 'uLight');
-    uniforms.texture = gl.getUniformLocation(program, 'uTexture');
-
-    // The shader is the only thing drawn, so keep its unpremultiplied output
-    // untouched and let the browser composite the antialiased sphere edge.
-    gl.disable(gl.BLEND);
-    gl.clearColor(0, 0, 0, 0);
-
-    loadTexture();
-    return true;
+    points = list;
   }
 
-  function loadTexture() {
-    var image = new Image();
+  /* Decorative orbit data -------------------------------------------------- */
 
-    image.onload = function () {
-      try {
-        texture = gl.createTexture();
-        gl.bindTexture(gl.TEXTURE_2D, texture);
-        gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
-        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT);
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
+  function buildDecor() {
+    var random = randomFactory(0x9e3779b9);
+    var i;
 
-        // Keep coastlines crisp where the sphere turns away from the viewer.
-        var anisotropy = gl.getExtension('EXT_texture_filter_anisotropic') ||
-          gl.getExtension('WEBKIT_EXT_texture_filter_anisotropic');
-        if (anisotropy) {
-          var maxAnisotropy = gl.getParameter(anisotropy.MAX_TEXTURE_MAX_ANISOTROPY_EXT);
-          gl.texParameterf(
-            gl.TEXTURE_2D,
-            anisotropy.TEXTURE_MAX_ANISOTROPY_EXT,
-            Math.min(maxAnisotropy || 1, 8)
-          );
-        }
+    rays = [];
+    for (i = 0; i < 168; i += 1) {
+      rays.push({
+        angle: random() * TWO_PI,
+        start: 1.003 + random() * 0.034,
+        length: 0.028 + random() * 0.19,
+        alpha: 0.1 + random() * 0.5,
+        width: 0.35 + random() * 0.72,
+        bend: (random() - 0.5) * 0.05,
+        phase: random() * TWO_PI,
+        speed: 0.0007 + random() * 0.002
+      });
+    }
 
-        gl.generateMipmap(gl.TEXTURE_2D);
-        gl.bindTexture(gl.TEXTURE_2D, null);
-      } catch (error) {
-        // A local file:// texture is blocked as cross-origin; keep the fallback.
-        texture = null;
-      }
+    rings = [
+      { rx: 1.045, ry: 0.385, tilt: -0.54, alpha: 0.52, width: 1.1, speed: 0.00012, phase: 0.6, dash: null, ox: 0.004, oy: -0.008 },
+      { rx: 1.155, ry: 0.565, tilt: 0.31, alpha: 0.42, width: 0.95, speed: -0.00008, phase: 2.2, dash: [1.2, 8], ox: -0.012, oy: 0.008 },
+      { rx: 1.285, ry: 0.745, tilt: -0.22, alpha: 0.32, width: 0.85, speed: 0.00006, phase: 4.3, dash: null, ox: 0.016, oy: -0.004 },
+      { rx: 1.41, ry: 0.93, tilt: 0.55, alpha: 0.2, width: 0.75, speed: -0.00004, phase: 1.2, dash: null, ox: -0.018, oy: 0.006 },
+      { rx: 1.33, ry: 0.62, tilt: 1.02, alpha: 0.27, width: 0.8, speed: 0.00009, phase: 3.4, dash: [2, 12], ox: 0.01, oy: 0.012 }
+    ];
 
-      dirty = true;
-    };
+    defineCity('newYork', 40.71, -74.0, 0.16);
+    defineCity('losAngeles', 34.05, -118.24, 4.1);
+    defineCity('mexicoCity', 19.43, -99.13, 2.7);
+    defineCity('lima', -12.05, -77.04, 5.2);
+    defineCity('saoPaulo', -23.55, -46.63, 1.4);
+    defineCity('buenosAires', -34.6, -58.38, 3.8);
+    defineCity('london', 51.51, -0.13, 0.2);
+    defineCity('madrid', 40.42, -3.7, 2.1);
+    defineCity('paris', 48.86, 2.35, 4.8);
+    defineCity('lagos', 6.52, 3.38, 5.7);
+    defineCity('capeTown', -33.92, 18.42, 1.9);
+    defineCity('nairobi', -1.29, 36.82, 3.3);
+    defineCity('cairo', 30.04, 31.24, 0.9);
+    defineCity('moscow', 55.75, 37.62, 5.1);
+    defineCity('dubai', 25.2, 55.27, 2.5);
+    defineCity('mumbai', 19.08, 72.88, 4.4);
+    defineCity('kolkata', 22.57, 88.36, 1.1);
+    defineCity('singapore', 1.35, 103.82, 3.6);
+    defineCity('jakarta', -6.2, 106.85, 5.9);
+    defineCity('beijing', 39.9, 116.4, 0.5);
+    defineCity('seoul', 37.57, 126.98, 2.9);
+    defineCity('tokyo', 35.68, 139.69, 4.7);
+    defineCity('sydney', -33.87, 151.21, 1.6);
+    defineCity('auckland', -36.85, 174.76, 4.0);
+    defineCity('honolulu', 21.31, -157.86, 5.5);
+    defineCity('vancouver', 49.28, -123.12, 0.7);
 
-    image.src = TEXTURE_URL;
-  }
-
-  var glReady = initGL();
-
-  function renderGL() {
-    if (!glReady || !texture) return;
-
-    gl.viewport(0, 0, canvas.width, canvas.height);
-    gl.clear(gl.COLOR_BUFFER_BIT);
-    gl.useProgram(program);
-
-    gl.uniform2f(uniforms.resolution, canvas.width, canvas.height);
-    gl.uniform1f(uniforms.radius, radius * dpr);
-    gl.uniform1f(uniforms.yaw, yaw);
-    gl.uniform1f(uniforms.pitch, pitch);
-    gl.uniform3f(uniforms.light, -0.42, 0.52, 0.74);
-
-    gl.activeTexture(gl.TEXTURE0);
-    gl.bindTexture(gl.TEXTURE_2D, texture);
-    gl.uniform1i(uniforms.texture, 0);
-
-    gl.drawArrays(gl.TRIANGLES, 0, 6);
-  }
-
-  /* Overlay art ----------------------------------------------------------- */
-
-  function project(lat, lon) {
-    var cosLat = Math.cos(lat);
-    var x = cosLat * Math.sin(lon + yaw);
-    var y = Math.sin(lat);
-    var z = cosLat * Math.cos(lon + yaw);
-    var cosPitch = Math.cos(pitch);
-    var sinPitch = Math.sin(pitch);
-
-    return [
-      centerX + x * radius,
-      centerY - (y * cosPitch - z * sinPitch) * radius,
-      y * sinPitch + z * cosPitch
+    arcs = [
+      makeArc('newYork', 'london', 0.14),
+      makeArc('newYork', 'losAngeles', 0.08),
+      makeArc('mexicoCity', 'lima', 0.09),
+      makeArc('lima', 'saoPaulo', 0.1),
+      makeArc('saoPaulo', 'capeTown', 0.15),
+      makeArc('buenosAires', 'lagos', 0.18),
+      makeArc('london', 'lagos', 0.1),
+      makeArc('london', 'dubai', 0.16),
+      makeArc('madrid', 'mexicoCity', 0.19),
+      makeArc('paris', 'moscow', 0.07),
+      makeArc('lagos', 'nairobi', 0.08),
+      makeArc('cairo', 'dubai', 0.08),
+      makeArc('dubai', 'mumbai', 0.09),
+      makeArc('mumbai', 'kolkata', 0.06),
+      makeArc('kolkata', 'singapore', 0.12),
+      makeArc('singapore', 'sydney', 0.15),
+      makeArc('beijing', 'seoul', 0.06),
+      makeArc('seoul', 'tokyo', 0.05),
+      makeArc('tokyo', 'honolulu', 0.17),
+      makeArc('sydney', 'auckland', 0.09),
+      makeArc('vancouver', 'tokyo', 0.2)
     ];
   }
 
-  function drawAtmosphere() {
-    var outer = radius * 1.16;
-    var inner = radius * 0.985;
+  function defineCity(key, lat, lon, phase) {
+    var latRad = lat * DEG;
+    var lonRad = lon * DEG;
+    var cosLat = Math.cos(latRad);
 
-    var glow = ctx.createRadialGradient(centerX, centerY, inner, centerX, centerY, outer);
-    glow.addColorStop(0, 'rgba(108, 143, 184, .34)');
-    glow.addColorStop(0.35, 'rgba(108, 143, 184, .16)');
-    glow.addColorStop(1, 'rgba(108, 143, 184, 0)');
+    cities[key] = {
+      key: key,
+      x: cosLat * Math.sin(lonRad),
+      y: Math.sin(latRad),
+      z: cosLat * Math.cos(lonRad),
+      special: key === 'kolkata',
+      phase: phase
+    };
+  }
 
+  function makeArc(from, to, lift) {
+    var a = cities[from];
+    var b = cities[to];
+    var dot = clamp(a.x * b.x + a.y * b.y + a.z * b.z, -1, 1);
+
+    return {
+      a: a,
+      b: b,
+      lift: lift,
+      omega: Math.acos(dot),
+      phase: (a.phase + b.phase) * 0.5,
+      speed: 0.00012 + (a.phase % 1) * 0.00005
+    };
+  }
+
+  /* Projection helpers ---------------------------------------------------- */
+
+  function project(x, y, z, cosYaw, sinYaw, cosPitch, sinPitch) {
+    var rx = x * cosYaw + z * sinYaw;
+    var rz = z * cosYaw - x * sinYaw;
+    var ry = y * cosPitch - rz * sinPitch;
+
+    return {
+      x: centerX + rx * radius,
+      y: centerY - ry * radius,
+      z: y * sinPitch + rz * cosPitch
+    };
+  }
+
+  function cityPoint(city, cosYaw, sinYaw, cosPitch, sinPitch) {
+    return project(city.x, city.y, city.z, cosYaw, sinYaw, cosPitch, sinPitch);
+  }
+
+  /* Halo ------------------------------------------------------------------ */
+
+  function drawHalo() {
+    var halo = ctx.createRadialGradient(
+      centerX, centerY, radius * 0.9,
+      centerX, centerY, radius * 1.36
+    );
+    halo.addColorStop(0, 'rgba(89, 146, 235, .18)');
+    halo.addColorStop(0.42, 'rgba(88, 144, 232, .07)');
+    halo.addColorStop(1, 'rgba(88, 144, 232, 0)');
+
+    ctx.fillStyle = halo;
     ctx.beginPath();
-    ctx.arc(centerX, centerY, outer, 0, TWO_PI);
-    ctx.arc(centerX, centerY, inner, 0, TWO_PI, true);
-    ctx.fillStyle = glow;
+    ctx.arc(centerX, centerY, radius * 1.36, 0, TWO_PI);
     ctx.fill();
+
+    var under = ctx.createRadialGradient(
+      centerX, centerY + radius * 1.02, 0,
+      centerX, centerY + radius * 1.02, radius * 0.62
+    );
+    under.addColorStop(0, 'rgba(37, 67, 122, .12)');
+    under.addColorStop(1, 'rgba(37, 67, 122, 0)');
+
+    ctx.fillStyle = under;
+    ctx.beginPath();
+    ctx.ellipse(centerX, centerY + radius * 1.02, radius * 0.82, radius * 0.2, 0, 0, TWO_PI);
+    ctx.fill();
+  }
+
+  /* Sphere and point cloud ------------------------------------------------ */
+
+  function drawSphereBase() {
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, radius, 0, TWO_PI);
+    ctx.clip();
+
+    var base = ctx.createRadialGradient(
+      centerX - radius * 0.36, centerY - radius * 0.42, radius * 0.04,
+      centerX, centerY, radius * 1.04
+    );
+    base.addColorStop(0, '#101c31');
+    base.addColorStop(0.4, '#0a1425');
+    base.addColorStop(0.76, '#050b17');
+    base.addColorStop(1, '#02050c');
+    ctx.fillStyle = base;
+    ctx.fillRect(centerX - radius, centerY - radius, radius * 2, radius * 2);
+
+    var haze = ctx.createRadialGradient(
+      centerX - radius * 0.32, centerY - radius * 0.38, 0,
+      centerX - radius * 0.32, centerY - radius * 0.38, radius * 0.82
+    );
+    haze.addColorStop(0, 'rgba(66, 112, 190, .17)');
+    haze.addColorStop(0.55, 'rgba(30, 62, 118, .07)');
+    haze.addColorStop(1, 'rgba(10, 24, 50, 0)');
+    ctx.fillStyle = haze;
+    ctx.fillRect(centerX - radius, centerY - radius, radius * 2, radius * 2);
+
+    ctx.restore();
+  }
+
+  function drawPoints() {
+    if (!points.length) return;
+
+    var cosYaw = Math.cos(yaw);
+    var sinYaw = Math.sin(yaw);
+    var cosPitch = Math.cos(pitch);
+    var sinPitch = Math.sin(pitch);
+    var dot = clamp(radius * 0.0068, 0.82, 1.24);
+    var oceanDot = dot * 0.78;
+    var oceanNear = new Path2D();
+    var oceanFar = new Path2D();
+    var landGlow = new Path2D();
+    var landNear = new Path2D();
+    var landFar = new Path2D();
+    var sparks = new Path2D();
+    var i;
+
+    for (i = 0; i < points.length; i += 1) {
+      var p = points[i];
+
+      var rx = p.x * cosYaw + p.z * sinYaw;
+      var rz = p.z * cosYaw - p.x * sinYaw;
+      var ry = p.y * cosPitch - rz * sinPitch;
+      var depth = p.y * sinPitch + rz * cosPitch;
+
+      if (depth <= 0.01) continue;
+
+      var sx = centerX + rx * radius;
+      var sy = centerY - ry * radius;
+
+      if (p.land) {
+        landGlow.rect(sx - dot * 1.55, sy - dot * 1.55, dot * 3.1, dot * 3.1);
+
+        if (p.spark) {
+          sparks.rect(sx - dot * 0.85, sy - dot * 0.85, dot * 1.7, dot * 1.7);
+        } else if (depth > 0.4) {
+          landNear.rect(sx - dot * 0.5, sy - dot * 0.5, dot, dot);
+        } else {
+          landFar.rect(sx - dot * 0.5, sy - dot * 0.5, dot, dot);
+        }
+      } else if (depth > 0.42) {
+        oceanNear.rect(sx - oceanDot * 0.5, sy - oceanDot * 0.5, oceanDot, oceanDot);
+      } else {
+        oceanFar.rect(sx - oceanDot * 0.5, sy - oceanDot * 0.5, oceanDot, oceanDot);
+      }
+    }
+
+    ctx.save();
+    ctx.globalCompositeOperation = 'lighter';
+
+    ctx.fillStyle = 'rgba(74, 130, 214, .32)';
+    ctx.fill(oceanFar);
+    ctx.fillStyle = 'rgba(96, 148, 226, .46)';
+    ctx.fill(oceanNear);
+
+    ctx.fillStyle = 'rgba(86, 150, 255, .075)';
+    ctx.fill(landGlow);
+
+    ctx.fillStyle = 'rgba(139, 178, 240, .54)';
+    ctx.fill(landFar);
+    ctx.fillStyle = 'rgba(207, 229, 255, .95)';
+    ctx.fill(landNear);
+    ctx.fillStyle = 'rgba(246, 250, 255, 1)';
+    ctx.fill(sparks);
+
+    ctx.restore();
   }
 
   function drawRim() {
-    ctx.beginPath();
-    ctx.arc(centerX, centerY, radius, 0, TWO_PI);
-    ctx.lineWidth = 1;
-    ctx.strokeStyle = 'rgba(74, 92, 116, .32)';
-    ctx.stroke();
-  }
-
-  function drawOrbitRing() {
-    var scale = radius / 188;
+    ctx.save();
+    ctx.globalCompositeOperation = 'source-over';
 
     ctx.save();
-    ctx.translate(centerX, centerY);
-    ctx.rotate(-22 * DEG);
     ctx.beginPath();
-    ctx.ellipse(0, 0, radius * 1.163, radius * 0.571, 0, 0, TWO_PI);
-    ctx.setLineDash([3 * scale, 9 * scale]);
-    ctx.lineWidth = 1.2;
-    ctx.strokeStyle = 'rgba(181, 48, 60, .3)';
-    ctx.stroke();
-    ctx.restore();
-    ctx.setLineDash([]);
+    ctx.arc(centerX, centerY, radius, 0, TWO_PI);
+    ctx.clip();
 
-    // A single crimson satellite travelling the ring.
-    var angle = (performance.now() / 16000) % TWO_PI;
-    var satelliteX = Math.cos(angle) * radius * 1.163;
-    var satelliteY = Math.sin(angle) * radius * 0.571;
-    var cos = Math.cos(-22 * DEG);
-    var sin = Math.sin(-22 * DEG);
-
-    ctx.beginPath();
-    ctx.arc(
-      centerX + satelliteX * cos - satelliteY * sin,
-      centerY + satelliteX * sin + satelliteY * cos,
-      Math.max(1.8, radius * 0.012),
-      0,
-      TWO_PI
+    var topHaze = ctx.createRadialGradient(
+      centerX - radius * 0.5, centerY - radius * 0.82, 0,
+      centerX - radius * 0.5, centerY - radius * 0.82, radius * 0.78
     );
-    ctx.fillStyle = CRIMSON;
+    topHaze.addColorStop(0, 'rgba(118, 180, 255, .19)');
+    topHaze.addColorStop(0.45, 'rgba(77, 137, 224, .08)');
+    topHaze.addColorStop(1, 'rgba(35, 80, 160, 0)');
+    ctx.fillStyle = topHaze;
+    ctx.fillRect(centerX - radius, centerY - radius, radius * 2, radius * 2);
+
+    var baseHaze = ctx.createRadialGradient(
+      centerX, centerY + radius * 0.9, 0,
+      centerX, centerY + radius * 0.9, radius * 0.72
+    );
+    baseHaze.addColorStop(0, 'rgba(118, 180, 255, .23)');
+    baseHaze.addColorStop(0.55, 'rgba(83, 142, 235, .09)');
+    baseHaze.addColorStop(1, 'rgba(35, 80, 160, 0)');
+    ctx.fillStyle = baseHaze;
+    ctx.fillRect(centerX - radius, centerY - radius, radius * 2, radius * 2);
+
+    ctx.restore();
+
+    var rim = ctx.createLinearGradient(
+      centerX - radius * 0.72, centerY - radius * 0.92,
+      centerX + radius * 0.74, centerY + radius * 0.88
+    );
+    rim.addColorStop(0, 'rgba(224, 240, 255, .95)');
+    rim.addColorStop(0.3, 'rgba(132, 184, 255, .6)');
+    rim.addColorStop(0.62, 'rgba(82, 132, 220, .24)');
+    rim.addColorStop(1, 'rgba(168, 210, 255, .62)');
+
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, radius, 0, TWO_PI);
+    ctx.lineWidth = Math.max(0.8, radius * 0.006);
+    ctx.strokeStyle = rim;
+    ctx.shadowColor = 'rgba(104, 164, 255, .9)';
+    ctx.shadowBlur = radius * 0.12;
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, radius * 0.994, Math.PI * 0.78, Math.PI * 1.82);
+    ctx.lineWidth = Math.max(1.2, radius * 0.015);
+    ctx.strokeStyle = 'rgba(206, 230, 255, .46)';
+    ctx.shadowColor = 'rgba(116, 176, 255, .95)';
+    ctx.shadowBlur = radius * 0.1;
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+
+    var bloom = ctx.createRadialGradient(
+      centerX, centerY, radius * 0.76,
+      centerX, centerY, radius * 1.28
+    );
+    bloom.addColorStop(0, 'rgba(78, 142, 255, 0)');
+    bloom.addColorStop(0.44, 'rgba(78, 142, 255, .13)');
+    bloom.addColorStop(0.66, 'rgba(70, 130, 240, .08)');
+    bloom.addColorStop(1, 'rgba(30, 70, 160, 0)');
+    ctx.fillStyle = bloom;
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, radius * 1.28, 0, TWO_PI);
     ctx.fill();
+
+    ctx.restore();
   }
 
-  function drawMarker(now) {
-    var marker = project(MARKER_LAT, MARKER_LON);
-    var depth = marker[2];
-    var fade = depth > 0.02 ? clamp((depth - 0.02) / 0.26, 0, 1) : 0;
-    if (!fade) return;
+  /* Satellite rings ------------------------------------------------------- */
 
-    var dot = Math.max(3.4, radius * 0.035);
-    var ring = dot * 2.35;
-
-    ctx.globalAlpha = fade;
-
+  function drawRings(now) {
+    ctx.save();
+    ctx.globalCompositeOperation = 'source-over';
     ctx.beginPath();
-    ctx.arc(marker[0], marker[1], ring, 0, TWO_PI);
-    ctx.lineWidth = 1;
-    ctx.strokeStyle = 'rgba(181, 48, 60, .32)';
-    ctx.stroke();
+    ctx.rect(0, 0, size, size);
+    ctx.arc(centerX, centerY, radius * 0.975, 0, TWO_PI, true);
+    ctx.clip();
 
-    if (!reducedMotion) {
-      var pulse = (Math.sin(now / 900) + 1) / 2;
+    for (var i = 0; i < rings.length; i += 1) {
+      var ring = rings[i];
+      var tilt = ring.tilt + Math.sin(now * ring.speed + ring.phase) * 0.06;
+      var rx = radius * ring.rx;
+      var ry = radius * ring.ry;
+      var ox = centerX + radius * (ring.ox || 0);
+      var oy = centerY + radius * (ring.oy || 0);
+
       ctx.beginPath();
-      ctx.arc(marker[0], marker[1], ring + pulse * 7, 0, TWO_PI);
-      ctx.strokeStyle = 'rgba(181, 48, 60, ' + (.18 * (1 - pulse)) + ')';
+      ctx.ellipse(ox, oy, rx, ry, tilt, 0, TWO_PI);
+      if (ring.dash) ctx.setLineDash([ring.dash[0] * (size / 500), ring.dash[1] * (size / 500)]);
+      ctx.lineWidth = Math.max(0.85, radius * 0.0064) * ring.width;
+      ctx.strokeStyle = 'rgba(92, 139, 209, ' + (ring.alpha * 0.85) + ')';
+      ctx.stroke();
+
+      ctx.lineWidth = Math.max(1.8, radius * 0.022) * ring.width;
+      ctx.strokeStyle = 'rgba(126, 169, 228, ' + (ring.alpha * 0.24) + ')';
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      var angle = ((now * 0.000035 * (i % 2 ? -1 : 1) + ring.phase) % TWO_PI + TWO_PI) % TWO_PI;
+      var trail = 0.5;
+
+      ctx.beginPath();
+      ctx.ellipse(ox, oy, rx, ry, tilt, angle - trail, angle);
+      ctx.lineWidth = Math.max(1, radius * 0.006);
+      ctx.strokeStyle = 'rgba(53, 105, 187, ' + (ring.alpha * 1.02) + ')';
+      ctx.stroke();
+
+      var cosTilt = Math.cos(tilt);
+      var sinTilt = Math.sin(tilt);
+      var ex = rx * Math.cos(angle);
+      var ey = ry * Math.sin(angle);
+      var px = ox + ex * cosTilt - ey * sinTilt;
+      var py = oy + ex * sinTilt + ey * cosTilt;
+
+      ctx.fillStyle = 'rgba(47, 98, 180, ' + Math.min(0.95, ring.alpha * 2.1) + ')';
+      ctx.beginPath();
+      ctx.arc(px, py, Math.max(0.9, radius * 0.009), 0, TWO_PI);
+      ctx.fill();
+
+      ctx.fillStyle = 'rgba(119, 164, 226, ' + (ring.alpha * 0.28) + ')';
+      ctx.beginPath();
+      ctx.arc(px, py, Math.max(2.2, radius * 0.035), 0, TWO_PI);
+      ctx.fill();
+    }
+
+    ctx.restore();
+  }
+
+  /* Rays ------------------------------------------------------------------ */
+
+  function drawRays(now) {
+    ctx.save();
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.beginPath();
+    ctx.rect(0, 0, size, size);
+    ctx.arc(centerX, centerY, radius * 1.002, 0, TWO_PI, true);
+    ctx.clip();
+
+    for (var i = 0; i < rays.length; i += 1) {
+      var ray = rays[i];
+      var breathe = 0.72 + 0.28 * Math.sin(now * ray.speed + ray.phase);
+      var inner = radius * ray.start;
+      var outer = radius * (ray.start + ray.length * breathe);
+      var angle = ray.angle;
+      var endAngle = angle + ray.bend;
+      var alpha = ray.alpha * breathe;
+
+      ctx.beginPath();
+      ctx.moveTo(centerX + Math.cos(angle) * inner, centerY + Math.sin(angle) * inner);
+      ctx.lineTo(centerX + Math.cos(endAngle) * outer, centerY + Math.sin(endAngle) * outer);
+      ctx.lineWidth = ray.width * Math.max(0.6, size / 900);
+      ctx.strokeStyle = i % 7 === 0
+        ? 'rgba(65, 115, 198, ' + (alpha * 1.15) + ')'
+        : 'rgba(108, 150, 216, ' + alpha + ')';
       ctx.stroke();
     }
 
-    ctx.beginPath();
-    ctx.arc(marker[0], marker[1], dot, 0, TWO_PI);
-    ctx.fillStyle = CRIMSON;
-    ctx.fill();
-    ctx.globalAlpha = 1;
+    ctx.restore();
   }
 
-  /* Fallback: an ocean-filled wireframe if WebGL or the texture is missing. */
+  /* Connection arcs ------------------------------------------------------- */
 
-  var LATITUDES = [-60, -40, -20, 0, 20, 40, 60].map(function (value) {
-    return value * DEG;
-  });
+  function drawConnections(now) {
+    var cosYaw = Math.cos(yaw);
+    var sinYaw = Math.sin(yaw);
+    var cosPitch = Math.cos(pitch);
+    var sinPitch = Math.sin(pitch);
+    var nodes = {};
+    var i;
+    var j;
 
-  function fallbackLine(points, frontAlpha, backAlpha) {
-    var front = new Path2D();
-    var back = new Path2D();
+    for (i = 0; i < arcs.length; i += 1) {
+      var arc = arcs[i];
+      var a = arc.a;
+      var b = arc.b;
+      var aPoint = cityPoint(a, cosYaw, sinYaw, cosPitch, sinPitch);
+      var bPoint = cityPoint(b, cosYaw, sinYaw, cosPitch, sinPitch);
+      var visible = Math.min(aPoint.z, bPoint.z);
 
-    for (var i = 0; i < points.length - 1; i += 1) {
-      var a = points[i];
-      var b = points[i + 1];
-      var path = (a[2] + b[2]) * 0.5 >= 0 ? front : back;
-      path.moveTo(a[0], a[1]);
-      path.lineTo(b[0], b[1]);
+      if (visible < 0.045) continue;
+
+      var fade = clamp((visible - 0.045) / 0.22, 0, 1);
+      var sinOmega = Math.sin(arc.omega);
+      var path = new Path2D();
+      var started = false;
+      var steps = 52;
+      var lastParticle = null;
+
+      if (sinOmega < 0.0001) continue;
+
+      for (j = 0; j <= steps; j += 1) {
+        var t = j / steps;
+        var wa = Math.sin((1 - t) * arc.omega) / sinOmega;
+        var wb = Math.sin(t * arc.omega) / sinOmega;
+        var lift = 1 + arc.lift * Math.sin(Math.PI * t);
+        var vx = (a.x * wa + b.x * wb) * lift;
+        var vy = (a.y * wa + b.y * wb) * lift;
+        var vz = (a.z * wa + b.z * wb) * lift;
+        var point = project(vx, vy, vz, cosYaw, sinYaw, cosPitch, sinPitch);
+
+        if (point.z > 0.012) {
+          if (!started) {
+            path.moveTo(point.x, point.y);
+            started = true;
+          } else {
+            path.lineTo(point.x, point.y);
+          }
+        } else {
+          started = false;
+        }
+      }
+
+      var particleT = (((now * arc.speed + arc.phase) % 1) + 1) % 1;
+      var particleA = Math.sin((1 - particleT) * arc.omega) / sinOmega;
+      var particleB = Math.sin(particleT * arc.omega) / sinOmega;
+      var particleLift = 1 + arc.lift * Math.sin(Math.PI * particleT);
+      var particlePoint = project(
+        (a.x * particleA + b.x * particleB) * particleLift,
+        (a.y * particleA + b.y * particleB) * particleLift,
+        (a.z * particleA + b.z * particleB) * particleLift,
+        cosYaw, sinYaw, cosPitch, sinPitch
+      );
+      if (particlePoint.z > 0.02) lastParticle = particlePoint;
+
+      ctx.save();
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.lineWidth = Math.max(2.6, radius * 0.018);
+      ctx.strokeStyle = 'rgba(84, 133, 205, ' + (0.16 * fade) + ')';
+      ctx.stroke(path);
+      ctx.lineWidth = Math.max(0.85, radius * 0.0062);
+      ctx.strokeStyle = 'rgba(36, 82, 152, ' + (0.5 * fade) + ')';
+      ctx.stroke(path);
+      ctx.lineWidth = Math.max(0.5, radius * 0.0026);
+      ctx.strokeStyle = 'rgba(233, 244, 255, ' + (0.62 * fade) + ')';
+      ctx.stroke(path);
+
+      if (lastParticle && lastParticle.z > 0.02) {
+        ctx.fillStyle = 'rgba(64, 116, 194, ' + (0.4 * fade) + ')';
+        ctx.beginPath();
+        ctx.arc(lastParticle.x, lastParticle.y, Math.max(3.2, radius * 0.032), 0, TWO_PI);
+        ctx.fill();
+        ctx.fillStyle = 'rgba(247, 251, 255, ' + (0.95 * fade) + ')';
+        ctx.beginPath();
+        ctx.arc(lastParticle.x, lastParticle.y, Math.max(1.2, radius * 0.008), 0, TWO_PI);
+        ctx.fill();
+      }
+
+      ctx.restore();
+
+      if (!nodes[a.key]) nodes[a.key] = { point: aPoint, city: a };
+      if (!nodes[b.key]) nodes[b.key] = { point: bPoint, city: b };
     }
 
-    ctx.lineWidth = 1;
-    ctx.strokeStyle = 'rgba(207, 214, 225, ' + backAlpha + ')';
-    ctx.stroke(back);
-    ctx.strokeStyle = 'rgba(207, 214, 225, ' + frontAlpha + ')';
-    ctx.stroke(front);
+    for (var key in nodes) {
+      if (!Object.prototype.hasOwnProperty.call(nodes, key)) continue;
+      var node = nodes[key];
+      drawNode(node.point, node.city, now);
+    }
+
+    var marker = cityPoint(
+      { x: Math.cos(MARKER_LAT) * Math.sin(MARKER_LON), y: Math.sin(MARKER_LAT), z: Math.cos(MARKER_LAT) * Math.cos(MARKER_LON) },
+      cosYaw, sinYaw, cosPitch, sinPitch
+    );
+    if (marker.z > 0.03) {
+      var markerFade = clamp((marker.z - 0.03) / 0.2, 0, 1);
+      var dotR = Math.max(3, radius * 0.016);
+      var pulsePhase = (now % 2600) / 2600;
+
+      ctx.save();
+      ctx.globalAlpha = markerFade;
+
+      var markerGlow = ctx.createRadialGradient(marker.x, marker.y, dotR, marker.x, marker.y, dotR * 5.4);
+      markerGlow.addColorStop(0, 'rgba(255, 72, 92, .38)');
+      markerGlow.addColorStop(0.55, 'rgba(255, 72, 92, .12)');
+      markerGlow.addColorStop(1, 'rgba(255, 72, 92, 0)');
+      ctx.fillStyle = markerGlow;
+      ctx.beginPath();
+      ctx.arc(marker.x, marker.y, dotR * 5.4, 0, TWO_PI);
+      ctx.fill();
+
+      for (var pulseIndex = 0; pulseIndex < 2; pulseIndex += 1) {
+        var pulseT = (pulsePhase + pulseIndex * 0.5) % 1;
+        ctx.beginPath();
+        ctx.arc(marker.x, marker.y, dotR + pulseT * radius * 0.07, 0, TWO_PI);
+        ctx.lineWidth = Math.max(0.8, radius * 0.003);
+        ctx.strokeStyle = 'rgba(255, 86, 106, ' + (0.55 * (1 - pulseT)) + ')';
+        ctx.stroke();
+      }
+
+      ctx.beginPath();
+      ctx.arc(marker.x, marker.y, dotR + Math.max(1.4, radius * 0.005), 0, TWO_PI);
+      ctx.fillStyle = 'rgba(255, 244, 246, .92)';
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(marker.x, marker.y, dotR, 0, TWO_PI);
+      ctx.fillStyle = CRIMSON;
+      ctx.fill();
+
+      var label = 'Kolkata';
+      var fontSize = Math.max(9, radius * 0.055);
+      var side = marker.x > centerX ? -1 : 1;
+      ctx.font = '600 ' + fontSize + 'px "JetBrains Mono", monospace';
+      var textWidth = ctx.measureText(label).width;
+      var padX = fontSize * 0.55;
+      var pillH = fontSize + fontSize * 0.7;
+      var pillW = textWidth + padX * 2;
+      var pillY = marker.y - pillH * 0.5;
+      var pillX = marker.x + side * (dotR + fontSize * 0.9) - (side < 0 ? pillW : 0);
+      var pillR = pillH * 0.5;
+
+      ctx.beginPath();
+      if (ctx.roundRect) {
+        ctx.roundRect(pillX, pillY, pillW, pillH, pillR);
+      } else {
+        ctx.rect(pillX, pillY, pillW, pillH);
+      }
+      ctx.fillStyle = 'rgba(4, 11, 24, .74)';
+      ctx.fill();
+      ctx.lineWidth = 0.8;
+      ctx.strokeStyle = 'rgba(255, 110, 128, .38)';
+      ctx.stroke();
+
+      ctx.fillStyle = 'rgba(255, 238, 241, .97)';
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(label, pillX + padX, marker.y + fontSize * 0.04);
+
+      ctx.restore();
+    }
   }
 
-  function drawFallback(now) {
+  function drawNode(point, city, now) {
+    if (point.z < 0.04) return;
+
+    var fade = clamp((point.z - 0.04) / 0.2, 0, 1);
+    var twinkle = 0.6 + 0.4 * Math.sin(now * 0.0017 + city.phase);
+    var special = city.special;
+
+    ctx.save();
+    ctx.globalCompositeOperation = 'lighter';
+    ctx.globalAlpha = fade;
+
+    ctx.fillStyle = special ? 'rgba(255, 101, 119, .26)' : 'rgba(139, 188, 255, .24)';
     ctx.beginPath();
-    ctx.arc(centerX, centerY, radius, 0, TWO_PI);
-    ctx.fillStyle = '#dfe9f3';
+    ctx.arc(point.x, point.y, Math.max(4.5, radius * 0.045) * (0.7 + twinkle * 0.5), 0, TWO_PI);
     ctx.fill();
-    ctx.strokeStyle = 'rgba(90, 101, 120, .4)';
-    ctx.lineWidth = 1;
+
+    ctx.fillStyle = special ? 'rgba(255, 168, 178, .5)' : 'rgba(206, 232, 255, .54)';
+    ctx.beginPath();
+    ctx.arc(point.x, point.y, Math.max(2.2, radius * 0.017), 0, TWO_PI);
+    ctx.fill();
+
+    var flare = Math.max(3, radius * 0.035) * (0.65 + twinkle * 0.55);
+    ctx.strokeStyle = special ? 'rgba(255, 170, 178, .72)' : 'rgba(238, 248, 255, .7)';
+    ctx.lineWidth = Math.max(0.5, radius * 0.0028);
+    ctx.beginPath();
+    ctx.moveTo(point.x - flare, point.y);
+    ctx.lineTo(point.x + flare, point.y);
+    ctx.moveTo(point.x, point.y - flare);
+    ctx.lineTo(point.x, point.y + flare);
     ctx.stroke();
 
-    var latIndex;
-    var lonIndex;
-    var step;
-    var points;
+    ctx.fillStyle = special ? CRIMSON : '#f3f9ff';
+    ctx.beginPath();
+    ctx.arc(point.x, point.y, special ? 2 : 1.5, 0, TWO_PI);
+    ctx.fill();
 
-    for (latIndex = 0; latIndex < LATITUDES.length; latIndex += 1) {
-      points = [];
-      for (step = 0; step <= TWO_PI + 0.08; step += 0.08) {
-        points.push(project(LATITUDES[latIndex], step));
-      }
-      fallbackLine(points, .5, .16);
-    }
-
-    for (lonIndex = 0; lonIndex < 12; lonIndex += 1) {
-      points = [];
-      for (step = -Math.PI / 2; step <= Math.PI / 2 + 0.07; step += 0.07) {
-        points.push(project(step, lonIndex * (TWO_PI / 12)));
-      }
-      fallbackLine(points, .42, .13);
-    }
-
-    drawMarker(now);
+    ctx.restore();
   }
+
+  /* Render loop ----------------------------------------------------------- */
 
   function render(now) {
     if (!size) return;
 
     ctx.clearRect(0, 0, size, size);
-    drawAtmosphere();
-
-    if (glReady && texture) {
-      renderGL();
-      drawRim();
-      drawOrbitRing();
-      drawMarker(now);
-    } else {
-      drawFallback(now);
-    }
+    drawHalo();
+    drawSphereBase();
+    drawPoints();
+    drawRays(now);
+    drawRim();
+    drawRings(now);
+    drawConnections(now);
   }
 
-  /* Sizing --------------------------------------------------------------- */
+  /* Sizing ---------------------------------------------------------------- */
 
   function resize() {
     var nextSize = canvas.getBoundingClientRect().width;
@@ -447,17 +809,16 @@
 
     canvas.width = Math.round(size * dpr);
     canvas.height = Math.round(size * dpr);
-    overlay.width = Math.round(size * dpr);
-    overlay.height = Math.round(size * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
     centerX = size / 2;
     centerY = size / 2;
-    radius = size * 0.382;
+    radius = size * 0.365;
+    buildPoints();
     dirty = true;
   }
 
-  /* Interaction ---------------------------------------------------------- */
+  /* Interaction ----------------------------------------------------------- */
 
   function dismissHint() {
     if (hintDismissed || !hint) return;
@@ -486,7 +847,7 @@
       try {
         canvas.setPointerCapture(event.pointerId);
       } catch (error) {
-        /* Pointer capture is a progressive enhancement. */
+        /* Progressive enhancement. */
       }
     }
   }
@@ -500,7 +861,7 @@
     var elapsed = Math.max(8, now - lastMoveTime) / 1000;
 
     yaw += dx * ROTATE_PER_PX;
-    pitch = clamp(pitch + dy * TILT_PER_PX, -1.2, 1.2);
+    pitch = clamp(pitch + dy * TILT_PER_PX, -1.18, 1.18);
     moveVelocity = (dx * ROTATE_PER_PX) / elapsed;
     tiltVelocity = (dy * TILT_PER_PX) / elapsed;
 
@@ -517,8 +878,8 @@
     dragging = false;
     activePointer = null;
     lastInteraction = performance.now();
-    spinVelocity = reducedMotion ? 0 : clamp(moveVelocity, -4, 4);
-    tiltSpinVelocity = reducedMotion ? 0 : clamp(tiltVelocity, -4, 4);
+    spinVelocity = reducedMotion ? 0 : clamp(moveVelocity, -3.2, 3.2);
+    tiltSpinVelocity = reducedMotion ? 0 : clamp(tiltVelocity, -3.2, 3.2);
 
     canvas.classList.remove('is-dragging');
     if (canvas.releasePointerCapture && canvas.hasPointerCapture && canvas.hasPointerCapture(event.pointerId)) {
@@ -538,6 +899,7 @@
         spinVelocity = 0;
         tiltSpinVelocity = 0;
       }
+      dirty = true;
     };
     if (motionQuery.addEventListener) motionQuery.addEventListener('change', onMotionChange);
     else if (motionQuery.addListener) motionQuery.addListener(onMotionChange);
@@ -556,6 +918,7 @@
     }, { rootMargin: '80px' }).observe(canvas);
   }
 
+  buildDecor();
   resize();
 
   var lastFrame = performance.now();
@@ -576,13 +939,13 @@
         }
 
         if (tiltSpinVelocity) {
-          pitch = clamp(pitch + tiltSpinVelocity * delta, -1.2, 1.2);
+          pitch = clamp(pitch + tiltSpinVelocity * delta, -1.18, 1.18);
           tiltSpinVelocity *= Math.exp(-3.2 * delta);
           if (Math.abs(tiltSpinVelocity) < 0.003) tiltSpinVelocity = 0;
         }
 
-        if (!reducedMotion && now - lastInteraction > 2200) {
-          yaw += 0.055 * delta;
+        if (!reducedMotion && now - lastInteraction > 2300) {
+          yaw -= 0.009 * delta;
         }
       }
 
