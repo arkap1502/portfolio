@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Projects — Arka Patra</title>
-<meta name="description" content="Security-focused builds by Arka Patra — website scanning, phishing detection, password tools, document prompt-injection detection and desktop protection.">
+<meta name="description" content="Security-focused builds by Arka Patra — website scanning, phishing detection, password tools, document prompt-injection detection and QR code safety.">
 <meta property="og:title" content="Projects — Arka Patra">
 <meta property="og:description" content="Eight security-focused builds, built to explore real concepts.">
 <meta property="og:type" content="website">
@@ -27,7 +27,6 @@
       <a href="projects.html" aria-current="page">Projects</a>
       <a href="about.html">About</a>
       <a href="certificates.html">Certificates</a>
-      <a href="contact.html">Contact</a>
     </nav>
     <div class="nav-actions">
       <a class="btn btn--crimson" href="contact.html">Let's Talk <span class="arrow">→</span></a>
@@ -41,7 +40,6 @@
     <a href="projects.html" aria-current="page">Projects <span aria-hidden="true">→</span></a>
     <a href="about.html">About <span aria-hidden="true">→</span></a>
     <a href="certificates.html">Certificates <span aria-hidden="true">→</span></a>
-    <a href="contact.html">Contact <span aria-hidden="true">→</span></a>
     <a class="btn btn--crimson" href="contact.html">Let's Talk <span class="arrow">→</span></a>
   </nav>
 </header>
@@ -250,24 +248,27 @@
         </div>
       </article>
 
-      <article class="build-card" id="build-antivirus" data-category="cyber" data-reveal style="--delay:150ms">
+      <article class="build-card" id="build-quishing" data-category="web" data-reveal style="--delay:150ms">
         <div class="build-top">
           <span class="build-num">07</span>
-          <span class="status-pill">Local build</span>
+          <span class="status-pill">Live</span>
         </div>
-        <h3 class="build-title">Laptop Antivirus</h3>
+        <h3 class="build-title">Quishing Guard</h3>
         <div class="build-foot">
-          <p class="build-cat">Real-time protection</p>
-          <button class="build-toggle" type="button" aria-expanded="false" aria-controls="panel-antivirus" aria-label="Show technical details for Laptop Antivirus">
+          <p class="build-cat">Web security · QR phishing</p>
+          <button class="build-toggle" type="button" aria-expanded="false" aria-controls="panel-quishing" aria-label="Show technical details for Quishing Guard">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 18 18 6M8 6h10v10"/></svg>
           </button>
         </div>
-        <div class="build-panel" id="panel-antivirus" aria-hidden="true">
+        <div class="build-panel" id="panel-quishing" aria-hidden="true">
           <div class="build-panel__inner">
             <div class="build-panel__content">
-              <p>Real-time monitoring across Desktop, Downloads, Documents and USB drives, with SHA-256 signatures, heuristic scans, severity alerts and an encrypted quarantine vault. Includes a Tkinter dashboard and phishing shield.</p>
-              <ul class="stack"><li>Python</li><li>Tkinter</li><li>SHA-256</li></ul>
-              <div class="build-links"><span class="build-note">Runs locally · no public demo</span></div>
+              <p>Scans QR codes from your camera or an uploaded image, decodes the payload locally and scores the risk before anything opens. Flags shortened links, lookalike and punycode domains, IP-address URLs, suspicious TLDs and UPI payee mismatches — with scan history kept on the device.</p>
+              <ul class="stack"><li>React</li><li>TypeScript</li><li>Vite</li><li>jsQR</li><li>PWA</li></ul>
+              <div class="build-links">
+                <a class="link-arrow" href="https://quishing-guard.vercel.app/" target="_blank" rel="noopener">Live demo ↗</a>
+                <a class="link-arrow" href="https://github.com/arkap1502/Quishing-Guard" target="_blank" rel="noopener">Source code</a>
+              </div>
             </div>
           </div>
         </div>
