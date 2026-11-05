@@ -29,7 +29,7 @@ document.documentElement.classList.add('js');
   }
 })();
 </script>
-<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/site.css?v=3">
 </head>
 <body class="entry-page">
 
@@ -92,7 +92,7 @@ document.documentElement.classList.add('js');
                     <span class="mini-scroll">SCROLL DOWN ↓</span>
                     <span class="mini-copy">Hi, I'm Arka, a cyber security student and security-focused developer from West Bengal. I build tools that turn real threats into working demos.</span>
                   </span>
-                  <span class="mini-globe-wrap">
+                  <span class="mini-globe-wrap" data-globe-wrap>
                     <svg class="mini-globe" viewBox="0 0 220 220" fill="none" aria-hidden="true">
                       <circle cx="110" cy="110" r="88" stroke="#cfd6e1" stroke-width="1.1"/>
                       <g stroke="#cfd6e1" stroke-width=".85">
@@ -108,16 +108,7 @@ document.documentElement.classList.add('js');
                       <circle cx="64" cy="147" r="2.8" fill="#b5303c"/>
                       <circle cx="146" cy="156" r="3" fill="#b5303c" opacity=".55"/>
                     </svg>
-                    <span class="mini-live"><i></i>Live threat monitor</span>
-                  </span>
-                </span>
-
-                <span class="mini-foot">
-                  <span class="mini-contact"><span>Let's Talk</span><strong>arkap1502@gmail.com</strong></span>
-                  <span class="mini-stats">
-                    <span class="mini-stat"><strong>08</strong><span>Builds</span></span>
-                    <span class="mini-stat"><strong>10</strong><span>Certificates</span></span>
-                    <span class="mini-stat"><strong>01</strong><span>Internship</span></span>
+                    <canvas class="mini-globe mini-globe--canvas" id="entryLaptopGlobe" width="440" height="440" data-mini-globe data-yaw="-1.5" data-pitch="0.24" data-spin="0.06" data-globe-label aria-hidden="true"></canvas>
                   </span>
                 </span>
               </span>
@@ -140,7 +131,7 @@ document.documentElement.classList.add('js');
               <span class="phone-headline">Cybersecurity<br><span class="amp">&amp;</span> Secure Code</span>
               <span class="phone-copy">Cyber security student and security-focused developer from West Bengal.</span>
               <span class="phone-cta">Let's Talk</span>
-              <span class="phone-globe-wrap">
+              <span class="phone-globe-wrap" data-globe-wrap>
                 <svg class="phone-globe" viewBox="0 0 220 220" fill="none" aria-hidden="true">
                   <circle cx="110" cy="110" r="88" stroke="#cfd6e1" stroke-width="1.1"/>
                   <g stroke="#cfd6e1" stroke-width=".85">
@@ -154,7 +145,7 @@ document.documentElement.classList.add('js');
                   <circle cx="172" cy="58" r="3.4" fill="#b5303c"/>
                   <circle cx="64" cy="147" r="2.8" fill="#b5303c"/>
                 </svg>
-                <canvas class="phone-globe phone-globe--canvas" id="entryPhoneGlobe" width="440" height="440" aria-hidden="true"></canvas>
+                <canvas class="phone-globe phone-globe--canvas" id="entryPhoneGlobe" width="440" height="440" data-mini-globe data-yaw="-0.95" data-pitch="0.24" data-spin="0.07" aria-hidden="true"></canvas>
                 <span class="phone-globe-hint" aria-hidden="true">Drag to rotate</span>
               </span>
             </span>
@@ -175,6 +166,7 @@ document.documentElement.classList.add('js');
 
 <script src="assets/site.js"></script>
 <script src="assets/entry-balls.js"></script>
-<script src="assets/phone-globe.js"></script>
+<script src="assets/land-mask.js"></script>
+<script src="assets/phone-globe.js?v=3"></script>
 </body>
 </html>

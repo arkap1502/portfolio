@@ -61,6 +61,10 @@
     return Math.min(max, Math.max(min, value));
   }
 
+  function wrapAngle(value) {
+    return ((value + Math.PI) % TWO_PI + TWO_PI) % TWO_PI - Math.PI;
+  }
+
   function randomFactory(seed) {
     var state = seed >>> 0;
     return function () {
@@ -829,6 +833,7 @@
   function pointerDown(event) {
     if (event.pointerType === 'mouse' && event.button !== 0) return;
 
+    event.preventDefault();
     dragging = true;
     activePointer = event.pointerId;
     lastX = event.clientX;
@@ -861,7 +866,7 @@
     var elapsed = Math.max(8, now - lastMoveTime) / 1000;
 
     yaw += dx * ROTATE_PER_PX;
-    pitch = clamp(pitch + dy * TILT_PER_PX, -1.18, 1.18);
+    pitch = wrapAngle(pitch + dy * TILT_PER_PX);
     moveVelocity = (dx * ROTATE_PER_PX) / elapsed;
     tiltVelocity = (dy * TILT_PER_PX) / elapsed;
 
@@ -888,9 +893,9 @@
   }
 
   canvas.addEventListener('pointerdown', pointerDown);
-  canvas.addEventListener('pointermove', pointerMove);
-  canvas.addEventListener('pointerup', pointerUp);
-  canvas.addEventListener('pointercancel', pointerUp);
+  window.addEventListener('pointermove', pointerMove);
+  window.addEventListener('pointerup', pointerUp);
+  window.addEventListener('pointercancel', pointerUp);
 
   if (motionQuery) {
     var onMotionChange = function (event) {
@@ -939,13 +944,13 @@
         }
 
         if (tiltSpinVelocity) {
-          pitch = clamp(pitch + tiltSpinVelocity * delta, -1.18, 1.18);
+          pitch = wrapAngle(pitch + tiltSpinVelocity * delta);
           tiltSpinVelocity *= Math.exp(-3.2 * delta);
           if (Math.abs(tiltSpinVelocity) < 0.003) tiltSpinVelocity = 0;
         }
 
         if (!reducedMotion && now - lastInteraction > 2300) {
-          yaw -= 0.009 * delta;
+          yaw += 0.022 * delta;
         }
       }
 

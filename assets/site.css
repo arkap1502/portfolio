@@ -1043,7 +1043,7 @@ html.entry-touch .entry-hint--mobile { display: inline-flex; }
 }
 
 .mini-headline {
-  margin-top: 3.1em;
+  margin-top: .9em;
   font-family: var(--font-display);
   font-size: 4.8em;
   font-weight: 700;
@@ -1059,7 +1059,7 @@ html.entry-touch .entry-hint--mobile { display: inline-flex; }
   align-items: end;
   gap: 2em;
   flex: 1;
-  margin-top: 2.4em;
+  margin-top: 1.2em;
 }
 
 .mini-scroll {
@@ -1084,18 +1084,35 @@ html.entry-touch .entry-hint--mobile { display: inline-flex; }
 
 .mini-globe-wrap {
   position: relative;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  align-self: stretch;
-  padding-bottom: 1.3em;
+  width: 13em;
+  max-width: 100%;
+  aspect-ratio: 1;
+  margin-left: -1.2em;
+  align-self: end;
+  justify-self: start;
 }
 
 .mini-globe {
-  width: 17em;
-  max-width: 100%;
-  height: auto;
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
 }
+
+.mini-globe--canvas {
+  display: none;
+  cursor: grab;
+  pointer-events: auto;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.mini-globe--canvas.is-dragging { cursor: grabbing; }
+.mini-globe-wrap.is-live .mini-globe--canvas { display: block; }
+.mini-globe-wrap.is-live svg.mini-globe { display: none; }
 
 .mini-live {
   position: absolute;
