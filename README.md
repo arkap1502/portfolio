@@ -50,6 +50,8 @@ assets/site.js        Navigation, theme/palette, filters, dialogs, ticker, form
 assets/lunar-hero.webp  Master astronaut artwork
 theme-*-hero.webp      Full-resolution hero art per visor set (graded from the master)
 theme-*.webp           Palette strip thumbnails, cropped from the same art
+screen-home-desktop.webp  Home page capture shown inside the cover laptop
+screen-home-phone.webp    Home page capture shown inside the cover phone
 assets/cert-*.pdf     Credential documents
 assets/Arka_Patra_CV.pdf
 ```
