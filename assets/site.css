@@ -1089,7 +1089,7 @@ p { margin: 0; }
   height: 100%;
   border-radius: 50%;
   object-fit: cover;
-  object-position: 50% 38%;
+  object-position: 50% 50%;
   transition: opacity .22s var(--ease);
 }
 

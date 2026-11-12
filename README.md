@@ -47,7 +47,7 @@ certificates.html     Credentials
 contact.html          Contact and form
 assets/site.css       Design system, themes, palettes, responsive rules
 assets/site.js        Navigation, theme/palette, filters, dialogs, ticker, form
-assets/*.webp         Astronaut hero and palette thumbnails
+assets/*.webp         Astronaut hero, 1200px hero art per visor set, palette thumbnails
 assets/cert-*.pdf     Credential documents
 assets/Arka_Patra_CV.pdf
 ```

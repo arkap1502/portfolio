@@ -16,11 +16,13 @@
     nebula: 'Nebula',
     lunar: 'Lunar'
   };
+  /* Hero art is a dedicated 1200px square per visor set; the strip keeps the
+     small thumbnails so the picker stays light. */
   var paletteArt = {
-    pearl: { src: 'assets/theme-pearl.webp', alt: 'Astronaut in a white suit with a gold mirrored visor' },
-    obsidian: { src: 'assets/theme-obsidian.webp', alt: 'Astronaut in a black suit with a blue visor' },
-    glacier: { src: 'assets/theme-glacier.webp', alt: 'Astronaut in a white suit with a teal visor' },
-    nebula: { src: 'assets/theme-nebula.webp', alt: 'Astronaut in a black suit with a violet visor' },
+    pearl: { src: 'assets/theme-pearl-hero.webp', alt: 'Astronaut in a white suit with a gold mirrored visor' },
+    obsidian: { src: 'assets/theme-obsidian-hero.webp', alt: 'Astronaut in a black suit with a blue visor' },
+    glacier: { src: 'assets/theme-glacier-hero.webp', alt: 'Astronaut in a white suit with a teal visor' },
+    nebula: { src: 'assets/theme-nebula-hero.webp', alt: 'Astronaut in a black suit with a violet visor' },
     lunar: { src: 'assets/lunar-hero.webp', alt: 'Astronaut in a polished white suit with a dark reflective visor' }
   };
 
@@ -98,9 +100,13 @@
   syncTheme();
   syncPalette(false);
 
-  /* Preload every visor portrait so a palette change swaps instantly. */
-  if (document.querySelector('[data-hero]')) {
+  /* Preload the other visor portraits so a palette change swaps instantly. */
+  var heroArt = document.querySelector('[data-hero]');
+
+  if (heroArt) {
+    var heroSrc = heroArt.getAttribute('src');
     Object.keys(paletteArt).forEach(function (key) {
+      if (paletteArt[key].src === heroSrc) return;
       var preload = new Image();
       preload.src = paletteArt[key].src;
     });
