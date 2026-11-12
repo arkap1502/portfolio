@@ -1,35 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark" data-default-theme="dark" data-palette="lunar">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact — Arka Patra</title>
-<meta name="description" content="Contact Arka Patra for internships, collaboration and security projects. Replies within 24 hours.">
+<meta name="description" content="Contact Arka Patra for internships, collaboration and security projects. Open to entry-level roles and cybersecurity conversations.">
 <meta property="og:title" content="Contact — Arka Patra">
-<meta property="og:description" content="Internships, collaboration, security projects — my inbox is open.">
+<meta property="og:description" content="Let’s build something secure. Internships, collaboration and security projects.">
 <meta property="og:type" content="website">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2318202E'/%3E%3Cpath d='M32 12 L50 19 V31 C50 43 42 50 32 54 C22 50 14 43 14 31 V19 Z' fill='none' stroke='%23FFFFFF' stroke-width='3'/%3E%3Ccircle cx='32' cy='32' r='4' fill='%23B5303C'/%3E%3C/svg%3E" type="image/svg+xml">
+<meta name="theme-color" content="#151515" id="metaTheme">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<script>document.documentElement.classList.add('js');</script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&amp;family=Source+Serif+4:ital,opsz,wght@1,8..60,300;1,8..60,400&amp;family=Courier+Prime:wght@400;700&amp;display=swap" rel="stylesheet">
+<script>
+document.documentElement.classList.add('js');
+(function () {
+  try {
+    var theme = localStorage.getItem('arka-theme');
+    if (theme === 'light' || theme === 'dark') document.documentElement.setAttribute('data-theme', theme);
+    var palette = localStorage.getItem('arka-palette');
+    if (palette) document.documentElement.setAttribute('data-palette', palette);
+  } catch (error) {}
+})();
+</script>
 <link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
 
 <a class="skip-link" href="#main">Skip to content</a>
 
-<header class="site-header" id="siteHeader">
-  <div class="container nav">
-    <a class="brand" href="dashboard.html" aria-label="Arka Patra — home">Arka Patra<sup>®</sup></a>
-    <nav class="nav-pill" aria-label="Primary">
+<header class="site-header">
+  <div class="frame nav">
+    <a class="brand" href="dashboard.html" aria-label="Arka Patra — home">arka<sup>®</sup></a>
+    <nav class="nav-links" aria-label="Primary">
       <a href="dashboard.html">Home</a>
       <a href="projects.html">Projects</a>
       <a href="about.html">About</a>
       <a href="certificates.html">Certificates</a>
+      <a href="contact.html" aria-current="page">Contact</a>
     </nav>
     <div class="nav-actions">
-      <a class="btn btn--crimson" href="contact.html">Let's Talk <span class="arrow">→</span></a>
+      <a class="btn btn--ghost" href="mailto:arkap1502@gmail.com">Let’s talk <span class="arrow" aria-hidden="true">↗</span></a>
       <button class="nav-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -40,106 +52,83 @@
     <a href="projects.html">Projects <span aria-hidden="true">→</span></a>
     <a href="about.html">About <span aria-hidden="true">→</span></a>
     <a href="certificates.html">Certificates <span aria-hidden="true">→</span></a>
-    <a class="btn btn--crimson" href="contact.html">Let's Talk <span class="arrow">→</span></a>
+    <a href="contact.html" aria-current="page">Contact <span aria-hidden="true">→</span></a>
+    <a class="btn btn--ghost" href="mailto:arkap1502@gmail.com">Let’s talk <span class="arrow" aria-hidden="true">↗</span></a>
   </nav>
 </header>
 
-<main id="main">
-  <div class="container contact-layout">
-    <section class="contact-copy" data-reveal aria-labelledby="contactTitle">
-      <h1 id="contactTitle">Let's build<br>something<br><span class="text-crimson">secure.</span></h1>
-      <p class="contact-sub">Internships, collaborations or a security question — tell me what you are working on. I read everything and reply within a day.</p>
-      <span class="reply-badge"><span class="dot dot--green"></span>Replies within 24 hours</span>
+<main id="main" class="slide-main">
+  <section class="slide" aria-labelledby="contactTitle">
+    <div class="frame contact-grid">
+      <div class="contact-copy" data-reveal>
+        <span class="kicker"><i class="kicker__square" aria-hidden="true"></i>Contact / 06</span>
+        <h1 class="display display--hero contact-title" id="contactTitle">Let’s build<br><em>something secure.</em></h1>
+        <p class="lead contact-lead">Open to internships, entry-level roles, collaboration and cybersecurity conversations.</p>
 
-      <div class="contact-list">
-        <div class="contact-row">
-          <span class="contact-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/></svg>
-          </span>
-          <span class="contact-label">Email</span>
-          <a class="contact-value" href="mailto:arkap1502@gmail.com">arkap1502@gmail.com</a>
-          <button class="copy-btn" type="button" data-copy="arkap1502@gmail.com" aria-label="Copy email address arkap1502@gmail.com">Copy</button>
-          <p class="copy-status" role="status" aria-live="polite"></p>
-        </div>
-
-        <a class="contact-row" href="tel:+919748813115">
-          <span class="contact-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6.6 3.5 9 3l1.6 4.2-1.7 1.3a13 13 0 0 0 6.6 6.6l1.3-1.7L21 15l-.5 2.4a2.4 2.4 0 0 1-2.5 1.9C10.9 18.5 5.5 13.1 4.7 6A2.4 2.4 0 0 1 6.6 3.5Z" stroke-linejoin="round"/></svg>
-          </span>
-          <span class="contact-label">Phone</span>
-          <span class="contact-value">+91 97488 13115</span>
-        </a>
-
-        <a class="contact-row" href="https://www.linkedin.com/in/arka-patra-579110422/" target="_blank" rel="noopener">
-          <span class="contact-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.8 0 0 .78 0 1.75v20.5C0 23.22.8 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.75V1.75C24 .78 23.2 0 22.22 0Z"/></svg>
-          </span>
-          <span class="contact-label">LinkedIn</span>
-          <span class="contact-value">arka-patra</span>
-        </a>
-
-        <a class="contact-row" href="https://github.com/arkap1502" target="_blank" rel="noopener">
-          <span class="contact-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.87-1.36-3.87-1.36-.53-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.58.24 2.75.12 3.04.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14 0 1.55-.01 2.79-.01 3.17 0 .3.2.66.79.55A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
-          </span>
-          <span class="contact-label">GitHub</span>
-          <span class="contact-value">@arkap1502</span>
-        </a>
-
-        <div class="contact-row">
-          <span class="contact-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-5.1 7-11a7 7 0 1 0-14 0c0 5.9 7 11 7 11Z" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.5"/></svg>
-          </span>
-          <span class="contact-label">Location</span>
-          <span class="contact-value">Madhyamgram, Kolkata 700130 · West Bengal</span>
+        <div class="contact-list">
+          <a class="contact-row" href="mailto:arkap1502@gmail.com">
+            <span class="contact-label">Email</span>
+            <span class="contact-value">arkap1502@gmail.com</span>
+            <span class="contact-arrow" aria-hidden="true">↗</span>
+          </a>
+          <a class="contact-row" href="https://github.com/arkap1502" target="_blank" rel="noopener">
+            <span class="contact-label">GitHub</span>
+            <span class="contact-value">github.com/arkap1502</span>
+            <span class="contact-arrow" aria-hidden="true">↗</span>
+          </a>
+          <a class="contact-row" href="https://www.linkedin.com/in/arka-patra-579110422/" target="_blank" rel="noopener">
+            <span class="contact-label">LinkedIn</span>
+            <span class="contact-value">linkedin.com/in/arka-patra-579110422</span>
+            <span class="contact-arrow" aria-hidden="true">↗</span>
+          </a>
+          <a class="contact-row" href="tel:+919748813115">
+            <span class="contact-label">Phone</span>
+            <span class="contact-value">+91 97488 13115</span>
+            <span class="contact-arrow" aria-hidden="true">↗</span>
+          </a>
         </div>
       </div>
-    </section>
 
-    <section class="contact-form-card" data-reveal style="--delay:100ms" aria-labelledby="formTitle">
-      <h2 id="formTitle">Send a message</h2>
-      <p class="form-intro">Tell me about the opportunity or idea — I read everything and reply within a day.</p>
+      <section class="contact-form" data-reveal style="--delay:100ms" aria-labelledby="formTitle">
+        <h2 class="contact-form__title" id="formTitle">Send a message</h2>
 
-      <form id="contactForm" novalidate>
-        <div class="field">
-          <label for="cfName">Name</label>
-          <input id="cfName" name="name" type="text" placeholder="Your name" autocomplete="name" aria-describedby="cfNameError">
-          <p class="field-error" id="cfNameError" aria-live="polite"></p>
-        </div>
+        <form id="contactForm" novalidate>
+          <div class="field">
+            <label for="cfName">Name</label>
+            <input id="cfName" name="name" type="text" placeholder="Your name" autocomplete="name" aria-describedby="cfNameError">
+            <p class="field-error" id="cfNameError" aria-live="polite"></p>
+          </div>
 
-        <div class="field">
-          <label for="cfEmail">Email</label>
-          <input id="cfEmail" name="email" type="email" placeholder="you@example.com" autocomplete="email" aria-describedby="cfEmailError">
-          <p class="field-error" id="cfEmailError" aria-live="polite"></p>
-        </div>
+          <div class="field">
+            <label for="cfEmail">Email</label>
+            <input id="cfEmail" name="email" type="email" placeholder="you@example.com" autocomplete="email" aria-describedby="cfEmailError">
+            <p class="field-error" id="cfEmailError" aria-live="polite"></p>
+          </div>
 
-        <div class="field">
-          <label for="cfMessage">Message</label>
-          <textarea id="cfMessage" name="message" rows="5" placeholder="Tell me what you are building" aria-describedby="cfMessageError"></textarea>
-          <p class="field-error" id="cfMessageError" aria-live="polite"></p>
-        </div>
+          <div class="field">
+            <label for="cfMessage">Message</label>
+            <textarea id="cfMessage" name="message" rows="4" placeholder="Tell me what you are building" aria-describedby="cfMessageError"></textarea>
+            <p class="field-error" id="cfMessageError" aria-live="polite"></p>
+          </div>
 
-        <button class="btn btn--crimson btn--block" id="cfSubmit" type="submit"><span class="btn-label">Send message</span> <span class="arrow" aria-hidden="true">→</span></button>
-        <p class="form-status" id="cfStatus" role="status" aria-live="polite"></p>
-      </form>
-    </section>
-  </div>
+          <button class="btn btn--solid" id="cfSubmit" type="submit"><span class="btn-label">Send message</span> <span class="arrow" aria-hidden="true">→</span></button>
+          <p class="form-status" id="cfStatus" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+    </div>
+  </section>
 </main>
 
 <footer class="site-footer">
-  <div class="container footer-inner">
-    <div>
-      <p class="footer-brand">Arka Patra<sup>®</sup></p>
-      <p class="footer-copy">© 2026 Arka Patra. Cyber security student and security-focused developer in West Bengal, India.</p>
+  <div class="frame footer-inner">
+    <p class="footer-meta">Arka Patra — Cybersecurity — West Bengal</p>
+    <div class="theme-switch" role="group" aria-label="Colour theme">
+      <span>Theme:</span>
+      <button class="theme-btn" type="button" data-set-theme="light" aria-pressed="false">Light</button>
+      <span class="theme-switch__slash" aria-hidden="true">/</span>
+      <button class="theme-btn" type="button" data-set-theme="dark" aria-pressed="true">Dark</button>
     </div>
-    <nav class="footer-links" aria-label="Footer">
-      <a href="dashboard.html">Home</a>
-      <a href="projects.html">Projects</a>
-      <a href="about.html">About</a>
-      <a href="certificates.html">Certificates</a>
-      <a href="https://github.com/arkap1502" target="_blank" rel="noopener">GitHub</a>
-      <a href="index.html">Cover</a>
-    </nav>
+    <p class="footer-meta page-count">06 / 06</p>
   </div>
 </footer>
 

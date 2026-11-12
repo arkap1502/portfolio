@@ -1,29 +1,123 @@
 /* ==========================================================================
-   Arka Patra — shared site behaviour
-   Header state · mobile menu · scroll reveals · project filters & details
-   email copy · contact form
+   Arka Patra — LUNAR interface behaviour
+   Theme and palette · header menu · scroll reveals · live threat monitor
+   project filters and details · contact form
    ========================================================================== */
 
 (function () {
   'use strict';
 
+  var root = document.documentElement;
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var paletteNames = {
+    pearl: 'Pearl',
+    obsidian: 'Obsidian',
+    glacier: 'Glacier',
+    nebula: 'Nebula',
+    lunar: 'Lunar'
+  };
+  var paletteArt = {
+    pearl: { src: 'assets/theme-pearl.webp', alt: 'Astronaut in a white suit with a gold mirrored visor' },
+    obsidian: { src: 'assets/theme-obsidian.webp', alt: 'Astronaut in a black suit with a blue visor' },
+    glacier: { src: 'assets/theme-glacier.webp', alt: 'Astronaut in a white suit with a teal visor' },
+    nebula: { src: 'assets/theme-nebula.webp', alt: 'Astronaut in a black suit with a violet visor' },
+    lunar: { src: 'assets/lunar-hero.webp', alt: 'Astronaut in a polished white suit with a dark reflective visor' }
+  };
+
+  /* -----------------------------------------------------------------------
+     Theme and palette
+     ----------------------------------------------------------------------- */
+
+  function store(key, value) {
+    try { localStorage.setItem(key, value); } catch (error) {}
+  }
+
+  function syncTheme() {
+    var theme = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    var meta = document.getElementById('metaTheme');
+    if (meta) meta.setAttribute('content', theme === 'light' ? '#e3e3e4' : '#151515');
+    document.querySelectorAll('[data-set-theme]').forEach(function (button) {
+      button.setAttribute('aria-pressed', String(button.getAttribute('data-set-theme') === theme));
+    });
+  }
+
+  function syncHero(palette, animate) {
+    var hero = document.querySelector('[data-hero]');
+    if (!hero) return;
+
+    var art = paletteArt[palette] || paletteArt.lunar;
+    var current = hero.getAttribute('src');
+    if (current === art.src) return;
+
+    if (!animate || reducedMotion) {
+      hero.setAttribute('src', art.src);
+      hero.setAttribute('alt', art.alt);
+      return;
+    }
+
+    hero.classList.add('is-swapping');
+    window.setTimeout(function () {
+      hero.setAttribute('src', art.src);
+      hero.setAttribute('alt', art.alt);
+      hero.classList.remove('is-swapping');
+    }, 170);
+  }
+
+  function syncPalette(animate) {
+    var palette = root.getAttribute('data-palette') || 'lunar';
+    var label = document.getElementById('paletteName');
+    if (label) label.textContent = paletteNames[palette] || 'Lunar';
+    document.querySelectorAll('.theme-thumb[data-palette]').forEach(function (button) {
+      button.setAttribute('aria-pressed', String(button.getAttribute('data-palette') === palette));
+    });
+    syncHero(palette, animate);
+  }
+
+  function setTheme(theme) {
+    if (theme !== 'light' && theme !== 'dark') return;
+    root.setAttribute('data-theme', theme);
+    store('arka-theme', theme);
+    syncTheme();
+  }
+
+  function setPalette(palette) {
+    if (!paletteNames[palette]) return;
+    root.setAttribute('data-palette', palette);
+    store('arka-palette', palette);
+    syncPalette(true);
+  }
+
+  syncTheme();
+  syncPalette(false);
+
+  /* Preload every visor portrait so a palette change swaps instantly. */
+  if (document.querySelector('[data-hero]')) {
+    Object.keys(paletteArt).forEach(function (key) {
+      var preload = new Image();
+      preload.src = paletteArt[key].src;
+    });
+  }
+
+  document.querySelectorAll('[data-set-theme]').forEach(function (button) {
+    button.addEventListener('click', function () {
+      setTheme(button.getAttribute('data-set-theme'));
+    });
+  });
+
+  document.querySelectorAll('.theme-thumb[data-palette]').forEach(function (button) {
+    button.addEventListener('click', function () {
+      setPalette(button.getAttribute('data-palette'));
+    });
+  });
+
+  /* -----------------------------------------------------------------------
+     Mobile menu
+     ----------------------------------------------------------------------- */
 
   document.addEventListener('DOMContentLoaded', function () {
-    var header = document.getElementById('siteHeader');
     var menu = document.getElementById('mobileMenu');
     var toggle = document.getElementById('menuToggle');
 
-    /* Header shadow after scrolling -------------------------------------- */
-    if (header) {
-      var syncHeader = function () {
-        header.classList.toggle('is-scrolled', window.scrollY > 10);
-      };
-      syncHeader();
-      window.addEventListener('scroll', syncHeader, { passive: true });
-    }
-
-    /* Mobile menu -------------------------------------------------------- */
     function closeMenu() {
       if (!menu || !toggle) return;
       menu.classList.remove('is-open');
@@ -46,10 +140,10 @@
       });
 
       document.addEventListener('keydown', function (event) {
-        if (event.key === 'Escape') {
-          closeMenu();
-          toggle.focus();
-        }
+        if (event.key !== 'Escape') return;
+        if (toggle.getAttribute('aria-expanded') !== 'true') return;
+        closeMenu();
+        toggle.focus();
       });
 
       document.addEventListener('click', function (event) {
@@ -59,43 +153,14 @@
       });
 
       window.addEventListener('resize', function () {
-        if (window.innerWidth > 1080) closeMenu();
+        if (window.innerWidth > 900) closeMenu();
       });
     }
 
-    /* Entry screen — the inactive device is a visual preview only -------- */
-    var entryLaptop = document.querySelector('.entry-devices .device--laptop');
-    var entryPhone = document.querySelector('.entry-devices .device--phone');
-    var compactEntry = window.matchMedia('(max-width: 1024px)');
+    /* ---------------------------------------------------------------------
+       Scroll reveals
+       --------------------------------------------------------------------- */
 
-    function setDevicePreview(device, previewOnly) {
-      if (!device) return;
-      device.classList.toggle('is-static', previewOnly);
-
-      if (previewOnly) {
-        device.setAttribute('tabindex', '-1');
-        device.setAttribute('aria-hidden', 'true');
-      } else {
-        device.removeAttribute('tabindex');
-        device.removeAttribute('aria-hidden');
-      }
-    }
-
-    function syncEntryDevices() {
-      /* Phone screens open with the phone; larger screens open with the laptop. */
-      setDevicePreview(entryLaptop, compactEntry.matches);
-      setDevicePreview(entryPhone, !compactEntry.matches);
-    }
-
-    syncEntryDevices();
-
-    if (compactEntry.addEventListener) {
-      compactEntry.addEventListener('change', syncEntryDevices);
-    } else if (compactEntry.addListener) {
-      compactEntry.addListener(syncEntryDevices);
-    }
-
-    /* Scroll reveals ----------------------------------------------------- */
     var revealItems = document.querySelectorAll('[data-reveal]');
 
     if (!reducedMotion && 'IntersectionObserver' in window) {
@@ -105,187 +170,277 @@
           entry.target.classList.add('is-visible');
           revealObserver.unobserve(entry.target);
         });
-      }, { threshold: .1, rootMargin: '0px 0px -5% 0px' });
+      }, { threshold: .08, rootMargin: '0px 0px -4% 0px' });
 
       revealItems.forEach(function (item) { revealObserver.observe(item); });
+
+      /* Safety net: never leave content permanently hidden if the observer misses it. */
+      window.setTimeout(function () {
+        revealItems.forEach(function (item) { item.classList.add('is-visible'); });
+      }, 5000);
     } else {
       revealItems.forEach(function (item) { item.classList.add('is-visible'); });
     }
 
-    /* Project filters ---------------------------------------------------- */
-    var filterButtons = Array.prototype.slice.call(document.querySelectorAll('.filter-pill'));
-    var buildCards = Array.prototype.slice.call(document.querySelectorAll('.build-card'));
-    var buildCount = document.getElementById('buildCount');
-    var emptyState = document.getElementById('buildEmpty');
+    /* ---------------------------------------------------------------------
+       Live threat monitor
+       --------------------------------------------------------------------- */
 
-    /* Project details ---------------------------------------------------- */
-    var buildToggles = Array.prototype.slice.call(document.querySelectorAll('.build-toggle'));
+    var threatMessage = document.getElementById('threatMessage');
+    var threatLevel = document.getElementById('threatLevel');
 
-    function setCardOpen(card, button, open) {
-      var panel = document.getElementById(button.getAttribute('aria-controls'));
-      var title = card.querySelector('.build-title');
-      if (!panel) return;
+    if (threatMessage && threatLevel && !reducedMotion) {
+      var threats = [
+        { text: 'Typosquatted domain detected', level: 'High' },
+        { text: 'Phishing link intercepted', level: 'High' },
+        { text: 'Weak password pattern found', level: 'Medium' },
+        { text: 'Certificate expiring in 6 days', level: 'Low' },
+        { text: 'Lookalike login page blocked', level: 'High' }
+      ];
+      var threatIndex = 0;
 
-      card.classList.toggle('is-open', open);
-      button.setAttribute('aria-expanded', String(open));
-      panel.setAttribute('aria-hidden', String(!open));
-      if ('inert' in panel) panel.inert = !open;
-      button.setAttribute('aria-label', (open ? 'Hide' : 'Show') + ' technical details for ' + (title ? title.textContent.trim() : 'this project'));
+      window.setInterval(function () {
+        if (document.hidden) return;
+        threatIndex = (threatIndex + 1) % threats.length;
+        threatMessage.textContent = threats[threatIndex].text;
+        threatLevel.textContent = threats[threatIndex].level;
+      }, 5200);
+    }
 
-      if (open && !reducedMotion) {
-        window.setTimeout(function () {
-          if (!card.classList.contains('is-open')) return;
-          var rect = card.getBoundingClientRect();
-          if (rect.bottom > window.innerHeight) {
-            card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-          }
-        }, 380);
+    /* ---------------------------------------------------------------------
+       Project data
+       --------------------------------------------------------------------- */
+
+    var projects = {
+      copilot: {
+        index: '01',
+        title: 'Website Security Copilot',
+        category: 'Cybersecurity · Browser extension',
+        status: 'Completed',
+        desc: 'A FastAPI engine checks security headers, TLS certificates, cookie flags, DNS email records, open ports and phishing signals. The MV3 extension watches tabs and blocks harmful pages before they load. AI explains the tool output — it never invents findings.',
+        stack: ['Next.js', 'FastAPI', 'Python', 'SQLite', 'Docker', 'MV3'],
+        links: [
+          { label: 'Live demo', href: 'https://website-security-copilot-3m0hij8jl-arkap1502-9053s-projects.vercel.app/' },
+          { label: 'Source code', href: 'https://github.com/arkap1502/Website-Security-Copilot' }
+        ]
+      },
+      altron: {
+        index: '02',
+        title: 'ALTRON Password Inspector',
+        category: 'Security · Web tool',
+        status: 'Completed',
+        desc: 'Passwords are generated with crypto.getRandomValues(), never Math.random(). Strength scoring checks character classes and a 15+ character length threshold. Everything runs in the browser.',
+        stack: ['JavaScript', 'Web Crypto API', 'HTML', 'CSS'],
+        links: [
+          { label: 'Live demo', href: 'https://arkap1502.github.io/password-making/' },
+          { label: 'Source code', href: 'https://github.com/arkap1502/password-making' }
+        ]
+      },
+      url: {
+        index: '03',
+        title: 'URL Threat Scanner',
+        category: 'Web security · Phishing detection',
+        status: 'Completed',
+        desc: 'Client-side URL analysis flags raw IPs, uncommon TLDs, lookalike brand spellings and phishing keywords, then combines them into a 0–100 risk score with a plain-language verdict.',
+        stack: ['JavaScript', 'HTML', 'CSS'],
+        links: [
+          { label: 'Live demo', href: 'https://arkap1502.github.io/URL-Scanner/' },
+          { label: 'Source code', href: 'https://github.com/arkap1502/URL-Scanner' }
+        ]
+      },
+      humanize: {
+        index: '04',
+        title: 'Humanize AI',
+        category: 'AI · Text tool',
+        status: 'Ongoing',
+        desc: 'A React frontend with an Express backend, plus a zero-build client-side fallback so it runs offline. Light, Medium and Strong modes transform text in real time with a word-count diff.',
+        stack: ['React', 'Express', 'JavaScript'],
+        links: [
+          { label: 'Live demo', href: 'https://arkap1502.github.io/Humanize-AI/' },
+          { label: 'Source code', href: 'https://github.com/arkap1502/Humanize-AI' }
+        ]
+      },
+      nexvault: {
+        index: '05',
+        title: 'NexVault',
+        category: 'Security · Web app',
+        status: 'Ongoing',
+        desc: 'A group-built web vault following a “your data, your vault, your control” model. Vault data is gated behind authentication, with encrypted, access-controlled storage and a personal dashboard per user.',
+        stack: ['Web App', 'Authentication', 'Data Security'],
+        links: [
+          { label: 'Live demo', href: 'https://secure-vault-system.onrender.com/' }
+        ]
+      },
+      prompt: {
+        index: '06',
+        title: 'Hidden-Prompt Scanner',
+        category: 'AI security · Document analysis',
+        status: 'Completed',
+        desc: 'Extracts visible text and layout signals — colour, font size, opacity, position — to flag hidden text, zero-width characters, metadata, comments and injection phrases. Ships as a CLI and Flask UI, fully local.',
+        stack: ['Python', 'Flask', 'PyPDF2', 'python-docx'],
+        links: [
+          { label: 'Live demo', href: 'https://hidden-prompt-scanner-for-documents.onrender.com/' },
+          { label: 'Source code', href: 'https://github.com/arkap1502/Hidden-prompt-scanner-for-documents%2E' }
+        ]
+      },
+      prototype: {
+        index: '07',
+        title: 'Prototype Safety Check',
+        category: 'Web security · Passive checks',
+        status: 'Ongoing',
+        desc: 'Passive checks for exposed parameters, database errors, missing security headers, suspicious scripts and HTTPS signals. Ships a web UI, CLI and REST API — no exploitation.',
+        stack: ['Python', 'Flask', 'REST API'],
+        links: [
+          { label: 'Live demo', href: 'https://prototype-safety-check.onrender.com/' },
+          { label: 'Source code', href: 'https://github.com/arkap1502/prototype-safety-check' }
+        ]
+      },
+      quishing: {
+        index: '08',
+        title: 'Quishing Guard',
+        category: 'Web security · QR phishing',
+        status: 'Completed',
+        desc: 'Scans QR codes from your camera or an uploaded image, decodes the payload locally and scores the risk before anything opens. Flags shortened links, lookalike and punycode domains, IP-address URLs, suspicious TLDs and UPI payee mismatches — with scan history kept on the device.',
+        stack: ['React', 'TypeScript', 'Vite', 'jsQR', 'PWA'],
+        links: [
+          { label: 'Live demo', href: 'https://quishing-guard.vercel.app/' },
+          { label: 'Source code', href: 'https://github.com/arkap1502/Quishing-Guard' }
+        ]
       }
-    }
+    };
 
-    function closeAllCards() {
-      buildToggles.forEach(function (button) {
-        var card = button.closest('.build-card');
-        if (card && card.classList.contains('is-open')) setCardOpen(card, button, false);
+    /* ---------------------------------------------------------------------
+       Project details dialogue
+       --------------------------------------------------------------------- */
+
+    var dialog = document.getElementById('projectDialog');
+
+    if (dialog && typeof dialog.showModal === 'function') {
+      var dialogEyebrow = document.getElementById('dialogEyebrow');
+      var dialogTitle = document.getElementById('dialogTitle');
+      var dialogMeta = document.getElementById('dialogMeta');
+      var dialogDesc = document.getElementById('dialogDesc');
+      var dialogStack = document.getElementById('dialogStack');
+      var dialogLinks = document.getElementById('dialogLinks');
+      var lastTrigger = null;
+
+      function fillDialog(project) {
+        dialogEyebrow.textContent = project.index + ' / Project';
+        dialogTitle.textContent = project.title;
+        dialogMeta.textContent = project.category + ' · ' + project.status;
+        dialogDesc.textContent = project.desc;
+
+        dialogStack.textContent = '';
+        project.stack.forEach(function (item) {
+          var chip = document.createElement('span');
+          chip.textContent = item;
+          dialogStack.appendChild(chip);
+        });
+
+        dialogLinks.textContent = '';
+        project.links.forEach(function (link) {
+          var anchor = document.createElement('a');
+          anchor.className = 'link-arrow';
+          anchor.href = link.href;
+          if (link.href.indexOf('http') === 0) {
+            anchor.target = '_blank';
+            anchor.rel = 'noopener';
+          }
+          anchor.innerHTML = link.label + ' <span class="arrow" aria-hidden="true">↗</span>';
+          dialogLinks.appendChild(anchor);
+        });
+      }
+
+      function openProject(card, trigger) {
+        var project = projects[card.getAttribute('data-project')];
+        if (!project) return;
+        lastTrigger = trigger;
+        fillDialog(project);
+        dialog.showModal();
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeDialog() {
+        if (!dialog.open) return;
+        dialog.close();
+      }
+
+      document.querySelectorAll('.project-card').forEach(function (card) {
+        var trigger = card.querySelector('.project-open');
+        if (!trigger) return;
+        trigger.addEventListener('click', function () {
+          openProject(card, trigger);
+        });
+      });
+
+      dialog.querySelectorAll('[data-close-dialog]').forEach(function (button) {
+        button.addEventListener('click', closeDialog);
+      });
+
+      dialog.addEventListener('click', function (event) {
+        if (event.target === dialog) closeDialog();
+      });
+
+      dialog.addEventListener('close', function () {
+        document.body.style.overflow = '';
+        if (lastTrigger) lastTrigger.focus();
       });
     }
 
-    buildToggles.forEach(function (button) {
-      var card = button.closest('.build-card');
-      var panel = document.getElementById(button.getAttribute('aria-controls'));
-      if (panel && 'inert' in panel) panel.inert = true;
+    /* ---------------------------------------------------------------------
+       Project filters
+       --------------------------------------------------------------------- */
 
-      button.addEventListener('click', function () {
-        if (!card) return;
-        var willOpen = button.getAttribute('aria-expanded') !== 'true';
-        if (willOpen) {
-          buildToggles.forEach(function (other) {
-            if (other === button) return;
-            var otherCard = other.closest('.build-card');
-            if (otherCard) setCardOpen(otherCard, other, false);
-          });
-        }
-        setCardOpen(card, button, willOpen);
+    var filterButtons = Array.prototype.slice.call(document.querySelectorAll('.filter-btn'));
+    var cards = Array.prototype.slice.call(document.querySelectorAll('.project-card'));
+    var filterCount = document.getElementById('filterCount');
+    var emptyState = document.getElementById('buildEmpty');
+    var moreHead = document.getElementById('moreHead');
+    var moreGrid = document.getElementById('moreGrid');
+    var moreCount = document.getElementById('moreCount');
+
+    function applyFilter(filter) {
+      var shown = 0;
+      var shownMore = 0;
+
+      cards.forEach(function (card) {
+        var match = filter === 'all' || card.getAttribute('data-status') === filter;
+        card.classList.toggle('is-hidden', !match);
+        if (!match) return;
+        shown += 1;
+        if (moreGrid && moreGrid.contains(card)) shownMore += 1;
       });
-    });
 
-    /* Open the matching project when arriving from the home preview */
-    function openHashProject() {
-      var hash = window.location.hash;
-      if (!hash || hash.indexOf('#build-') !== 0) return;
-      var target = document.querySelector(hash);
-      if (!target || !target.classList.contains('build-card')) return;
-      var button = target.querySelector('.build-toggle');
-      if (button) setCardOpen(target, button, true);
+      if (filterCount) {
+        filterCount.textContent = String(shown).padStart(2, '0') + (shown === 1 ? ' build' : ' builds');
+      }
+      if (moreCount) {
+        moreCount.textContent = String(shownMore).padStart(2, '0');
+      }
+      if (moreHead) {
+        moreHead.hidden = shownMore === 0;
+      }
+      if (emptyState) {
+        emptyState.hidden = shown !== 0;
+      }
+
+      filterButtons.forEach(function (button) {
+        button.setAttribute('aria-pressed', String(button.getAttribute('data-filter') === filter));
+      });
     }
 
-    window.addEventListener('hashchange', openHashProject);
-    openHashProject();
-
-    if (filterButtons.length && buildCards.length) {
+    if (filterButtons.length && cards.length) {
       filterButtons.forEach(function (button) {
         button.addEventListener('click', function () {
-          var filter = button.dataset.filter || 'all';
-
-          filterButtons.forEach(function (item) {
-            var active = item === button;
-            item.classList.toggle('is-active', active);
-            item.setAttribute('aria-pressed', String(active));
-          });
-
-          closeAllCards();
-
-          var shown = 0;
-          buildCards.forEach(function (card) {
-            var match = filter === 'all' || card.dataset.category === filter;
-            card.hidden = !match;
-            if (match) shown += 1;
-          });
-
-          if (buildCount) {
-            buildCount.textContent = String(shown).padStart(2, '0') + (shown === 1 ? ' build' : ' builds');
-          }
-          if (emptyState) emptyState.hidden = shown !== 0;
+          applyFilter(button.getAttribute('data-filter') || 'all');
         });
       });
     }
 
-    /* Click-to-copy email ------------------------------------------------ */
-    document.querySelectorAll('[data-copy]').forEach(function (button) {
-      var row = button.closest('.contact-row');
-      var status = row ? row.querySelector('.copy-status') : null;
-      var resetTimer;
-      var buttonTimer;
+    /* ---------------------------------------------------------------------
+       Contact form
+       --------------------------------------------------------------------- */
 
-      function legacyCopy(value) {
-        var input = document.createElement('textarea');
-        input.value = value;
-        input.setAttribute('readonly', '');
-        input.style.position = 'fixed';
-        input.style.opacity = '0';
-        document.body.appendChild(input);
-        input.select();
-        var copied = false;
-        try {
-          copied = document.execCommand('copy');
-        } catch (error) {
-          copied = false;
-        }
-        document.body.removeChild(input);
-        return copied;
-      }
-
-      function selectEmail() {
-        var value = row ? row.querySelector('.contact-value') : null;
-        if (!value || !window.getSelection) return false;
-        var range = document.createRange();
-        range.selectNodeContents(value);
-        var selection = window.getSelection();
-        selection.removeAllRanges();
-        selection.addRange(range);
-        return true;
-      }
-
-      function setButtonLabel(label) {
-        button.textContent = label;
-        clearTimeout(buttonTimer);
-        buttonTimer = setTimeout(function () { button.textContent = 'Copy'; }, 2600);
-      }
-
-      button.addEventListener('click', function () {
-        var value = button.dataset.copy;
-        if (!value) return;
-
-        function confirmCopy(message) {
-          if (status) {
-            status.textContent = message;
-            clearTimeout(resetTimer);
-            resetTimer = setTimeout(function () { status.textContent = ''; }, 2600);
-          }
-          setButtonLabel('Copied');
-        }
-
-        function fallbackCopy() {
-          if (legacyCopy(value)) {
-            confirmCopy('Copied to clipboard');
-          } else if (selectEmail()) {
-            confirmCopy('Press Ctrl/Cmd+C to copy');
-          } else {
-            confirmCopy('Copy failed — select the address');
-          }
-        }
-
-        if (navigator.clipboard && window.isSecureContext) {
-          navigator.clipboard.writeText(value)
-            .then(function () { confirmCopy('Copied to clipboard'); })
-            .catch(fallbackCopy);
-        } else {
-          fallbackCopy();
-        }
-      });
-    });
-
-    /* Contact form ------------------------------------------------------- */
     var form = document.getElementById('contactForm');
 
     if (form) {
