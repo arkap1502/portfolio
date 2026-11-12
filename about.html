@@ -41,7 +41,10 @@ document.documentElement.classList.add('js');
       <a href="contact.html">Contact</a>
     </nav>
     <div class="nav-actions">
-      <a class="btn btn--ghost" href="contact.html">Let’s talk <span class="arrow" aria-hidden="true">↗</span></a>
+      <div class="theme-toggle" role="group" aria-label="Colour theme">
+        <button class="theme-toggle__btn" type="button" data-set-theme="light" aria-pressed="true">Light</button>
+        <button class="theme-toggle__btn" type="button" data-set-theme="dark" aria-pressed="false">Dark</button>
+      </div>
       <button class="nav-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -53,7 +56,6 @@ document.documentElement.classList.add('js');
     <a href="about.html" aria-current="page">About <span aria-hidden="true">→</span></a>
     <a href="certificates.html">Certificates <span aria-hidden="true">→</span></a>
     <a href="contact.html">Contact <span aria-hidden="true">→</span></a>
-    <a class="btn btn--ghost" href="contact.html">Let’s talk <span class="arrow" aria-hidden="true">↗</span></a>
   </nav>
 </header>
 
