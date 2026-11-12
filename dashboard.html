@@ -96,8 +96,9 @@ document.documentElement.classList.add('js');
       </div>
 
       <div class="home-art" data-reveal style="--delay:120ms">
-        <div class="hero-portrait">
+        <div class="hero-portrait" data-portrait>
           <img src="assets/lunar-hero.webp" alt="Astronaut in a polished white suit with a dark reflective visor" width="1380" height="1452" fetchpriority="high" data-hero>
+          <span class="visor-hud" data-reticle aria-hidden="true"><i class="visor-hud__dot"></i></span>
         </div>
 
         <div class="theme-block">
@@ -163,6 +164,6 @@ document.documentElement.classList.add('js');
     </div>
   </section>
 </main>
-<script src="assets/site.js"></script>
+<script src="assets/site.js?v=4"></script>
 </body>
 </html>

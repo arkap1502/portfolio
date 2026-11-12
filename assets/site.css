@@ -1179,8 +1179,64 @@ p { margin: 0; }
   border-radius: 50%;
   object-fit: cover;
   object-position: 50% 50%;
-  transition: opacity .22s var(--ease);
+  transform: scale(1.04) translate(var(--hero-parallax-x, 0px), var(--hero-parallax-y, 0px));
+  transition: opacity .22s var(--ease), transform .45s var(--ease);
 }
+
+/* Helmet HUD: a reticle that rides the visor glass and follows the pointer. */
+.hero-portrait {
+  --reticle-x: 62%;
+  --reticle-y: 23.5%;
+}
+
+.visor-hud {
+  position: absolute;
+  z-index: 2;
+  left: var(--reticle-x);
+  top: var(--reticle-y);
+  width: 34px;
+  height: 34px;
+  margin: -17px 0 0 -17px;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s var(--ease);
+}
+
+.visor-hud::before,
+.visor-hud::after {
+  content: "";
+  position: absolute;
+  background: var(--accent);
+  opacity: .75;
+}
+
+/* Vertical and horizontal hairline cross, slightly overhanging the ring. */
+.visor-hud::before {
+  top: -8px;
+  bottom: -8px;
+  left: 50%;
+  width: 1px;
+  margin-left: -.5px;
+}
+
+.visor-hud::after {
+  left: -8px;
+  right: -8px;
+  top: 50%;
+  height: 1px;
+  margin-top: -.5px;
+}
+
+.visor-hud__dot {
+  position: absolute;
+  inset: 13px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.hero-portrait.is-tracking .visor-hud { opacity: .9; }
 
 /* Each palette swaps in its own visor portrait, so the whole design changes. */
 .hero-portrait img.is-swapping { opacity: .25; }

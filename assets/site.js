@@ -133,6 +133,67 @@
   });
 
   /* -----------------------------------------------------------------------
+     Visor HUD — a reticle that tracks the pointer across the helmet glass
+     ----------------------------------------------------------------------- */
+
+  var portrait = document.querySelector('[data-portrait]');
+  var reticle = document.querySelector('[data-reticle]');
+
+  if (portrait && reticle && !reducedMotion) {
+    /* The glass sits in the same place in every palette portrait, so one
+       ellipse (in percent of the portrait box) serves all five robots. */
+    var VISOR = { cx: 62, cy: 23.5, rx: 17, ry: 16 };
+    var point = { x: VISOR.cx, y: VISOR.cy };
+    var lean = { x: 0, y: 0 };
+    /* Pointer events already arrive at frame rate, so paint straight away
+       rather than waiting on requestAnimationFrame (which stalls in a
+       hidden tab). */
+    var paint = function () {
+      portrait.style.setProperty('--reticle-x', point.x.toFixed(2) + '%');
+      portrait.style.setProperty('--reticle-y', point.y.toFixed(2) + '%');
+      portrait.style.setProperty('--hero-parallax-x', lean.x.toFixed(2) + 'px');
+      portrait.style.setProperty('--hero-parallax-y', lean.y.toFixed(2) + 'px');
+    };
+
+    portrait.addEventListener('pointermove', function (event) {
+      var box = portrait.getBoundingClientRect();
+      if (!box.width || !box.height) return;
+
+      var x = ((event.clientX - box.left) / box.width) * 100;
+      var y = ((event.clientY - box.top) / box.height) * 100;
+      var dx = (x - VISOR.cx) / VISOR.rx;
+      var dy = (y - VISOR.cy) / VISOR.ry;
+      var reach = dx * dx + dy * dy;
+
+      /* Past the glass edge the reticle slides along it instead of leaving. */
+      if (reach > 1) {
+        var length = Math.sqrt(reach);
+        dx /= length;
+        dy /= length;
+      }
+
+      point.x = VISOR.cx + dx * VISOR.rx;
+      point.y = VISOR.cy + dy * VISOR.ry;
+
+      /* The artwork leans a few pixels away from the pointer. */
+      lean.x = -dx * 5;
+      lean.y = -dy * 5;
+
+      portrait.classList.add('is-tracking');
+      paint();
+    });
+
+    portrait.addEventListener('pointerleave', function () {
+      portrait.classList.remove('is-tracking');
+      point.x = VISOR.cx;
+      point.y = VISOR.cy;
+      lean.x = 0;
+      lean.y = 0;
+      paint();
+    });
+  }
+
+  /* -----------------------------------------------------------------------
      Entry cover — laptop and phone, only the matching one is usable
      ----------------------------------------------------------------------- */
 
