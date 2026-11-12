@@ -25,6 +25,15 @@
     nebula: { src: 'assets/theme-nebula-hero.webp?v=3', alt: 'Astronaut in a dark suit with a violet visor' },
     lunar: { src: 'assets/lunar-hero.webp?v=3', alt: 'Astronaut in a polished white suit with a dark reflective visor' }
   };
+  /* Stopping the reticle opens a window onto this palette's counterpart:
+     white suits turn blue/violet, dark suits turn white again. */
+  var revealPair = {
+    pearl: 'obsidian',
+    obsidian: 'pearl',
+    glacier: 'nebula',
+    nebula: 'glacier',
+    lunar: 'obsidian'
+  };
 
   /* -----------------------------------------------------------------------
      Theme and palette
@@ -72,6 +81,13 @@
     }, 170);
   }
 
+  function syncReveal(palette) {
+    var reveal = document.querySelector('[data-hero-reveal]');
+    if (!reveal) return;
+    var art = paletteArt[revealPair[palette] || 'obsidian'];
+    if (reveal.getAttribute('src') !== art.src) reveal.setAttribute('src', art.src);
+  }
+
   function syncPalette(animate) {
     var palette = root.getAttribute('data-palette') || 'lunar';
     var label = document.getElementById('paletteName');
@@ -80,6 +96,7 @@
       button.setAttribute('aria-pressed', String(button.getAttribute('data-palette') === palette));
     });
     syncHero(palette, animate);
+    syncReveal(palette);
     syncMetaColor();
   }
 
@@ -133,26 +150,88 @@
   });
 
   /* -----------------------------------------------------------------------
-     Visor HUD — a reticle that tracks the pointer across the helmet glass
+     Robot HUD — a reticle that glides across the whole portrait disc, wakes
+     the visor galaxy, and opens the paired palette where it comes to rest.
      ----------------------------------------------------------------------- */
 
   var portrait = document.querySelector('[data-portrait]');
   var reticle = document.querySelector('[data-reticle]');
 
   if (portrait && reticle && !reducedMotion) {
-    /* The glass sits in the same place in every palette portrait, so one
-       ellipse (in percent of the portrait box) serves all five robots. */
-    var VISOR = { cx: 62, cy: 23.5, rx: 17, ry: 16 };
-    var point = { x: VISOR.cx, y: VISOR.cy };
+    var HUD_RADIUS = 47;              /* keep the ring on the disc, in % */
+    var home = { x: 62, y: 23.5 };    /* the visor, where the HUD parks */
+    var point = { x: home.x, y: home.y };
+    var goal = { x: home.x, y: home.y };
     var lean = { x: 0, y: 0 };
-    /* Pointer events already arrive at frame rate, so paint straight away
-       rather than waiting on requestAnimationFrame (which stalls in a
-       hidden tab). */
+    var leanGoal = { x: 0, y: 0 };
+    var reveal = 1;
+    var revealGoal = 1;
+    var frame = 0;
+    var lastTime = 0;
+    var restTimer = 0;
+
     var paint = function () {
       portrait.style.setProperty('--reticle-x', point.x.toFixed(2) + '%');
       portrait.style.setProperty('--reticle-y', point.y.toFixed(2) + '%');
+      portrait.style.setProperty('--reveal-r', reveal.toFixed(2) + '%');
       portrait.style.setProperty('--hero-parallax-x', lean.x.toFixed(2) + 'px');
       portrait.style.setProperty('--hero-parallax-y', lean.y.toFixed(2) + 'px');
+    };
+
+    /* Frame-rate independent easing: the reticle eases toward the pointer
+       instead of snapping, so the whole path across the robot stays fluid. */
+    var settle = function (now) {
+      if (!lastTime) lastTime = now;
+      var dt = Math.min((now - lastTime) / 1000, .05);
+      lastTime = now;
+
+      var ease = 1 - Math.exp(-dt * 11);
+      point.x += (goal.x - point.x) * ease;
+      point.y += (goal.y - point.y) * ease;
+      lean.x += (leanGoal.x - lean.x) * ease;
+      lean.y += (leanGoal.y - lean.y) * ease;
+      reveal += (revealGoal - reveal) * ease;
+      paint();
+
+      var moving =
+        Math.abs(goal.x - point.x) > .01 ||
+        Math.abs(goal.y - point.y) > .01 ||
+        Math.abs(leanGoal.x - lean.x) > .01 ||
+        Math.abs(leanGoal.y - lean.y) > .01 ||
+        Math.abs(revealGoal - reveal) > .01;
+
+      frame = moving ? window.requestAnimationFrame(settle) : 0;
+      if (!moving) lastTime = 0;
+    };
+
+    var animate = function () {
+      if (frame) return;
+      lastTime = 0;
+      frame = window.requestAnimationFrame(settle);
+    };
+
+    /* Moving keeps a smaller reveal window glued to the reticle, so the
+       colour swap follows the pointer instead of waiting for it to stop. */
+    var resetRest = function () {
+      window.clearTimeout(restTimer);
+      portrait.classList.remove('is-resting');
+      revealGoal = 21;
+    };
+
+    var clearReveal = function () {
+      window.clearTimeout(restTimer);
+      portrait.classList.remove('is-resting', 'is-revealing');
+      revealGoal = 1;
+    };
+
+    /* A short pause settles the window a little wider under the reticle. */
+    var scheduleRest = function () {
+      window.clearTimeout(restTimer);
+      restTimer = window.setTimeout(function () {
+        portrait.classList.add('is-resting');
+        revealGoal = 26;
+        animate();
+      }, 170);
     };
 
     portrait.addEventListener('pointermove', function (event) {
@@ -161,35 +240,60 @@
 
       var x = ((event.clientX - box.left) / box.width) * 100;
       var y = ((event.clientY - box.top) / box.height) * 100;
-      var dx = (x - VISOR.cx) / VISOR.rx;
-      var dy = (y - VISOR.cy) / VISOR.ry;
-      var reach = dx * dx + dy * dy;
+      var dx = x - 50;
+      var dy = y - 50;
+      var distance = Math.sqrt(dx * dx + dy * dy);
 
-      /* Past the glass edge the reticle slides along it instead of leaving. */
-      if (reach > 1) {
-        var length = Math.sqrt(reach);
-        dx /= length;
-        dy /= length;
+      /* The artwork is a disc: only track while the pointer is on the robot. */
+      if (distance > 50) {
+        clearReveal();
+        portrait.classList.remove('is-tracking', 'is-visoring');
+        goal.x = home.x;
+        goal.y = home.y;
+        leanGoal.x = 0;
+        leanGoal.y = 0;
+        animate();
+        return;
       }
 
-      point.x = VISOR.cx + dx * VISOR.rx;
-      point.y = VISOR.cy + dy * VISOR.ry;
+      /* The glass sits in the same ellipse for every palette portrait. */
+      var visorX = (x - 62) / 17;
+      var visorY = (y - 23.5) / 16;
+      portrait.classList.toggle('is-visoring', visorX * visorX + visorY * visorY <= 1);
 
-      /* The artwork leans a few pixels away from the pointer. */
-      lean.x = -dx * 5;
-      lean.y = -dy * 5;
+      /* Near the rim the ring is pulled just inside so it never spills off. */
+      if (distance > HUD_RADIUS) {
+        x = 50 + (dx / distance) * HUD_RADIUS;
+        y = 50 + (dy / distance) * HUD_RADIUS;
+      }
 
-      portrait.classList.add('is-tracking');
-      paint();
+      resetRest();
+
+      if (!portrait.classList.contains('is-tracking')) {
+        /* Entering the disc should feel like the HUD was already waiting. */
+        point.x = x;
+        point.y = y;
+        paint();
+      }
+
+      goal.x = x;
+      goal.y = y;
+      leanGoal.x = -((x - 50) / 50) * 6;
+      leanGoal.y = -((y - 50) / 50) * 6;
+
+      portrait.classList.add('is-tracking', 'is-revealing');
+      scheduleRest();
+      animate();
     });
 
     portrait.addEventListener('pointerleave', function () {
-      portrait.classList.remove('is-tracking');
-      point.x = VISOR.cx;
-      point.y = VISOR.cy;
-      lean.x = 0;
-      lean.y = 0;
-      paint();
+      clearReveal();
+      portrait.classList.remove('is-tracking', 'is-visoring');
+      goal.x = home.x;
+      goal.y = home.y;
+      leanGoal.x = 0;
+      leanGoal.y = 0;
+      animate();
     });
   }
 
