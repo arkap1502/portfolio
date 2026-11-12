@@ -1318,6 +1318,35 @@ p { margin: 0; }
   text-transform: uppercase;
 }
 
+.project-card__links {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px clamp(12px, 1.1vw, 18px);
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+
+.project-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-mid);
+  font-family: var(--font-mono);
+  font-size: clamp(.54rem, .16vw + .5rem, .66rem);
+  letter-spacing: .12em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  transition: color .18s var(--ease);
+}
+
+.project-card__link:hover { color: var(--text); }
+
+.project-card__link span { transition: transform .2s var(--ease); }
+.project-card__link:hover span { transform: translate(2px, -2px); }
+
 .project-open {
   position: absolute;
   inset: 0;

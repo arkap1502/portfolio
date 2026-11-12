@@ -332,6 +332,34 @@
     };
 
     /* ---------------------------------------------------------------------
+       Project links — live demo and source on the card itself
+       --------------------------------------------------------------------- */
+
+    document.querySelectorAll('.project-card[data-project]').forEach(function (card) {
+      var project = projects[card.getAttribute('data-project')];
+      var body = card.querySelector('.project-card__body');
+      if (!project || !body || !project.links || !project.links.length) return;
+      if (body.querySelector('.project-card__links')) return;
+
+      var row = document.createElement('div');
+      row.className = 'project-card__links';
+
+      project.links.forEach(function (link) {
+        var anchor = document.createElement('a');
+        anchor.className = 'project-card__link';
+        anchor.href = link.href;
+        if (link.href.indexOf('http') === 0) {
+          anchor.target = '_blank';
+          anchor.rel = 'noopener';
+        }
+        anchor.innerHTML = link.label + ' <span aria-hidden="true">↗</span>';
+        row.appendChild(anchor);
+      });
+
+      body.appendChild(row);
+    });
+
+    /* ---------------------------------------------------------------------
        Project details dialogue
        --------------------------------------------------------------------- */
 
