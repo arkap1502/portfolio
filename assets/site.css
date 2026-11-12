@@ -881,6 +881,16 @@ p { margin: 0; }
 
 [data-theme="light"] .orbit__disc { background: #cfcfd0; }
 
+/* A satellite that travels the ring: the wrapper turns around the orbit's
+   centre, the dot rides its edge. It is a circle, so no counter-rotation. */
+.orbit__dot-wrap {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  animation: orbit-drift 26s linear infinite;
+  will-change: transform;
+}
+
 .orbit__dot {
   position: absolute;
   top: 18.5%;
@@ -889,6 +899,11 @@ p { margin: 0; }
   height: 13px;
   border-radius: 50%;
   background: var(--text-mid);
+}
+
+@keyframes orbit-drift {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 .laptop {
@@ -2356,4 +2371,5 @@ p { margin: 0; }
     opacity: 1;
     transform: none;
   }
+
 }
