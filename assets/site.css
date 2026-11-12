@@ -82,6 +82,183 @@
 [data-theme="light"][data-palette="lunar"]    { --accent: #3f4042; }
 
 /* --------------------------------------------------------------------------
+   1b. Full interface themes
+   One complete theme per visor set: canvas, panels, insets, hairlines and text
+   tones all follow the robot. Scoped to [data-ui="palette"] so the entry cover
+   keeps its own lunar canvas. Lunar is the base theme, so it needs no block.
+   -------------------------------------------------------------------------- */
+
+[data-ui="palette"][data-palette="pearl"] {
+  --bg: #17140f;
+  --bg-elev: #201c15;
+  --bg-inset: #0f0d09;
+  --bg-raised: #2b2419;
+  --bg-disc: #6d5734;
+
+  --line: #3a3225;
+  --line-strong: #5a4c36;
+
+  --text: #f1eadc;
+  --text-soft: #d8cdb8;
+  --text-mid: #cec2ab;
+  --muted: #a69a84;
+  --dim: #8c8270;
+  --warn: #cf8f66;
+
+  --accent: #d2ae70;
+  --accent-contrast: #1a1510;
+}
+
+[data-ui="palette"][data-palette="obsidian"] {
+  --bg: #0c1119;
+  --bg-elev: #141b26;
+  --bg-inset: #070b11;
+  --bg-raised: #1b2532;
+  --bg-disc: #2f4b73;
+
+  --line: #22303f;
+  --line-strong: #3a4c61;
+
+  --text: #e6edf6;
+  --text-soft: #c6d2e1;
+  --text-mid: #b6c6d8;
+  --muted: #8c9bad;
+  --dim: #768595;
+  --warn: #d08f6e;
+
+  --accent: #8ea9d9;
+  --accent-contrast: #0a1017;
+}
+
+[data-ui="palette"][data-palette="glacier"] {
+  --bg: #0c1516;
+  --bg-elev: #14201f;
+  --bg-inset: #071010;
+  --bg-raised: #1c2b2a;
+  --bg-disc: #2e5f60;
+
+  --line: #223231;
+  --line-strong: #3a4f4e;
+
+  --text: #e2efee;
+  --text-soft: #bed3d1;
+  --text-mid: #aec7c5;
+  --muted: #8aa09f;
+  --dim: #74898a;
+  --warn: #cf8b70;
+
+  --accent: #8bc8cb;
+  --accent-contrast: #08100f;
+}
+
+[data-ui="palette"][data-palette="nebula"] {
+  --bg: #120f19;
+  --bg-elev: #1a1524;
+  --bg-inset: #0b0910;
+  --bg-raised: #241d32;
+  --bg-disc: #4a3a6e;
+
+  --line: #2c2438;
+  --line-strong: #453a5c;
+
+  --text: #ede8f7;
+  --text-soft: #d0c6e3;
+  --text-mid: #c3b7db;
+  --muted: #a195b5;
+  --dim: #867b97;
+  --warn: #cf8e86;
+
+  --accent: #b79bd8;
+  --accent-contrast: #0f0b17;
+}
+
+[data-theme="light"][data-ui="palette"][data-palette="pearl"] {
+  --bg: #ece7db;
+  --bg-elev: #f5f1e7;
+  --bg-inset: #ddd6c6;
+  --bg-raised: #e3dccb;
+  --bg-disc: #cabfa4;
+
+  --line: #cdc4b1;
+  --line-strong: #b0a489;
+
+  --text: #221d15;
+  --text-soft: #3f372a;
+  --text-mid: #3f372a;
+  --muted: #6a6050;
+  --dim: #7c7261;
+  --warn: #8a563c;
+
+  --accent: #8a6a2f;
+  --accent-contrast: #f5f1e7;
+}
+
+[data-theme="light"][data-ui="palette"][data-palette="obsidian"] {
+  --bg: #e2e5ea;
+  --bg-elev: #edf0f4;
+  --bg-inset: #d1d7df;
+  --bg-raised: #d6dbe3;
+  --bg-disc: #b3bcc9;
+
+  --line: #c0c7d2;
+  --line-strong: #98a3b2;
+
+  --text: #171d25;
+  --text-soft: #2b3440;
+  --text-mid: #2b3440;
+  --muted: #59646f;
+  --dim: #6a7581;
+  --warn: #8a563c;
+
+  --accent: #48628f;
+  --accent-contrast: #edf0f4;
+}
+
+[data-theme="light"][data-ui="palette"][data-palette="glacier"] {
+  --bg: #e0e8e7;
+  --bg-elev: #ebf2f1;
+  --bg-inset: #cfdad9;
+  --bg-raised: #d3dedd;
+  --bg-disc: #afc2c1;
+
+  --line: #becbc9;
+  --line-strong: #95a8a6;
+
+  --text: #152220;
+  --text-soft: #283735;
+  --text-mid: #283735;
+  --muted: #536563;
+  --dim: #637876;
+  --warn: #8a563c;
+
+  --accent: #3f7578;
+  --accent-contrast: #ebf2f1;
+}
+
+[data-theme="light"][data-ui="palette"][data-palette="nebula"] {
+  --bg: #e8e2ee;
+  --bg-elev: #f2edf7;
+  --bg-inset: #d8d0e0;
+  --bg-raised: #ddd5e5;
+  --bg-disc: #bfb2ce;
+
+  --line: #cec4d9;
+  --line-strong: #a697b9;
+
+  --text: #1e1827;
+  --text-soft: #332b3f;
+  --text-mid: #332b3f;
+  --muted: #61576d;
+  --dim: #716677;
+  --warn: #8a563c;
+
+  --accent: #6e518b;
+  --accent-contrast: #f2edf7;
+}
+
+
+
+/* --------------------------------------------------------------------------
    2. Reset and base
    -------------------------------------------------------------------------- */
 
@@ -790,6 +967,39 @@ p { margin: 0; }
   font-size: clamp(.9rem, .3vw + .78rem, 1.06rem);
 }
 
+.home-stats {
+  display: flex;
+  max-width: 800px;
+  flex-wrap: wrap;
+  gap: 14px clamp(22px, 3vw, 44px);
+  margin-top: clamp(34px, 5vh, 56px);
+  padding-top: clamp(18px, 2.4vh, 26px);
+  border-top: 1px solid var(--line);
+}
+
+.home-stat {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.home-stat__num {
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: clamp(1.4rem, 1.85vw, 2rem);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -.04em;
+}
+
+.home-stat__label {
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: clamp(.56rem, .2vw + .5rem, .72rem);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
 .threat-bar {
   display: flex;
   max-width: 800px;
@@ -840,6 +1050,8 @@ p { margin: 0; }
   letter-spacing: .12em;
   text-transform: uppercase;
 }
+
+.home-stats + .threat-bar { margin-top: clamp(24px, 3.4vh, 38px); }
 
 @keyframes pulse {
   0% { box-shadow: 0 0 0 0 rgba(183, 185, 187, .38); }

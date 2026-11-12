@@ -7,7 +7,7 @@ The interface follows the **Lunar** design system: a charcoal, near-monochrome c
 ## Pages
 
 - [Entry](index.html) — animated cover with orbit, laptop and phone
-- [Home](dashboard.html) — hero, live threat monitor, astronaut visor and palette strip, then a scroll-down row with the Thiranex internship credential and one featured build
+- [Home](dashboard.html) — hero with build/certificate/internship counts, live threat monitor, astronaut visor and palette strip, then a scroll-down row with the Thiranex internship credential and one featured build
 - [Projects](projects.html) — eight security builds with filters and detail dialogs
 - [About](about.html) — profile, education, experience and toolkit (light by default)
 - [Certificates](certificates.html) — featured credential and nine certificate cards
@@ -18,7 +18,7 @@ The interface follows the **Lunar** design system: a charcoal, near-monochrome c
 - Charcoal `#151515` background, `#1D1E1E` panels, `#0F0F0F` insets, hairline `#333334` rules.
 - Poppins for display and body, Source Serif 4 italic for accent lines, Courier Prime for labels.
 - Light and dark themes via the footer switch, persisted in `localStorage` (`arka-theme`).
-- Five visor sets — Pearl, Obsidian, Glacier, Nebula and Lunar — selectable from the home-page strip and persisted in `localStorage` (`arka-palette`). Each swaps both the accent colour and the hero astronaut portrait, so the whole design changes. Lunar is the default.
+- Five visor sets — Pearl, Obsidian, Glacier, Nebula and Lunar — selectable from the home-page strip and persisted in `localStorage` (`arka-palette`). Picking one rethemes the entire interface: canvas, panels, insets, hairlines, text tones and accent, in both light and dark, plus the hero astronaut portrait (`assets/theme-*.webp`). Lunar is the default. The entry cover keeps its own lunar canvas and is excluded from the palette themes.
 
 ## Interaction
 

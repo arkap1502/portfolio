@@ -32,13 +32,20 @@
     try { localStorage.setItem(key, value); } catch (error) {}
   }
 
+  /* The browser chrome follows the active theme, whatever canvas it uses. */
+  function syncMetaColor() {
+    var meta = document.getElementById('metaTheme');
+    if (!meta) return;
+    var bg = window.getComputedStyle(root).getPropertyValue('--bg').trim();
+    if (bg) meta.setAttribute('content', bg);
+  }
+
   function syncTheme() {
     var theme = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
-    var meta = document.getElementById('metaTheme');
-    if (meta) meta.setAttribute('content', theme === 'light' ? '#e3e3e4' : '#151515');
     document.querySelectorAll('[data-set-theme]').forEach(function (button) {
       button.setAttribute('aria-pressed', String(button.getAttribute('data-set-theme') === theme));
     });
+    syncMetaColor();
   }
 
   function syncHero(palette, animate) {
@@ -71,6 +78,7 @@
       button.setAttribute('aria-pressed', String(button.getAttribute('data-palette') === palette));
     });
     syncHero(palette, animate);
+    syncMetaColor();
   }
 
   function setTheme(theme) {
