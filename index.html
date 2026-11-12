@@ -30,37 +30,15 @@ document.documentElement.classList.add('js');
 
 <a class="skip-link" href="#main">Skip to portfolio entry</a>
 
-<header class="site-header">
-  <div class="frame nav">
-    <a class="brand" href="index.html" aria-label="Arka Patra — cover">arka<sup>®</sup></a>
-    <nav class="nav-links" aria-label="Primary">
-      <a href="dashboard.html">Home</a>
-      <a href="projects.html">Projects</a>
-      <a href="about.html">About</a>
-      <a href="certificates.html">Certificates</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-    <div class="nav-actions">
-      <div class="theme-toggle" role="group" aria-label="Colour theme">
-        <button class="theme-toggle__btn" type="button" data-set-theme="light" aria-pressed="false">Light</button>
-        <button class="theme-toggle__btn" type="button" data-set-theme="dark" aria-pressed="true">Dark</button>
-      </div>
-      <button class="nav-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
+<div class="entry-toolbar">
+  <div class="theme-toggle" role="group" aria-label="Colour theme">
+    <button class="theme-toggle__btn" type="button" data-set-theme="light" aria-pressed="false">Light</button>
+    <button class="theme-toggle__btn" type="button" data-set-theme="dark" aria-pressed="true">Dark</button>
   </div>
-  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile" aria-hidden="true">
-    <a href="dashboard.html">Home <span aria-hidden="true">→</span></a>
-    <a href="projects.html">Projects <span aria-hidden="true">→</span></a>
-    <a href="about.html">About <span aria-hidden="true">→</span></a>
-    <a href="certificates.html">Certificates <span aria-hidden="true">→</span></a>
-    <a href="contact.html">Contact <span aria-hidden="true">→</span></a>
-  </nav>
-</header>
+</div>
 
 <main id="main" class="slide-main">
-  <section class="slide" aria-labelledby="entryTitle">
+  <section class="slide slide--cover" aria-labelledby="entryTitle">
     <div class="frame entry-grid">
       <div class="entry-copy" data-reveal>
         <span class="kicker"><i class="kicker__square" aria-hidden="true"></i>Open to internships / 2026</span>
@@ -79,7 +57,7 @@ document.documentElement.classList.add('js');
           <span class="orbit__disc" aria-hidden="true"></span>
           <span class="orbit__dot" aria-hidden="true"></span>
 
-          <a class="laptop" href="dashboard.html" aria-label="Open the portfolio — laptop view">
+          <a class="laptop" href="dashboard.html" data-device="laptop" aria-label="Open the portfolio — laptop view">
             <span class="laptop__screen">
               <span class="mono">Enter</span>
               <span class="mono mono--dim">Click to open</span>
@@ -87,11 +65,11 @@ document.documentElement.classList.add('js');
             <span class="laptop__base" aria-hidden="true"></span>
           </a>
 
-          <a class="phone" href="dashboard.html" aria-label="Open the portfolio — mobile view">
+          <a class="phone" href="dashboard.html" data-device="phone" aria-label="Open the portfolio — mobile view">
             <span class="mono">Tap</span>
           </a>
         </div>
-        <p class="entry-caption mono">Laptop — click to enter<br>Mobile — tap to enter</p>
+        <p class="entry-caption mono" id="deviceCaption"><span>Laptop — click to enter</span><br><span>Phone — mobile only</span></p>
       </div>
     </div>
   </section>

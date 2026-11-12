@@ -133,6 +133,47 @@
   });
 
   /* -----------------------------------------------------------------------
+     Entry cover — laptop and phone, only the matching one is usable
+     ----------------------------------------------------------------------- */
+
+  var deviceLaptop = document.querySelector('[data-device="laptop"]');
+  var devicePhone = document.querySelector('[data-device="phone"]');
+
+  if (deviceLaptop && devicePhone) {
+    var deviceCaption = document.getElementById('deviceCaption');
+
+    var syncDevices = function () {
+      /* Same breakpoint the layout switches at, so the active option always
+         matches the frame the visitor is actually looking at. */
+      var mobile = window.innerWidth <= 900;
+
+      [
+        { el: deviceLaptop, active: !mobile, target: 'dashboard.html' },
+        { el: devicePhone, active: mobile, target: 'dashboard.html' }
+      ].forEach(function (device) {
+        device.el.classList.toggle('is-inactive', !device.active);
+        device.el.setAttribute('aria-disabled', String(!device.active));
+        device.el.tabIndex = device.active ? 0 : -1;
+        if (device.active) {
+          device.el.setAttribute('href', device.target);
+        } else {
+          device.el.removeAttribute('href');
+        }
+      });
+
+      if (deviceCaption) {
+        var lines = deviceCaption.querySelectorAll('span');
+        if (lines[0]) lines[0].textContent = mobile ? 'Phone — tap to enter' : 'Laptop — click to enter';
+        if (lines[1]) lines[1].textContent = mobile ? 'Laptop — desktop only' : 'Phone — mobile only';
+      }
+    };
+
+    syncDevices();
+    window.addEventListener('resize', syncDevices);
+    window.addEventListener('orientationchange', syncDevices);
+  }
+
+  /* -----------------------------------------------------------------------
      Mobile menu
      ----------------------------------------------------------------------- */
 

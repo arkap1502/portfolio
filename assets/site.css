@@ -795,6 +795,26 @@ p { margin: 0; }
    8. Entry cover
    -------------------------------------------------------------------------- */
 
+/* The cover has no header bar — only the theme switch floats in the corner. */
+.entry-toolbar {
+  position: fixed;
+  top: clamp(14px, 2vw, 26px);
+  right: clamp(14px, 3vw, 44px);
+  z-index: 120;
+}
+
+/* Clearance so the floating switch never sits on top of the cover copy. */
+.slide--cover { padding-top: clamp(70px, 9vh, 104px); }
+
+/* Both entry devices stay visible; only the one that matches the device works. */
+.laptop.is-inactive,
+.phone.is-inactive {
+  opacity: .3;
+  filter: grayscale(1);
+  pointer-events: none;
+  cursor: default;
+}
+
 .entry-grid {
   display: grid;
   grid-template-columns: minmax(0, .98fr) minmax(0, 1.02fr);
