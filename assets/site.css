@@ -1767,7 +1767,7 @@ p { margin: 0; }
 
 .cert-top {
   display: grid;
-  grid-template-columns: minmax(0, 1.02fr) minmax(0, .98fr);
+  grid-template-columns: minmax(0, 1fr);
   align-items: start;
   gap: clamp(38px, 5.6vw, 96px);
 }
@@ -1775,7 +1775,7 @@ p { margin: 0; }
 .cert-featured {
   position: relative;
   display: flex;
-  min-height: clamp(380px, 48vh, 522px);
+  min-height: clamp(320px, 38vh, 420px);
   flex-direction: column;
   padding: clamp(26px, 3.2vw, 48px);
   border: 1px solid var(--line);
