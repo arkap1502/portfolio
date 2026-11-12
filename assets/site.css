@@ -1271,17 +1271,33 @@ p { margin: 0; }
   margin-bottom: clamp(18px, 2.6vh, 26px);
 }
 
+/* Stacked, not side by side. */
 .home-extra__grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
   gap: clamp(10px, .9vw, 16px);
 }
 
 .home-extra__grid .cert-card,
 .home-extra__grid .project-card { min-height: clamp(240px, 26vh, 300px); }
 
+/* Stacked full-width, so the build visual stays a banner instead of
+   growing to a square wall. */
+.home-extra__grid .project-card__visual {
+  aspect-ratio: auto;
+  height: clamp(200px, 26vh, 300px);
+}
+
+.home-extra__grid .project-card__monogram {
+  width: auto;
+  height: 64%;
+  max-width: 80%;
+}
+
+/* Full width leaves the body no need for its half-width reserve. */
+.home-extra__grid .project-card__body { min-height: 0; }
+
 @media (max-width: 760px) {
-  .home-extra__grid { grid-template-columns: 1fr; }
   .home-extra__grid .cert-card,
   .home-extra__grid .project-card { min-height: 0; }
 }
@@ -1661,24 +1677,18 @@ p { margin: 0; }
   margin-top: clamp(42px, 6vh, 66px);
 }
 
-.about-profile__disc {
-  display: grid;
+/* Portrait disc beside the name. */
+.about-profile__photo {
+  display: block;
   width: clamp(120px, 12.2vw, 232px);
+  height: auto;
   flex: none;
   aspect-ratio: 1;
-  place-items: center;
+  border: 1px solid var(--line-strong);
   border-radius: 50%;
   background: var(--bg-disc);
-  color: var(--text-mid);
-  font-family: var(--font-serif);
-  font-size: clamp(2.2rem, 4.2vw, 4.6rem);
-  font-style: italic;
-  letter-spacing: -.05em;
-}
-
-[data-theme="light"] .about-profile__disc {
-  background: #393a3a;
-  color: #b7b9bb;
+  object-fit: cover;
+  object-position: 50% 30%;
 }
 
 .about-profile__meta {
