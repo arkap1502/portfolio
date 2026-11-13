@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Carlito:wght@400;700&amp;family=Courier+Prime:wght@400;700&amp;display=swap" rel="stylesheet">
 <script>document.documentElement.classList.add('js');</script>
-<link rel="stylesheet" href="assets/site.css?v=19">
+<link rel="stylesheet" href="assets/site.css?v=20">
 </head>
 <body>
 
@@ -93,27 +93,18 @@
             <span class="threat-chip__level" id="threatLevel">High</span>
           </div>
 
-          <div class="globe-panel" aria-hidden="true">
-            <svg class="globe-svg" viewBox="0 0 200 200" fill="none">
-              <circle cx="100" cy="100" r="88" stroke="#243450" stroke-width=".8" stroke-dasharray="2 5"/>
-              <circle cx="100" cy="100" r="70" stroke="#4CC9F0" stroke-opacity=".7"/>
-              <ellipse cx="100" cy="100" rx="70" ry="26" stroke="#4CC9F0" stroke-opacity=".3"/>
-              <ellipse cx="100" cy="100" rx="26" ry="70" stroke="#4CC9F0" stroke-opacity=".3"/>
-              <ellipse cx="100" cy="100" rx="54" ry="70" stroke="#8B7CF6" stroke-opacity=".35"/>
-              <ellipse cx="100" cy="100" rx="70" ry="54" stroke="#8B7CF6" stroke-opacity=".25"/>
-              <path d="M30 100h140M100 30v140" stroke="#243450"/>
-              <circle cx="100" cy="100" r="3" fill="#4CC9F0"/>
-              <circle cx="64" cy="74" r="2" fill="#4CC9F0"/>
-              <circle cx="142" cy="64" r="2" fill="#8B7CF6"/>
-              <circle cx="150" cy="128" r="2" fill="#F5B94A"/>
-              <circle cx="58" cy="134" r="2" fill="#34D399"/>
-              <circle cx="112" cy="49" r="1.5" fill="#4CC9F0"/>
-              <circle cx="44" cy="104" r="1.5" fill="#8B7CF6"/>
-            </svg>
-            <span class="globe-label globe-label--one">IN · 22.57°N</span>
-            <span class="globe-label globe-label--two">EU node</span>
-            <span class="globe-label globe-label--three">US node</span>
-            <span class="globe-label globe-label--four">APAC node</span>
+          <div class="globe-panel" id="globePanel">
+            <canvas class="globe-canvas" id="globeCanvas" tabindex="0" role="img"
+              aria-label="Interactive globe. Your base is West Bengal, India, at 22.57 degrees north and 88.36 degrees east. Drag the globe or use the arrow keys to rotate it."></canvas>
+            <span class="globe-label globe-label--one" data-globe-label="in" aria-hidden="true">You · 22.57°N</span>
+            <span class="globe-label globe-label--two" data-globe-label="eu" aria-hidden="true">EU node</span>
+            <span class="globe-label globe-label--three" data-globe-label="us" aria-hidden="true">US node</span>
+            <span class="globe-label globe-label--four" data-globe-label="apac" aria-hidden="true">APAC node</span>
+          </div>
+
+          <div class="globe-caption">
+            <span class="globe-base"><span>Base</span> West Bengal, India <b>22.57°N · 88.36°E</b></span>
+            <span class="globe-hint" id="globeHint">Drag to rotate ↻</span>
           </div>
 
           <div class="terminal hero-terminal">
@@ -225,5 +216,6 @@
 </footer>
 
 <script src="assets/site.js?v=18"></script>
+<script src="assets/globe.js?v=1"></script>
 </body>
 </html>

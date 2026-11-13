@@ -7,7 +7,7 @@ The interface follows the **Secure HUD** design language from the supplied *Port
 ## Pages
 
 - [Entry](index.html) — animated cover with a full-screen code-rain canvas, boot sequence, typewriter name, orbit rings, laptop and phone
-- [Home](dashboard.html) — command deck with identity panel, live threat monitor, terminal, active mission, counters and proof cards
+- [Home](dashboard.html) — command deck with identity panel, live threat monitor, drag-to-rotate globe, terminal, active mission, counters and proof cards
 - [About](about.html) — flippable digital identity card, focus grid, education and experience
 - [Skills](skills.html) — three skill modules; every badge maps to real projects
 - [Projects](projects.html) — featured URL Scanner plus seven filterable builds and mission-report dialogs
@@ -32,6 +32,7 @@ The interface follows the **Secure HUD** design language from the supplied *Port
 - Sticky navigation with a collapsible mobile menu (Escape closes it).
 - Scroll reveals, a 3D pointer tilt on the About identity stack, and animated HUD counters.
 - Rotating live-threat ticker on the home page.
+- Interactive orthographic globe on the home page: drag or use the arrow keys to rotate in any direction, with a pulsing marker on West Bengal and animated network arcs.
 - Project status filters, empty state and accessible `<dialog>` mission reports.
 - Skill badges that reveal the builds using each skill.
 - Flippable About identity card with a capability record on the back.
@@ -66,6 +67,9 @@ assets/css/journey-contact.css
 assets/css/responsive.css
 assets/site.js           Navigation, boot, code rain, wipe, reveals, tilt, filters,
                          dialogs, skill readout, card flip, ticker, counters and form
+assets/globe.js          Interactive home-page globe: rotation, land mask, arcs and location marker
+assets/world-land-110m.json
+                         Natural Earth 1:110m land geometry (public domain)
 assets/favicon.svg       Cyan "A" mark
 assets/Arka_Patra_CV.pdf Downloadable CV
 assets/cert-*.pdf        Credential documents
@@ -75,6 +79,7 @@ assets/Thiranex_Certificate_Arka_Patra_THX-AUG0426-563.pdf
 ## Credits
 
 - Typefaces served by [Google Fonts](https://fonts.google.com/): Carlito and Courier Prime.
+- Land geometry from [Natural Earth](https://www.naturalearthdata.com/) 1:110m land (public domain).
 - Visual language derived from the supplied *Arka Patra Portfolio UI/UX 3D* design deck.
 - Icons are CSS and inline SVG; no icon library is bundled.
 
