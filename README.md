@@ -21,14 +21,14 @@ The interface follows the **Secure HUD** design language from the supplied *Port
 - Accents: cyan `#4CC9F0`, violet `#8B7CF6`, green `#34D399`, amber `#F5B94A`.
 - Type: Carlito for display and body, Courier Prime for labels, counts and terminal text.
 - Square panels, four-point corner brackets, hairline rules, dotted technical grid and colour-coded status tags.
-- Shared tokens, chrome and primitives live in `assets/css/core.css`; page families are split into focused modules and imported by `assets/site.css`.
+- Shared tokens, chrome and primitives live in `assets/css/core.css`; page families are split into focused modules that every page links from its `<head>`, so the browser fetches them in parallel rather than through a chain of `@import`s.
 - Responsive from 320px up, with a compact page structure at tablet and mobile widths.
 
 ## Interaction
 
 - Boot sequence on the entry cover, playable once per tab and skippable.
 - Full-screen falling-code canvas behind the entry cover, paused while the tab is hidden and disabled for reduced motion.
-- Page-transition wipe for internal navigation, disabled when reduced motion is requested.
+- Navigation acceleration: internal pages are prefetched on hover, focus and idle, and links navigate natively with no artificial delay.
 - Sticky navigation with a collapsible mobile menu (Escape closes it).
 - Scroll reveals, a 3D pointer tilt on the About identity stack, and animated HUD counters.
 - Rotating live-threat ticker on the home page.
@@ -58,7 +58,6 @@ certificates.html        Featured credential and document vault
 journey.html             Five-level cybersecurity journey
 contact.html             Contact details and message form
 
-assets/site.css          Imports the CSS modules below
 assets/css/core.css      Tokens, reset, header, footer, panels, buttons, terminal, motion
 assets/css/entry-home.css
 assets/css/about-skills.css

@@ -17,13 +17,11 @@
   }
 
   /* -----------------------------------------------------------------------
-     Page wipe
+     Page navigation
+     Internal pages are fetched as soon as a pointer or focus reaches their
+     link, so a click paints the next document from cache instead of
+     waiting on a network round trip.
      ----------------------------------------------------------------------- */
-
-  var wipe = document.createElement('div');
-  wipe.className = 'page-wipe';
-  wipe.setAttribute('aria-hidden', 'true');
-  document.body.appendChild(wipe);
 
   function isInternalPage(link) {
     if (!link || !link.getAttribute) return false;
@@ -35,23 +33,41 @@
     return true;
   }
 
-  document.addEventListener('click', function (event) {
-    var link = event.target.closest ? event.target.closest('a') : null;
-    if (!link || event.defaultPrevented) return;
-    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-    if (!isInternalPage(link)) return;
-    if (reducedMotion) return;
+  var prefetched = Object.create(null);
 
-    event.preventDefault();
-    wipe.classList.add('is-active');
-    window.setTimeout(function () {
-      window.location.href = link.href;
-    }, 380);
+  function prefetch(link) {
+    if (!isInternalPage(link) || prefetched[link.href]) return;
+    prefetched[link.href] = true;
+
+    var hint = document.createElement('link');
+    hint.rel = 'prefetch';
+    hint.as = 'document';
+    hint.href = link.href;
+    document.head.appendChild(hint);
+  }
+
+  function linkOf(event) {
+    var target = event.target;
+    return target && target.closest ? target.closest('a') : null;
+  }
+
+  document.addEventListener('pointerover', function (event) {
+    prefetch(linkOf(event));
+  }, { passive: true });
+
+  document.addEventListener('focusin', function (event) {
+    prefetch(linkOf(event));
   });
 
-  window.addEventListener('pageshow', function () {
-    wipe.classList.remove('is-active');
-  });
+  function prefetchNavigation() {
+    document.querySelectorAll('.nav-links a, .mobile-menu a, .site-foot a').forEach(prefetch);
+  }
+
+  if ('requestIdleCallback' in window) {
+    window.requestIdleCallback(prefetchNavigation, { timeout: 2500 });
+  } else {
+    window.setTimeout(prefetchNavigation, 1500);
+  }
 
   /* -----------------------------------------------------------------------
      Mobile navigation
