@@ -6,7 +6,7 @@ The interface follows the **Secure HUD** design language from the supplied *Port
 
 ## Pages
 
-- [Entry](index.html) — animated cover with boot sequence, typewriter name, orbit rings, laptop and phone
+- [Entry](index.html) — animated cover with a full-screen code-rain canvas, boot sequence, typewriter name, orbit rings, laptop and phone
 - [Home](dashboard.html) — command deck with identity panel, live threat monitor, terminal, active mission, counters and proof cards
 - [About](about.html) — flippable digital identity card, focus grid, education and experience
 - [Skills](skills.html) — three skill modules; every badge maps to real projects
@@ -27,6 +27,7 @@ The interface follows the **Secure HUD** design language from the supplied *Port
 ## Interaction
 
 - Boot sequence on the entry cover, playable once per tab and skippable.
+- Full-screen falling-code canvas behind the entry cover, paused while the tab is hidden and disabled for reduced motion.
 - Page-transition wipe for internal navigation, disabled when reduced motion is requested.
 - Sticky navigation with a collapsible mobile menu (Escape closes it).
 - Scroll reveals, a 3D pointer tilt on the About identity stack, and animated HUD counters.
@@ -63,8 +64,8 @@ assets/css/about-skills.css
 assets/css/projects-certs.css
 assets/css/journey-contact.css
 assets/css/responsive.css
-assets/site.js           Navigation, boot, wipe, reveals, tilt, filters, dialogs,
-                         skill readout, card flip, ticker, counters and form
+assets/site.js           Navigation, boot, code rain, wipe, reveals, tilt, filters,
+                         dialogs, skill readout, card flip, ticker, counters and form
 assets/favicon.svg       Cyan "A" mark
 assets/Arka_Patra_CV.pdf Downloadable CV
 assets/cert-*.pdf        Credential documents

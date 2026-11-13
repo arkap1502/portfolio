@@ -235,12 +235,12 @@
 
   .entry-orbit {
     width: 100%;
-    height: 205px;
+    height: 225px;
     margin-top: 18px;
   }
-  .entry-laptop { width: 196px; }
-  .laptop-screen { height: 122px; }
-  .entry-phone { left: 68%; width: 45px; height: 88px; }
+  .entry-laptop { width: 222px; }
+  .laptop-screen { height: 138px; }
+  .entry-phone { left: 68%; width: 50px; height: 98px; }
   .orbit-chip { font-size: 6.5px; padding: 3px 5px; }
   .orbit-chip--tl { left: 0; top: 13%; }
   .orbit-chip--tr { right: 0; top: 4%; }
@@ -323,10 +323,10 @@
 @media (max-width: 420px) {
   .entry__status { display: none; }
   .entry__name { font-size: 34px; }
-  .entry-orbit { height: 180px; }
-  .entry-laptop { width: 170px; }
-  .laptop-screen { height: 108px; padding: 8px; }
-  .entry-phone { width: 38px; height: 76px; }
+  .entry-orbit { height: 195px; }
+  .entry-laptop { width: 190px; }
+  .laptop-screen { height: 120px; padding: 8px; }
+  .entry-phone { width: 42px; height: 84px; }
   .orbit-chip--tr,
   .orbit-chip--bl { display: none; }
 
@@ -344,4 +344,22 @@
   .capability-list { gap: 6px; }
   .project-card { padding: 15px; }
   .dialog__panel { padding: 20px; }
+}
+
+/* Short viewports — keep the entry cover on one screen --------------------- */
+
+@media (max-height: 660px) {
+  .entry { padding-top: 16px; padding-bottom: 10px; }
+  .entry__main { padding: 8px 0; }
+  .entry__name { font-size: clamp(36px, 4.8vw, 60px); }
+  .entry__role { margin-top: 8px; }
+  .entry-orbit {
+    height: 205px;
+    margin: 8px auto 4px;
+  }
+  .entry-laptop { width: min(290px, 52vw); }
+  .laptop-screen { height: clamp(155px, 30vh, 175px); }
+  .entry-phone { width: 48px; height: 94px; }
+  .entry__bottom { padding-bottom: 4px; }
+  .entry__foot { padding-top: 8px; }
 }
