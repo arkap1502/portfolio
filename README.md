@@ -1,6 +1,6 @@
 # Arka Patra — Portfolio
 
-A static portfolio for Arka Patra, a cybersecurity student and security-focused developer from West Bengal, India. Built with HTML, CSS and JavaScript — no frameworks, no build step.
+A static portfolio for Arka Patra, a UI/UX developer and cybersecurity student from West Bengal, India. Built with HTML, CSS and JavaScript — no frameworks, no build step.
 
 The interface follows the **Secure HUD** design language from the supplied *Portfolio UI/UX 3D* deck: a near-black canvas, cyan command accents, square panels with corner brackets, mono labels, subtle scanlines and a live threat-monitor feel.
 
