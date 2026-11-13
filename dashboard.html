@@ -1,30 +1,20 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark" data-default-theme="dark" data-palette="lunar" data-ui="palette">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Home — Arka Patra</title>
 <meta name="description" content="Arka Patra — cybersecurity student and security-focused developer from West Bengal. Explore secure builds, credentials and practical security work.">
-<meta property="og:title" content="Arka Patra — Cybersecurity &amp; UI/UX Developer">
-<meta property="og:description" content="Cybersecurity student and security-focused developer from West Bengal.">
+<meta property="og:title" content="Arka Patra — Cybersecurity &amp; Secure Code Developer">
+<meta property="og:description" content="Securing the digital world, one project at a time. Secure builds, credentials and threat detection.">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#151515" id="metaTheme">
+<meta name="theme-color" content="#05070c">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&amp;family=Source+Serif+4:ital,opsz,wght@1,8..60,300;1,8..60,400&amp;family=Courier+Prime:wght@400;700&amp;display=swap" rel="stylesheet">
-<script>
-document.documentElement.classList.add('js');
-(function () {
-  try {
-    var theme = localStorage.getItem('arka-theme');
-    if (theme === 'light' || theme === 'dark') document.documentElement.setAttribute('data-theme', theme);
-    var palette = localStorage.getItem('arka-palette');
-    if (palette) document.documentElement.setAttribute('data-palette', palette);
-  } catch (error) {}
-})();
-</script>
-<link rel="stylesheet" href="assets/site.css?v=10">
+<link href="https://fonts.googleapis.com/css2?family=Carlito:wght@400;700&amp;family=Courier+Prime:wght@400;700&amp;display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js');</script>
+<link rel="stylesheet" href="assets/site.css?v=16">
 </head>
 <body>
 
@@ -32,206 +22,206 @@ document.documentElement.classList.add('js');
 
 <header class="site-header">
   <div class="frame nav">
-    <a class="brand" href="dashboard.html" aria-label="Arka Patra — home">arka<sup>®</sup></a>
+    <a class="brand" href="dashboard.html" aria-label="Arka Patra — home">AP // ARKA PATRA</a>
     <nav class="nav-links" aria-label="Primary">
       <a href="dashboard.html" aria-current="page">Home</a>
-      <a href="projects.html">Projects</a>
       <a href="about.html">About</a>
+      <a href="skills.html">Skills</a>
+      <a href="projects.html">Projects</a>
       <a href="certificates.html">Certificates</a>
+      <a href="journey.html">Journey</a>
       <a href="contact.html">Contact</a>
     </nav>
-    <div class="nav-actions">
-      <div class="theme-toggle" role="group" aria-label="Colour theme">
-        <button class="theme-toggle__btn" type="button" data-set-theme="light" aria-pressed="false">Light</button>
-        <button class="theme-toggle__btn" type="button" data-set-theme="dark" aria-pressed="true">Dark</button>
-      </div>
-      <button class="nav-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
+    <span class="nav-status"><i class="status-dot" aria-hidden="true"></i>System online</span>
+    <button class="nav-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
   <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile" aria-hidden="true">
-    <a href="dashboard.html" aria-current="page">Home <span aria-hidden="true">→</span></a>
-    <a href="projects.html">Projects <span aria-hidden="true">→</span></a>
-    <a href="about.html">About <span aria-hidden="true">→</span></a>
-    <a href="certificates.html">Certificates <span aria-hidden="true">→</span></a>
-    <a href="contact.html">Contact <span aria-hidden="true">→</span></a>
+    <div class="mobile-menu__inner frame">
+      <a href="dashboard.html" aria-current="page">Home <span aria-hidden="true">→</span></a>
+      <a href="about.html">About <span aria-hidden="true">→</span></a>
+      <a href="skills.html">Skills <span aria-hidden="true">→</span></a>
+      <a href="projects.html">Projects <span aria-hidden="true">→</span></a>
+      <a href="certificates.html">Certificates <span aria-hidden="true">→</span></a>
+      <a href="journey.html">Journey <span aria-hidden="true">→</span></a>
+      <a href="contact.html">Contact <span aria-hidden="true">→</span></a>
+    </div>
   </nav>
 </header>
 
-<main id="main" class="slide-main">
-  <section class="slide" aria-labelledby="homeTitle">
-    <div class="frame home-grid">
-      <div class="home-copy" data-reveal>
-        <span class="kicker"><i class="kicker__square" aria-hidden="true"></i>Home</span>
-        <h1 class="display display--hero home-title" id="homeTitle">Cybersecurity<br><em>&amp; UI/UX Developer</em></h1>
-        <p class="lead home-lead">Hi, I’m Arka, a cybersecurity student and security-focused developer from West Bengal. I build tools that turn real threats into working demos.</p>
+<main id="main" class="page">
+  <div class="frame">
 
-        <div class="home-actions">
-          <a class="btn btn--solid" href="assets/Arka_Patra_CV.pdf" download>Download CV <span class="arrow" aria-hidden="true">→</span></a>
-          <a class="btn btn--text" href="projects.html">View my projects <span class="arrow" aria-hidden="true">↓</span></a>
+    <div class="home-layout">
+
+      <aside class="profile-panel panel bracket" aria-label="Identity panel" data-reveal>
+        <div class="profile-head"><span>Identity</span><span>● Online</span></div>
+        <div class="profile-avatar" aria-hidden="true">AP</div>
+        <dl class="profile-meta">
+          <div class="profile-field"><dt>Name</dt><dd>Arka Patra</dd></div>
+          <div class="profile-field"><dt>Role</dt><dd>Cybersecurity Enthusiast</dd></div>
+          <div class="profile-field"><dt>Focus</dt><dd>Secure Code Developer</dd></div>
+          <div class="profile-field"><dt>Base</dt><dd>West Bengal, India</dd></div>
+        </dl>
+        <div class="profile-links">
+          <a class="btn btn--ghost btn--sm" href="https://github.com/arkap1502" target="_blank" rel="noopener">GitHub <span class="arrow" aria-hidden="true">↗</span></a>
+          <a class="btn btn--ghost btn--sm" href="https://www.linkedin.com/in/arka-patra-579110422/" target="_blank" rel="noopener">LinkedIn <span class="arrow" aria-hidden="true">↗</span></a>
+        </div>
+      </aside>
+
+      <div class="home-main">
+
+        <div class="home-copy" data-reveal style="--delay:80ms">
+          <span class="status-chip"><i class="status-dot" aria-hidden="true"></i>Available for opportunities</span>
+          <h1 class="home-title" id="homeTitle">Securing the Digital World, <span>One Project at a Time.</span></h1>
+          <p class="home-role">Cybersecurity Enthusiast &amp; Secure Code Developer</p>
+          <p class="home-lead">I explore cybersecurity, build secure applications, and develop practical solutions for detecting digital threats — from URL scanners to phishing detection and secure web apps.</p>
+          <div class="home-actions">
+            <a class="btn btn--solid" href="projects.html">Explore my work <span class="arrow" aria-hidden="true">→</span></a>
+            <a class="btn" href="contact.html">Contact me <span class="arrow" aria-hidden="true">→</span></a>
+            <a class="btn btn--ghost" href="assets/Arka_Patra_CV.pdf" download>Download CV <span class="arrow" aria-hidden="true">↓</span></a>
+          </div>
         </div>
 
-        <div class="home-stats" aria-label="Portfolio at a glance">
+        <div class="home-globe" data-reveal style="--delay:140ms">
+          <div class="threat-chip" aria-label="Live threat monitor">
+            <span class="threat-chip__label">Live threat monitor</span>
+            <span class="threat-chip__message" id="threatMessage">Typosquatted domain detected</span>
+            <span class="threat-chip__level" id="threatLevel">High</span>
+          </div>
+
+          <div class="globe-panel" aria-hidden="true">
+            <svg class="globe-svg" viewBox="0 0 200 200" fill="none">
+              <circle cx="100" cy="100" r="88" stroke="#243450" stroke-width=".8" stroke-dasharray="2 5"/>
+              <circle cx="100" cy="100" r="70" stroke="#4CC9F0" stroke-opacity=".7"/>
+              <ellipse cx="100" cy="100" rx="70" ry="26" stroke="#4CC9F0" stroke-opacity=".3"/>
+              <ellipse cx="100" cy="100" rx="26" ry="70" stroke="#4CC9F0" stroke-opacity=".3"/>
+              <ellipse cx="100" cy="100" rx="54" ry="70" stroke="#8B7CF6" stroke-opacity=".35"/>
+              <ellipse cx="100" cy="100" rx="70" ry="54" stroke="#8B7CF6" stroke-opacity=".25"/>
+              <path d="M30 100h140M100 30v140" stroke="#243450"/>
+              <circle cx="100" cy="100" r="3" fill="#4CC9F0"/>
+              <circle cx="64" cy="74" r="2" fill="#4CC9F0"/>
+              <circle cx="142" cy="64" r="2" fill="#8B7CF6"/>
+              <circle cx="150" cy="128" r="2" fill="#F5B94A"/>
+              <circle cx="58" cy="134" r="2" fill="#34D399"/>
+              <circle cx="112" cy="49" r="1.5" fill="#4CC9F0"/>
+              <circle cx="44" cy="104" r="1.5" fill="#8B7CF6"/>
+            </svg>
+            <span class="globe-label globe-label--one">IN · 22.57°N</span>
+            <span class="globe-label globe-label--two">EU node</span>
+            <span class="globe-label globe-label--three">US node</span>
+            <span class="globe-label globe-label--four">APAC node</span>
+          </div>
+
+          <div class="terminal hero-terminal">
+            <div class="terminal__bar">
+              <span class="terminal__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="terminal__title">urlscanner — bash</span>
+            </div>
+            <div class="terminal__body">
+              <p><span class="t-green">$</span> urlscanner --url demo</p>
+              <p><span class="t-amber">▸</span> typosquat: <span class="t-amber">DETECTED</span></p>
+              <p><span class="t-cyan">▸</span> risk score: 82/100</p>
+              <p><span class="t-green">$</span> <span class="cursor" aria-hidden="true"></span></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="home-stats" aria-label="Portfolio at a glance" data-reveal style="--delay:180ms">
           <div class="home-stat">
-            <span class="home-stat__num">08</span>
+            <span class="home-stat__num" data-count="8" data-pad="2">08</span>
             <span class="home-stat__label">Builds</span>
           </div>
           <div class="home-stat">
-            <span class="home-stat__num">10</span>
+            <span class="home-stat__num" data-count="10" data-pad="2">10</span>
             <span class="home-stat__label">Certificates</span>
           </div>
           <div class="home-stat">
-            <span class="home-stat__num">01</span>
+            <span class="home-stat__num" data-count="1" data-pad="2">01</span>
             <span class="home-stat__label">Internship</span>
           </div>
         </div>
 
-        <div class="threat-bar" aria-label="Live threat monitor">
-          <span class="threat-dot" aria-hidden="true"></span>
-          <span class="threat-label">Live threat monitor</span>
-          <span class="threat-message" id="threatMessage">Typosquatted domain detected</span>
-          <span class="threat-level" id="threatLevel">High</span>
-        </div>
       </div>
 
-      <div class="home-art" data-reveal style="--delay:120ms">
-        <div class="hero-portrait" data-portrait>
-          <img src="assets/lunar-hero.webp" alt="Astronaut in a polished white suit with a dark reflective visor" width="1380" height="1452" fetchpriority="high" data-hero>
-          <img class="hero-reveal" src="assets/theme-obsidian-hero.webp?v=3" alt="" width="1380" height="1452" decoding="async" aria-hidden="true" data-hero-reveal>
-          <span class="visor-galaxy" aria-hidden="true">
-            <i class="visor-galaxy__spin"></i>
-            <i class="visor-galaxy__spin visor-galaxy__spin--alt"></i>
-            <i class="visor-galaxy__stars"></i>
-            <svg class="visor-galaxy__map" viewBox="0 0 200 180" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-              <g class="visor-galaxy__dust">
-                <circle cx="18" cy="24" r=".7"/><circle cx="34" cy="58" r=".9"/>
-                <circle cx="52" cy="18" r=".6"/><circle cx="70" cy="42" r=".8"/>
-                <circle cx="88" cy="24" r=".7"/><circle cx="112" cy="52" r="1"/>
-                <circle cx="132" cy="30" r=".6"/><circle cx="154" cy="22" r=".9"/>
-                <circle cx="176" cy="48" r=".7"/><circle cx="190" cy="74" r=".6"/>
-                <circle cx="12" cy="72" r=".8"/><circle cx="28" cy="92" r=".6"/>
-                <circle cx="44" cy="76" r="1"/><circle cx="64" cy="110" r=".7"/>
-                <circle cx="82" cy="88" r=".6"/><circle cx="102" cy="70" r=".9"/>
-                <circle cx="122" cy="96" r=".6"/><circle cx="142" cy="78" r=".8"/>
-                <circle cx="162" cy="104" r=".7"/><circle cx="184" cy="118" r=".9"/>
-                <circle cx="20" cy="128" r=".6"/><circle cx="38" cy="146" r=".9"/>
-                <circle cx="58" cy="132" r=".7"/><circle cx="76" cy="156" r=".6"/>
-                <circle cx="96" cy="138" r=".8"/><circle cx="118" cy="160" r=".7"/>
-                <circle cx="138" cy="142" r=".9"/><circle cx="158" cy="158" r=".6"/>
-                <circle cx="176" cy="136" r=".8"/><circle cx="190" cy="152" r=".6"/>
-                <circle cx="8" cy="104" r=".7"/><circle cx="66" cy="62" r=".6"/>
-                <circle cx="108" cy="120" r=".9"/><circle cx="150" cy="64" r=".6"/>
-                <circle cx="86" cy="166" r=".7"/><circle cx="170" cy="90" r="1"/>
-              </g>
-              <g class="visor-galaxy__grid" transform="rotate(-14 100 90)">
-                <ellipse cx="100" cy="90" rx="82" ry="56"/>
-                <ellipse cx="100" cy="90" rx="54" ry="56"/>
-                <ellipse cx="100" cy="90" rx="26" ry="56"/>
-                <ellipse cx="100" cy="90" rx="82" ry="38"/>
-                <ellipse cx="100" cy="90" rx="82" ry="20"/>
-                <line x1="18" y1="90" x2="182" y2="90"/>
-                <line x1="100" y1="34" x2="100" y2="146"/>
-              </g>
-              <g class="visor-galaxy__orbits" transform="rotate(-20 100 90)">
-                <ellipse cx="100" cy="90" rx="84" ry="46"/>
-                <ellipse cx="100" cy="90" rx="64" ry="35"/>
-                <ellipse cx="100" cy="90" rx="46" ry="25"/>
-                <ellipse cx="100" cy="90" rx="28" ry="15"/>
-                <ellipse cx="100" cy="90" rx="13" ry="7"/>
-              </g>
-              <g class="visor-galaxy__orbits visor-galaxy__orbits--alt" transform="rotate(34 100 90)">
-                <ellipse cx="100" cy="90" rx="93" ry="50"/>
-                <ellipse cx="100" cy="90" rx="73" ry="40"/>
-                <ellipse cx="100" cy="90" rx="52" ry="28"/>
-              </g>
-              <g class="visor-galaxy__nodes">
-                <circle cx="46" cy="44" r="1.1"/>
-                <circle cx="150" cy="58" r="1.4"/>
-                <circle cx="60" cy="124" r="1"/>
-                <circle cx="142" cy="126" r="1.2"/>
-                <circle cx="120" cy="34" r="1"/>
-                <circle cx="36" cy="86" r="1"/>
-                <circle cx="168" cy="42" r="4" class="visor-galaxy__node"/>
-                <circle cx="176" cy="110" r="6" class="visor-galaxy__node"/>
-                <circle cx="28" cy="104" r="3" class="visor-galaxy__node"/>
-                <circle cx="114" cy="146" r="3.5" class="visor-galaxy__node"/>
-                <text x="52" y="38">SIRIUS</text>
-                <text x="136" y="122">RAN</text>
-                <text x="112" y="30">KEPLER</text>
-                <text x="24" y="140">VEGA</text>
-                <text x="152" y="86">LYRA</text>
-                <text x="100" y="114" text-anchor="middle" class="visor-galaxy__distance">0.0001 LY</text>
-              </g>
-            </svg>
-            <i class="visor-galaxy__core"></i>
-          </span>
-          <span class="hero-hud" data-reticle aria-hidden="true"><i class="hero-hud__plus"></i></span>
-        </div>
-
-        <div class="theme-block">
-          <div class="theme-strip" role="group" aria-label="Interface palette">
-            <button class="theme-thumb" type="button" data-palette="pearl" aria-pressed="false">
-              <img src="assets/theme-pearl.webp?v=3" alt="" width="477" height="561" decoding="async">
-              <span>Pearl</span>
-            </button>
-            <button class="theme-thumb" type="button" data-palette="obsidian" aria-pressed="false">
-              <img src="assets/theme-obsidian.webp?v=3" alt="" width="477" height="561" decoding="async">
-              <span>Obsidian</span>
-            </button>
-            <button class="theme-thumb" type="button" data-palette="glacier" aria-pressed="false">
-              <img src="assets/theme-glacier.webp?v=3" alt="" width="477" height="561" decoding="async">
-              <span>Glacier</span>
-            </button>
-            <button class="theme-thumb" type="button" data-palette="nebula" aria-pressed="false">
-              <img src="assets/theme-nebula.webp?v=3" alt="" width="477" height="561" decoding="async">
-              <span>Nebula</span>
-            </button>
-            <button class="theme-thumb" type="button" data-palette="lunar" aria-pressed="true">
-              <img src="assets/theme-lunar.webp?v=3" alt="" width="477" height="561" decoding="async">
-              <span>Lunar</span>
-            </button>
+      <aside class="mission-panel bracket bracket--violet" aria-label="Active mission" data-reveal style="--delay:160ms">
+        <div class="mission-head">Active mission</div>
+        <div class="mission-body">
+          <div class="mission-block">
+            <span class="mission-label">Mission name</span>
+            <span class="mission-value">URL Scanner</span>
+          </div>
+          <div class="mission-block">
+            <span class="mission-label">Goal</span>
+            <p class="mission-text">Detect suspicious URLs, typosquatting and weak security headers, then explain the risk in plain English.</p>
+          </div>
+          <div class="mission-block">
+            <span class="mission-label">Capabilities</span>
+            <ul class="mission-list">
+              <li>URL &amp; typosquat checks</li>
+              <li>Security headers</li>
+              <li>Risk scoring</li>
+              <li>Plain-language report</li>
+            </ul>
+          </div>
+          <div class="mission-block">
+            <span class="mission-label">Rewards</span>
+            <div class="mission-rewards">
+              <span class="reward-chip" title="Risk score">82</span>
+              <span class="reward-chip" title="Signals checked">12</span>
+              <span class="reward-chip" title="Client-side">100%</span>
+              <span class="reward-chip" title="Open source">OSS</span>
+            </div>
           </div>
         </div>
-      </div>
+      </aside>
+
     </div>
-  </section>
 
-  <section class="home-extra" aria-label="Internship credential and featured build">
-    <div class="frame">
-      <div class="home-extra__head">
-        <span class="kicker kicker--plain"><i class="kicker__square" aria-hidden="true"></i>Internship credential &amp; featured build</span>
-        <a class="link-arrow" href="projects.html">See all builds <span class="arrow" aria-hidden="true">→</span></a>
+    <section class="section" aria-labelledby="homeExtraTitle">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Internship credential &amp; featured build</span>
+          <h2 id="homeExtraTitle">Proof, not promises.</h2>
+        </div>
+        <a class="btn btn--ghost btn--sm" href="projects.html">See all builds <span class="arrow" aria-hidden="true">→</span></a>
       </div>
 
-      <div class="home-extra__grid">
-        <a class="cert-card" href="assets/Thiranex_Certificate_Arka_Patra_THX-AUG0426-563.pdf" target="_blank" rel="noopener" data-reveal>
-          <span class="cert-card__provider">Thiranex — internship</span>
-          <span class="cert-card__title">Cyber Security Internship</span>
-          <span class="cert-card__date">Aug–Sept 2026 · ID THX-AUG0426-563</span>
-          <span class="cert-card__chips">
-            <span class="cert-card__chip">Applied security</span>
-            <span class="cert-card__chip">Mentored training</span>
-            <span class="cert-card__chip">Project work</span>
-          </span>
-          <span class="cert-card__link">Open certificate <span aria-hidden="true">→</span></span>
+      <div class="record-grid">
+        <a class="record-card" href="assets/Thiranex_Certificate_Arka_Patra_THX-AUG0426-563.pdf" target="_blank" rel="noopener" data-reveal>
+          <p class="record-card__period">Thiranex — internship</p>
+          <h3 class="record-card__title">Cyber Security Internship</h3>
+          <p class="record-card__text">Hands-on security training and applied project work with guided mentorship. Aug–Sept 2026 · ID THX-AUG0426-563.</p>
         </a>
-
-        <a class="project-card" href="projects.html" data-reveal style="--delay:100ms">
-          <div class="project-card__visual">
-            <span class="project-card__index">01</span>
-            <span class="project-card__monogram" aria-hidden="true">WS</span>
-          </div>
-          <div class="project-card__body">
-            <h3 class="project-card__title">Website Security Copilot</h3>
-            <p class="project-card__desc">Headers, TLS, cookies, DNS and open ports checked by a FastAPI engine, with an MV3 extension that blocks harmful pages before they load.</p>
-            <span class="project-card__category">Cybersecurity · Browser extension</span>
-          </div>
+        <a class="record-card" href="projects.html#project-copilot" data-reveal style="--delay:60ms">
+          <p class="record-card__period">Featured build</p>
+          <h3 class="record-card__title">Website Security Copilot</h3>
+          <p class="record-card__text">Headers, TLS, cookies, DNS and open ports checked by a FastAPI engine, with an MV3 extension that blocks harmful pages before they load.</p>
+        </a>
+        <a class="record-card" href="certificates.html" data-reveal style="--delay:120ms">
+          <p class="record-card__period">Credentials vault</p>
+          <h3 class="record-card__title">Ten certificates, one direction</h3>
+          <p class="record-card__text">Cisco, WsCube Tech, Deloitte, Commonwealth Bank, Datacom, BCLP, National Urban League and Thiranex — every credential with proof.</p>
         </a>
       </div>
-    </div>
-  </section>
+    </section>
+
+  </div>
 </main>
-<script src="assets/site.js?v=10"></script>
+
+<footer class="site-foot">
+  <div class="frame foot">
+    <span class="foot__note">Arka Patra © 2026 · <b>Secure HUD</b></span>
+    <span>System secured. Always learning. Always building.</span>
+    <div class="socials">
+      <a class="social-link" href="https://github.com/arkap1502" target="_blank" rel="noopener" aria-label="GitHub">GH</a>
+      <a class="social-link" href="https://www.linkedin.com/in/arka-patra-579110422/" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
+      <a class="social-link" href="mailto:arkap1502@gmail.com" aria-label="Email">@</a>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/site.js?v=16"></script>
 </body>
 </html>

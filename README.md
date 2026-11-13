@@ -1,32 +1,40 @@
 # Arka Patra — Portfolio
 
-A static portfolio for Arka Patra, a cyber security student and security-focused developer from West Bengal, India. Built with HTML, CSS and JavaScript — no frameworks or build step.
+A static portfolio for Arka Patra, a cybersecurity student and security-focused developer from West Bengal, India. Built with HTML, CSS and JavaScript — no frameworks, no build step.
 
-The interface follows the **Lunar** design system: a charcoal, near-monochrome canvas with panels, hairline rules, mono labels, and a serif italic accent voice.
+The interface follows the **Secure HUD** design language from the supplied *Portfolio UI/UX 3D* deck: a near-black canvas, cyan command accents, square panels with corner brackets, mono labels, subtle scanlines and a live threat-monitor feel.
 
 ## Pages
 
-- [Entry](index.html) — animated cover with orbit, laptop and phone
-- [Home](dashboard.html) — hero with build/certificate/internship counts, live threat monitor, astronaut visor and palette strip, then a scroll-down row with the Thiranex internship credential and one featured build
-- [Projects](projects.html) — eight security builds with filters and detail dialogs
-- [About](about.html) — profile, education, experience and toolkit (light by default)
-- [Certificates](certificates.html) — featured credential and nine certificate cards
-- [Contact](contact.html) — contact details and validated message form
+- [Entry](index.html) — animated cover with boot sequence, typewriter name, orbit rings, laptop and phone
+- [Home](dashboard.html) — command deck with identity panel, live threat monitor, terminal, active mission, counters and proof cards
+- [About](about.html) — flippable digital identity card, focus grid, education and experience
+- [Skills](skills.html) — three skill modules; every badge maps to real projects
+- [Projects](projects.html) — featured URL Scanner plus seven filterable builds and mission-report dialogs
+- [Certificates](certificates.html) — featured Cisco credential and a ten-document secure vault
+- [Journey](journey.html) — a five-level staircase from fundamentals to AI-powered security
+- [Contact](contact.html) — contact rows, encrypted-channel terminal and validated message form
 
 ## Design system
 
-- Charcoal `#151515` background, `#1D1E1E` panels, `#0F0F0F` insets, hairline `#333334` rules.
-- Poppins for display and body, Source Serif 4 italic for accent lines, Courier Prime for labels.
-- Light and dark themes via the footer switch, persisted in `localStorage` (`arka-theme`).
-- Five visor sets — Pearl, Obsidian, Glacier, Nebula and Lunar — selectable from the home-page strip and persisted in `localStorage` (`arka-palette`). Picking one rethemes the entire interface: canvas, panels, insets, hairlines, text tones and accent, in both light and dark, plus the hero astronaut portrait (`assets/theme-*.webp`). Lunar is the default. The entry cover keeps its own lunar canvas and is excluded from the palette themes.
+- Canvas `#05070C`, panels `#0D1219` / `#131C2B`, borders `#243450`.
+- Accents: cyan `#4CC9F0`, violet `#8B7CF6`, green `#34D399`, amber `#F5B94A`.
+- Type: Carlito for display and body, Courier Prime for labels, counts and terminal text.
+- Square panels, four-point corner brackets, hairline rules, dotted technical grid and colour-coded status tags.
+- Shared tokens, chrome and primitives live in `assets/css/core.css`; page families are split into focused modules and imported by `assets/site.css`.
+- Responsive from 320px up, with a compact page structure at tablet and mobile widths.
 
 ## Interaction
 
-- Responsive layout with a collapsible mobile menu.
-- Project category filters and accessible `<dialog>` details.
-- Animated live-threat ticker on the home page.
-- Contact form validation with inline errors and a success state.
-- Scroll reveals with a safety fallback so content is never left hidden.
+- Boot sequence on the entry cover, playable once per tab and skippable.
+- Page-transition wipe for internal navigation, disabled when reduced motion is requested.
+- Sticky navigation with a collapsible mobile menu (Escape closes it).
+- Scroll reveals, a 3D pointer tilt on the About identity stack, and animated HUD counters.
+- Rotating live-threat ticker on the home page.
+- Project status filters, empty state and accessible `<dialog>` mission reports.
+- Skill badges that reveal the builds using each skill.
+- Flippable About identity card with a capability record on the back.
+- Contact form with inline validation, success/error states and FormSubmit delivery.
 
 ## Run locally
 
@@ -39,27 +47,35 @@ Then open <http://localhost:8000>.
 ## Project structure
 
 ```
-index.html            Entry cover
-dashboard.html        Portfolio home
-projects.html         Project index
-about.html            About and record
-certificates.html     Credentials
-contact.html          Contact and form
-assets/site.css       Design system, themes, palettes, responsive rules
-assets/site.js        Navigation, theme/palette, filters, dialogs, ticker, form
-assets/lunar-hero.webp  Master astronaut artwork
-theme-*-hero.webp      Full-resolution hero art per visor set (graded from the master)
-theme-*.webp           Palette strip thumbnails, cropped from the same art
-screen-home-desktop.webp  Home page capture shown inside the cover laptop
-screen-home-phone.webp    Home page capture shown inside the cover phone
-assets/cert-*.pdf     Credential documents
-assets/Arka_Patra_CV.pdf
+index.html               Entry cover
+dashboard.html           Home command deck
+about.html               Identity, education and experience
+skills.html              Skill matrix
+projects.html            Featured build and filterable archive
+certificates.html        Featured credential and document vault
+journey.html             Five-level cybersecurity journey
+contact.html             Contact details and message form
+
+assets/site.css          Imports the CSS modules below
+assets/css/core.css      Tokens, reset, header, footer, panels, buttons, terminal, motion
+assets/css/entry-home.css
+assets/css/about-skills.css
+assets/css/projects-certs.css
+assets/css/journey-contact.css
+assets/css/responsive.css
+assets/site.js           Navigation, boot, wipe, reveals, tilt, filters, dialogs,
+                         skill readout, card flip, ticker, counters and form
+assets/favicon.svg       Cyan "A" mark
+assets/Arka_Patra_CV.pdf Downloadable CV
+assets/cert-*.pdf        Credential documents
+assets/Thiranex_Certificate_Arka_Patra_THX-AUG0426-563.pdf
 ```
 
 ## Credits
 
-- Typefaces served by [Google Fonts](https://fonts.google.com/): Poppins, Source Serif 4 and Courier Prime.
-- Astronaut artwork and palette thumbnails are derived from the supplied Lunar design deck and optimised as WebP.
+- Typefaces served by [Google Fonts](https://fonts.google.com/): Carlito and Courier Prime.
+- Visual language derived from the supplied *Arka Patra Portfolio UI/UX 3D* design deck.
+- Icons are CSS and inline SVG; no icon library is bundled.
 
 ## Links
 

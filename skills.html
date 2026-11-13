@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skills — Arka Patra</title>
+<meta name="description" content="The skill matrix of Arka Patra — cybersecurity, development and tools, mapped to real security builds.">
+<meta property="og:title" content="Skills — Arka Patra">
+<meta property="og:description" content="A skill matrix that maps every capability to a shipped build.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#05070c">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Carlito:wght@400;700&amp;family=Courier+Prime:wght@400;700&amp;display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js');</script>
+<link rel="stylesheet" href="assets/site.css?v=16">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="frame nav">
+    <a class="brand" href="dashboard.html" aria-label="Arka Patra — home">AP // ARKA PATRA</a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="dashboard.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="skills.html" aria-current="page">Skills</a>
+      <a href="projects.html">Projects</a>
+      <a href="certificates.html">Certificates</a>
+      <a href="journey.html">Journey</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <span class="nav-status"><i class="status-dot" aria-hidden="true"></i>System online</span>
+    <button class="nav-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile" aria-hidden="true">
+    <div class="mobile-menu__inner frame">
+      <a href="dashboard.html">Home <span aria-hidden="true">→</span></a>
+      <a href="about.html">About <span aria-hidden="true">→</span></a>
+      <a href="skills.html" aria-current="page">Skills <span aria-hidden="true">→</span></a>
+      <a href="projects.html">Projects <span aria-hidden="true">→</span></a>
+      <a href="certificates.html">Certificates <span aria-hidden="true">→</span></a>
+      <a href="journey.html">Journey <span aria-hidden="true">→</span></a>
+      <a href="contact.html">Contact <span aria-hidden="true">→</span></a>
+    </div>
+  </nav>
+</header>
+
+<main id="main" class="page">
+  <div class="frame">
+
+    <header class="page-head">
+      <div>
+        <span class="eyebrow">02 // Skills</span>
+        <h1>Skill matrix</h1>
+      </div>
+      <p class="page-head__aside">Hover a badge to lift it. Click to filter the builds that use it. <strong>Every badge maps to shipped work.</strong></p>
+    </header>
+
+    <div class="skills-layout">
+
+      <section class="skill-module bracket" aria-labelledby="moduleSecurity" data-reveal>
+        <div class="module-head">
+          <span class="module-index">01</span>
+          <div>
+            <h2 class="module-title" id="moduleSecurity">Cybersecurity</h2>
+            <p class="module-sub">Module · 6 skills</p>
+          </div>
+        </div>
+        <div class="skill-list">
+          <button class="skill-badge" type="button" data-skill="Vulnerability Assessment" data-projects="copilot,prototype">Vulnerability Assessment <span class="skill-badge__meta">02</span></button>
+          <button class="skill-badge" type="button" data-skill="Penetration Testing Fundamentals" data-projects="copilot,prototype">Penetration Testing Fundamentals <span class="skill-badge__meta">02</span></button>
+          <button class="skill-badge" type="button" data-skill="Threat Analysis" data-projects="url,quishing">Threat Analysis <span class="skill-badge__meta">02</span></button>
+          <button class="skill-badge" type="button" data-skill="Phishing Detection" data-projects="url,copilot,quishing">Phishing Detection <span class="skill-badge__meta">03</span></button>
+          <button class="skill-badge" type="button" data-skill="Web Security" data-projects="url,copilot,prototype,quishing">Web Security <span class="skill-badge__meta">04</span></button>
+          <button class="skill-badge" type="button" data-skill="Threat Modelling" data-projects="copilot,nexvault">Threat Modelling <span class="skill-badge__meta">02</span></button>
+        </div>
+      </section>
+
+      <section class="skill-module skill-module--violet bracket bracket--violet" aria-labelledby="moduleDevelopment" data-reveal style="--delay:80ms">
+        <div class="module-head">
+          <span class="module-index">02</span>
+          <div>
+            <h2 class="module-title" id="moduleDevelopment">Development</h2>
+            <p class="module-sub">Module · 6 skills</p>
+          </div>
+        </div>
+        <div class="skill-list">
+          <button class="skill-badge" type="button" data-skill="Python" data-projects="copilot,prompt,prototype">Python <span class="skill-badge__meta">03</span></button>
+          <button class="skill-badge" type="button" data-skill="JavaScript" data-projects="url,altron,humanize,quishing">JavaScript <span class="skill-badge__meta">04</span></button>
+          <button class="skill-badge" type="button" data-skill="HTML" data-projects="url,altron">HTML <span class="skill-badge__meta">02</span></button>
+          <button class="skill-badge" type="button" data-skill="CSS" data-projects="url,altron">CSS <span class="skill-badge__meta">02</span></button>
+          <button class="skill-badge" type="button" data-skill="Flask" data-projects="prompt,prototype">Flask <span class="skill-badge__meta">02</span></button>
+          <button class="skill-badge" type="button" data-skill="React" data-projects="humanize,quishing">React <span class="skill-badge__meta">02</span></button>
+        </div>
+      </section>
+
+      <section class="skill-module skill-module--green bracket bracket--green" aria-labelledby="moduleTools" data-reveal style="--delay:160ms">
+        <div class="module-head">
+          <span class="module-index">03</span>
+          <div>
+            <h2 class="module-title" id="moduleTools">Tools &amp; Technologies</h2>
+            <p class="module-sub">Module · 5 skills</p>
+          </div>
+        </div>
+        <div class="skill-list">
+          <button class="skill-badge" type="button" data-skill="Git" data-projects="url,copilot,quishing">Git <span class="skill-badge__meta">03</span></button>
+          <button class="skill-badge" type="button" data-skill="GitHub" data-projects="url,copilot">GitHub <span class="skill-badge__meta">02</span></button>
+          <button class="skill-badge" type="button" data-skill="VS Code" data-projects="altron,quishing">VS Code <span class="skill-badge__meta">02</span></button>
+          <button class="skill-badge" type="button" data-skill="Docker" data-projects="copilot">Docker <span class="skill-badge__meta">01</span></button>
+          <button class="skill-badge" type="button" data-skill="Linux" data-projects="copilot,prompt">Linux <span class="skill-badge__meta">02</span></button>
+        </div>
+      </section>
+
+    </div>
+
+    <div class="skill-readout" data-reveal>
+      <div class="skill-readout__label"><b id="skillReadoutName">Awaiting input</b>Related builds</div>
+      <div class="skill-readout__body" id="skillReadoutBody">
+        <p class="skill-readout__empty">Select a skill badge to see the builds that use it.</p>
+      </div>
+    </div>
+
+    <aside class="github-strip" data-reveal>
+      <div>
+        <span class="eyebrow">From skill to ship</span>
+        <h2>Every module leaves a working build.</h2>
+        <p>Browse the full archive of scanners, secure apps and AI-security experiments — each with source and a live demo where available.</p>
+      </div>
+      <a class="btn btn--ghost" href="projects.html">Open mission control <span class="arrow" aria-hidden="true">→</span></a>
+    </aside>
+
+  </div>
+</main>
+
+<footer class="site-foot">
+  <div class="frame foot">
+    <span class="foot__note">Arka Patra © 2026 · <b>Secure HUD</b></span>
+    <span>System secured. Always learning. Always building.</span>
+    <div class="socials">
+      <a class="social-link" href="https://github.com/arkap1502" target="_blank" rel="noopener" aria-label="GitHub">GH</a>
+      <a class="social-link" href="https://www.linkedin.com/in/arka-patra-579110422/" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
+      <a class="social-link" href="mailto:arkap1502@gmail.com" aria-label="Email">@</a>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/site.js?v=16"></script>
+</body>
+</html>

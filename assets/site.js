@@ -1,7 +1,8 @@
 /* ==========================================================================
-   Arka Patra — LUNAR interface behaviour
-   Theme and palette · header menu · scroll reveals · live threat monitor
-   project filters and details · contact form
+   ARKA PATRA — SECURE HUD behaviour
+   Boot sequence · page wipe · navigation · reveals · 3D tilt · counters
+   live threat monitor · project dialogs and filters · skill readout
+   identity flip · contact form
    ========================================================================== */
 
 (function () {
@@ -9,424 +10,208 @@
 
   var root = document.documentElement;
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var paletteNames = {
-    pearl: 'Pearl',
-    obsidian: 'Obsidian',
-    glacier: 'Glacier',
-    nebula: 'Nebula',
-    lunar: 'Lunar'
-  };
-  /* Hero art is a dedicated 1200px square per visor set; the strip keeps the
-     small thumbnails so the picker stays light. */
-  var paletteArt = {
-    pearl: { src: 'assets/theme-pearl-hero.webp?v=3', alt: 'Astronaut in a white suit with a gold mirrored visor' },
-    obsidian: { src: 'assets/theme-obsidian-hero.webp?v=3', alt: 'Astronaut in a dark suit with a blue visor' },
-    glacier: { src: 'assets/theme-glacier-hero.webp?v=3', alt: 'Astronaut in a white suit with a teal visor' },
-    nebula: { src: 'assets/theme-nebula-hero.webp?v=3', alt: 'Astronaut in a dark suit with a violet visor' },
-    lunar: { src: 'assets/lunar-hero.webp?v=3', alt: 'Astronaut in a polished white suit with a dark reflective visor' }
-  };
-  /* Stopping the reticle opens a window onto this palette's counterpart:
-     white suits turn blue/violet, dark suits turn white again. */
-  var revealPair = {
-    pearl: 'obsidian',
-    obsidian: 'pearl',
-    glacier: 'nebula',
-    nebula: 'glacier',
-    lunar: 'obsidian'
-  };
+  root.classList.add('js');
+
+  function pad(value) {
+    return value < 10 ? '0' + value : String(value);
+  }
 
   /* -----------------------------------------------------------------------
-     Theme and palette
+     Page wipe
      ----------------------------------------------------------------------- */
 
-  function store(key, value) {
-    try { localStorage.setItem(key, value); } catch (error) {}
+  var wipe = document.createElement('div');
+  wipe.className = 'page-wipe';
+  wipe.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(wipe);
+
+  function isInternalPage(link) {
+    if (!link || !link.getAttribute) return false;
+    if (link.target === '_blank' || link.hasAttribute('download')) return false;
+    if (link.protocol !== 'http:' && link.protocol !== 'https:') return false;
+    if (link.host !== window.location.host) return false;
+    if (link.pathname === window.location.pathname) return false;
+    if (!/\.html?$/i.test(link.pathname)) return false;
+    return true;
   }
 
-  /* The browser chrome follows the active theme, whatever canvas it uses. */
-  function syncMetaColor() {
-    var meta = document.getElementById('metaTheme');
-    if (!meta) return;
-    var bg = window.getComputedStyle(root).getPropertyValue('--bg').trim();
-    if (bg) meta.setAttribute('content', bg);
+  document.addEventListener('click', function (event) {
+    var link = event.target.closest ? event.target.closest('a') : null;
+    if (!link || event.defaultPrevented) return;
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    if (!isInternalPage(link)) return;
+    if (reducedMotion) return;
+
+    event.preventDefault();
+    wipe.classList.add('is-active');
+    window.setTimeout(function () {
+      window.location.href = link.href;
+    }, 380);
+  });
+
+  window.addEventListener('pageshow', function () {
+    wipe.classList.remove('is-active');
+  });
+
+  /* -----------------------------------------------------------------------
+     Mobile navigation
+     ----------------------------------------------------------------------- */
+
+  var header = document.querySelector('.site-header');
+  var menu = document.getElementById('mobileMenu');
+  var toggle = document.getElementById('menuToggle');
+
+  function closeMenu() {
+    if (!header || !menu || !toggle) return;
+    header.classList.remove('is-open');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', 'Open menu');
+    menu.setAttribute('aria-hidden', 'true');
   }
 
-  function syncTheme() {
-    var theme = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
-    document.querySelectorAll('[data-set-theme]').forEach(function (button) {
-      button.setAttribute('aria-pressed', String(button.getAttribute('data-set-theme') === theme));
+  if (header && menu && toggle) {
+    toggle.addEventListener('click', function () {
+      var open = toggle.getAttribute('aria-expanded') !== 'true';
+      header.classList.toggle('is-open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      menu.setAttribute('aria-hidden', String(!open));
     });
-    syncMetaColor();
+
+    menu.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', closeMenu);
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key !== 'Escape') return;
+      if (toggle.getAttribute('aria-expanded') !== 'true') return;
+      closeMenu();
+      toggle.focus();
+    });
+
+    document.addEventListener('click', function (event) {
+      if (toggle.getAttribute('aria-expanded') !== 'true') return;
+      if (menu.contains(event.target) || toggle.contains(event.target)) return;
+      closeMenu();
+    });
+
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 980) closeMenu();
+    });
   }
 
-  function syncHero(palette, animate) {
-    var hero = document.querySelector('[data-hero]');
-    if (!hero) return;
+  /* -----------------------------------------------------------------------
+     Scroll reveals + journey line
+     ----------------------------------------------------------------------- */
 
-    var art = paletteArt[palette] || paletteArt.lunar;
-    var current = hero.getAttribute('src');
-    if (current === art.src) return;
+  var revealItems = document.querySelectorAll('[data-reveal]');
 
-    if (!animate || reducedMotion) {
-      hero.setAttribute('src', art.src);
-      hero.setAttribute('alt', art.alt);
+  if (!reducedMotion && 'IntersectionObserver' in window) {
+    var revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      });
+    }, { threshold: .08, rootMargin: '0px 0px -4% 0px' });
+
+    revealItems.forEach(function (item) { revealObserver.observe(item); });
+
+    window.setTimeout(function () {
+      revealItems.forEach(function (item) { item.classList.add('is-visible'); });
+    }, 5000);
+  } else {
+    revealItems.forEach(function (item) { item.classList.add('is-visible'); });
+  }
+
+  /* -----------------------------------------------------------------------
+     Pointer tilt
+     ----------------------------------------------------------------------- */
+
+  if (!reducedMotion && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    document.querySelectorAll('[data-tilt]').forEach(function (target) {
+      var strength = parseFloat(target.getAttribute('data-tilt')) || 5;
+
+      target.addEventListener('pointermove', function (event) {
+        var box = target.getBoundingClientRect();
+        if (!box.width || !box.height) return;
+        var x = (event.clientX - box.left) / box.width - .5;
+        var y = (event.clientY - box.top) / box.height - .5;
+        target.style.setProperty('--tilt-y', (x * strength).toFixed(2) + 'deg');
+        target.style.setProperty('--tilt-x', (-y * strength).toFixed(2) + 'deg');
+        target.classList.add('is-tilting');
+      });
+
+      target.addEventListener('pointerleave', function () {
+        target.style.setProperty('--tilt-y', '0deg');
+        target.style.setProperty('--tilt-x', '0deg');
+        target.classList.remove('is-tilting');
+      });
+    });
+  }
+
+  /* -----------------------------------------------------------------------
+     HUD counters
+     ----------------------------------------------------------------------- */
+
+  var counters = document.querySelectorAll('[data-count]');
+
+  function runCounter(el) {
+    var end = parseInt(el.getAttribute('data-count'), 10);
+    var digits = el.getAttribute('data-pad');
+    if (isNaN(end)) return;
+
+    if (reducedMotion) {
+      el.textContent = digits === '2' ? pad(end) : String(end);
       return;
     }
 
-    hero.classList.add('is-swapping');
-    window.setTimeout(function () {
-      hero.setAttribute('src', art.src);
-      hero.setAttribute('alt', art.alt);
-      hero.classList.remove('is-swapping');
-    }, 170);
-  }
+    var start = performance.now();
+    var duration = 900;
 
-  function syncReveal(palette) {
-    var reveal = document.querySelector('[data-hero-reveal]');
-    if (!reveal) return;
-    var art = paletteArt[revealPair[palette] || 'obsidian'];
-    if (reveal.getAttribute('src') !== art.src) reveal.setAttribute('src', art.src);
-  }
-
-  function syncPalette(animate) {
-    var palette = root.getAttribute('data-palette') || 'lunar';
-    var label = document.getElementById('paletteName');
-    if (label) label.textContent = paletteNames[palette] || 'Lunar';
-    document.querySelectorAll('.theme-thumb[data-palette]').forEach(function (button) {
-      button.setAttribute('aria-pressed', String(button.getAttribute('data-palette') === palette));
-    });
-    syncHero(palette, animate);
-    syncReveal(palette);
-    syncMetaColor();
-  }
-
-  function setTheme(theme) {
-    if (theme !== 'light' && theme !== 'dark') return;
-    root.setAttribute('data-theme', theme);
-    store('arka-theme', theme);
-    syncTheme();
-  }
-
-  function setPalette(palette) {
-    if (!paletteNames[palette]) return;
-    root.setAttribute('data-palette', palette);
-    store('arka-palette', palette);
-    syncPalette(true);
-  }
-
-  syncTheme();
-  syncPalette(false);
-
-  /* Warm the other visor portraits on first interaction with the strip, so a
-     palette change swaps instantly without loading every hero up front. */
-  var strip = document.querySelector('.theme-strip');
-
-  if (strip) {
-    var warmed = false;
-    var warmArt = function () {
-      if (warmed) return;
-      warmed = true;
-      var heroSrc = document.querySelector('[data-hero]') ? document.querySelector('[data-hero]').getAttribute('src') : '';
-      Object.keys(paletteArt).forEach(function (key) {
-        if (paletteArt[key].src === heroSrc) return;
-        var preload = new Image();
-        preload.src = paletteArt[key].src;
-      });
-    };
-    strip.addEventListener('pointerenter', warmArt);
-    strip.addEventListener('focusin', warmArt);
-  }
-
-  document.querySelectorAll('[data-set-theme]').forEach(function (button) {
-    button.addEventListener('click', function () {
-      setTheme(button.getAttribute('data-set-theme'));
-    });
-  });
-
-  document.querySelectorAll('.theme-thumb[data-palette]').forEach(function (button) {
-    button.addEventListener('click', function () {
-      setPalette(button.getAttribute('data-palette'));
-    });
-  });
-
-  /* -----------------------------------------------------------------------
-     Robot HUD — a reticle that glides across the whole portrait disc, wakes
-     the visor galaxy, and opens the paired palette where it comes to rest.
-     ----------------------------------------------------------------------- */
-
-  var portrait = document.querySelector('[data-portrait]');
-  var reticle = document.querySelector('[data-reticle]');
-
-  if (portrait && reticle && !reducedMotion) {
-    var HUD_RADIUS = 47;              /* keep the ring on the disc, in % */
-    var home = { x: 62, y: 23.5 };    /* the visor, where the HUD parks */
-    var point = { x: home.x, y: home.y };
-    var goal = { x: home.x, y: home.y };
-    var lean = { x: 0, y: 0 };
-    var leanGoal = { x: 0, y: 0 };
-    var reveal = 1;
-    var revealGoal = 1;
-    var frame = 0;
-    var lastTime = 0;
-    var restTimer = 0;
-
-    var paint = function () {
-      portrait.style.setProperty('--reticle-x', point.x.toFixed(2) + '%');
-      portrait.style.setProperty('--reticle-y', point.y.toFixed(2) + '%');
-      portrait.style.setProperty('--reveal-r', reveal.toFixed(2) + '%');
-      portrait.style.setProperty('--hero-parallax-x', lean.x.toFixed(2) + 'px');
-      portrait.style.setProperty('--hero-parallax-y', lean.y.toFixed(2) + 'px');
-    };
-
-    /* Frame-rate independent easing: the reticle eases toward the pointer
-       instead of snapping, so the whole path across the robot stays fluid. */
-    var settle = function (now) {
-      if (!lastTime) lastTime = now;
-      var dt = Math.min((now - lastTime) / 1000, .05);
-      lastTime = now;
-
-      var ease = 1 - Math.exp(-dt * 11);
-      point.x += (goal.x - point.x) * ease;
-      point.y += (goal.y - point.y) * ease;
-      lean.x += (leanGoal.x - lean.x) * ease;
-      lean.y += (leanGoal.y - lean.y) * ease;
-      reveal += (revealGoal - reveal) * ease;
-      paint();
-
-      var moving =
-        Math.abs(goal.x - point.x) > .01 ||
-        Math.abs(goal.y - point.y) > .01 ||
-        Math.abs(leanGoal.x - lean.x) > .01 ||
-        Math.abs(leanGoal.y - lean.y) > .01 ||
-        Math.abs(revealGoal - reveal) > .01;
-
-      frame = moving ? window.requestAnimationFrame(settle) : 0;
-      if (!moving) lastTime = 0;
-    };
-
-    var animate = function () {
-      if (frame) return;
-      lastTime = 0;
-      frame = window.requestAnimationFrame(settle);
-    };
-
-    /* Moving keeps a smaller reveal window glued to the reticle, so the
-       colour swap follows the pointer instead of waiting for it to stop. */
-    var resetRest = function () {
-      window.clearTimeout(restTimer);
-      portrait.classList.remove('is-resting');
-      revealGoal = 21;
-    };
-
-    var clearReveal = function () {
-      window.clearTimeout(restTimer);
-      portrait.classList.remove('is-resting', 'is-revealing');
-      revealGoal = 1;
-    };
-
-    /* A short pause settles the window a little wider under the reticle. */
-    var scheduleRest = function () {
-      window.clearTimeout(restTimer);
-      restTimer = window.setTimeout(function () {
-        portrait.classList.add('is-resting');
-        revealGoal = 26;
-        animate();
-      }, 170);
-    };
-
-    portrait.addEventListener('pointermove', function (event) {
-      var box = portrait.getBoundingClientRect();
-      if (!box.width || !box.height) return;
-
-      var x = ((event.clientX - box.left) / box.width) * 100;
-      var y = ((event.clientY - box.top) / box.height) * 100;
-      var dx = x - 50;
-      var dy = y - 50;
-      var distance = Math.sqrt(dx * dx + dy * dy);
-
-      /* The artwork is a disc: only track while the pointer is on the robot. */
-      if (distance > 50) {
-        clearReveal();
-        portrait.classList.remove('is-tracking', 'is-visoring');
-        goal.x = home.x;
-        goal.y = home.y;
-        leanGoal.x = 0;
-        leanGoal.y = 0;
-        animate();
-        return;
-      }
-
-      /* The glass sits in the same ellipse for every palette portrait. */
-      var visorX = (x - 62) / 17;
-      var visorY = (y - 23.5) / 16;
-      portrait.classList.toggle('is-visoring', visorX * visorX + visorY * visorY <= 1);
-
-      /* Near the rim the ring is pulled just inside so it never spills off. */
-      if (distance > HUD_RADIUS) {
-        x = 50 + (dx / distance) * HUD_RADIUS;
-        y = 50 + (dy / distance) * HUD_RADIUS;
-      }
-
-      resetRest();
-
-      if (!portrait.classList.contains('is-tracking')) {
-        /* Entering the disc should feel like the HUD was already waiting. */
-        point.x = x;
-        point.y = y;
-        paint();
-      }
-
-      goal.x = x;
-      goal.y = y;
-      leanGoal.x = -((x - 50) / 50) * 6;
-      leanGoal.y = -((y - 50) / 50) * 6;
-
-      portrait.classList.add('is-tracking', 'is-revealing');
-      scheduleRest();
-      animate();
-    });
-
-    portrait.addEventListener('pointerleave', function () {
-      clearReveal();
-      portrait.classList.remove('is-tracking', 'is-visoring');
-      goal.x = home.x;
-      goal.y = home.y;
-      leanGoal.x = 0;
-      leanGoal.y = 0;
-      animate();
-    });
-  }
-
-  /* -----------------------------------------------------------------------
-     Entry cover — laptop and phone, only the matching one is usable
-     ----------------------------------------------------------------------- */
-
-  var deviceLaptop = document.querySelector('[data-device="laptop"]');
-  var devicePhone = document.querySelector('[data-device="phone"]');
-
-  if (deviceLaptop && devicePhone) {
-    var deviceCaption = document.getElementById('deviceCaption');
-
-    var syncDevices = function () {
-      /* Same breakpoint the layout switches at, so the active option always
-         matches the frame the visitor is actually looking at. */
-      var mobile = window.innerWidth <= 900;
-
-      [
-        { el: deviceLaptop, active: !mobile, target: 'dashboard.html' },
-        { el: devicePhone, active: mobile, target: 'dashboard.html' }
-      ].forEach(function (device) {
-        device.el.classList.toggle('is-inactive', !device.active);
-        device.el.setAttribute('aria-disabled', String(!device.active));
-        device.el.tabIndex = device.active ? 0 : -1;
-        if (device.active) {
-          device.el.setAttribute('href', device.target);
-        } else {
-          device.el.removeAttribute('href');
-        }
-      });
-
-      if (deviceCaption) {
-        var lines = deviceCaption.querySelectorAll('span');
-        if (lines[0]) lines[0].textContent = mobile ? 'Phone — tap to enter' : 'Laptop — click to enter';
-        if (lines[1]) lines[1].textContent = mobile ? 'Laptop — desktop only' : 'Phone — mobile only';
-      }
-    };
-
-    syncDevices();
-    window.addEventListener('resize', syncDevices);
-    window.addEventListener('orientationchange', syncDevices);
-  }
-
-  /* -----------------------------------------------------------------------
-     Mobile menu
-     ----------------------------------------------------------------------- */
-
-  document.addEventListener('DOMContentLoaded', function () {
-    var menu = document.getElementById('mobileMenu');
-    var toggle = document.getElementById('menuToggle');
-
-    function closeMenu() {
-      if (!menu || !toggle) return;
-      menu.classList.remove('is-open');
-      toggle.setAttribute('aria-expanded', 'false');
-      toggle.setAttribute('aria-label', 'Open menu');
-      menu.setAttribute('aria-hidden', 'true');
+    function tick(now) {
+      var t = Math.min((now - start) / duration, 1);
+      var eased = 1 - Math.pow(1 - t, 3);
+      var value = Math.round(end * eased);
+      el.textContent = digits === '2' ? pad(value) : String(value);
+      if (t < 1) window.requestAnimationFrame(tick);
     }
+    window.requestAnimationFrame(tick);
+  }
 
-    if (menu && toggle) {
-      toggle.addEventListener('click', function () {
-        var open = toggle.getAttribute('aria-expanded') !== 'true';
-        toggle.setAttribute('aria-expanded', String(open));
-        toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-        menu.classList.toggle('is-open', open);
-        menu.setAttribute('aria-hidden', String(!open));
-      });
-
-      menu.querySelectorAll('a').forEach(function (link) {
-        link.addEventListener('click', closeMenu);
-      });
-
-      document.addEventListener('keydown', function (event) {
-        if (event.key !== 'Escape') return;
-        if (toggle.getAttribute('aria-expanded') !== 'true') return;
-        closeMenu();
-        toggle.focus();
-      });
-
-      document.addEventListener('click', function (event) {
-        if (toggle.getAttribute('aria-expanded') !== 'true') return;
-        if (menu.contains(event.target) || toggle.contains(event.target)) return;
-        closeMenu();
-      });
-
-      window.addEventListener('resize', function () {
-        if (window.innerWidth > 900) closeMenu();
-      });
-    }
-
-    /* ---------------------------------------------------------------------
-       Scroll reveals
-       --------------------------------------------------------------------- */
-
-    var revealItems = document.querySelectorAll('[data-reveal]');
-
-    if (!reducedMotion && 'IntersectionObserver' in window) {
-      var revealObserver = new IntersectionObserver(function (entries) {
+  if (counters.length) {
+    if ('IntersectionObserver' in window) {
+      var countObserver = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
           if (!entry.isIntersecting) return;
-          entry.target.classList.add('is-visible');
-          revealObserver.unobserve(entry.target);
+          runCounter(entry.target);
+          countObserver.unobserve(entry.target);
         });
-      }, { threshold: .08, rootMargin: '0px 0px -4% 0px' });
-
-      revealItems.forEach(function (item) { revealObserver.observe(item); });
-
-      /* Safety net: never leave content permanently hidden if the observer misses it. */
-      window.setTimeout(function () {
-        revealItems.forEach(function (item) { item.classList.add('is-visible'); });
-      }, 5000);
+      }, { threshold: .5 });
+      counters.forEach(function (el) { countObserver.observe(el); });
     } else {
-      revealItems.forEach(function (item) { item.classList.add('is-visible'); });
+      counters.forEach(runCounter);
     }
+  }
 
-    /* ---------------------------------------------------------------------
-       Live threat monitor
-       --------------------------------------------------------------------- */
+  /* -----------------------------------------------------------------------
+     Live threat monitor
+     ----------------------------------------------------------------------- */
 
-    var threatMessage = document.getElementById('threatMessage');
-    var threatLevel = document.getElementById('threatLevel');
+  var threatMessage = document.getElementById('threatMessage');
+  var threatLevel = document.getElementById('threatLevel');
 
-    if (threatMessage && threatLevel && !reducedMotion) {
-      var threats = [
-        { text: 'Typosquatted domain detected', level: 'High' },
-        { text: 'Phishing link intercepted', level: 'High' },
-        { text: 'Weak password pattern found', level: 'Medium' },
-        { text: 'Certificate expiring in 6 days', level: 'Low' },
-        { text: 'Lookalike login page blocked', level: 'High' }
-      ];
-      var threatIndex = 0;
+  if (threatMessage && threatLevel) {
+    var threats = [
+      { text: 'Typosquatted domain detected', level: 'High' },
+      { text: 'Phishing link intercepted', level: 'High' },
+      { text: 'Weak password pattern found', level: 'Medium' },
+      { text: 'Certificate expiring in 6 days', level: 'Low' },
+      { text: 'Lookalike login page blocked', level: 'High' }
+    ];
+    var threatIndex = 0;
 
+    if (!reducedMotion) {
       window.setInterval(function () {
         if (document.hidden) return;
         threatIndex = (threatIndex + 1) % threats.length;
@@ -434,361 +219,444 @@
         threatLevel.textContent = threats[threatIndex].level;
       }, 5200);
     }
+  }
 
-    /* ---------------------------------------------------------------------
-       Project data
-       --------------------------------------------------------------------- */
+  /* -----------------------------------------------------------------------
+     Project data
+     ----------------------------------------------------------------------- */
 
-    var projects = {
-      copilot: {
-        index: '01',
-        title: 'Website Security Copilot',
-        category: 'Cybersecurity · Browser extension',
-        status: 'Completed',
-        desc: 'A FastAPI engine checks security headers, TLS certificates, cookie flags, DNS email records, open ports and phishing signals. The MV3 extension watches tabs and blocks harmful pages before they load. AI explains the tool output — it never invents findings.',
-        stack: ['Next.js', 'FastAPI', 'Python', 'SQLite', 'Docker', 'MV3'],
-        links: [
-          { label: 'Live demo', href: 'https://website-security-copilot-3m0hij8jl-arkap1502-9053s-projects.vercel.app/' },
-          { label: 'Source code', href: 'https://github.com/arkap1502/Website-Security-Copilot' }
-        ]
-      },
-      altron: {
-        index: '02',
-        title: 'ALTRON Password Inspector',
-        category: 'Security · Web tool',
-        status: 'Completed',
-        desc: 'Passwords are generated with crypto.getRandomValues(), never Math.random(). Strength scoring checks character classes and a 15+ character length threshold. Everything runs in the browser.',
-        stack: ['JavaScript', 'Web Crypto API', 'HTML', 'CSS'],
-        links: [
-          { label: 'Live demo', href: 'https://arkap1502.github.io/password-making/' },
-          { label: 'Source code', href: 'https://github.com/arkap1502/password-making' }
-        ]
-      },
-      url: {
-        index: '03',
-        title: 'URL Threat Scanner',
-        category: 'Web security · Phishing detection',
-        status: 'Completed',
-        desc: 'Client-side URL analysis flags raw IPs, uncommon TLDs, lookalike brand spellings and phishing keywords, then combines them into a 0–100 risk score with a plain-language verdict.',
-        stack: ['JavaScript', 'HTML', 'CSS'],
-        links: [
-          { label: 'Live demo', href: 'https://arkap1502.github.io/URL-Scanner/' },
-          { label: 'Source code', href: 'https://github.com/arkap1502/URL-Scanner' }
-        ]
-      },
-      humanize: {
-        index: '04',
-        title: 'Humanize AI',
-        category: 'AI · Text tool',
-        status: 'Ongoing',
-        desc: 'A React frontend with an Express backend, plus a zero-build client-side fallback so it runs offline. Light, Medium and Strong modes transform text in real time with a word-count diff.',
-        stack: ['React', 'Express', 'JavaScript'],
-        links: [
-          { label: 'Live demo', href: 'https://arkap1502.github.io/Humanize-AI/' },
-          { label: 'Source code', href: 'https://github.com/arkap1502/Humanize-AI' }
-        ]
-      },
-      nexvault: {
-        index: '05',
-        title: 'NexVault',
-        category: 'Security · Web app',
-        status: 'Ongoing',
-        desc: 'A group-built web vault following a “your data, your vault, your control” model. Vault data is gated behind authentication, with encrypted, access-controlled storage and a personal dashboard per user.',
-        stack: ['Web App', 'Authentication', 'Data Security'],
-        links: [
-          { label: 'Live demo', href: 'https://secure-vault-system.onrender.com/' }
-        ]
-      },
-      prompt: {
-        index: '06',
-        title: 'Hidden-Prompt Scanner',
-        category: 'AI security · Document analysis',
-        status: 'Completed',
-        desc: 'Extracts visible text and layout signals — colour, font size, opacity, position — to flag hidden text, zero-width characters, metadata, comments and injection phrases. Ships as a CLI and Flask UI, fully local.',
-        stack: ['Python', 'Flask', 'PyPDF2', 'python-docx'],
-        links: [
-          { label: 'Live demo', href: 'https://hidden-prompt-scanner-for-documents.onrender.com/' },
-          { label: 'Source code', href: 'https://github.com/arkap1502/Hidden-prompt-scanner-for-documents%2E' }
-        ]
-      },
-      prototype: {
-        index: '07',
-        title: 'Prototype Safety Check',
-        category: 'Web security · Passive checks',
-        status: 'Ongoing',
-        desc: 'Passive checks for exposed parameters, database errors, missing security headers, suspicious scripts and HTTPS signals. Ships a web UI, CLI and REST API — no exploitation.',
-        stack: ['Python', 'Flask', 'REST API'],
-        links: [
-          { label: 'Live demo', href: 'https://prototype-safety-check.onrender.com/' },
-          { label: 'Source code', href: 'https://github.com/arkap1502/prototype-safety-check' }
-        ]
-      },
-      quishing: {
-        index: '08',
-        title: 'Quishing Guard',
-        category: 'Web security · QR phishing',
-        status: 'Completed',
-        desc: 'Scans QR codes from your camera or an uploaded image, decodes the payload locally and scores the risk before anything opens. Flags shortened links, lookalike and punycode domains, IP-address URLs, suspicious TLDs and UPI payee mismatches — with scan history kept on the device.',
-        stack: ['React', 'TypeScript', 'Vite', 'jsQR', 'PWA'],
-        links: [
-          { label: 'Live demo', href: 'https://quishing-guard.vercel.app/' },
-          { label: 'Source code', href: 'https://github.com/arkap1502/Quishing-Guard' }
-        ]
-      }
-    };
+  var projects = {
+    url: {
+      index: '01',
+      title: 'URL Scanner',
+      category: 'URL security scanner · Threat detection',
+      status: 'Completed',
+      desc: 'A cybersecurity-focused URL scanner that flags raw IPs, uncommon TLDs, lookalike brand spellings, phishing keywords and weak security headers, then combines the signals into a 0–100 risk score with a plain-language verdict.',
+      stack: ['JavaScript', 'HTML', 'CSS'],
+      links: [
+        { label: 'Live demo', href: 'https://arkap1502.github.io/URL-Scanner/' },
+        { label: 'Source code', href: 'https://github.com/arkap1502/URL-Scanner' }
+      ]
+    },
+    copilot: {
+      index: '02',
+      title: 'Website Security Copilot',
+      category: 'Cybersecurity · Browser extension',
+      status: 'Completed',
+      desc: 'A FastAPI engine checks security headers, TLS certificates, cookie flags, DNS email records, open ports and phishing signals. The MV3 extension watches tabs and blocks harmful pages before they load. AI explains the tool output — it never invents findings.',
+      stack: ['Next.js', 'FastAPI', 'Python', 'SQLite', 'Docker', 'MV3'],
+      links: [
+        { label: 'Live demo', href: 'https://website-security-copilot-3m0hij8jl-arkap1502-9053s-projects.vercel.app/' },
+        { label: 'Source code', href: 'https://github.com/arkap1502/Website-Security-Copilot' }
+      ]
+    },
+    altron: {
+      index: '03',
+      title: 'ALTRON Password Inspector',
+      category: 'Security · Web tool',
+      status: 'Completed',
+      desc: 'Passwords are generated with crypto.getRandomValues(), never Math.random(). Strength scoring checks character classes and a 15+ character length threshold. Everything runs in the browser.',
+      stack: ['JavaScript', 'Web Crypto API', 'HTML', 'CSS'],
+      links: [
+        { label: 'Live demo', href: 'https://arkap1502.github.io/password-making/' },
+        { label: 'Source code', href: 'https://github.com/arkap1502/password-making' }
+      ]
+    },
+    humanize: {
+      index: '04',
+      title: 'Humanize AI',
+      category: 'AI · Text tool',
+      status: 'Ongoing',
+      desc: 'A React frontend with an Express backend, plus a zero-build client-side fallback so it runs offline. Light, Medium and Strong modes transform text in real time with a word-count diff.',
+      stack: ['React', 'Express', 'JavaScript'],
+      links: [
+        { label: 'Live demo', href: 'https://arkap1502.github.io/Humanize-AI/' },
+        { label: 'Source code', href: 'https://github.com/arkap1502/Humanize-AI' }
+      ]
+    },
+    nexvault: {
+      index: '05',
+      title: 'NexVault',
+      category: 'Security · Web app',
+      status: 'Ongoing',
+      desc: 'A group-built web vault following a “your data, your vault, your control” model. Vault data is gated behind authentication, with encrypted, access-controlled storage and a personal dashboard per user.',
+      stack: ['Web App', 'Authentication', 'Data Security'],
+      links: [
+        { label: 'Live demo', href: 'https://secure-vault-system.onrender.com/' }
+      ]
+    },
+    prompt: {
+      index: '06',
+      title: 'Hidden-Prompt Scanner',
+      category: 'AI security · Document analysis',
+      status: 'Completed',
+      desc: 'Extracts visible text and layout signals — colour, font size, opacity, position — to flag hidden text, zero-width characters, metadata, comments and injection phrases. Ships as a CLI and Flask UI, fully local.',
+      stack: ['Python', 'Flask', 'PyPDF2', 'python-docx'],
+      links: [
+        { label: 'Live demo', href: 'https://hidden-prompt-scanner-for-documents.onrender.com/' },
+        { label: 'Source code', href: 'https://github.com/arkap1502/Hidden-prompt-scanner-for-documents%2E' }
+      ]
+    },
+    prototype: {
+      index: '07',
+      title: 'Prototype Safety Check',
+      category: 'Web security · Passive checks',
+      status: 'Ongoing',
+      desc: 'Passive checks for exposed parameters, database errors, missing security headers, suspicious scripts and HTTPS signals. Ships a web UI, CLI and REST API — no exploitation.',
+      stack: ['Python', 'Flask', 'REST API'],
+      links: [
+        { label: 'Live demo', href: 'https://prototype-safety-check.onrender.com/' },
+        { label: 'Source code', href: 'https://github.com/arkap1502/prototype-safety-check' }
+      ]
+    },
+    quishing: {
+      index: '08',
+      title: 'Quishing Guard',
+      category: 'Web security · QR phishing',
+      status: 'Completed',
+      desc: 'Scans QR codes from your camera or an uploaded image, decodes the payload locally and scores the risk before anything opens. Flags shortened links, lookalike and punycode domains, IP-address URLs, suspicious TLDs and UPI payee mismatches — with scan history kept on the device.',
+      stack: ['React', 'TypeScript', 'Vite', 'jsQR', 'PWA'],
+      links: [
+        { label: 'Live demo', href: 'https://quishing-guard.vercel.app/' },
+        { label: 'Source code', href: 'https://github.com/arkap1502/Quishing-Guard' }
+      ]
+    }
+  };
 
-    /* ---------------------------------------------------------------------
-       Project links — live demo and source on the card itself
-       --------------------------------------------------------------------- */
+  /* -----------------------------------------------------------------------
+     Project dialog
+     ----------------------------------------------------------------------- */
 
-    document.querySelectorAll('.project-card[data-project]').forEach(function (card) {
-      var project = projects[card.getAttribute('data-project')];
-      var body = card.querySelector('.project-card__body');
-      if (!project || !body || !project.links || !project.links.length) return;
-      if (body.querySelector('.project-card__links')) return;
+  var dialog = document.getElementById('projectDialog');
 
-      var row = document.createElement('div');
-      row.className = 'project-card__links';
+  if (dialog && typeof dialog.showModal === 'function') {
+    var dialogEyebrow = document.getElementById('dialogEyebrow');
+    var dialogTitle = document.getElementById('dialogTitle');
+    var dialogMeta = document.getElementById('dialogMeta');
+    var dialogDesc = document.getElementById('dialogDesc');
+    var dialogStack = document.getElementById('dialogStack');
+    var dialogLinks = document.getElementById('dialogLinks');
+    var lastTrigger = null;
 
+    function fillDialog(project) {
+      dialogEyebrow.textContent = project.index + ' / Project';
+      dialogTitle.textContent = project.title;
+      dialogMeta.textContent = project.category + ' · ' + project.status;
+      dialogDesc.textContent = project.desc;
+
+      dialogStack.textContent = '';
+      project.stack.forEach(function (item) {
+        var chip = document.createElement('span');
+        chip.textContent = item;
+        dialogStack.appendChild(chip);
+      });
+
+      dialogLinks.textContent = '';
       project.links.forEach(function (link) {
         var anchor = document.createElement('a');
-        anchor.className = 'project-card__link';
+        anchor.className = 'link-arrow';
         anchor.href = link.href;
         if (link.href.indexOf('http') === 0) {
           anchor.target = '_blank';
           anchor.rel = 'noopener';
         }
-        anchor.innerHTML = link.label + ' <span aria-hidden="true">↗</span>';
-        row.appendChild(anchor);
+        anchor.innerHTML = link.label + ' <span class="arrow" aria-hidden="true">↗</span>';
+        dialogLinks.appendChild(anchor);
       });
+    }
 
-      body.appendChild(row);
-    });
-
-    /* ---------------------------------------------------------------------
-       Project details dialogue
-       --------------------------------------------------------------------- */
-
-    var dialog = document.getElementById('projectDialog');
-
-    if (dialog && typeof dialog.showModal === 'function') {
-      var dialogEyebrow = document.getElementById('dialogEyebrow');
-      var dialogTitle = document.getElementById('dialogTitle');
-      var dialogMeta = document.getElementById('dialogMeta');
-      var dialogDesc = document.getElementById('dialogDesc');
-      var dialogStack = document.getElementById('dialogStack');
-      var dialogLinks = document.getElementById('dialogLinks');
-      var lastTrigger = null;
-
-      function fillDialog(project) {
-        dialogEyebrow.textContent = project.index + ' / Project';
-        dialogTitle.textContent = project.title;
-        dialogMeta.textContent = project.category + ' · ' + project.status;
-        dialogDesc.textContent = project.desc;
-
-        dialogStack.textContent = '';
-        project.stack.forEach(function (item) {
-          var chip = document.createElement('span');
-          chip.textContent = item;
-          dialogStack.appendChild(chip);
-        });
-
-        dialogLinks.textContent = '';
-        project.links.forEach(function (link) {
-          var anchor = document.createElement('a');
-          anchor.className = 'link-arrow';
-          anchor.href = link.href;
-          if (link.href.indexOf('http') === 0) {
-            anchor.target = '_blank';
-            anchor.rel = 'noopener';
-          }
-          anchor.innerHTML = link.label + ' <span class="arrow" aria-hidden="true">↗</span>';
-          dialogLinks.appendChild(anchor);
-        });
-      }
-
-      function openProject(card, trigger) {
-        var project = projects[card.getAttribute('data-project')];
+    document.querySelectorAll('[data-open-project]').forEach(function (trigger) {
+      trigger.addEventListener('click', function () {
+        var key = trigger.getAttribute('data-open-project');
+        var project = projects[key];
         if (!project) return;
         lastTrigger = trigger;
         fillDialog(project);
         dialog.showModal();
         document.body.style.overflow = 'hidden';
-      }
-
-      function closeDialog() {
-        if (!dialog.open) return;
-        dialog.close();
-      }
-
-      document.querySelectorAll('.project-card').forEach(function (card) {
-        var trigger = card.querySelector('.project-open');
-        if (!trigger) return;
-        trigger.addEventListener('click', function () {
-          openProject(card, trigger);
-        });
       });
+    });
 
-      dialog.querySelectorAll('[data-close-dialog]').forEach(function (button) {
-        button.addEventListener('click', closeDialog);
-      });
+    dialog.querySelectorAll('[data-close-dialog]').forEach(function (button) {
+      button.addEventListener('click', function () { dialog.close(); });
+    });
 
-      dialog.addEventListener('click', function (event) {
-        if (event.target === dialog) closeDialog();
-      });
+    dialog.addEventListener('click', function (event) {
+      if (event.target === dialog) dialog.close();
+    });
 
-      dialog.addEventListener('close', function () {
-        document.body.style.overflow = '';
-        if (lastTrigger) lastTrigger.focus();
-      });
+    dialog.addEventListener('close', function () {
+      document.body.style.overflow = '';
+      if (lastTrigger) lastTrigger.focus();
+    });
+  }
+
+  /* -----------------------------------------------------------------------
+     Project filters
+     ----------------------------------------------------------------------- */
+
+  var filterButtons = Array.prototype.slice.call(document.querySelectorAll('.filter-btn'));
+  var projectCards = Array.prototype.slice.call(document.querySelectorAll('#projectGrid .project-card'));
+  var filterCount = document.getElementById('filterCount');
+  var emptyState = document.getElementById('buildEmpty');
+
+  function applyFilter(filter) {
+    var shown = 0;
+
+    projectCards.forEach(function (card) {
+      var match = filter === 'all' || card.getAttribute('data-status') === filter;
+      card.classList.toggle('is-hidden', !match);
+      if (match) shown += 1;
+    });
+
+    if (filterCount) {
+      filterCount.textContent = pad(shown) + (shown === 1 ? ' build' : ' builds');
+    }
+    if (emptyState) {
+      emptyState.hidden = shown !== 0;
     }
 
-    /* ---------------------------------------------------------------------
-       Project filters
-       --------------------------------------------------------------------- */
+    filterButtons.forEach(function (button) {
+      button.setAttribute('aria-pressed', String(button.getAttribute('data-filter') === filter));
+    });
+  }
 
-    var filterButtons = Array.prototype.slice.call(document.querySelectorAll('.filter-btn'));
-    var cards = Array.prototype.slice.call(document.querySelectorAll('.project-card'));
-    var filterCount = document.getElementById('filterCount');
-    var emptyState = document.getElementById('buildEmpty');
-    var moreHead = document.getElementById('moreHead');
-    var moreGrid = document.getElementById('moreGrid');
-    var moreCount = document.getElementById('moreCount');
-
-    function applyFilter(filter) {
-      var shown = 0;
-      var shownMore = 0;
-
-      cards.forEach(function (card) {
-        var match = filter === 'all' || card.getAttribute('data-status') === filter;
-        card.classList.toggle('is-hidden', !match);
-        if (!match) return;
-        shown += 1;
-        if (moreGrid && moreGrid.contains(card)) shownMore += 1;
+  if (filterButtons.length && projectCards.length) {
+    filterButtons.forEach(function (button) {
+      button.addEventListener('click', function () {
+        applyFilter(button.getAttribute('data-filter') || 'all');
       });
+    });
+    applyFilter('all');
+  }
 
-      if (filterCount) {
-        filterCount.textContent = String(shown).padStart(2, '0') + (shown === 1 ? ' build' : ' builds');
-      }
-      if (moreCount) {
-        moreCount.textContent = String(shownMore).padStart(2, '0');
-      }
-      if (moreHead) {
-        moreHead.hidden = shownMore === 0;
-      }
-      if (emptyState) {
-        emptyState.hidden = shown !== 0;
-      }
+  /* -----------------------------------------------------------------------
+     Skill → related build readout
+     ----------------------------------------------------------------------- */
 
-      filterButtons.forEach(function (button) {
-        button.setAttribute('aria-pressed', String(button.getAttribute('data-filter') === filter));
-      });
+  var skillButtons = Array.prototype.slice.call(document.querySelectorAll('.skill-badge'));
+  var skillName = document.getElementById('skillReadoutName');
+  var skillBody = document.getElementById('skillReadoutBody');
+
+  function resetSkillReadout() {
+    if (skillName) skillName.textContent = 'Awaiting input';
+    if (skillBody) {
+      skillBody.innerHTML = '<p class="skill-readout__empty">Select a skill badge to see the builds that use it.</p>';
+    }
+  }
+
+  function showSkill(button) {
+    var label = button.getAttribute('data-skill') || 'Skill';
+    var keys = (button.getAttribute('data-projects') || '').split(',').filter(Boolean);
+    if (skillName) skillName.textContent = label;
+
+    if (!skillBody) return;
+    skillBody.textContent = '';
+
+    if (!keys.length) {
+      var empty = document.createElement('p');
+      empty.className = 'skill-readout__empty';
+      empty.textContent = 'No public build mapped to this skill yet.';
+      skillBody.appendChild(empty);
+      return;
     }
 
-    if (filterButtons.length && cards.length) {
-      filterButtons.forEach(function (button) {
-        button.addEventListener('click', function () {
-          applyFilter(button.getAttribute('data-filter') || 'all');
-        });
+    var list = document.createElement('div');
+    list.className = 'skill-readout__list';
+
+    keys.forEach(function (key) {
+      var project = projects[key];
+      if (!project) return;
+      var link = document.createElement('a');
+      link.className = 'skill-readout__link';
+      link.href = 'projects.html#project-' + key;
+      link.innerHTML = project.title + ' <span aria-hidden="true">↗</span>';
+      list.appendChild(link);
+    });
+
+    skillBody.appendChild(list);
+  }
+
+  skillButtons.forEach(function (button) {
+    button.setAttribute('aria-pressed', 'false');
+    button.addEventListener('click', function () {
+      var wasActive = button.classList.contains('is-active');
+      skillButtons.forEach(function (other) {
+        other.classList.remove('is-active');
+        other.setAttribute('aria-pressed', 'false');
       });
-    }
 
-    /* ---------------------------------------------------------------------
-       Contact form
-       --------------------------------------------------------------------- */
-
-    var form = document.getElementById('contactForm');
-
-    if (form) {
-      var nameInput = document.getElementById('cfName');
-      var emailInput = document.getElementById('cfEmail');
-      var messageInput = document.getElementById('cfMessage');
-      var status = document.getElementById('cfStatus');
-      var submit = document.getElementById('cfSubmit');
-      var submitLabel = submit ? submit.querySelector('.btn-label') : null;
-
-      function fieldOf(input) { return input.closest('.field'); }
-
-      function setError(input, message) {
-        if (!input) return;
-        var field = fieldOf(input);
-        var error = field ? field.querySelector('.field-error') : null;
-        if (field) field.classList.toggle('has-error', Boolean(message));
-        input.setAttribute('aria-invalid', message ? 'true' : 'false');
-        if (error) error.textContent = message || '';
+      if (wasActive) {
+        resetSkillReadout();
+        return;
       }
 
-      [nameInput, emailInput, messageInput].forEach(function (input) {
-        if (!input) return;
-        input.addEventListener('input', function () { setError(input, ''); });
-      });
-
-      form.addEventListener('submit', function (event) {
-        event.preventDefault();
-
-        var valid = true;
-        var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-        if (!nameInput.value.trim()) {
-          setError(nameInput, 'Please enter your name.');
-          valid = false;
-        }
-        if (!emailPattern.test(emailInput.value.trim())) {
-          setError(emailInput, 'Enter a valid email address.');
-          valid = false;
-        }
-        if (!messageInput.value.trim()) {
-          setError(messageInput, 'Please write a short message.');
-          valid = false;
-        }
-
-        if (!valid) {
-          status.textContent = '';
-          status.classList.remove('is-error');
-          var firstInvalid = form.querySelector('[aria-invalid="true"]');
-          if (firstInvalid) firstInvalid.focus();
-          return;
-        }
-
-        var inbox = 'f3400068730008743ebb2c550435c41d';
-        status.classList.remove('is-error');
-        status.textContent = 'Sending…';
-        if (submit) {
-          submit.disabled = true;
-          if (submitLabel) submitLabel.textContent = 'Sending…';
-        }
-
-        fetch('https://formsubmit.co/ajax/' + inbox, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify({
-            name: nameInput.value.trim(),
-            email: emailInput.value.trim(),
-            message: messageInput.value.trim(),
-            _subject: 'Portfolio contact — from ' + nameInput.value.trim()
-          })
-        })
-          .then(function (response) {
-            if (!response.ok) throw new Error('send failed');
-            return response.json();
-          })
-          .then(function () {
-            status.classList.remove('is-error');
-            status.textContent = 'Message sent — I reply within 24 hours.';
-            form.reset();
-            [nameInput, emailInput, messageInput].forEach(function (input) { setError(input, ''); });
-          })
-          .catch(function () {
-            status.classList.add('is-error');
-            status.textContent = 'Could not send just now — email me directly at arkap1502@gmail.com.';
-          })
-          .finally(function () {
-            if (submit) {
-              submit.disabled = false;
-              if (submitLabel) submitLabel.textContent = 'Send message';
-            }
-          });
-      });
-    }
+      button.classList.add('is-active');
+      button.setAttribute('aria-pressed', 'true');
+      showSkill(button);
+    });
   });
+
+  /* -----------------------------------------------------------------------
+     Identity card flip
+     ----------------------------------------------------------------------- */
+
+  var idCard = document.getElementById('idCard');
+  var idFlip = document.getElementById('idFlip');
+
+  if (idCard && idFlip) {
+    idFlip.addEventListener('click', function () {
+      var flipped = idCard.classList.toggle('is-flipped');
+      idFlip.setAttribute('aria-pressed', String(flipped));
+      idFlip.querySelector('span').textContent = flipped ? 'Flip to identity' : 'Flip to stats';
+    });
+  }
+
+  /* -----------------------------------------------------------------------
+     Boot sequence — entry cover only, once per tab
+     ----------------------------------------------------------------------- */
+
+  var boot = document.getElementById('bootOverlay');
+
+  if (boot) {
+    var bootFill = boot.querySelector('.boot__fill');
+    var bootSkip = boot.querySelector('.boot__skip');
+    var bootDone = false;
+    var bootTimer = 0;
+
+    function finishBoot() {
+      if (bootDone) return;
+      bootDone = true;
+      window.clearTimeout(bootTimer);
+
+      try { sessionStorage.setItem('arka-booted', '1'); } catch (error) {}
+
+      boot.classList.add('is-done');
+      document.body.classList.remove('is-booting');
+      window.setTimeout(function () { boot.hidden = true; }, 480);
+    }
+
+    var alreadyBooted = false;
+    try { alreadyBooted = sessionStorage.getItem('arka-booted') === '1'; } catch (error) {}
+
+    if (alreadyBooted || reducedMotion) {
+      boot.hidden = true;
+    } else {
+      boot.hidden = false;
+      document.body.classList.add('is-booting');
+      window.requestAnimationFrame(function () {
+        window.requestAnimationFrame(function () {
+          if (bootFill) bootFill.style.width = '100%';
+        });
+      });
+      bootTimer = window.setTimeout(finishBoot, 2050);
+    }
+
+    if (bootSkip) bootSkip.addEventListener('click', finishBoot);
+
+    var enterLink = document.querySelector('[data-enter]');
+    if (enterLink) {
+      enterLink.addEventListener('click', function () {
+        try { sessionStorage.setItem('arka-booted', '1'); } catch (error) {}
+      });
+    }
+  }
+
+  /* -----------------------------------------------------------------------
+     Contact form
+     ----------------------------------------------------------------------- */
+
+  var form = document.getElementById('contactForm');
+
+  if (form) {
+    var nameInput = document.getElementById('cfName');
+    var emailInput = document.getElementById('cfEmail');
+    var messageInput = document.getElementById('cfMessage');
+    var status = document.getElementById('cfStatus');
+    var submit = document.getElementById('cfSubmit');
+    var submitLabel = submit ? submit.querySelector('.btn-label') : null;
+
+    function fieldOf(input) { return input.closest('.field'); }
+
+    function setError(input, message) {
+      if (!input) return;
+      var field = fieldOf(input);
+      var error = field ? field.querySelector('.field-error') : null;
+      if (field) field.classList.toggle('has-error', Boolean(message));
+      input.setAttribute('aria-invalid', message ? 'true' : 'false');
+      if (error) error.textContent = message || '';
+    }
+
+    [nameInput, emailInput, messageInput].forEach(function (input) {
+      if (!input) return;
+      input.addEventListener('input', function () { setError(input, ''); });
+    });
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      var valid = true;
+      var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!nameInput.value.trim()) {
+        setError(nameInput, 'Please enter your name.');
+        valid = false;
+      }
+      if (!emailPattern.test(emailInput.value.trim())) {
+        setError(emailInput, 'Enter a valid email address.');
+        valid = false;
+      }
+      if (!messageInput.value.trim()) {
+        setError(messageInput, 'Please write a short message.');
+        valid = false;
+      }
+
+      if (!valid) {
+        status.textContent = '';
+        status.classList.remove('is-error');
+        var firstInvalid = form.querySelector('[aria-invalid="true"]');
+        if (firstInvalid) firstInvalid.focus();
+        return;
+      }
+
+      var inbox = 'f3400068730008743ebb2c550435c41d';
+      status.classList.remove('is-error');
+      status.textContent = 'Transmitting…';
+      if (submit) {
+        submit.disabled = true;
+        if (submitLabel) submitLabel.textContent = 'Transmitting…';
+      }
+
+      fetch('https://formsubmit.co/ajax/' + inbox, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          name: nameInput.value.trim(),
+          email: emailInput.value.trim(),
+          message: messageInput.value.trim(),
+          _subject: 'Portfolio contact — from ' + nameInput.value.trim()
+        })
+      })
+        .then(function (response) {
+          if (!response.ok) throw new Error('send failed');
+          return response.json();
+        })
+        .then(function () {
+          status.classList.remove('is-error');
+          status.textContent = 'Channel open — message received. I reply within 24 hours.';
+          form.reset();
+          [nameInput, emailInput, messageInput].forEach(function (input) { setError(input, ''); });
+        })
+        .catch(function () {
+          status.classList.add('is-error');
+          status.textContent = 'Channel busy — email me directly at arkap1502@gmail.com.';
+        })
+        .finally(function () {
+          if (submit) {
+            submit.disabled = false;
+            if (submitLabel) submitLabel.textContent = 'Send message';
+          }
+        });
+    });
+  }
 })();

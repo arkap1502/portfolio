@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark" data-default-theme="dark" data-palette="lunar" data-ui="palette">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,23 +8,13 @@
 <meta property="og:title" content="Certificates — Arka Patra">
 <meta property="og:description" content="10 certificates. One direction. Every credential with proof.">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#151515" id="metaTheme">
+<meta name="theme-color" content="#05070c">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&amp;family=Source+Serif+4:ital,opsz,wght@1,8..60,300;1,8..60,400&amp;family=Courier+Prime:wght@400;700&amp;display=swap" rel="stylesheet">
-<script>
-document.documentElement.classList.add('js');
-(function () {
-  try {
-    var theme = localStorage.getItem('arka-theme');
-    if (theme === 'light' || theme === 'dark') document.documentElement.setAttribute('data-theme', theme);
-    var palette = localStorage.getItem('arka-palette');
-    if (palette) document.documentElement.setAttribute('data-palette', palette);
-  } catch (error) {}
-})();
-</script>
-<link rel="stylesheet" href="assets/site.css?v=10">
+<link href="https://fonts.googleapis.com/css2?family=Carlito:wght@400;700&amp;family=Courier+Prime:wght@400;700&amp;display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js');</script>
+<link rel="stylesheet" href="assets/site.css?v=16">
 </head>
 <body>
 
@@ -32,171 +22,204 @@ document.documentElement.classList.add('js');
 
 <header class="site-header">
   <div class="frame nav">
-    <a class="brand" href="dashboard.html" aria-label="Arka Patra — home">arka<sup>®</sup></a>
+    <a class="brand" href="dashboard.html" aria-label="Arka Patra — home">AP // ARKA PATRA</a>
     <nav class="nav-links" aria-label="Primary">
       <a href="dashboard.html">Home</a>
-      <a href="projects.html">Projects</a>
       <a href="about.html">About</a>
+      <a href="skills.html">Skills</a>
+      <a href="projects.html">Projects</a>
       <a href="certificates.html" aria-current="page">Certificates</a>
+      <a href="journey.html">Journey</a>
       <a href="contact.html">Contact</a>
     </nav>
-    <div class="nav-actions">
-      <div class="theme-toggle" role="group" aria-label="Colour theme">
-        <button class="theme-toggle__btn" type="button" data-set-theme="light" aria-pressed="false">Light</button>
-        <button class="theme-toggle__btn" type="button" data-set-theme="dark" aria-pressed="true">Dark</button>
-      </div>
-      <button class="nav-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
+    <span class="nav-status"><i class="status-dot" aria-hidden="true"></i>System online</span>
+    <button class="nav-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
   <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile" aria-hidden="true">
-    <a href="dashboard.html">Home <span aria-hidden="true">→</span></a>
-    <a href="projects.html">Projects <span aria-hidden="true">→</span></a>
-    <a href="about.html">About <span aria-hidden="true">→</span></a>
-    <a href="certificates.html" aria-current="page">Certificates <span aria-hidden="true">→</span></a>
-    <a href="contact.html">Contact <span aria-hidden="true">→</span></a>
+    <div class="mobile-menu__inner frame">
+      <a href="dashboard.html">Home <span aria-hidden="true">→</span></a>
+      <a href="about.html">About <span aria-hidden="true">→</span></a>
+      <a href="skills.html">Skills <span aria-hidden="true">→</span></a>
+      <a href="projects.html">Projects <span aria-hidden="true">→</span></a>
+      <a href="certificates.html" aria-current="page">Certificates <span aria-hidden="true">→</span></a>
+      <a href="journey.html">Journey <span aria-hidden="true">→</span></a>
+      <a href="contact.html">Contact <span aria-hidden="true">→</span></a>
+    </div>
   </nav>
 </header>
 
 <main id="main" class="page">
   <div class="frame">
+
     <header class="page-head">
       <div>
-        <span class="kicker kicker--plain">03 / Certificates</span>
-        <h1 class="display display--cert">10 certificates. <em>One direction.</em></h1>
+        <span class="eyebrow">04 // Certificates</span>
+        <h1>Credentials <em>vault.</em></h1>
       </div>
+      <p class="page-head__aside">Ten credentials. One direction. <strong>Every document opens as a PDF in a new tab.</strong></p>
     </header>
 
-    <div class="cert-top">
-      <article class="cert-featured" data-reveal>
-        <p class="cert-featured__provider">Thiranex — internship</p>
-        <span class="cert-featured__disc" aria-hidden="true">01</span>
-        <h2>Cyber Security Internship</h2>
-        <div class="cert-chips">
-          <span class="cert-chip">Applied security</span>
-          <span class="cert-chip">Mentored training</span>
-          <span class="cert-chip">Project work</span>
-          <span class="cert-chip">Aug–Sept 2026</span>
+    <div class="cert-layout">
+
+      <div class="cert-fan" data-reveal>
+        <span class="fan-layer fan-layer--back" aria-hidden="true"></span>
+        <span class="fan-layer fan-layer--mid" aria-hidden="true"></span>
+
+        <article class="cert-featured bracket">
+          <div class="cert-featured__head">
+            <span class="provider-square">CISCO</span>
+            <span class="tag tag--green">Verified</span>
+          </div>
+          <div class="cert-featured__meta">
+            <p class="cert-provider">Cisco Networking Academy</p>
+            <h2 class="cert-title">Computer Hardware Basics</h2>
+            <p class="cert-sub">PC assembly, maintenance, troubleshooting and safe hardware practice.</p>
+          </div>
+          <div class="cert-chips">
+            <span class="cert-chip">PC assembly</span>
+            <span class="cert-chip">Troubleshooting</span>
+            <span class="cert-chip">System maintenance</span>
+            <span class="cert-chip">Safety practices</span>
+          </div>
+          <div class="cert-actions">
+            <a class="btn btn--solid" href="assets/cert-cisco-hardware-basics.pdf" target="_blank" rel="noopener">View certificate <span class="arrow" aria-hidden="true">↗</span></a>
+            <a class="btn btn--ghost" href="#vault">All credentials</a>
+          </div>
+          <div class="cert-featured__foot"><span>Credential 01 / 10</span><b>Verified</b></div>
+        </article>
+      </div>
+
+      <section class="vault" id="vault" aria-labelledby="vaultTitle">
+        <div class="vault-head">
+          <span id="vaultTitle">Secure credentials vault</span>
+          <span class="vault-count">10 credentials</span>
         </div>
-        <a class="link-arrow cert-featured__link" href="assets/Thiranex_Certificate_Arka_Patra_THX-AUG0426-563.pdf" target="_blank" rel="noopener">Credential link <span class="arrow" aria-hidden="true">→</span></a>
-      </article>
+
+        <div class="vault-list">
+
+          <a class="vault-row" href="assets/cert-cisco-intro-cybersecurity.pdf" target="_blank" rel="noopener">
+            <span class="vault-lock"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="1" stroke="currentColor"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor"/><circle cx="12" cy="15" r="1.4" fill="currentColor"/></svg></span>
+            <span class="vault-info">
+              <span class="vault-index">Credential 02</span>
+              <span class="vault-title">Introduction to Cybersecurity</span>
+              <span class="vault-issuer">Cisco Networking Academy</span>
+            </span>
+            <span class="vault-view">View</span>
+          </a>
+
+          <a class="vault-row" href="assets/cert-wscube-ethical-hacker-2026.pdf" target="_blank" rel="noopener">
+            <span class="vault-lock"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="1" stroke="currentColor"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor"/><circle cx="12" cy="15" r="1.4" fill="currentColor"/></svg></span>
+            <span class="vault-info">
+              <span class="vault-index">Credential 03</span>
+              <span class="vault-title">Certified Ethical Hacker in 2026</span>
+              <span class="vault-issuer">WsCube Tech · Oct 2026</span>
+            </span>
+            <span class="vault-view">View</span>
+          </a>
+
+          <a class="vault-row" href="assets/cert-forage-technical-interviews.pdf" target="_blank" rel="noopener">
+            <span class="vault-lock"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="1" stroke="currentColor"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor"/><circle cx="12" cy="15" r="1.4" fill="currentColor"/></svg></span>
+            <span class="vault-info">
+              <span class="vault-index">Credential 04</span>
+              <span class="vault-title">Mastering Technical Interviews</span>
+              <span class="vault-issuer">Forage · Jul 2026</span>
+            </span>
+            <span class="vault-view">View</span>
+          </a>
+
+          <a class="vault-row" href="assets/cert-deloitte-cyber.pdf" target="_blank" rel="noopener">
+            <span class="vault-lock"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="1" stroke="currentColor"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor"/><circle cx="12" cy="15" r="1.4" fill="currentColor"/></svg></span>
+            <span class="vault-info">
+              <span class="vault-index">Credential 05</span>
+              <span class="vault-title">Cyber Job Simulation</span>
+              <span class="vault-issuer">Deloitte · Jun–Jul 2026</span>
+            </span>
+            <span class="vault-view">View</span>
+          </a>
+
+          <a class="vault-row" href="assets/cert-commbank-cybersecurity.pdf" target="_blank" rel="noopener">
+            <span class="vault-lock"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="1" stroke="currentColor"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor"/><circle cx="12" cy="15" r="1.4" fill="currentColor"/></svg></span>
+            <span class="vault-info">
+              <span class="vault-index">Credential 06</span>
+              <span class="vault-title">Cybersecurity Job Simulation</span>
+              <span class="vault-issuer">Commonwealth Bank · Jul 2026</span>
+            </span>
+            <span class="vault-view">View</span>
+          </a>
+
+          <a class="vault-row" href="assets/cert-datacom-ai-workplace.pdf" target="_blank" rel="noopener">
+            <span class="vault-lock"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="1" stroke="currentColor"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor"/><circle cx="12" cy="15" r="1.4" fill="currentColor"/></svg></span>
+            <span class="vault-info">
+              <span class="vault-index">Credential 07</span>
+              <span class="vault-title">Partnering with AI in the Workplace</span>
+              <span class="vault-issuer">Datacom · Jul 2026</span>
+            </span>
+            <span class="vault-view">View</span>
+          </a>
+
+          <a class="vault-row" href="assets/cert-nul-career-readiness.pdf" target="_blank" rel="noopener">
+            <span class="vault-lock"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="1" stroke="currentColor"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor"/><circle cx="12" cy="15" r="1.4" fill="currentColor"/></svg></span>
+            <span class="vault-info">
+              <span class="vault-index">Credential 08</span>
+              <span class="vault-title">Career Readiness Job Simulation</span>
+              <span class="vault-issuer">National Urban League · Jul 2026</span>
+            </span>
+            <span class="vault-view">View</span>
+          </a>
+
+          <a class="vault-row" href="assets/cert-bclp-interview-success.pdf" target="_blank" rel="noopener">
+            <span class="vault-lock"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="1" stroke="currentColor"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor"/><circle cx="12" cy="15" r="1.4" fill="currentColor"/></svg></span>
+            <span class="vault-info">
+              <span class="vault-index">Credential 09</span>
+              <span class="vault-title">Interview Success Job Simulation</span>
+              <span class="vault-issuer">BCLP · Jul 2026</span>
+            </span>
+            <span class="vault-view">View</span>
+          </a>
+
+          <a class="vault-row" href="assets/Thiranex_Certificate_Arka_Patra_THX-AUG0426-563.pdf" target="_blank" rel="noopener">
+            <span class="vault-lock"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="1" stroke="currentColor"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor"/><circle cx="12" cy="15" r="1.4" fill="currentColor"/></svg></span>
+            <span class="vault-info">
+              <span class="vault-index">Credential 10</span>
+              <span class="vault-title">Cyber Security Internship</span>
+              <span class="vault-issuer">Thiranex · Aug–Sept 2026</span>
+            </span>
+            <span class="vault-view">View</span>
+          </a>
+
+        </div>
+
+        <p class="vault-note">Every credential verified · PDFs open in a new tab</p>
+      </section>
+
     </div>
 
-    <div class="more-head">
-      <span>All credentials / 09</span>
-      <span>PDFs open in a new tab</span>
-    </div>
+    <aside class="github-strip" data-reveal>
+      <div>
+        <span class="eyebrow">Keep learning</span>
+        <h2>Credentials are the checkpoint, not the finish line.</h2>
+        <p>Follow the five-level journey from networking fundamentals to AI-powered security — or see how each skill becomes a working build.</p>
+      </div>
+      <a class="btn btn--ghost" href="journey.html">View the journey <span class="arrow" aria-hidden="true">→</span></a>
+    </aside>
 
-    <div class="cert-grid">
-      <a class="cert-card" href="assets/cert-cisco-intro-cybersecurity.pdf" target="_blank" rel="noopener" data-reveal>
-        <span class="cert-card__provider">Cisco Networking Academy</span>
-        <span class="cert-card__title">Introduction to Cybersecurity</span>
-        <span class="cert-card__date">Verified credential</span>
-        <span class="cert-card__chips">
-          <span class="cert-card__chip">Threat landscape</span>
-          <span class="cert-card__chip">Security basics</span>
-          <span class="cert-card__chip">Defence</span>
-        </span>
-        <span class="cert-card__link">Credential link <span aria-hidden="true">→</span></span>
-      </a>
-
-      <a class="cert-card" href="assets/cert-wscube-ethical-hacker-2026.pdf" target="_blank" rel="noopener" data-reveal style="--delay:40ms">
-        <span class="cert-card__provider">WsCube Tech</span>
-        <span class="cert-card__title">Certified Ethical Hacker in 2026</span>
-        <span class="cert-card__date">Oct 2026</span>
-        <span class="cert-card__chips">
-          <span class="cert-card__chip">Ethical hacking</span>
-          <span class="cert-card__chip">Reconnaissance</span>
-          <span class="cert-card__chip">Testing</span>
-        </span>
-        <span class="cert-card__link">Credential link <span aria-hidden="true">→</span></span>
-      </a>
-
-      <a class="cert-card" href="assets/cert-forage-technical-interviews.pdf" target="_blank" rel="noopener" data-reveal style="--delay:80ms">
-        <span class="cert-card__provider">Forage</span>
-        <span class="cert-card__title">Mastering Technical Interviews</span>
-        <span class="cert-card__date">Jul 2026</span>
-        <span class="cert-card__chips">
-          <span class="cert-card__chip">Interview technique</span>
-          <span class="cert-card__chip">Communication</span>
-        </span>
-        <span class="cert-card__link">Credential link <span aria-hidden="true">→</span></span>
-      </a>
-
-      <a class="cert-card" href="assets/cert-deloitte-cyber.pdf" target="_blank" rel="noopener" data-reveal>
-        <span class="cert-card__provider">Deloitte</span>
-        <span class="cert-card__title">Cyber Job Simulation</span>
-        <span class="cert-card__date">Jun–Jul 2026</span>
-        <span class="cert-card__chips">
-          <span class="cert-card__chip">Incident response</span>
-          <span class="cert-card__chip">Penetration testing</span>
-          <span class="cert-card__chip">Security awareness</span>
-        </span>
-        <span class="cert-card__link">Credential link <span aria-hidden="true">→</span></span>
-      </a>
-
-      <a class="cert-card" href="assets/cert-commbank-cybersecurity.pdf" target="_blank" rel="noopener" data-reveal style="--delay:40ms">
-        <span class="cert-card__provider">Commonwealth Bank</span>
-        <span class="cert-card__title">Cybersecurity Job Simulation</span>
-        <span class="cert-card__date">Jul 2026</span>
-        <span class="cert-card__chips">
-          <span class="cert-card__chip">Threat analysis</span>
-          <span class="cert-card__chip">Incident response</span>
-          <span class="cert-card__chip">Security design</span>
-        </span>
-        <span class="cert-card__link">Credential link <span aria-hidden="true">→</span></span>
-      </a>
-
-      <a class="cert-card" href="assets/cert-datacom-ai-workplace.pdf" target="_blank" rel="noopener" data-reveal style="--delay:80ms">
-        <span class="cert-card__provider">Datacom</span>
-        <span class="cert-card__title">Partnering with AI in the Workplace</span>
-        <span class="cert-card__date">Jul 2026</span>
-        <span class="cert-card__chips">
-          <span class="cert-card__chip">AI-assisted defence</span>
-          <span class="cert-card__chip">Research</span>
-          <span class="cert-card__chip">Debugging</span>
-        </span>
-        <span class="cert-card__link">Credential link <span aria-hidden="true">→</span></span>
-      </a>
-
-      <a class="cert-card" href="assets/cert-nul-career-readiness.pdf" target="_blank" rel="noopener" data-reveal>
-        <span class="cert-card__provider">National Urban League</span>
-        <span class="cert-card__title">Career Readiness Job Simulation</span>
-        <span class="cert-card__date">Jul 2026</span>
-        <span class="cert-card__chips">
-          <span class="cert-card__chip">Professional skills</span>
-          <span class="cert-card__chip">Communication</span>
-        </span>
-        <span class="cert-card__link">Credential link <span aria-hidden="true">→</span></span>
-      </a>
-
-      <a class="cert-card" href="assets/cert-bclp-interview-success.pdf" target="_blank" rel="noopener" data-reveal style="--delay:40ms">
-        <span class="cert-card__provider">BCLP</span>
-        <span class="cert-card__title">Interview Success Job Simulation</span>
-        <span class="cert-card__date">Jul 2026</span>
-        <span class="cert-card__chips">
-          <span class="cert-card__chip">Interview technique</span>
-          <span class="cert-card__chip">Communication</span>
-        </span>
-        <span class="cert-card__link">Credential link <span aria-hidden="true">→</span></span>
-      </a>
-
-      <a class="cert-card" href="assets/cert-cisco-hardware-basics.pdf" target="_blank" rel="noopener" data-reveal style="--delay:80ms">
-        <span class="cert-card__provider">Cisco Networking Academy</span>
-        <span class="cert-card__title">Computer Hardware Basics</span>
-        <span class="cert-card__date">Verified credential</span>
-        <span class="cert-card__chips">
-          <span class="cert-card__chip">PC assembly</span>
-          <span class="cert-card__chip">Troubleshooting</span>
-          <span class="cert-card__chip">System maintenance</span>
-          <span class="cert-card__chip">Safety practices</span>
-        </span>
-        <span class="cert-card__link">Credential link <span aria-hidden="true">→</span></span>
-      </a>
-    </div>
   </div>
 </main>
-<script src="assets/site.js?v=10"></script>
+
+<footer class="site-foot">
+  <div class="frame foot">
+    <span class="foot__note">Arka Patra © 2026 · <b>Secure HUD</b></span>
+    <span>System secured. Always learning. Always building.</span>
+    <div class="socials">
+      <a class="social-link" href="https://github.com/arkap1502" target="_blank" rel="noopener" aria-label="GitHub">GH</a>
+      <a class="social-link" href="https://www.linkedin.com/in/arka-patra-579110422/" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
+      <a class="social-link" href="mailto:arkap1502@gmail.com" aria-label="Email">@</a>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/site.js?v=16"></script>
 </body>
 </html>

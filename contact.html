@@ -1,30 +1,20 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark" data-default-theme="dark" data-palette="lunar" data-ui="palette">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact — Arka Patra</title>
 <meta name="description" content="Contact Arka Patra for internships, collaboration and security projects. Open to entry-level roles and cybersecurity conversations.">
 <meta property="og:title" content="Contact — Arka Patra">
-<meta property="og:description" content="Let’s build something secure. Internships, collaboration and security projects.">
+<meta property="og:description" content="Let's build a more secure digital future. Internships, collaboration and security projects.">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#151515" id="metaTheme">
+<meta name="theme-color" content="#05070c">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&amp;family=Source+Serif+4:ital,opsz,wght@1,8..60,300;1,8..60,400&amp;family=Courier+Prime:wght@400;700&amp;display=swap" rel="stylesheet">
-<script>
-document.documentElement.classList.add('js');
-(function () {
-  try {
-    var theme = localStorage.getItem('arka-theme');
-    if (theme === 'light' || theme === 'dark') document.documentElement.setAttribute('data-theme', theme);
-    var palette = localStorage.getItem('arka-palette');
-    if (palette) document.documentElement.setAttribute('data-palette', palette);
-  } catch (error) {}
-})();
-</script>
-<link rel="stylesheet" href="assets/site.css?v=10">
+<link href="https://fonts.googleapis.com/css2?family=Carlito:wght@400;700&amp;family=Courier+Prime:wght@400;700&amp;display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js');</script>
+<link rel="stylesheet" href="assets/site.css?v=16">
 </head>
 <body>
 
@@ -32,94 +22,152 @@ document.documentElement.classList.add('js');
 
 <header class="site-header">
   <div class="frame nav">
-    <a class="brand" href="dashboard.html" aria-label="Arka Patra — home">arka<sup>®</sup></a>
+    <a class="brand" href="dashboard.html" aria-label="Arka Patra — home">AP // ARKA PATRA</a>
     <nav class="nav-links" aria-label="Primary">
       <a href="dashboard.html">Home</a>
-      <a href="projects.html">Projects</a>
       <a href="about.html">About</a>
+      <a href="skills.html">Skills</a>
+      <a href="projects.html">Projects</a>
       <a href="certificates.html">Certificates</a>
+      <a href="journey.html">Journey</a>
       <a href="contact.html" aria-current="page">Contact</a>
     </nav>
-    <div class="nav-actions">
-      <div class="theme-toggle" role="group" aria-label="Colour theme">
-        <button class="theme-toggle__btn" type="button" data-set-theme="light" aria-pressed="false">Light</button>
-        <button class="theme-toggle__btn" type="button" data-set-theme="dark" aria-pressed="true">Dark</button>
-      </div>
-      <button class="nav-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
+    <span class="nav-status"><i class="status-dot" aria-hidden="true"></i>System online</span>
+    <button class="nav-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
   <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile" aria-hidden="true">
-    <a href="dashboard.html">Home <span aria-hidden="true">→</span></a>
-    <a href="projects.html">Projects <span aria-hidden="true">→</span></a>
-    <a href="about.html">About <span aria-hidden="true">→</span></a>
-    <a href="certificates.html">Certificates <span aria-hidden="true">→</span></a>
-    <a href="contact.html" aria-current="page">Contact <span aria-hidden="true">→</span></a>
+    <div class="mobile-menu__inner frame">
+      <a href="dashboard.html">Home <span aria-hidden="true">→</span></a>
+      <a href="about.html">About <span aria-hidden="true">→</span></a>
+      <a href="skills.html">Skills <span aria-hidden="true">→</span></a>
+      <a href="projects.html">Projects <span aria-hidden="true">→</span></a>
+      <a href="certificates.html">Certificates <span aria-hidden="true">→</span></a>
+      <a href="journey.html">Journey <span aria-hidden="true">→</span></a>
+      <a href="contact.html" aria-current="page">Contact <span aria-hidden="true">→</span></a>
+    </div>
   </nav>
 </header>
 
-<main id="main" class="slide-main">
-  <section class="slide" aria-labelledby="contactTitle">
-    <div class="frame contact-grid">
-      <div class="contact-copy" data-reveal>
-        <span class="kicker"><i class="kicker__square" aria-hidden="true"></i>Contact / 06</span>
-        <h1 class="display display--hero contact-title" id="contactTitle">Let’s build<br><em>something secure.</em></h1>
-        <p class="lead contact-lead">Open to internships, entry-level roles, collaboration and cybersecurity conversations.</p>
+<main id="main" class="page">
+  <div class="frame">
 
-        <div class="contact-list">
+    <div class="contact-layout">
+
+      <div class="contact-copy" data-reveal>
+        <span class="eyebrow">06 // Contact</span>
+        <h1 class="contact-title" id="contactTitle">Let's Build a More <span>Secure Digital Future.</span></h1>
+        <p class="contact-lead">Have an opportunity, project, or idea related to cybersecurity? Let's connect. I'm open to internships, entry-level roles, collaboration and security conversations.</p>
+
+        <div class="contact-rows">
           <a class="contact-row" href="mailto:arkap1502@gmail.com">
-            <span class="contact-label">Email</span>
-            <span class="contact-value">arkap1502@gmail.com</span>
-            <span class="contact-arrow" aria-hidden="true">↗</span>
-          </a>
-          <a class="contact-row" href="https://github.com/arkap1502" target="_blank" rel="noopener">
-            <span class="contact-label">GitHub</span>
-            <span class="contact-value">github.com/arkap1502</span>
+            <span class="contact-icon" aria-hidden="true">@</span>
+            <span>
+              <span class="contact-label">Email</span>
+              <span class="contact-value">arkap1502@gmail.com</span>
+            </span>
             <span class="contact-arrow" aria-hidden="true">↗</span>
           </a>
           <a class="contact-row" href="https://www.linkedin.com/in/arka-patra-579110422/" target="_blank" rel="noopener">
-            <span class="contact-label">LinkedIn</span>
-            <span class="contact-value">linkedin.com/in/arka-patra-579110422</span>
+            <span class="contact-icon" aria-hidden="true">in</span>
+            <span>
+              <span class="contact-label">LinkedIn</span>
+              <span class="contact-value">linkedin.com/in/arka-patra-579110422</span>
+            </span>
+            <span class="contact-arrow" aria-hidden="true">↗</span>
+          </a>
+          <a class="contact-row" href="https://github.com/arkap1502" target="_blank" rel="noopener">
+            <span class="contact-icon" aria-hidden="true">GH</span>
+            <span>
+              <span class="contact-label">GitHub</span>
+              <span class="contact-value">github.com/arkap1502</span>
+            </span>
             <span class="contact-arrow" aria-hidden="true">↗</span>
           </a>
           <a class="contact-row" href="tel:+919748813115">
-            <span class="contact-label">Phone</span>
-            <span class="contact-value">+91 97488 13115</span>
+            <span class="contact-icon" aria-hidden="true">☎</span>
+            <span>
+              <span class="contact-label">Phone</span>
+              <span class="contact-value">+91 97488 13115</span>
+            </span>
             <span class="contact-arrow" aria-hidden="true">↗</span>
           </a>
         </div>
       </div>
 
-      <section class="contact-form" data-reveal style="--delay:100ms" aria-labelledby="formTitle">
-        <h2 class="contact-form__title" id="formTitle">Send a message</h2>
-
-        <form id="contactForm" novalidate>
-          <div class="field">
-            <label for="cfName">Name</label>
-            <input id="cfName" name="name" type="text" placeholder="Your name" autocomplete="name" aria-describedby="cfNameError">
-            <p class="field-error" id="cfNameError" aria-live="polite"></p>
+      <div class="contact-side" data-reveal style="--delay:100ms">
+        <div class="terminal contact-terminal">
+          <div class="terminal__bar">
+            <span class="terminal__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="terminal__title">secure-hq — bash</span>
           </div>
-
-          <div class="field">
-            <label for="cfEmail">Email</label>
-            <input id="cfEmail" name="email" type="email" placeholder="you@example.com" autocomplete="email" aria-describedby="cfEmailError">
-            <p class="field-error" id="cfEmailError" aria-live="polite"></p>
+          <div class="terminal__body">
+            <p><span class="t-green">arka@secure-hq:~$</span> whoami</p>
+            <p class="t-muted">arka-patra // cybersecurity-enthusiast</p>
+            <p><span class="t-green">arka@secure-hq:~$</span> cat mission.txt</p>
+            <p class="t-muted">build a safer digital world</p>
+            <p><span class="t-green">arka@secure-hq:~$</span> ./connect --secure</p>
+            <p><span class="t-cyan">▸</span> channel: encrypted</p>
+            <p><span class="t-cyan">▸</span> response: within 24 hours</p>
+            <p><span class="t-green">arka@secure-hq:~$</span> <span class="cursor" aria-hidden="true"></span></p>
           </div>
+        </div>
+        <div class="contact-terminal__foot">
+          <span>System secured</span>
+          <b>Always learning · Always building</b>
+        </div>
+      </div>
 
-          <div class="field">
-            <label for="cfMessage">Message</label>
-            <textarea id="cfMessage" name="message" rows="4" placeholder="Tell me what you are building" aria-describedby="cfMessageError"></textarea>
-            <p class="field-error" id="cfMessageError" aria-live="polite"></p>
-          </div>
-
-          <button class="btn btn--solid" id="cfSubmit" type="submit"><span class="btn-label">Send message</span> <span class="arrow" aria-hidden="true">→</span></button>
-          <p class="form-status" id="cfStatus" role="status" aria-live="polite"></p>
-        </form>
-      </section>
     </div>
-  </section>
+
+    <section class="contact-form-section" aria-labelledby="formTitle">
+      <div class="contact-form-panel bracket">
+        <div class="form-head">
+          <span id="formTitle">Send a secure message</span>
+          <span>● Channel open</span>
+        </div>
+        <form id="contactForm" novalidate>
+          <div class="form-grid">
+            <div class="field">
+              <label for="cfName">Name</label>
+              <input id="cfName" name="name" type="text" placeholder="Your name" autocomplete="name" aria-describedby="cfNameError">
+              <p class="field-error" id="cfNameError" aria-live="polite"></p>
+            </div>
+            <div class="field">
+              <label for="cfEmail">Email</label>
+              <input id="cfEmail" name="email" type="email" placeholder="you@example.com" autocomplete="email" aria-describedby="cfEmailError">
+              <p class="field-error" id="cfEmailError" aria-live="polite"></p>
+            </div>
+            <div class="field field--full">
+              <label for="cfMessage">Message</label>
+              <textarea id="cfMessage" name="message" rows="5" placeholder="Tell me what you are building" aria-describedby="cfMessageError"></textarea>
+              <p class="field-error" id="cfMessageError" aria-live="polite"></p>
+            </div>
+          </div>
+          <div class="form-foot">
+            <button class="btn btn--solid" id="cfSubmit" type="submit"><span class="btn-label">Send message</span> <span class="arrow" aria-hidden="true">→</span></button>
+            <p class="form-status" id="cfStatus" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+      </div>
+    </section>
+
+  </div>
 </main>
-<script src="assets/site.js?v=10"></script>
+
+<footer class="site-foot">
+  <div class="frame foot">
+    <span class="foot__note">Arka Patra © 2026 · <b>Secure HUD</b></span>
+    <span>System secured. Always learning. Always building.</span>
+    <div class="socials">
+      <a class="social-link" href="https://github.com/arkap1502" target="_blank" rel="noopener" aria-label="GitHub">GH</a>
+      <a class="social-link" href="https://www.linkedin.com/in/arka-patra-579110422/" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
+      <a class="social-link" href="mailto:arkap1502@gmail.com" aria-label="Email">@</a>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/site.js?v=16"></script>
 </body>
 </html>

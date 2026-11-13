@@ -1,78 +1,101 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark" data-default-theme="dark" data-palette="lunar">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Arka Patra — Cybersecurity &amp; Innovation</title>
-<meta name="description" content="The portfolio of Arka Patra — a cybersecurity student and security-focused developer from West Bengal. Step into the lunar interface.">
-<meta property="og:title" content="Arka Patra — Cybersecurity &amp; Innovation">
-<meta property="og:description" content="Welcome to my world of cybersecurity and innovation. Pick a screen and step inside.">
+<title>Arka Patra — Cybersecurity &amp; Secure Code</title>
+<meta name="description" content="The portfolio of Arka Patra — a cybersecurity student and security-focused developer from West Bengal. Boot the secure HUD and step inside.">
+<meta property="og:title" content="Arka Patra — Cybersecurity &amp; Secure Code">
+<meta property="og:description" content="Securing the digital world, one project at a time. Enter the secure HUD portfolio.">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#151515" id="metaTheme">
+<meta name="theme-color" content="#05070c">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&amp;family=Source+Serif+4:ital,opsz,wght@1,8..60,300;1,8..60,400&amp;family=Courier+Prime:wght@400;700&amp;display=swap" rel="stylesheet">
-<script>
-document.documentElement.classList.add('js');
-(function () {
-  try {
-    var theme = localStorage.getItem('arka-theme');
-    if (theme === 'light' || theme === 'dark') document.documentElement.setAttribute('data-theme', theme);
-    var palette = localStorage.getItem('arka-palette');
-    if (palette) document.documentElement.setAttribute('data-palette', palette);
-  } catch (error) {}
-})();
-</script>
-<link rel="stylesheet" href="assets/site.css?v=10">
+<link href="https://fonts.googleapis.com/css2?family=Carlito:wght@400;700&amp;family=Courier+Prime:wght@400;700&amp;display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js');</script>
+<link rel="stylesheet" href="assets/site.css?v=16">
 </head>
-<body>
+<body class="entry-page">
 
 <a class="skip-link" href="#main">Skip to portfolio entry</a>
 
-<div class="entry-toolbar">
-  <div class="theme-toggle" role="group" aria-label="Colour theme">
-    <button class="theme-toggle__btn" type="button" data-set-theme="light" aria-pressed="false">Light</button>
-    <button class="theme-toggle__btn" type="button" data-set-theme="dark" aria-pressed="true">Dark</button>
+<div class="boot" id="bootOverlay" hidden aria-label="System boot sequence">
+  <div class="boot__panel bracket">
+    <div class="boot__head"><span>AP // BOOT SEQUENCE</span><span>v1.0</span></div>
+    <div class="boot__line"><span>loading secure modules</span><b>[ OK ]</b></div>
+    <div class="boot__line"><span>calibrating threat monitor</span><b>[ OK ]</b></div>
+    <div class="boot__line"><span>identity verified</span><b>[ OK ]</b></div>
+    <div class="boot__bar"><div class="boot__fill"></div></div>
+    <button class="boot__skip" type="button">Skip boot ▸</button>
   </div>
 </div>
 
-<main id="main" class="slide-main">
-  <section class="slide slide--cover" aria-labelledby="entryTitle">
-    <div class="frame entry-grid">
-      <div class="entry-copy" data-reveal>
-        <span class="kicker"><i class="kicker__square" aria-hidden="true"></i>Open to internships / 2026</span>
-        <h1 class="display display--entry entry-title" id="entryTitle">Welcome to<br>my world of<br><em>Cybersecurity</em><br><em>&amp; Innovation.</em></h1>
-        <p class="entry-lead">Arka Patra — Cybersecurity Student, West Bengal.</p>
-        <a class="btn btn--solid entry-cta" href="dashboard.html">
-          <span class="desktop-label">Click the laptop to enter</span>
-          <span class="mobile-label">Tap to enter</span>
-          <span class="arrow" aria-hidden="true">→</span>
-        </a>
-      </div>
+<main class="entry" id="main">
+  <div class="entry__top">
+    <span class="entry__brand">AP // ARKA PATRA</span>
+    <span class="entry__status"><i class="status-dot" aria-hidden="true"></i>System online · v1.0</span>
+  </div>
 
-      <div class="entry-art" data-reveal style="--delay:120ms">
-        <div class="orbit">
-          <span class="orbit__ring" aria-hidden="true"></span>
-          <span class="orbit__disc" aria-hidden="true"></span>
-          <span class="orbit__dot-wrap" aria-hidden="true"><span class="orbit__dot"></span></span>
+  <div class="entry__main">
+    <h1 class="entry__name" id="entryTitle"><span>ARKA PATRA</span></h1>
+    <p class="entry__role mono">Cybersecurity Enthusiast | Secure Code Developer</p>
 
-          <a class="laptop" href="dashboard.html" data-device="laptop" aria-label="Open the portfolio — laptop view">
-            <span class="laptop__screen">
-              <img class="laptop__preview" src="assets/screen-home-desktop.webp" alt="Home page shown in the laptop view" width="702" height="450" decoding="async">
-            </span>
-            <span class="laptop__base" aria-hidden="true"></span>
-          </a>
+    <div class="entry-orbit">
+      <span class="orbit-ring orbit-ring--one" aria-hidden="true"></span>
+      <span class="orbit-ring orbit-ring--two" aria-hidden="true"></span>
+      <span class="orbit-ring orbit-ring--three" aria-hidden="true"></span>
 
-          <a class="phone" href="dashboard.html" data-device="phone" aria-label="Open the portfolio — mobile view">
-            <img class="phone__preview" src="assets/screen-home-phone.webp" alt="Home page shown in the mobile view" width="260" height="500" decoding="async">
-          </a>
-        </div>
-        <p class="entry-caption mono" id="deviceCaption"><span>Laptop — click to enter</span><br><span>Phone — mobile only</span></p>
-      </div>
+      <span class="orbit-dot orbit-dot--one" aria-hidden="true"></span>
+      <span class="orbit-dot orbit-dot--two" aria-hidden="true"></span>
+      <span class="orbit-dot orbit-dot--three orbit-dot--violet" aria-hidden="true"></span>
+      <span class="orbit-dot orbit-dot--four" aria-hidden="true"></span>
+
+      <a class="entry-laptop" href="dashboard.html" data-enter aria-label="Enter the portfolio — laptop view">
+        <span class="laptop-screen">
+          <span class="laptop-ui__top"><span>● SYSTEM ONLINE</span><span>AP // 01</span></span>
+          <span class="laptop-ui__title">Securing the<br><span>Digital World</span></span>
+          <span class="laptop-ui__buttons" aria-hidden="true"><i></i><i></i></span>
+          <span class="laptop-ui__grid" aria-hidden="true"><i></i><i></i><i></i></span>
+        </span>
+        <span class="laptop-base" aria-hidden="true"></span>
+      </a>
+
+      <a class="entry-phone" href="dashboard.html" data-enter aria-label="Enter the portfolio — mobile view">
+        <span class="phone-screen">
+          <b>AP</b>
+          <i aria-hidden="true"></i>
+          <i aria-hidden="true"></i>
+          <i aria-hidden="true"></i>
+          <em>ENTER</em>
+        </span>
+      </a>
+
+      <span class="orbit-chip orbit-chip--tl">Threat detection</span>
+      <span class="orbit-chip orbit-chip--tr">Secure code</span>
+      <span class="orbit-chip orbit-chip--bl">AI forensics</span>
+      <span class="orbit-chip orbit-chip--br">Threat monitor</span>
     </div>
-  </section>
+  </div>
+
+  <div class="entry__bottom">
+    <div class="boot-log">
+      <p><b>[ok]</b> loading secure modules <i>···</i></p>
+      <p><b>[ok]</b> calibrating threat monitor <i>···</i></p>
+      <p><b>[ok]</b> identity verified <i>···</i></p>
+    </div>
+
+    <a class="btn btn--solid entry-enter" href="dashboard.html" data-enter>Enter portfolio <span class="arrow" aria-hidden="true">→</span></a>
+
+    <div class="entry-progress">
+      <div class="entry-progress__line"><span>System initialising</span><b>100%</b></div>
+      <div class="progress-track"><div class="progress-fill"></div></div>
+    </div>
+  </div>
+
+  <p class="entry__foot"><b>Portfolio ▸</b> Eight security builds, ten verified credentials and a five-level journey — built in West Bengal, shipping for the web.</p>
 </main>
-<script src="assets/site.js?v=10"></script>
+
+<script src="assets/site.js?v=16"></script>
 </body>
 </html>
