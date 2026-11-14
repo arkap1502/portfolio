@@ -319,6 +319,77 @@ html[data-theme="light"] .about-portrait::before {
 }
 .skill-readout__link:hover { border-color: var(--accent); color: var(--accent); }
 
+/* Full technical-skills ledger, grouped as on the CV. */
+.skill-ledger {
+  margin-top: 20px;
+  padding: 26px 30px 10px;
+}
+.skill-ledger__head {
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+}
+.skill-ledger__head h3 {
+  margin-top: 8px;
+  font-size: 22px;
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: -.02em;
+}
+.skill-ledger__head p {
+  max-width: 62ch;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 14.5px;
+  line-height: 1.5;
+}
+
+.skill-ledger__rows { margin: 0; }
+.skill-ledger__row {
+  display: grid;
+  grid-template-columns: 168px minmax(0, 1fr);
+  gap: 8px 24px;
+  align-items: start;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+.skill-ledger__row:last-child { border-bottom: 0; }
+.skill-ledger__row dt {
+  padding-top: 6px;
+  color: var(--dim);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.3;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.skill-ledger__row dd {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  min-width: 0;
+}
+
+.tech-tag {
+  display: inline-flex;
+  align-items: center;
+  min-height: 31px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--chip);
+  color: var(--text);
+  font-size: 13.5px;
+  line-height: 1;
+  white-space: nowrap;
+  transition: border-color .2s var(--ease), color .2s var(--ease), background .2s var(--ease);
+}
+.tech-tag:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
 @media (max-width: 1080px) {
   .about-deck { grid-template-columns: 1fr; }
   .about-card { min-height: 0; }

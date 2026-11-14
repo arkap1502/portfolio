@@ -256,7 +256,7 @@ strong, b { font-weight: 700; }
 .site-header {
   position: relative;
   z-index: 200;
-  padding-top: 24px;
+  padding-top: 18px;
 }
 
 .nav {
@@ -400,7 +400,7 @@ html[data-theme="dark"] .theme-toggle__knob { transform: translateX(27px); }
 
 .page {
   min-height: calc(100svh - var(--header-h));
-  padding: 34px 0 8px;
+  padding: 16px 0 8px;
 }
 
 .page-title {

@@ -18,7 +18,7 @@
 
   .frame { width: calc(100% - 40px); }
 
-  .page { padding-top: 28px; }
+  .page { padding-top: 16px; }
   .page-title { font-size: clamp(34px, 5vw, 44px); }
   .deck { margin-top: 30px; }
 
@@ -38,7 +38,7 @@
   .nav-toggle { display: block; }
   .theme-toggle { margin-left: auto; }
 
-  .site-header { padding-top: 18px; }
+  .site-header { padding-top: 14px; }
   .page-title { font-size: clamp(32px, 7vw, 40px); margin-top: 0; }
   .page-sub { font-size: 16px; }
 
@@ -55,7 +55,7 @@
   body { font-size: 15px; }
   .frame { width: calc(100% - 32px); }
 
-  .site-header { padding-top: 14px; }
+  .site-header { padding-top: 12px; }
   .nav { min-height: 58px; padding: 9px 10px 9px 13px; border-radius: 16px; }
   .brand { font-size: 17px; gap: 9px; }
   .brand::before { width: 30px; height: 30px; border-radius: 8px; font-size: 14px; }
@@ -63,7 +63,7 @@
   .theme-toggle__knob { width: 19px; height: 19px; }
   html[data-theme="dark"] .theme-toggle__knob { transform: translateX(23px); }
 
-  .page { padding-top: 24px; }
+  .page { padding-top: 14px; }
   .page-title { font-size: 32px; }
   .page-sub { font-size: 15px; }
   .deck { margin-top: 24px; }
@@ -109,6 +109,14 @@
   .record-list { gap: 22px; margin-top: 24px; }
 
   .skill-module { padding: 22px; }
+  .skill-ledger { padding: 22px 22px 6px; }
+  .skill-ledger__head h3 { font-size: 20px; }
+  .skill-ledger__row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 9px;
+    padding: 13px 0;
+  }
+  .skill-ledger__row dt { padding-top: 0; }
   .skill-readout {
     flex-direction: column;
     gap: 14px;
