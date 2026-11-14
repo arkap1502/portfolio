@@ -752,6 +752,88 @@ body.is-booting { overflow: hidden; }
   user-select: none;
   -webkit-user-select: none;
 }
+/* Magnetic-field and radiation orbits around the globe.
+   Every orbit uses the globe's own 16.1s revolution (22.35 deg/s), so the
+   rings, their travelling nodes and the sphere all move as one system. */
+
+.globe-field {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.globe-field__halo {
+  position: absolute;
+  left: 50%; top: 50%;
+  height: 80%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, transparent 50%, rgba(76, 201, 240, .2) 61%, rgba(139, 124, 246, .08) 70%, transparent 80%);
+  animation: fieldPulse 16.1s ease-in-out infinite;
+}
+
+.globe-orbit {
+  position: absolute;
+  left: 50%; top: 50%;
+  height: var(--orbit-size, 92%);
+  aspect-ratio: 1;
+  border: 1px dashed rgba(76, 201, 240, .3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) rotate(var(--orbit-tilt, 0deg)) scaleY(var(--orbit-squash, .3));
+}
+.globe-orbit i {
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  animation: orbitTravel 16.1s linear infinite;
+}
+.globe-orbit i::before {
+  content: "";
+  position: absolute;
+  left: 50%; top: -3px;
+  width: 6px; height: 6px;
+  margin-left: -3px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 10px currentColor;
+  transform: scaleY(var(--orbit-unsquash, 3.33));
+}
+
+.globe-orbit--one {
+  --orbit-size: 92%;
+  --orbit-tilt: -18deg;
+  --orbit-squash: .3;
+  --orbit-unsquash: 3.33;
+  color: var(--cyan);
+}
+.globe-orbit--two {
+  --orbit-size: 108%;
+  --orbit-tilt: 15deg;
+  --orbit-squash: .2;
+  --orbit-unsquash: 5;
+  border-color: rgba(139, 124, 246, .32);
+  color: var(--violet);
+}
+.globe-orbit--three {
+  --orbit-size: 124%;
+  --orbit-tilt: -4deg;
+  --orbit-squash: .38;
+  --orbit-unsquash: 2.63;
+  border-color: rgba(52, 211, 153, .24);
+  color: var(--green);
+}
+
+@keyframes orbitTravel {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes fieldPulse {
+  0%, 100% { opacity: .5; transform: translate(-50%, -50%) scale(.965); }
+  50% { opacity: .95; transform: translate(-50%, -50%) scale(1.035); }
+}
+
 .globe-canvas.is-dragging { cursor: grabbing; }
 .globe-canvas:focus-visible {
   outline: 1px solid var(--cyan);

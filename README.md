@@ -33,7 +33,7 @@ The interface follows the **Secure HUD** design language from the supplied *Port
 - Sticky navigation with a collapsible mobile menu (Escape closes it).
 - Scroll reveals, a 3D pointer tilt on the About identity stack, and animated HUD counters.
 - Rotating live-threat ticker on the home page.
-- Interactive orthographic globe on the home page: drag or use the arrow keys to rotate in any direction, with a pulsing marker on West Bengal and animated network arcs.
+- Interactive orthographic globe on the home page: drag or use the arrow keys to rotate in any direction, with a pulsing marker on West Bengal and animated network arcs. Idle spin runs at 22.35°/s, and three magnetic-field orbit rings plus a radiation halo travel with it on the same 16.1 s revolution.
 - Project status filters, empty state and accessible `<dialog>` mission reports.
 - Skill badges that reveal the builds using each skill.
 - Flippable About identity card with a capability record on the back.

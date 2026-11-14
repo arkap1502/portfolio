@@ -14,12 +14,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Carlito:wght@400;700&amp;family=Courier+Prime:wght@400;700&amp;display=swap" rel="stylesheet">
 <script>document.documentElement.classList.add('js');</script>
-<link rel="stylesheet" href="assets/css/core.css?v=22">
-<link rel="stylesheet" href="assets/css/entry-home.css?v=22">
-<link rel="stylesheet" href="assets/css/about-skills.css?v=22">
-<link rel="stylesheet" href="assets/css/projects-certs.css?v=22">
-<link rel="stylesheet" href="assets/css/journey-contact.css?v=22">
-<link rel="stylesheet" href="assets/css/responsive.css?v=22">
+<link rel="stylesheet" href="assets/css/core.css?v=23">
+<link rel="stylesheet" href="assets/css/entry-home.css?v=23">
+<link rel="stylesheet" href="assets/css/about-skills.css?v=23">
+<link rel="stylesheet" href="assets/css/projects-certs.css?v=23">
+<link rel="stylesheet" href="assets/css/journey-contact.css?v=23">
+<link rel="stylesheet" href="assets/css/responsive.css?v=23">
 </head>
 <body>
 
@@ -101,6 +101,13 @@
           <div class="globe-panel" id="globePanel">
             <canvas class="globe-canvas" id="globeCanvas" tabindex="0" role="img"
               aria-label="Interactive globe. Your base is West Bengal, India, at 22.57 degrees north and 88.36 degrees east. Drag the globe or use the arrow keys to rotate it."></canvas>
+            <div class="globe-field" aria-hidden="true">
+              <span class="globe-field__halo"></span>
+              <span class="globe-orbit globe-orbit--one"><i></i></span>
+              <span class="globe-orbit globe-orbit--two"><i></i></span>
+              <span class="globe-orbit globe-orbit--three"><i></i></span>
+            </div>
+
             <span class="globe-label globe-label--one" data-globe-label="in" aria-hidden="true">You · 22.57°N</span>
             <span class="globe-label globe-label--two" data-globe-label="eu" aria-hidden="true">EU node</span>
             <span class="globe-label globe-label--three" data-globe-label="us" aria-hidden="true">US node</span>
@@ -221,6 +228,6 @@
 </footer>
 
 <script src="assets/site.js?v=21"></script>
-<script src="assets/globe.js?v=1"></script>
+<script src="assets/globe.js?v=3"></script>
 </body>
 </html>

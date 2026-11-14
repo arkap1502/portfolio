@@ -727,8 +727,8 @@
         if (Math.abs(yawVelocity) < 0.00005) yawVelocity = 0;
         if (Math.abs(pitchVelocity) < 0.00005) pitchVelocity = 0;
 
-        if (now - lastInteraction > 4500) {
-          yaw += 0.0019 * factor;
+        if (now - lastInteraction > 2500) {
+          yaw += 0.0065 * factor;
         }
       } else {
         yawVelocity = 0;
