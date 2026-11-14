@@ -164,19 +164,21 @@ body::after {
   content: "";
   position: fixed;
   z-index: -1;
-  width: min(48vw, 640px);
+  width: min(40vw, 460px);
   aspect-ratio: 1;
   border-radius: 50%;
   pointer-events: none;
   transition: background-color .35s var(--ease);
 }
+/* Both fields stay tucked into their corners so they glow behind the chrome
+   instead of filling the band above each page title with flat colour. */
 body::before {
-  top: -16vw;
-  left: -14vw;
+  top: -22vw;
+  left: -18vw;
   background: var(--orb-a);
 }
 body::after {
-  right: -15vw;
+  right: -18vw;
   bottom: -20vw;
   background: var(--orb-b);
 }
