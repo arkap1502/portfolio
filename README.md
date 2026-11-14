@@ -8,8 +8,7 @@ The interface follows the **Secure HUD** design language from the supplied *Port
 
 - [Entry](index.html) — animated cover with a boot sequence, typewriter name, orbit rings, laptop and phone
 - [Home](dashboard.html) — command deck with identity panel, live threat monitor, drag-to-rotate globe, terminal, active mission, counters and proof cards
-- [About](about.html) — profile, education and experience, and the five-level cybersecurity journey from fundamentals to AI-powered security
-- [Skills](skills.html) — three skill modules; every badge maps to real projects
+- [About](about.html) — profile, education and experience, the skill matrix, and the five-level cybersecurity journey from fundamentals to AI-powered security
 - [Projects](projects.html) — featured URL Scanner plus seven filterable builds and mission-report dialogs
 - [Certificates](certificates.html) — featured Cisco credential and a ten-document secure vault
 - [Contact](contact.html) — contact rows, encrypted-channel terminal and validated message form
@@ -51,8 +50,7 @@ Then open <http://localhost:8000>.
 ```
 index.html               Entry cover
 dashboard.html           Home command deck
-about.html               Identity, education, experience and the five-level journey
-skills.html              Skill matrix
+about.html               Identity, education, experience, skills and the five-level journey
 projects.html            Featured build and filterable archive
 certificates.html        Featured credential and document vault
 contact.html             Contact details and message form

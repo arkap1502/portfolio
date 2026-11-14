@@ -14,12 +14,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Carlito:wght@400;700&amp;family=Courier+Prime:wght@400;700&amp;display=swap" rel="stylesheet">
 <script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('arka-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;}catch(e){}</script>
-<link rel="stylesheet" href="assets/css/core.css?v=41">
-<link rel="stylesheet" href="assets/css/entry-home.css?v=41">
-<link rel="stylesheet" href="assets/css/about-skills.css?v=41">
-<link rel="stylesheet" href="assets/css/projects-certs.css?v=41">
-<link rel="stylesheet" href="assets/css/journey-contact.css?v=41">
-<link rel="stylesheet" href="assets/css/responsive.css?v=41">
+<link rel="stylesheet" href="assets/css/core.css?v=45">
+<link rel="stylesheet" href="assets/css/entry-home.css?v=45">
+<link rel="stylesheet" href="assets/css/about-skills.css?v=45">
+<link rel="stylesheet" href="assets/css/projects-certs.css?v=45">
+<link rel="stylesheet" href="assets/css/journey-contact.css?v=45">
+<link rel="stylesheet" href="assets/css/responsive.css?v=45">
 </head>
 <body>
 
@@ -33,7 +33,6 @@
       <a href="projects.html">Projects</a>
       <a href="about.html" aria-current="page">About</a>
       <a href="certificates.html">Certificates</a>
-      <a href="skills.html">Skills</a>
       <a href="contact.html">Contact</a>
     </nav>
     <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to light mode" aria-pressed="false" title="Switch to light mode">
@@ -49,7 +48,6 @@
       <a href="projects.html">Projects <span aria-hidden="true">→</span></a>
       <a href="about.html" aria-current="page">About <span aria-hidden="true">→</span></a>
       <a href="certificates.html">Certificates <span aria-hidden="true">→</span></a>
-      <a href="skills.html">Skills <span aria-hidden="true">→</span></a>
       <a href="contact.html">Contact <span aria-hidden="true">→</span></a>
     </div>
   </nav>
@@ -60,15 +58,23 @@
 
     <header class="page-head">
       <h1 class="page-title">About</h1>
-      <p class="page-sub">Who I am, how I work and how I got here.</p>
+      <p class="page-sub">Who I am, what I work with and how I got here.</p>
     </header>
 
     <div class="about-deck">
 
       <article class="panel about-card" data-reveal>
-        <h2>Arka Patra</h2>
-        <p>I’m a cybersecurity student and security-focused developer. My rule: if a person can’t understand a screen in five seconds, it needs another pass.</p>
-        <p>I design clear interfaces, build them with plain web technology and test them the way an attacker would — so the finished thing is calm to use and hard to break.</p>
+        <div class="about-card__top">
+          <figure class="about-portrait">
+            <img src="assets/arka-patra.jpg" alt="Portrait of Arka Patra" width="560" height="560" decoding="async">
+            <figcaption><i class="about-portrait__dot" aria-hidden="true"></i>West Bengal <span class="about-portrait__country">· India</span></figcaption>
+          </figure>
+          <div class="about-card__intro">
+            <h2>Arka Patra</h2>
+            <p>I’m a cybersecurity student and security-focused developer. My rule: if a person can’t understand a screen in five seconds, it needs another pass.</p>
+            <p>I design clear interfaces, build them with plain web technology and test them the way an attacker would — so the finished thing is calm to use and hard to break.</p>
+          </div>
+        </div>
         <div class="chip-row">
           <span class="chip">HTML</span>
           <span class="chip">CSS</span>
@@ -99,9 +105,90 @@
 
     </div>
 
+    <section class="about-skills" id="skills" aria-labelledby="skillsTitle">
+
+      <header class="about-section__head" data-reveal>
+        <span class="mono-label mono-label--accent">Skills</span>
+        <h2 id="skillsTitle">A working matrix.</h2>
+        <p>Every capability is tied to a build you can open. Select a badge to see the builds that use it.</p>
+      </header>
+
+      <div class="skills-deck" data-reveal style="--delay:60ms">
+
+        <section class="panel skill-module" aria-labelledby="moduleSecurity">
+          <span class="module-index" aria-hidden="true">01</span>
+          <h3 class="module-title" id="moduleSecurity">Security</h3>
+          <p class="module-sub">Find, test and explain risk.</p>
+
+          <div class="skill-grid">
+            <button class="skill-chip" type="button" title="Threat Analysis" data-skill="Threat Analysis" data-projects="url,quishing">Threat detection</button>
+            <button class="skill-chip" type="button" title="Password Security" data-skill="Password Security" data-projects="altron">Password audit</button>
+            <button class="skill-chip" type="button" title="Network Reconnaissance" data-skill="Network Reconnaissance" data-projects="copilot">Network recon</button>
+            <button class="skill-chip" type="button" title="Phishing Detection" data-skill="Phishing Detection" data-projects="url,quishing">Phishing analysis</button>
+            <button class="skill-chip" type="button" title="Web Security" data-skill="Web Security" data-projects="url,copilot,prototype,quishing">URL scanning</button>
+            <button class="skill-chip" type="button" title="Wi-Fi Security" data-skill="Wi-Fi Security" data-projects="">Wi-Fi security</button>
+          </div>
+
+          <div class="module-used">
+            <span class="mono-label">Used in</span>
+            <p>URL Scanner · ALTRON · Quishing Guard</p>
+          </div>
+        </section>
+
+        <section class="panel skill-module" aria-labelledby="moduleDevelopment">
+          <span class="module-index" aria-hidden="true">02</span>
+          <h3 class="module-title" id="moduleDevelopment">Web &amp; UI</h3>
+          <p class="module-sub">Interfaces that look sharp and stay safe.</p>
+
+          <div class="skill-grid">
+            <button class="skill-chip" type="button" data-skill="HTML5" data-projects="url,altron">HTML5</button>
+            <button class="skill-chip" type="button" data-skill="CSS3" data-projects="url,altron">CSS3</button>
+            <button class="skill-chip" type="button" data-skill="JavaScript" data-projects="url,altron,humanize,quishing">JavaScript</button>
+            <button class="skill-chip" type="button" data-skill="Figma" data-projects="">Figma</button>
+            <button class="skill-chip" type="button" title="Responsive UI" data-skill="Responsive UI" data-projects="url,altron">Responsive UI</button>
+            <button class="skill-chip" type="button" data-skill="Accessibility" data-projects="url,altron">Accessibility</button>
+          </div>
+
+          <div class="module-used">
+            <span class="mono-label">Used in</span>
+            <p>Portfolio · NexVault · URL Scanner</p>
+          </div>
+        </section>
+
+        <section class="panel skill-module" aria-labelledby="moduleTools">
+          <span class="module-index" aria-hidden="true">03</span>
+          <h3 class="module-title" id="moduleTools">AI &amp; Automation</h3>
+          <p class="module-sub">Small tools that think for you.</p>
+
+          <div class="skill-grid">
+            <button class="skill-chip" type="button" data-skill="Python" data-projects="copilot,prompt,prototype">Python</button>
+            <button class="skill-chip" type="button" title="Prompt design" data-skill="Prompt design" data-projects="humanize,prompt">Prompt design</button>
+            <button class="skill-chip" type="button" data-skill="ML basics" data-projects="prompt">ML basics</button>
+            <button class="skill-chip" type="button" title="Text analysis" data-skill="Text analysis" data-projects="humanize,prompt">Text analysis</button>
+            <button class="skill-chip" type="button" data-skill="Forensics" data-projects="copilot,prompt">Forensics</button>
+            <button class="skill-chip" type="button" data-skill="Automation" data-projects="copilot,prototype">Automation</button>
+          </div>
+
+          <div class="module-used">
+            <span class="mono-label">Used in</span>
+            <p>Humanize AI · Hidden-Prompt Scanner · Copilot</p>
+          </div>
+        </section>
+
+      </div>
+
+      <div class="panel skill-readout" data-reveal>
+        <div class="skill-readout__label"><b id="skillReadoutName">Awaiting input</b>Related builds</div>
+        <div class="skill-readout__body" id="skillReadoutBody">
+          <p class="skill-readout__empty">Select a skill chip to see the builds that use it.</p>
+        </div>
+      </div>
+
+    </section>
+
     <section class="about-journey" id="journey" aria-labelledby="journeyTitle">
 
-      <header class="about-journey__head" data-reveal>
+      <header class="about-section__head" data-reveal>
         <span class="mono-label mono-label--accent">Journey</span>
         <h2 id="journeyTitle">Five levels, one direction.</h2>
         <p>From networking fundamentals to AI-powered security. Every level points to work you can open.</p>
@@ -173,7 +260,7 @@
         <p>I build practical security projects, from URL scanners to secure apps, and keep learning how digital threats work and how to stop them. My approach is simple: understand the attack, then ship an interface that makes it visible.</p>
       </div>
       <div class="about-note__actions">
-        <a class="btn btn--solid" href="skills.html">Open skill matrix</a>
+        <a class="btn btn--solid" href="#skills">Open skill matrix</a>
         <a class="btn" href="assets/Arka_Patra_CV.pdf" download>Download CV ↓</a>
       </div>
     </aside>

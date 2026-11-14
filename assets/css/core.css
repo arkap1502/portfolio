@@ -102,6 +102,7 @@ html {
 
 /* Anchor targets clear the fixed header. */
 #education,
+#skills,
 #journey,
 [id^="project-"] { scroll-margin-top: 116px; }
 

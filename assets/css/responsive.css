@@ -7,6 +7,10 @@
 @media (max-width: 1180px) {
   .nav-links a { padding: 0 11px; font-size: 14.5px; }
   .brand { font-size: 18px; }
+
+  .about-card__top { grid-template-columns: 150px minmax(0, 1fr); gap: 20px; }
+  .about-portrait__country { display: none; }
+  .about-card__intro p { font-size: 16px; }
 }
 
 @media (max-width: 1080px) {
@@ -19,6 +23,8 @@
   .deck { margin-top: 30px; }
 
   .about-card { min-height: 0; }
+  .about-card__top { grid-template-columns: 210px minmax(0, 1fr); gap: 26px; }
+  .about-portrait__country { display: inline; }
   .about-side { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .skill-readout { align-items: flex-start; }
 
@@ -91,10 +97,14 @@
 
   .about-card { padding: 24px; }
   .about-card h2 { font-size: 26px; }
+  .about-card__top { grid-template-columns: 1fr; gap: 20px; }
+  .about-portrait { max-width: 196px; aspect-ratio: 1 / 1; }
+  .about-card__intro p { font-size: 15.5px; }
   .about-record { padding: 24px; }
   .about-note { padding: 22px; }
+  .about-skills,
   .about-journey { margin-top: 34px; }
-  .about-journey__head h2 { font-size: 27px; }
+  .about-section__head h2 { font-size: 27px; }
   .about-journey__note { padding: 22px; }
   .record-list { gap: 22px; margin-top: 24px; }
 
