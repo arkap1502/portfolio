@@ -12,12 +12,12 @@
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/carlito-400.woff2" as="font" type="font/woff2" crossorigin>
 <script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('arka-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;}catch(e){}</script>
-<link rel="stylesheet" href="assets/css/core.css?v=47">
-<link rel="stylesheet" href="assets/css/entry-home.css?v=47">
-<link rel="stylesheet" href="assets/css/about-skills.css?v=47">
-<link rel="stylesheet" href="assets/css/projects-certs.css?v=47">
-<link rel="stylesheet" href="assets/css/journey-contact.css?v=47">
-<link rel="stylesheet" href="assets/css/responsive.css?v=47">
+<link rel="stylesheet" href="assets/css/core.css?v=51">
+<link rel="stylesheet" href="assets/css/entry-home.css?v=51">
+<link rel="stylesheet" href="assets/css/about-skills.css?v=51">
+<link rel="stylesheet" href="assets/css/projects-certs.css?v=51">
+<link rel="stylesheet" href="assets/css/journey-contact.css?v=51">
+<link rel="stylesheet" href="assets/css/responsive.css?v=51">
 </head>
 <body class="entry-page">
 
@@ -63,9 +63,9 @@
       </div>
     </div>
 
-    <a class="entry__mascot" href="dashboard.html" data-enter aria-label="Enter the portfolio">
-      <span class="entry__mascot-tag" aria-hidden="true">Enter portfolio</span>
-      <img class="entry__mascot-img" src="assets/character.webp" alt="" width="205" height="518" fetchpriority="high" decoding="async">
+    <a class="entry__stage" href="dashboard.html" data-enter aria-label="Enter the portfolio">
+      <span class="entry__stage-tag" aria-hidden="true">Enter portfolio</span>
+      <canvas class="entry__orb" id="entryOrb" width="720" height="720" aria-hidden="true"></canvas>
     </a>
   </div>
 
@@ -78,6 +78,7 @@
   </div>
 </main>
 
-<script src="assets/site.js?v=32"></script>
+<script src="assets/entry-orb.js?v=3"></script>
+<script src="assets/site.js?v=33"></script>
 </body>
 </html>

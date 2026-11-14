@@ -44,7 +44,7 @@
 
   .hero { padding-top: 2px; }
 
-  .entry { padding: 100px 0 64px; }
+  .entry { padding: 100px 0 40px; }
   .entry__title { font-size: clamp(52px, 11vw, 78px); }
 
   .foot { font-size: 10.5px; gap: 12px; }
@@ -80,7 +80,7 @@
   .win__body { padding: 16px 18px 18px; }
 
   .entry-theme { top: 16px; right: 16px; }
-  .entry { padding: 92px 0 28px; }
+  .entry { padding: 92px 0 22px; }
   .entry__eyebrow { font-size: 11px; }
   .entry__title { margin-top: 18px; font-size: clamp(46px, 14vw, 64px); }
   .entry__lead { margin-top: 18px; font-size: 16px; }

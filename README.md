@@ -6,7 +6,7 @@ The interface follows the **Secure HUD** design language from the supplied *Port
 
 ## Pages
 
-- [Entry](index.html) — animated cover with a boot sequence, typewriter name and a 3D guide character that points at the Enter button
+- [Entry](index.html) - animated cover with a boot sequence, typewriter name and a live 3D entry core that points at the Enter button
 - [Home](dashboard.html) — command deck with identity panel, live threat monitor, drag-to-rotate globe, terminal, active mission, counters and proof cards
 - [About](about.html) — profile, education and experience, the skill matrix, and the five-level cybersecurity journey from fundamentals to AI-powered security
 - [Projects](projects.html) — featured URL Scanner plus seven filterable builds and mission-report dialogs
@@ -25,7 +25,7 @@ The interface follows the **Secure HUD** design language from the supplied *Port
 ## Interaction
 
 - Boot sequence on the entry cover, playable once per tab and skippable.
-- The entry cover's 3D guide character links straight into the portfolio; it floats gently and its "Enter portfolio" tag highlights on hover.
+- The entry core links straight into the portfolio: a hand-written canvas render of a wireframe geodesic sphere with a pulsing violet nucleus and two precessing orbit rings, no library and no WebGL. It leans toward the pointer, its "Enter portfolio" tag highlights on hover, and it pauses when the tab is hidden or the cover scrolls out of view.
 - Page-transition wipe for internal navigation, a short 180 ms curtain that hands over to the prefetched page; skipped when reduced motion is requested.
 - Navigation acceleration: internal pages are prefetched on hover and focus only, and skipped entirely on Save-Data or 2G connections.
 - Sticky navigation with a collapsible mobile menu (Escape closes it).
@@ -48,7 +48,7 @@ Then open <http://localhost:8000>.
 
 - Typefaces are self-hosted latin subsets in `assets/fonts/` and declared in `core.css` with `font-display: swap`; there is no third-party font request before first paint. The regular Carlito weight is preloaded.
 - Frosted blur is limited to true overlays — the page wipe, modal dialogs, the boot screen and the small portrait caption. Panels, cards and windows use translucent fills with borders and inset highlights, so the glass look is identical over the flat canvas at a fraction of the paint cost.
-- Images ship as WebP (portrait, certificate preview and the entry character cut-out); the source files stay in `assets/`.
+- Images ship as WebP (portrait and certificate preview); the source files stay in `assets/`. The entry core is drawn at runtime, so it adds no image weight and is capped at 2× device pixel ratio.
 - The boot sequence runs for 1.3 s and is skippable.
 - Nav prefetching happens on intent, not on load, so opening a page does not download the other five.
 - Animations respect `prefers-reduced-motion`, and the transition wipe is skipped for it.
@@ -70,12 +70,13 @@ assets/css/projects-certs.css
 assets/css/journey-contact.css
 assets/css/responsive.css
 assets/fonts/*.woff2      Self-hosted latin subsets: Carlito and Courier Prime (400/700)
+assets/entry-orb.js      Canvas entry core: geodesic geometry, orbit rings,
+                         theme-aware palette, pointer lean and pause logic
 assets/site.js           Navigation, boot, wipe, reveals, tilt, filters,
                          dialogs, skill readout, card flip, ticker, counters and form
 assets/arka-patra.webp   Portrait used on the About profile card (JPG kept as source)
 assets/cert-thiranex-preview.webp
                          Thiranex certificate preview (PNG kept as source)
-assets/character.webp    Transparent 3D guide on the entry cover (PNG kept as source)
 assets/favicon.svg       Cyan "A" mark
 assets/Arka_Patra_CV.pdf Downloadable CV
 assets/cert-*.pdf        Credential documents
