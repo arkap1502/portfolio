@@ -190,9 +190,8 @@ html[data-theme="light"] .entry__stage::before {
 .hero {
   display: grid;
   grid-template-columns: minmax(0, 1.04fr) minmax(0, .96fr);
-  align-items: center;
+  align-items: start;
   gap: 34px;
-  min-height: 530px;
   padding: 10px 0 6px;
 }
 
