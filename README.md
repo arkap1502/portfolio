@@ -25,7 +25,7 @@ The interface follows the **Secure HUD** design language from the supplied *Port
 ## Interaction
 
 - Boot sequence on the entry cover, playable once per tab and skippable.
-- The entry core links straight into the portfolio: a hand-written canvas render of a wireframe geodesic sphere with a pulsing violet nucleus and two precessing orbit rings, no library and no WebGL. It leans toward the pointer, its "Enter portfolio" tag highlights on hover, and it pauses when the tab is hidden or the cover scrolls out of view.
+- The entry core links straight into the portfolio: a hand-written canvas render of a wireframe geodesic sphere with a pulsing violet nucleus and two precessing orbit rings, no library and no WebGL. It leans toward the pointer, lifts slightly on hover, and pauses when the tab is hidden or the cover scrolls out of view.
 - Page-transition wipe for internal navigation, a short 180 ms curtain that hands over to the prefetched page; skipped when reduced motion is requested.
 - Navigation acceleration: internal pages are prefetched on hover and focus only, and skipped entirely on Save-Data or 2G connections.
 - Sticky navigation with a collapsible mobile menu (Escape closes it).

@@ -75,54 +75,6 @@ html[data-theme="light"] .entry__stage::before {
   outline-offset: 6px;
 }
 
-.entry__stage-tag {
-  position: absolute;
-  right: 88%;
-  top: 50%;
-  z-index: 2;
-  display: inline-flex;
-  align-items: center;
-  padding: 8px 13px;
-  border: 1px solid var(--line-strong);
-  border-radius: 10px;
-  background: var(--panel-solid);
-  color: var(--accent);
-  font-family: var(--font-mono);
-  font-size: 11.5px;
-  line-height: 1;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  box-shadow: 0 10px 26px rgba(0, 0, 0, .3);
-  transform: translateY(-50%);
-  transition: background .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease);
-}
-.entry__stage-tag::before {
-  content: "";
-  position: absolute;
-  right: -5px;
-  top: 50%;
-  width: 8px;
-  height: 8px;
-  border-top: 1px solid var(--line-strong);
-  border-right: 1px solid var(--line-strong);
-  background: var(--panel-solid);
-  transform: translateY(-50%) rotate(45deg);
-  transition: background .25s var(--ease), border-color .25s var(--ease);
-}
-
-.entry__stage:hover .entry__stage-tag,
-.entry__stage:focus-visible .entry__stage-tag {
-  border-color: var(--accent);
-  background: var(--accent);
-  color: var(--accent-ink);
-}
-.entry__stage:hover .entry__stage-tag::before,
-.entry__stage:focus-visible .entry__stage-tag::before {
-  border-color: var(--accent);
-  background: var(--accent);
-}
-
 .entry-theme {
   position: fixed;
   top: 26px;
@@ -516,25 +468,7 @@ html[data-theme="light"] .entry__stage::before {
   .entry__stage {
     justify-self: center;
     width: clamp(230px, 46vw, 310px);
-    margin-top: 30px;
-  }
-  .entry__stage-tag {
-    right: auto;
-    left: 50%;
-    top: auto;
-    bottom: 88%;
-    transform: translateX(-50%);
-  }
-  .entry__stage-tag::before {
-    left: 50%;
-    right: auto;
-    top: auto;
-    bottom: -5px;
-    border-top: 0;
-    border-left: 0;
-    border-right: 1px solid var(--line-strong);
-    border-bottom: 1px solid var(--line-strong);
-    transform: translateX(-50%) rotate(45deg);
+    margin-top: 26px;
   }
   .entry__foot {
     position: static;
@@ -546,7 +480,6 @@ html[data-theme="light"] .entry__stage::before {
 @media (max-width: 760px) {
   .entry { padding: 92px 0 22px; }
   .entry__stage { width: clamp(206px, 56vw, 268px); margin-top: 18px; }
-  .entry__stage-tag { font-size: 10.5px; padding: 7px 11px; }
   .entry__nav { width: 100%; }
   .entry__nav a { padding: 9px 11px; font-size: 14px; }
   .home-feature-grid { gap: 14px; }
