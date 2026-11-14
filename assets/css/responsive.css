@@ -1,365 +1,175 @@
 /* ==========================================================================
-   Responsive rules
+   RESPONSIVE — crimson deck
+   The desktop layout mirrors the 1280 × 720 slides. Below that, the deck
+   folds into a clean single-column reading order.
    ========================================================================== */
 
-/* 1240 — command deck folds the mission panel underneath ------------------ */
-
-@media (max-width: 1240px) {
-  .home-layout {
-    grid-template-columns: 210px minmax(0, 1fr);
-    grid-template-areas:
-      "profile main"
-      "mission mission";
-  }
-  .home-main { grid-area: main; }
-  .profile-panel { grid-area: profile; }
-  .mission-panel {
-    grid-area: mission;
-    margin-top: 2px;
-  }
-  .mission-body {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 20px;
-    align-items: start;
-  }
-  .mission-block + .mission-block {
-    margin-top: 0;
-    padding-top: 0;
-    border-top: 0;
-    padding-left: 18px;
-    border-left: 1px solid var(--line-soft);
-  }
-  .mission-rewards {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    margin-top: 0;
-    padding-top: 0;
-  }
-
-  .project-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 1180px) {
+  .nav-links a { width: 88px; }
+  .brand { font-size: 20px; }
 }
 
-/* 1100 — long navigation trims -------------------------------------------- */
+@media (max-width: 1080px) {
+  :root { --frame: 100%; }
 
-@media (max-width: 1100px) {
-  .nav-status { display: none; }
-  .nav-links a { padding-inline: 8px; }
+  .frame { width: calc(100% - 40px); }
 
-  .featured-project { grid-template-columns: 1fr; }
-  .featured-visual {
-    min-height: 320px;
+  .page-title { font-size: 42px; }
+  .deck { margin-top: 34px; }
+  .deck > .panel { min-height: 0; }
+
+  .about-side {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: auto;
+  }
+  .focus-card { min-height: 110px; }
+  .record-card { min-height: 178px; }
+
+  .about-note { grid-template-columns: 1fr; gap: 20px; }
+  .about-note__actions { justify-content: flex-start; }
+
+  .project-side { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  .skill-readout { align-items: flex-start; }
+}
+
+@media (max-width: 980px) {
+  .nav-links,
+  .nav-cta { display: none; }
+  .nav { justify-content: space-between; }
+  .nav-toggle { display: block; }
+
+  .site-header { padding-top: 24px; }
+  .page-label { margin-top: 12px; }
+  .page-title { font-size: 38px; margin-top: 7px; }
+  .deck { margin-top: 30px; }
+  .page-head--row { align-items: flex-start; flex-direction: column; gap: 18px; }
+  .project-filters { margin-bottom: 0; }
+
+  .home-deck { grid-template-columns: 1fr; }
+  .home-side {
+    grid-column: auto;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+  }
+  .profile { min-height: 0; }
+  .profile__stats { margin-top: 28px; }
+
+  .about-deck { grid-template-columns: 1fr; }
+  .id-stack { min-height: 480px; max-width: 520px; margin-inline: auto; width: 100%; }
+
+  .skills-deck { grid-template-columns: 1fr; }
+  .skill-module { min-height: 0; }
+
+  .projects-deck { grid-template-columns: 1fr; }
+  .project-side { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  .entry { justify-content: center; }
+
+  .cert-deck { grid-template-columns: 1fr; grid-template-rows: none; grid-auto-flow: row; }
+
+  .contact-deck { grid-template-columns: 1fr; }
+  .contact-form-panel { grid-column: auto; }
+  .contact-info { gap: 22px; }
+  .contact-channel .term { line-height: 1.9; }
+}
+
+@media (max-width: 720px) {
+  body { font-size: 15px; }
+  .frame { width: calc(100% - 32px); }
+
+  .site-header { padding-top: 20px; }
+  .brand { font-size: 19px; gap: 9px; }
+  .brand::before { width: 24px; height: 24px; }
+
+  .page-title { font-size: 33px; }
+  .page-label { font-size: 12px; }
+
+  .home-deck { gap: 14px; }
+  .home-side { grid-template-columns: 1fr; gap: 14px; }
+  .profile,
+  .monitor,
+  .home-side__panel,
+  .panel--pad { padding: 24px; }
+  .profile__stats { gap: 22px; }
+  .profile__stat b { font-size: 34px; }
+  .radar { width: 210px; height: 210px; }
+
+  .about-side { grid-template-columns: 1fr; gap: 12px; }
+  .focus-card,
+  .record-card { min-height: 0; padding: 20px; }
+  .about-note { padding: 22px; }
+
+  .skill-module { padding: 22px; }
+  .skill-readout {
+    flex-direction: column;
+    gap: 14px;
+    padding: 20px 22px;
+  }
+  .skill-readout__label {
+    width: 100%;
+    padding: 0 0 12px;
     border-right: 0;
     border-bottom: 1px solid var(--line);
   }
-  .cert-layout {
-    grid-template-columns: 1fr;
-    max-width: 740px;
-    margin-inline: auto;
-  }
-  .cert-fan { max-width: 600px; margin-inline: auto; }
-  .contact-layout { grid-template-columns: 1fr; }
-  .contact-side { padding-top: 0; }
-  .contact-terminal .terminal__body { min-height: 250px; }
-}
 
-/* 1020 — about and skills settle into calmer columns ----------------------- */
+  .featured-project { padding: 24px; }
+  .featured-title { font-size: 31px; }
+  .featured-desc { font-size: 16px; }
+  .project-side { grid-template-columns: 1fr; gap: 12px; }
+  .project-card { min-height: 0; }
+  .project-card__desc { -webkit-line-clamp: 4; }
 
-@media (max-width: 1020px) {
-  .about-layout { grid-template-columns: 1fr; }
-  .identity-stack {
-    width: min(560px, 100%);
-    margin-inline: auto;
-  }
-  .skills-layout { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .skill-module:last-child { grid-column: 1 / -1; }
-  .record-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-
-/* 980 — mobile navigation -------------------------------------------------- */
-
-@media (max-width: 980px) {
-  .nav-links { display: none; }
-  .nav-toggle { display: block; }
-  .nav { gap: 12px; }
-
-  .home-layout {
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "profile"
-      "main"
-      "mission";
-  }
-  .profile-panel {
-    display: grid;
-    grid-template-columns: 132px minmax(0, 1fr);
-    gap: 0 20px;
-    align-items: center;
-  }
-  .profile-head { grid-column: 1 / -1; }
-  .profile-avatar {
-    width: 122px;
-    height: 122px;
-    margin: 16px 0 0;
-    font-size: 32px;
-  }
-  .profile-meta { margin-top: 16px; }
-  .profile-links {
-    grid-column: 1 / -1;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    margin-top: 14px;
-    padding-top: 0;
-  }
-
-  .home-main {
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "copy"
-      "globe"
-      "stats";
-  }
-  .home-globe { margin-top: 22px; }
-  .globe-panel { height: 300px; }
-  .hero-terminal { max-width: 100%; }
-
-  .mission-body { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .mission-block:nth-child(3) { border-left: 0; padding-left: 0; }
-  .mission-block + .mission-block { padding-bottom: 0; }
-
-  .project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .journey-stage { min-height: 520px; }
-  .journey-grid { min-height: 460px; }
-  .journey-svg { opacity: .55; }
-}
-
-/* 780 — page headers and dense grids go vertical --------------------------- */
-
-@media (max-width: 780px) {
-  .page-head {
-    display: block;
-    margin-bottom: 26px;
-  }
-  .page-head__aside {
-    max-width: none;
-    margin-top: 14px;
-    text-align: left;
-  }
-  .section-head {
-    display: block;
-    margin-bottom: 18px;
-  }
-  .section-head p { margin-top: 8px; }
-
-  .home-title { font-size: clamp(32px, 7vw, 42px); }
-  .home-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-
-  .focus-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .edu-strip {
-    display: block;
-    padding: 13px;
-  }
-  .edu-strip__line { display: none; }
-  .edu-strip__text { margin-top: 7px; font-size: 11.5px; }
-
-  .record-grid { grid-template-columns: 1fr; }
-  .skills-layout { grid-template-columns: 1fr; }
-  .skill-module:last-child { grid-column: auto; }
-  .skill-readout {
+  .project-card--wide {
     grid-template-columns: 1fr;
     gap: 12px;
+    margin-top: 12px;
+    padding: 18px 20px;
   }
+  .project-card--wide .project-card__foot { justify-content: space-between; }
 
-  .capability-list { grid-template-columns: 1fr; }
-  .featured-copy { padding: 24px 20px 26px; }
-  .featured-visual { min-height: 290px; padding: 22px; }
-  .featured-preview { width: min(330px, 100%); }
-  .project-toolbar { align-items: flex-start; }
-  .project-grid { grid-template-columns: 1fr; }
-  .project-card { min-height: 0; }
-  .github-strip { display: block; }
-  .github-strip .btn { margin-top: 18px; }
+  .cert-deck { gap: 10px; }
+  .cert-row { min-height: 66px; padding: 9px 18px; gap: 14px; }
+  .cert-title { font-size: 15px; }
+  .cert-issuer { font-size: 11px; }
+  .cert-index { width: 26px; font-size: 12px; }
+  .cert-type { font-size: 11px; }
 
-  .cert-featured__head { align-items: flex-start; }
-  .vault-row { grid-template-columns: 34px minmax(0, 1fr) auto; }
-  .vault-title { white-space: normal; }
+  .level-card { padding: 18px; }
+  .journey-legend { gap: 14px; }
 
-  .journey-stage {
-    min-height: 0;
-    margin-top: 8px;
-    padding: 12px 0 0;
-  }
-  .journey-svg { display: none; }
-  .journey-grid {
-    grid-template-columns: 1fr;
-    min-height: 0;
-    gap: 10px;
-  }
-  .level,
-  .level:nth-child(2),
-  .level:nth-child(3),
-  .level:nth-child(4),
-  .level:nth-child(5) { margin-bottom: 0; }
-  .level__card { min-height: 0; }
-  .level__platform { display: none; }
-  .level-chip { top: 10px; right: 10px; }
-  .journey-legend { margin-top: 20px; }
-  .journey-legend span:last-child { display: none; }
+  .contact-info,
+  .contact-channel { padding: 24px; }
+  .contact-form-panel { padding: 22px; }
+  .contact-info__value { font-size: 16px; }
 
-  .contact-title { font-size: clamp(36px, 8vw, 48px); }
-  .form-grid { grid-template-columns: 1fr; }
-  .form-foot { display: block; }
-  .form-foot .btn { width: 100%; margin-top: 10px; }
+  .foot { font-size: 10px; gap: 12px; }
+  .socials { order: 3; }
 
-  .foot {
-    display: block;
-    text-align: left;
-  }
-  .foot > span { display: block; }
-  .foot > span + span { margin-top: 4px; }
-  .foot > * + * { margin-top: 10px; }
-  .socials { justify-content: flex-start; }
-}
-
-/* 640 — entry cover condenses --------------------------------------------- */
-
-@media (max-width: 640px) {
-  .entry { padding: 18px var(--gutter) 14px; }
-  .entry::before { inset: 12px; }
-  .entry__top { padding-top: 6px; }
-  .entry__brand { font-size: 9px; }
-  .entry__status { font-size: 8px; }
-
-  .entry__main { padding-top: 14px; }
-  .entry__name { font-size: clamp(36px, 11vw, 48px); }
-  .entry__name span { border-right-width: 2px; }
-  .entry__role { font-size: 10px; }
-
-  .entry-orbit {
-    width: 100%;
-    height: 225px;
-    margin-top: 18px;
-  }
-  .entry-laptop { width: 222px; }
-  .laptop-screen { height: 138px; }
-  .entry-phone { left: 68%; width: 50px; height: 98px; }
-  .orbit-chip { font-size: 6.5px; padding: 3px 5px; }
-  .orbit-chip--tl { left: 0; top: 13%; }
-  .orbit-chip--tr { right: 0; top: 4%; }
-  .orbit-chip--bl { left: 4%; bottom: 3%; }
-  .orbit-chip--br { right: 0; bottom: 10%; }
-
-  .entry__bottom {
-    grid-template-columns: 1fr;
-    justify-items: center;
-    gap: 15px;
-    padding-bottom: 4px;
-  }
-  .boot-log { order: 2; text-align: center; font-size: 8px; }
-  .entry-enter { order: 1; width: 100%; max-width: 320px; }
-  .entry-progress { order: 3; justify-self: center; max-width: 320px; text-align: center; }
+  .entry { padding: 54px 20px 92px; }
+  .entry__lead { margin-top: 30px; font-size: 15px; }
+  .entry__actions { margin-top: 32px; }
   .entry__foot {
-    display: block;
-    margin-top: 14px;
-    font-size: 7px;
-    text-align: left;
+    bottom: 28px;
+    gap: 7px;
+    font-size: 11px;
+    letter-spacing: .08em;
   }
-  .entry__foot b { display: block; margin-bottom: 4px; }
+  .btn--lg { min-height: 54px; padding: 0 32px; font-size: 16px; }
 
-  .profile-panel { grid-template-columns: 1fr; text-align: left; }
-  .profile-avatar { margin: 16px auto 0; }
-  .profile-meta { margin-top: 14px; }
-  .profile-links { grid-template-columns: 1fr; }
-
-  .home-main { gap: 0; }
-  .globe-panel { height: 260px; }
-  .home-stats { grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
-  .home-stat { padding: 10px; }
-  .home-stat__num { font-size: 23px; }
-  .home-stat__label { font-size: 7px; }
-
-  .mission-body { grid-template-columns: 1fr; gap: 16px; }
-  .mission-block + .mission-block {
-    padding-left: 0;
-    border-left: 0;
-    padding-top: 14px;
-    border-top: 1px solid var(--line-soft);
-  }
-  .mission-rewards { grid-template-columns: repeat(4, 1fr); }
-
-  .about-title { font-size: clamp(32px, 8.5vw, 42px); }
-  .focus-grid { grid-template-columns: 1fr 1fr; }
-  .id-card { aspect-ratio: auto; height: 440px; min-height: 0; }
-  .id-back-grid { grid-template-columns: 1fr 1fr; }
-
-  .project-toolbar { display: block; }
-  .filter-line { margin-top: 9px; }
-  .filter-count { display: block; margin: 7px 0 0; padding: 7px 0 0; border-left: 0; border-top: 1px solid var(--line); }
-  .featured-topline { display: block; }
-  .featured-topline .tag { margin-top: 8px; }
-  .preview-score b { font-size: 40px; }
-
-  .cert-fan { padding-inline: 4px; }
-  .cert-featured__head { display: block; }
-  .provider-square { margin-bottom: 14px; }
-  .cert-featured__foot { display: block; }
-  .cert-featured__foot span { display: block; margin-top: 6px; }
-  .vault-head { display: block; }
-  .vault-count { display: block; margin-top: 5px; }
-  .vault-row { grid-template-columns: 30px minmax(0, 1fr); }
-  .vault-view { display: none; }
-  .vault-lock { width: 30px; height: 30px; }
-
-  .contact-row { grid-template-columns: 34px minmax(0, 1fr) auto; }
-  .contact-terminal .terminal__body { font-size: 10px; padding: 14px; }
-  .contact-terminal__foot { display: block; }
-  .contact-terminal__foot span { display: block; margin-top: 4px; }
-
-  .boot__panel { padding: 18px; }
-  .boot__head { font-size: 9px; }
-  .boot__line { font-size: 9px; }
+  .dialog__panel { padding: 24px; }
+  .dialog__title { font-size: 28px; }
 }
 
-/* 420 — smallest screens --------------------------------------------------- */
-
-@media (max-width: 420px) {
-  .entry__status { display: none; }
-  .entry__name { font-size: 34px; }
-  .entry-orbit { height: 195px; }
-  .entry-laptop { width: 190px; }
-  .laptop-screen { height: 120px; padding: 8px; }
-  .entry-phone { width: 42px; height: 84px; }
-  .orbit-chip--tr,
-  .orbit-chip--bl { display: none; }
-
-  .home-actions .btn { width: 100%; }
-  .home-stats { grid-template-columns: 1fr; }
-  .home-stat { display: flex; align-items: center; justify-content: space-between; padding: 11px 13px; }
-  .home-stat__num { font-size: 22px; }
-  .home-stat__label { margin-top: 0; }
-
-  .focus-grid { grid-template-columns: 1fr; }
-  .id-card__face { padding: 18px; }
-  .id-card { height: 470px; min-height: 0; }
-  .id-back-grid { grid-template-columns: 1fr 1fr; }
-
-  .capability-list { gap: 6px; }
-  .project-card { padding: 15px; }
-  .dialog__panel { padding: 20px; }
-}
-
-/* Short viewports — keep the entry cover on one screen --------------------- */
-
-@media (max-height: 660px) {
-  .entry { padding-top: 16px; padding-bottom: 10px; }
-  .entry__main { padding: 8px 0; }
-  .entry__name { font-size: clamp(36px, 4.8vw, 60px); }
-  .entry__role { margin-top: 8px; }
-  .entry-orbit {
-    height: 205px;
-    margin: 8px auto 4px;
-  }
-  .entry-laptop { width: min(290px, 52vw); }
-  .laptop-screen { height: clamp(155px, 30vh, 175px); }
-  .entry-phone { width: 48px; height: 94px; }
-  .entry__bottom { padding-bottom: 4px; }
-  .entry__foot { padding-top: 8px; }
+@media (max-width: 480px) {
+  .entry__title { font-size: clamp(46px, 14.5vw, 62px); }
+  .page-title { font-size: 30px; }
+  .profile__stats { flex-wrap: wrap; gap: 18px 26px; }
+  .home-side__panel { min-height: 0; }
+  .project-filters { gap: 5px; }
+  .filter-btn { min-height: 33px; padding: 0 12px; font-size: 13px; }
+  .filter-count { display: none; }
+  .cert-type { display: none; }
+  .verdict { align-items: flex-start; flex-direction: column; gap: 10px; }
+  .about-note__actions .btn { width: 100%; }
 }

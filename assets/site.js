@@ -456,7 +456,8 @@
      ----------------------------------------------------------------------- */
 
   var filterButtons = Array.prototype.slice.call(document.querySelectorAll('.filter-btn'));
-  var projectCards = Array.prototype.slice.call(document.querySelectorAll('#projectGrid .project-card'));
+  var projectCards = Array.prototype.slice.call(document.querySelectorAll('.featured-project, .project-card'));
+  var projectDeck = document.querySelector('.projects-deck');
   var filterCount = document.getElementById('filterCount');
   var emptyState = document.getElementById('buildEmpty');
 
@@ -468,6 +469,11 @@
       card.classList.toggle('is-hidden', !match);
       if (match) shown += 1;
     });
+
+    if (projectDeck) {
+      var featured = projectDeck.querySelector('.featured-project');
+      projectDeck.classList.toggle('projects-deck--solo', !!(featured && featured.classList.contains('is-hidden')));
+    }
 
     if (filterCount) {
       filterCount.textContent = pad(shown) + (shown === 1 ? ' build' : ' builds');
@@ -494,7 +500,7 @@
      Skill → related build readout
      ----------------------------------------------------------------------- */
 
-  var skillButtons = Array.prototype.slice.call(document.querySelectorAll('.skill-badge'));
+  var skillButtons = Array.prototype.slice.call(document.querySelectorAll('.skill-chip'));
   var skillName = document.getElementById('skillReadoutName');
   var skillBody = document.getElementById('skillReadoutBody');
 
@@ -618,6 +624,23 @@
     if (enterLink) {
       enterLink.addEventListener('click', function () {
         try { sessionStorage.setItem('arka-booted', '1'); } catch (error) {}
+      });
+    }
+
+    var replayBoot = document.querySelector('[data-boot-replay]');
+    if (replayBoot) {
+      replayBoot.addEventListener('click', function () {
+        bootDone = false;
+        boot.hidden = false;
+        boot.classList.remove('is-done');
+        document.body.classList.add('is-booting');
+        if (bootFill) bootFill.style.width = '0';
+        window.requestAnimationFrame(function () {
+          window.requestAnimationFrame(function () {
+            if (bootFill) bootFill.style.width = '100%';
+          });
+        });
+        bootTimer = window.setTimeout(finishBoot, 2050);
       });
     }
   }

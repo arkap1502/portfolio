@@ -6,20 +6,20 @@
 <title>Home — Arka Patra</title>
 <meta name="description" content="Arka Patra — UI/UX developer and cybersecurity student from West Bengal. Explore secure builds, credentials and practical interface work.">
 <meta property="og:title" content="Arka Patra — UI/UX Developer">
-<meta property="og:description" content="Securing the digital world through secure, human-centred design. Explore the work, credentials and process.">
+<meta property="og:description" content="Secure, human-centred interfaces and practical security tools. Enter the command deck.">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#05070c">
+<meta name="theme-color" content="#110a0e">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Carlito:wght@400;700&amp;family=Courier+Prime:wght@400;700&amp;display=swap" rel="stylesheet">
 <script>document.documentElement.classList.add('js');</script>
-<link rel="stylesheet" href="assets/css/core.css?v=23">
-<link rel="stylesheet" href="assets/css/entry-home.css?v=23">
-<link rel="stylesheet" href="assets/css/about-skills.css?v=23">
-<link rel="stylesheet" href="assets/css/projects-certs.css?v=23">
-<link rel="stylesheet" href="assets/css/journey-contact.css?v=23">
-<link rel="stylesheet" href="assets/css/responsive.css?v=23">
+<link rel="stylesheet" href="assets/css/core.css?v=35">
+<link rel="stylesheet" href="assets/css/entry-home.css?v=35">
+<link rel="stylesheet" href="assets/css/about-skills.css?v=35">
+<link rel="stylesheet" href="assets/css/projects-certs.css?v=35">
+<link rel="stylesheet" href="assets/css/journey-contact.css?v=35">
+<link rel="stylesheet" href="assets/css/responsive.css?v=35">
 </head>
 <body>
 
@@ -27,7 +27,7 @@
 
 <header class="site-header">
   <div class="frame nav">
-    <a class="brand" href="dashboard.html" aria-label="Arka Patra — home">AP // ARKA PATRA</a>
+    <a class="brand" href="dashboard.html" aria-label="Arka Patra — home">Arka Patra</a>
     <nav class="nav-links" aria-label="Primary">
       <a href="dashboard.html" aria-current="page">Home</a>
       <a href="about.html">About</a>
@@ -37,7 +37,7 @@
       <a href="journey.html">Journey</a>
       <a href="contact.html">Contact</a>
     </nav>
-    <span class="nav-status"><i class="status-dot" aria-hidden="true"></i>System online</span>
+    <a class="btn nav-cta" href="contact.html">Get in touch</a>
     <button class="nav-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -58,166 +58,89 @@
 <main id="main" class="page">
   <div class="frame">
 
-    <div class="home-layout">
+    <p class="page-label">01 — Home</p>
+    <h1 class="page-title">Command deck</h1>
 
-      <aside class="profile-panel panel bracket" aria-label="Identity panel" data-reveal>
-        <div class="profile-head"><span>Identity</span><span>● Online</span></div>
-        <div class="profile-avatar">
-          <img src="assets/arka-patra.jpg" alt="Portrait of Arka Patra" width="560" height="560" loading="lazy" decoding="async">
+    <div class="deck home-deck">
+
+      <aside class="panel profile" aria-label="Identity panel" data-reveal>
+        <div class="profile__avatar" aria-hidden="true">AP</div>
+        <h2 class="profile__name">Arka Patra</h2>
+        <p class="profile__role">UI/UX developer · Cybersecurity student</p>
+        <p class="profile__place">West Bengal, India</p>
+
+        <div class="profile__stats" aria-label="Portfolio at a glance">
+          <div class="profile__stat">
+            <b data-count="8" data-pad="2">08</b>
+            <span>Builds</span>
+          </div>
+          <div class="profile__stat">
+            <b data-count="10" data-pad="2">10</b>
+            <span>Certificates</span>
+          </div>
+          <div class="profile__stat">
+            <b data-count="1" data-pad="2">01</b>
+            <span>Internship</span>
+          </div>
         </div>
-        <dl class="profile-meta">
-          <div class="profile-field"><dt>Name</dt><dd>Arka Patra</dd></div>
-          <div class="profile-field"><dt>Role</dt><dd>UI/UX Developer</dd></div>
-          <div class="profile-field"><dt>Focus</dt><dd>Secure Interfaces</dd></div>
-          <div class="profile-field"><dt>Base</dt><dd>West Bengal, India</dd></div>
-        </dl>
-        <div class="profile-links">
-          <a class="btn btn--ghost btn--sm" href="https://github.com/arkap1502" target="_blank" rel="noopener">GitHub <span class="arrow" aria-hidden="true">↗</span></a>
-          <a class="btn btn--ghost btn--sm" href="https://www.linkedin.com/in/arka-patra-579110422/" target="_blank" rel="noopener">LinkedIn <span class="arrow" aria-hidden="true">↗</span></a>
+
+        <div class="profile__links">
+          <a class="btn btn--ghost btn--sm" href="https://github.com/arkap1502" target="_blank" rel="noopener">GitHub ↗</a>
+          <a class="btn btn--ghost btn--sm" href="https://www.linkedin.com/in/arka-patra-579110422/" target="_blank" rel="noopener">LinkedIn ↗</a>
         </div>
       </aside>
 
-      <div class="home-main">
-
-        <div class="home-copy" data-reveal style="--delay:80ms">
-          <span class="status-chip"><i class="status-dot" aria-hidden="true"></i>Available for opportunities</span>
-          <h1 class="home-title" id="homeTitle">Securing the <span>Digital World</span></h1>
-          <p class="home-role">UI/UX Developer</p>
-          <p class="home-lead">I design secure digital experiences and explore cybersecurity — from URL scanners to phishing detection and secure web apps — with a focus on clarity, usability and threat awareness.</p>
-          <div class="home-actions">
-            <a class="btn btn--solid" href="projects.html">Explore my work <span class="arrow" aria-hidden="true">→</span></a>
-            <a class="btn" href="contact.html">Contact me <span class="arrow" aria-hidden="true">→</span></a>
-            <a class="btn btn--ghost" href="assets/Arka_Patra_CV.pdf" download>Download CV <span class="arrow" aria-hidden="true">↓</span></a>
-          </div>
+      <section class="panel monitor" aria-label="Live threat monitor" data-reveal style="--delay:60ms">
+        <div class="monitor__head">
+          <span class="mono-label">Live threat monitor</span>
+          <span class="live-dot">Live</span>
         </div>
 
-        <div class="home-globe" data-reveal style="--delay:140ms">
-          <div class="threat-chip" aria-label="Live threat monitor">
-            <span class="threat-chip__label">Live threat monitor</span>
-            <span class="threat-chip__message" id="threatMessage">Typosquatted domain detected</span>
-            <span class="threat-chip__level" id="threatLevel">High</span>
-          </div>
-
-          <div class="globe-panel" id="globePanel">
-            <canvas class="globe-canvas" id="globeCanvas" tabindex="0" role="img"
-              aria-label="Interactive globe. Your base is West Bengal, India, at 22.57 degrees north and 88.36 degrees east. Drag the globe or use the arrow keys to rotate it."></canvas>
-            <div class="globe-field" aria-hidden="true">
-              <span class="globe-field__halo"></span>
-              <span class="globe-orbit globe-orbit--one"><i></i></span>
-              <span class="globe-orbit globe-orbit--two"><i></i></span>
-              <span class="globe-orbit globe-orbit--three"><i></i></span>
-            </div>
-
-            <span class="globe-label globe-label--one" data-globe-label="in" aria-hidden="true">You · 22.57°N</span>
-            <span class="globe-label globe-label--two" data-globe-label="eu" aria-hidden="true">EU node</span>
-            <span class="globe-label globe-label--three" data-globe-label="us" aria-hidden="true">US node</span>
-            <span class="globe-label globe-label--four" data-globe-label="apac" aria-hidden="true">APAC node</span>
-          </div>
-
-          <div class="globe-caption">
-            <span class="globe-base"><span>Base</span> West Bengal, India <b>22.57°N · 88.36°E</b></span>
-            <span class="globe-hint" id="globeHint">Drag to rotate ↻</span>
-          </div>
-
-          <div class="terminal hero-terminal">
-            <div class="terminal__bar">
-              <span class="terminal__dots" aria-hidden="true"><i></i><i></i><i></i></span>
-              <span class="terminal__title">urlscanner — bash</span>
-            </div>
-            <div class="terminal__body">
-              <p><span class="t-green">$</span> urlscanner --url demo</p>
-              <p><span class="t-amber">▸</span> typosquat: <span class="t-amber">DETECTED</span></p>
-              <p><span class="t-cyan">▸</span> risk score: 82/100</p>
-              <p><span class="t-green">$</span> <span class="cursor" aria-hidden="true"></span></p>
-            </div>
-          </div>
+        <div class="radar" aria-hidden="true">
+          <span class="radar__ring"></span>
+          <span class="radar__ellipse radar__ellipse--v"></span>
+          <span class="radar__ellipse radar__ellipse--h"></span>
+          <span class="radar__core"></span>
+          <span class="radar__sweep"></span>
+          <span class="radar__dot"></span>
         </div>
 
-        <div class="home-stats" aria-label="Portfolio at a glance" data-reveal style="--delay:180ms">
-          <div class="home-stat">
-            <span class="home-stat__num" data-count="8" data-pad="2">08</span>
-            <span class="home-stat__label">Builds</span>
-          </div>
-          <div class="home-stat">
-            <span class="home-stat__num" data-count="10" data-pad="2">10</span>
-            <span class="home-stat__label">Certificates</span>
-          </div>
-          <div class="home-stat">
-            <span class="home-stat__num" data-count="1" data-pad="2">01</span>
-            <span class="home-stat__label">Internship</span>
-          </div>
+        <div class="monitor__feed" aria-live="off">
+          <div class="feed-row"><span>Phishing URL blocked</span><time>02:14</time></div>
+          <div class="feed-row"><span>Fake document flagged</span><time>02:09</time></div>
         </div>
+      </section>
 
+      <div class="home-side">
+        <section class="panel home-side__panel" aria-label="Terminal" data-reveal style="--delay:100ms">
+          <span class="mono-label">Terminal</span>
+          <div class="term">
+            <p><span class="term__prompt">$</span> whoami</p>
+            <p><span class="term__prompt">&gt;</span> arka · ui/ux + security</p>
+            <p><span class="term__prompt">$</span> scan --url link</p>
+            <p><span class="term__prompt">[!]</span> 3 threats flagged</p>
+          </div>
+        </section>
+
+        <section class="panel home-side__panel mission" aria-label="Active mission" data-reveal style="--delay:140ms">
+          <span class="mono-label">Active mission</span>
+          <h2 class="mission__name">URL Threat Scanner</h2>
+          <p class="mission__text">Paste a link and get a clear risk verdict with a mission report.</p>
+          <div class="mission__bar" role="img" aria-label="Mission progress: 82 percent">
+            <div class="mission__fill"></div>
+          </div>
+          <p class="mission__meta">Live · 8 signals</p>
+        </section>
       </div>
-
-      <aside class="mission-panel bracket bracket--violet" aria-label="Active mission" data-reveal style="--delay:160ms">
-        <div class="mission-head">Active mission</div>
-        <div class="mission-body">
-          <div class="mission-block">
-            <span class="mission-label">Mission name</span>
-            <span class="mission-value">URL Scanner</span>
-          </div>
-          <div class="mission-block">
-            <span class="mission-label">Goal</span>
-            <p class="mission-text">Detect suspicious URLs, typosquatting and weak security headers, then explain the risk in plain English.</p>
-          </div>
-          <div class="mission-block">
-            <span class="mission-label">Capabilities</span>
-            <ul class="mission-list">
-              <li>URL &amp; typosquat checks</li>
-              <li>Security headers</li>
-              <li>Risk scoring</li>
-              <li>Plain-language report</li>
-            </ul>
-          </div>
-          <div class="mission-block">
-            <span class="mission-label">Rewards</span>
-            <div class="mission-rewards">
-              <span class="reward-chip" title="Risk score">82</span>
-              <span class="reward-chip" title="Signals checked">12</span>
-              <span class="reward-chip" title="Client-side">100%</span>
-              <span class="reward-chip" title="Open source">OSS</span>
-            </div>
-          </div>
-        </div>
-      </aside>
 
     </div>
-
-    <section class="section" aria-labelledby="homeExtraTitle">
-      <div class="section-head">
-        <div>
-          <span class="eyebrow">Internship credential &amp; featured build</span>
-          <h2 id="homeExtraTitle">Proof, not promises.</h2>
-        </div>
-        <a class="btn btn--ghost btn--sm" href="projects.html">See all builds <span class="arrow" aria-hidden="true">→</span></a>
-      </div>
-
-      <div class="record-grid">
-        <a class="record-card" href="assets/Thiranex_Certificate_Arka_Patra_THX-AUG0426-563.pdf" target="_blank" rel="noopener" data-reveal>
-          <p class="record-card__period">Thiranex — internship</p>
-          <h3 class="record-card__title">Cyber Security Internship</h3>
-          <p class="record-card__text">Hands-on security training and applied project work with guided mentorship. Aug–Sept 2026 · ID THX-AUG0426-563.</p>
-        </a>
-        <a class="record-card" href="projects.html#project-copilot" data-reveal style="--delay:60ms">
-          <p class="record-card__period">Featured build</p>
-          <h3 class="record-card__title">Website Security Copilot</h3>
-          <p class="record-card__text">Headers, TLS, cookies, DNS and open ports checked by a FastAPI engine, with an MV3 extension that blocks harmful pages before they load.</p>
-        </a>
-        <a class="record-card" href="certificates.html" data-reveal style="--delay:120ms">
-          <p class="record-card__period">Credentials vault</p>
-          <h3 class="record-card__title">Ten certificates, one direction</h3>
-          <p class="record-card__text">Cisco, WsCube Tech, Deloitte, Commonwealth Bank, Datacom, BCLP, National Urban League and Thiranex — every credential with proof.</p>
-        </a>
-      </div>
-    </section>
 
   </div>
 </main>
 
 <footer class="site-foot">
   <div class="frame foot">
-    <span class="foot__note">Arka Patra © 2026 · <b>Secure HUD</b></span>
+    <span class="foot__note">Arka Patra © 2026 · <b>Crimson deck</b></span>
     <span>System secured. Always learning. Always building.</span>
     <div class="socials">
       <a class="social-link" href="https://github.com/arkap1502" target="_blank" rel="noopener" aria-label="GitHub">GH</a>
@@ -227,7 +150,6 @@
   </div>
 </footer>
 
-<script src="assets/site.js?v=21"></script>
-<script src="assets/globe.js?v=3"></script>
+<script src="assets/site.js?v=27"></script>
 </body>
 </html>

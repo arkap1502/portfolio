@@ -4,22 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Projects — Arka Patra</title>
-<meta name="description" content="Security-focused builds by Arka Patra — website scanning, phishing detection, password tools, prompt-injection detection and QR code safety.">
+<meta name="description" content="Security-focused builds by Arka Patra — website scanning, phishing detection, password tools, document forensics and QR code safety.">
 <meta property="og:title" content="Projects — Arka Patra">
-<meta property="og:description" content="Mission control: security builds that ship. Eight builds with source and live demos.">
+<meta property="og:description" content="Mission archive: eight security builds with source and live demos.">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#05070c">
+<meta name="theme-color" content="#110a0e">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Carlito:wght@400;700&amp;family=Courier+Prime:wght@400;700&amp;display=swap" rel="stylesheet">
 <script>document.documentElement.classList.add('js');</script>
-<link rel="stylesheet" href="assets/css/core.css?v=23">
-<link rel="stylesheet" href="assets/css/entry-home.css?v=23">
-<link rel="stylesheet" href="assets/css/about-skills.css?v=23">
-<link rel="stylesheet" href="assets/css/projects-certs.css?v=23">
-<link rel="stylesheet" href="assets/css/journey-contact.css?v=23">
-<link rel="stylesheet" href="assets/css/responsive.css?v=23">
+<link rel="stylesheet" href="assets/css/core.css?v=35">
+<link rel="stylesheet" href="assets/css/entry-home.css?v=35">
+<link rel="stylesheet" href="assets/css/about-skills.css?v=35">
+<link rel="stylesheet" href="assets/css/projects-certs.css?v=35">
+<link rel="stylesheet" href="assets/css/journey-contact.css?v=35">
+<link rel="stylesheet" href="assets/css/responsive.css?v=35">
 </head>
 <body>
 
@@ -27,7 +27,7 @@
 
 <header class="site-header">
   <div class="frame nav">
-    <a class="brand" href="dashboard.html" aria-label="Arka Patra — home">AP // ARKA PATRA</a>
+    <a class="brand" href="dashboard.html" aria-label="Arka Patra — home">Arka Patra</a>
     <nav class="nav-links" aria-label="Primary">
       <a href="dashboard.html">Home</a>
       <a href="about.html">About</a>
@@ -37,7 +37,7 @@
       <a href="journey.html">Journey</a>
       <a href="contact.html">Contact</a>
     </nav>
-    <span class="nav-status"><i class="status-dot" aria-hidden="true"></i>System online</span>
+    <a class="btn nav-cta" href="contact.html">Get in touch</a>
     <button class="nav-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -58,215 +58,179 @@
 <main id="main" class="page">
   <div class="frame">
 
-    <header class="page-head">
+    <div class="page-head--row">
       <div>
-        <span class="eyebrow">03 // Projects</span>
-        <h1>Mission control: <em>security builds that ship.</em></h1>
+        <p class="page-label">04 — Projects</p>
+        <h1 class="page-title">Mission archive</h1>
       </div>
-      <p class="page-head__aside">Eight builds. Every one with source on GitHub and a live demo where available. <strong>Select a card to open the mission report.</strong></p>
-    </header>
+      <div class="project-filters" role="group" aria-label="Filter projects">
+        <button class="filter-btn" type="button" data-filter="all" aria-pressed="true">All 08</button>
+        <button class="filter-btn" type="button" data-filter="completed" aria-pressed="false">Live 05</button>
+        <button class="filter-btn" type="button" data-filter="ongoing" aria-pressed="false">Building 03</button>
+        <span class="filter-count" id="filterCount" aria-live="polite">08 builds</span>
+      </div>
+    </div>
 
-    <article class="featured-project bracket" id="project-url" data-reveal>
-      <div class="featured-visual">
-        <div class="featured-preview">
-          <div class="preview-head"><span>URL SCANNER // REPORT</span><b>● ONLINE</b></div>
-          <div class="preview-score"><b>82</b><span>/100 RISK</span></div>
-          <span class="preview-verdict">SUSPICIOUS URL</span>
-          <div class="preview-rule"></div>
-          <div class="preview-chips">
-            <span>Typosquatting</span>
-            <span>Headers</span>
-            <span>HTTPS</span>
-            <span>Risk score</span>
+    <div class="deck projects-deck">
+
+      <article class="panel featured-project" id="project-url" data-status="completed" data-reveal>
+        <span class="mono-label">Featured build</span>
+        <h2 class="featured-title">URL Threat Scanner</h2>
+        <p class="featured-desc">Paste a link and get a clear risk verdict with a mission report.</p>
+
+        <div class="verdict-input" aria-hidden="true">
+          <i></i>
+          <span>https://secure-login.example/verify</span>
+        </div>
+
+        <div class="verdict">
+          <span class="verdict__badge">High risk</span>
+          <p>Lookalike domain, new registration, redirect chain.</p>
+        </div>
+
+        <div class="featured-chips">
+          <span class="chip">Python</span>
+          <span class="chip">JavaScript</span>
+          <span class="chip chip--solid">Live</span>
+        </div>
+
+        <div class="featured-links">
+          <a href="https://arkap1502.github.io/URL-Scanner/" target="_blank" rel="noopener">Live demo ↗</a>
+          <a href="https://github.com/arkap1502/URL-Scanner" target="_blank" rel="noopener">Source ↗</a>
+          <button type="button" data-open-project="url" aria-haspopup="dialog">Report →</button>
+        </div>
+      </article>
+
+      <div class="project-side" id="projectGrid">
+
+        <article class="project-card" id="project-copilot" data-status="completed" data-reveal>
+          <div class="project-card__top">
+            <span class="status-pill status-pill--live">Live</span>
+            <span class="project-card__index">02</span>
           </div>
-          <div class="preview-scan"><span>Scanning</span><span>72%</span></div>
-        </div>
+          <h3 class="project-card__title">Security Copilot</h3>
+          <p class="project-card__desc">Headers, TLS and harmful page blocking.</p>
+          <div class="project-card__foot">
+            <div class="project-card__links">
+              <a class="project-card__link" href="https://website-security-copilot-3m0hij8jl-arkap1502-9053s-projects.vercel.app/" target="_blank" rel="noopener">Demo</a>
+              <a class="project-card__link" href="https://github.com/arkap1502/Website-Security-Copilot" target="_blank" rel="noopener">Code</a>
+            </div>
+            <button class="project-open" type="button" data-open-project="copilot" aria-haspopup="dialog">Details</button>
+          </div>
+        </article>
+
+        <article class="project-card" id="project-altron" data-status="completed" data-reveal style="--delay:40ms">
+          <div class="project-card__top">
+            <span class="status-pill status-pill--live">Live</span>
+            <span class="project-card__index">03</span>
+          </div>
+          <h3 class="project-card__title">ALTRON Inspector</h3>
+          <p class="project-card__desc">Secure password generation and scoring.</p>
+          <div class="project-card__foot">
+            <div class="project-card__links">
+              <a class="project-card__link" href="https://arkap1502.github.io/password-making/" target="_blank" rel="noopener">Demo</a>
+              <a class="project-card__link" href="https://github.com/arkap1502/password-making" target="_blank" rel="noopener">Code</a>
+            </div>
+            <button class="project-open" type="button" data-open-project="altron" aria-haspopup="dialog">Details</button>
+          </div>
+        </article>
+
+        <article class="project-card" id="project-humanize" data-status="ongoing" data-reveal style="--delay:80ms">
+          <div class="project-card__top">
+            <span class="status-pill">Building</span>
+            <span class="project-card__index">04</span>
+          </div>
+          <h3 class="project-card__title">Humanize AI</h3>
+          <p class="project-card__desc">AI rewrites with a live word diff.</p>
+          <div class="project-card__foot">
+            <div class="project-card__links">
+              <a class="project-card__link" href="https://arkap1502.github.io/Humanize-AI/" target="_blank" rel="noopener">Demo</a>
+              <a class="project-card__link" href="https://github.com/arkap1502/Humanize-AI" target="_blank" rel="noopener">Code</a>
+            </div>
+            <button class="project-open" type="button" data-open-project="humanize" aria-haspopup="dialog">Details</button>
+          </div>
+        </article>
+
+        <article class="project-card" id="project-nexvault" data-status="ongoing" data-reveal style="--delay:120ms">
+          <div class="project-card__top">
+            <span class="status-pill">Building</span>
+            <span class="project-card__index">05</span>
+          </div>
+          <h3 class="project-card__title">NexVault</h3>
+          <p class="project-card__desc">Encrypted, access-controlled notes vault.</p>
+          <div class="project-card__foot">
+            <div class="project-card__links">
+              <a class="project-card__link" href="https://secure-vault-system.onrender.com/" target="_blank" rel="noopener">Demo</a>
+            </div>
+            <button class="project-open" type="button" data-open-project="nexvault" aria-haspopup="dialog">Details</button>
+          </div>
+        </article>
+
+        <article class="project-card" id="project-prompt" data-status="completed" data-reveal style="--delay:40ms">
+          <div class="project-card__top">
+            <span class="status-pill status-pill--live">Live</span>
+            <span class="project-card__index">06</span>
+          </div>
+          <h3 class="project-card__title">Hidden-Prompt Scanner</h3>
+          <p class="project-card__desc">Finds hidden text and injection phrases.</p>
+          <div class="project-card__foot">
+            <div class="project-card__links">
+              <a class="project-card__link" href="https://hidden-prompt-scanner-for-documents.onrender.com/" target="_blank" rel="noopener">Demo</a>
+              <a class="project-card__link" href="https://github.com/arkap1502/Hidden-prompt-scanner-for-documents%2E" target="_blank" rel="noopener">Code</a>
+            </div>
+            <button class="project-open" type="button" data-open-project="prompt" aria-haspopup="dialog">Details</button>
+          </div>
+        </article>
+
+        <article class="project-card" id="project-prototype" data-status="ongoing" data-reveal style="--delay:80ms">
+          <div class="project-card__top">
+            <span class="status-pill">Building</span>
+            <span class="project-card__index">07</span>
+          </div>
+          <h3 class="project-card__title">Prototype Safety Check</h3>
+          <p class="project-card__desc">Passive checks for web security signals.</p>
+          <div class="project-card__foot">
+            <div class="project-card__links">
+              <a class="project-card__link" href="https://prototype-safety-check.onrender.com/" target="_blank" rel="noopener">Demo</a>
+              <a class="project-card__link" href="https://github.com/arkap1502/prototype-safety-check" target="_blank" rel="noopener">Code</a>
+            </div>
+            <button class="project-open" type="button" data-open-project="prototype" aria-haspopup="dialog">Details</button>
+          </div>
+        </article>
+
       </div>
 
-      <div class="featured-copy">
-        <div class="featured-topline">
-          <span class="tag tag--cyan">Featured · URL security scanner</span>
-          <span class="tag tag--green">Completed</span>
-        </div>
-        <h2 class="featured-title">URL Scanner</h2>
-        <p class="featured-desc">A cybersecurity-focused URL scanner that turns weak signals into a clear verdict. It flags raw IPs, uncommon TLDs, lookalike brand spellings, phishing keywords and missing security headers, then combines them into a 0–100 risk score with a plain-language explanation.</p>
+    </div>
 
-        <ul class="capability-list">
-          <li>URL &amp; typosquat detection</li>
-          <li>Security header analysis</li>
-          <li>HTTPS &amp; directory checks</li>
-          <li>Suspicious keyword &amp; TLD flags</li>
-          <li>0–100 risk score</li>
-          <li>Plain-language security report</li>
-        </ul>
-
-        <div class="featured-actions">
-          <a class="btn btn--solid" href="https://arkap1502.github.io/URL-Scanner/" target="_blank" rel="noopener">Live demo <span class="arrow" aria-hidden="true">↗</span></a>
-          <a class="btn btn--ghost" href="https://github.com/arkap1502/URL-Scanner" target="_blank" rel="noopener">GitHub <span class="arrow" aria-hidden="true">↗</span></a>
-          <button class="btn" type="button" data-open-project="url" aria-haspopup="dialog">View report <span class="arrow" aria-hidden="true">→</span></button>
+    <article class="project-card project-card--wide" id="project-quishing" data-status="completed" data-reveal>
+      <div class="project-card__wide-lead">
+        <span class="status-pill status-pill--live">Live</span>
+        <span class="project-card__index">08</span>
+      </div>
+      <div class="project-card__wide-body">
+        <h3 class="project-card__title">Quishing Guard</h3>
+        <p class="project-card__desc">Scores QR payloads before anything opens.</p>
+      </div>
+      <div class="project-card__foot">
+        <div class="project-card__links">
+          <a class="project-card__link" href="https://quishing-guard.vercel.app/" target="_blank" rel="noopener">Demo</a>
+          <a class="project-card__link" href="https://github.com/arkap1502/Quishing-Guard" target="_blank" rel="noopener">Code</a>
         </div>
+        <button class="project-open" type="button" data-open-project="quishing" aria-haspopup="dialog">Details</button>
       </div>
     </article>
 
-    <div class="project-toolbar">
-      <span class="project-toolbar__label">Build archive / <b>07</b></span>
-      <div class="filter-line" role="group" aria-label="Filter projects">
-        <button class="filter-btn" type="button" data-filter="all" aria-pressed="true">All builds</button>
-        <span class="filter-line__slash" aria-hidden="true">/</span>
-        <button class="filter-btn" type="button" data-filter="completed" aria-pressed="false">Completed</button>
-        <span class="filter-line__slash" aria-hidden="true">/</span>
-        <button class="filter-btn" type="button" data-filter="ongoing" aria-pressed="false">Ongoing</button>
-        <span class="filter-line__slash" aria-hidden="true">/</span>
-        <button class="filter-btn" type="button" data-filter="concept" aria-pressed="false">Concept</button>
-        <span class="filter-count" id="filterCount" aria-live="polite">07 builds</span>
-      </div>
-    </div>
-
-    <div class="project-grid" id="projectGrid">
-
-      <article class="project-card" id="project-copilot" data-status="completed" data-reveal>
-        <div class="project-card__top">
-          <span class="project-card__index">02</span>
-          <span class="tag tag--green">Completed</span>
-        </div>
-        <h3 class="project-card__title">Website Security Copilot</h3>
-        <p class="project-card__desc">Headers, TLS, cookies, DNS and open ports checked by a FastAPI engine, with an MV3 extension that blocks harmful pages before they load.</p>
-        <div class="project-card__tags">
-          <span class="tag">Next.js</span><span class="tag">FastAPI</span><span class="tag">MV3</span>
-        </div>
-        <div class="project-card__foot">
-          <div class="project-card__links">
-            <a class="project-card__link" href="https://website-security-copilot-3m0hij8jl-arkap1502-9053s-projects.vercel.app/" target="_blank" rel="noopener">Demo ↗</a>
-            <a class="project-card__link" href="https://github.com/arkap1502/Website-Security-Copilot" target="_blank" rel="noopener">Code ↗</a>
-          </div>
-          <button class="project-open" type="button" data-open-project="copilot" aria-haspopup="dialog">Details</button>
-        </div>
-      </article>
-
-      <article class="project-card" id="project-altron" data-status="completed" data-reveal style="--delay:50ms">
-        <div class="project-card__top">
-          <span class="project-card__index">03</span>
-          <span class="tag tag--green">Completed</span>
-        </div>
-        <h3 class="project-card__title">ALTRON Password Inspector</h3>
-        <p class="project-card__desc">Cryptographically secure password generation and strength scoring, with character-class checks and a 15+ character threshold — all client-side.</p>
-        <div class="project-card__tags">
-          <span class="tag">JavaScript</span><span class="tag">Web Crypto</span>
-        </div>
-        <div class="project-card__foot">
-          <div class="project-card__links">
-            <a class="project-card__link" href="https://arkap1502.github.io/password-making/" target="_blank" rel="noopener">Demo ↗</a>
-            <a class="project-card__link" href="https://github.com/arkap1502/password-making" target="_blank" rel="noopener">Code ↗</a>
-          </div>
-          <button class="project-open" type="button" data-open-project="altron" aria-haspopup="dialog">Details</button>
-        </div>
-      </article>
-
-      <article class="project-card" id="project-humanize" data-status="ongoing" data-reveal style="--delay:100ms">
-        <div class="project-card__top">
-          <span class="project-card__index">04</span>
-          <span class="tag tag--amber">Ongoing</span>
-        </div>
-        <h3 class="project-card__title">Humanize AI</h3>
-        <p class="project-card__desc">Light, Medium and Strong rewrites with a live word-count diff, plus a zero-build client-side fallback that keeps working offline.</p>
-        <div class="project-card__tags">
-          <span class="tag">React</span><span class="tag">Express</span>
-        </div>
-        <div class="project-card__foot">
-          <div class="project-card__links">
-            <a class="project-card__link" href="https://arkap1502.github.io/Humanize-AI/" target="_blank" rel="noopener">Demo ↗</a>
-            <a class="project-card__link" href="https://github.com/arkap1502/Humanize-AI" target="_blank" rel="noopener">Code ↗</a>
-          </div>
-          <button class="project-open" type="button" data-open-project="humanize" aria-haspopup="dialog">Details</button>
-        </div>
-      </article>
-
-      <article class="project-card" id="project-nexvault" data-status="ongoing" data-reveal style="--delay:150ms">
-        <div class="project-card__top">
-          <span class="project-card__index">05</span>
-          <span class="tag tag--amber">Ongoing</span>
-        </div>
-        <h3 class="project-card__title">NexVault</h3>
-        <p class="project-card__desc">A group-built web vault following a “your data, your vault, your control” model, with encrypted, access-controlled storage and a personal dashboard.</p>
-        <div class="project-card__tags">
-          <span class="tag">Web app</span><span class="tag">Auth</span><span class="tag">Data security</span>
-        </div>
-        <div class="project-card__foot">
-          <div class="project-card__links">
-            <a class="project-card__link" href="https://secure-vault-system.onrender.com/" target="_blank" rel="noopener">Demo ↗</a>
-          </div>
-          <button class="project-open" type="button" data-open-project="nexvault" aria-haspopup="dialog">Details</button>
-        </div>
-      </article>
-
-      <article class="project-card" id="project-prompt" data-status="completed" data-reveal>
-        <div class="project-card__top">
-          <span class="project-card__index">06</span>
-          <span class="tag tag--green">Completed</span>
-        </div>
-        <h3 class="project-card__title">Hidden-Prompt Scanner</h3>
-        <p class="project-card__desc">Extracts visible text and layout signals to flag hidden text, zero-width characters, metadata, comments and injection phrases in PDF and DOCX files.</p>
-        <div class="project-card__tags">
-          <span class="tag">Python</span><span class="tag">Flask</span><span class="tag">PyPDF2</span>
-        </div>
-        <div class="project-card__foot">
-          <div class="project-card__links">
-            <a class="project-card__link" href="https://hidden-prompt-scanner-for-documents.onrender.com/" target="_blank" rel="noopener">Demo ↗</a>
-            <a class="project-card__link" href="https://github.com/arkap1502/Hidden-prompt-scanner-for-documents%2E" target="_blank" rel="noopener">Code ↗</a>
-          </div>
-          <button class="project-open" type="button" data-open-project="prompt" aria-haspopup="dialog">Details</button>
-        </div>
-      </article>
-
-      <article class="project-card" id="project-prototype" data-status="ongoing" data-reveal style="--delay:50ms">
-        <div class="project-card__top">
-          <span class="project-card__index">07</span>
-          <span class="tag tag--amber">Ongoing</span>
-        </div>
-        <h3 class="project-card__title">Prototype Safety Check</h3>
-        <p class="project-card__desc">Passive checks for exposed parameters, database errors, missing security headers, suspicious scripts and HTTPS signals — no exploitation.</p>
-        <div class="project-card__tags">
-          <span class="tag">Python</span><span class="tag">Flask</span><span class="tag">REST API</span>
-        </div>
-        <div class="project-card__foot">
-          <div class="project-card__links">
-            <a class="project-card__link" href="https://prototype-safety-check.onrender.com/" target="_blank" rel="noopener">Demo ↗</a>
-            <a class="project-card__link" href="https://github.com/arkap1502/prototype-safety-check" target="_blank" rel="noopener">Code ↗</a>
-          </div>
-          <button class="project-open" type="button" data-open-project="prototype" aria-haspopup="dialog">Details</button>
-        </div>
-      </article>
-
-      <article class="project-card" id="project-quishing" data-status="completed" data-reveal style="--delay:100ms">
-        <div class="project-card__top">
-          <span class="project-card__index">08</span>
-          <span class="tag tag--green">Completed</span>
-        </div>
-        <h3 class="project-card__title">Quishing Guard</h3>
-        <p class="project-card__desc">Scans QR codes from your camera or an uploaded image, decodes the payload locally and scores the risk before anything opens.</p>
-        <div class="project-card__tags">
-          <span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">jsQR</span>
-        </div>
-        <div class="project-card__foot">
-          <div class="project-card__links">
-            <a class="project-card__link" href="https://quishing-guard.vercel.app/" target="_blank" rel="noopener">Demo ↗</a>
-            <a class="project-card__link" href="https://github.com/arkap1502/Quishing-Guard" target="_blank" rel="noopener">Code ↗</a>
-          </div>
-          <button class="project-open" type="button" data-open-project="quishing" aria-haspopup="dialog">Details</button>
-        </div>
-      </article>
-
-    </div>
-
     <p class="empty-state" id="buildEmpty" hidden>No builds in this expression yet. Try another filter.</p>
 
-    <aside class="github-strip" data-reveal>
+    <aside class="panel deck-note" data-reveal>
       <div>
-        <span class="eyebrow">Open source</span>
+        <span class="mono-label mono-label--accent">Open source</span>
         <h2>More experiments live on GitHub.</h2>
         <p>Source code, contributions and the work still in progress.</p>
       </div>
-      <a class="btn btn--ghost" href="https://github.com/arkap1502" target="_blank" rel="noopener">github.com/arkap1502 <span class="arrow" aria-hidden="true">↗</span></a>
+      <div class="deck-note__actions">
+        <a class="btn" href="https://github.com/arkap1502" target="_blank" rel="noopener">github.com/arkap1502 ↗</a>
+      </div>
     </aside>
 
   </div>
@@ -288,7 +252,7 @@
 
 <footer class="site-foot">
   <div class="frame foot">
-    <span class="foot__note">Arka Patra © 2026 · <b>Secure HUD</b></span>
+    <span class="foot__note">Arka Patra © 2026 · <b>Crimson deck</b></span>
     <span>System secured. Always learning. Always building.</span>
     <div class="socials">
       <a class="social-link" href="https://github.com/arkap1502" target="_blank" rel="noopener" aria-label="GitHub">GH</a>
@@ -298,6 +262,6 @@
   </div>
 </footer>
 
-<script src="assets/site.js?v=21"></script>
+<script src="assets/site.js?v=27"></script>
 </body>
 </html>
