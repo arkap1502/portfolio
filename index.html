@@ -12,12 +12,12 @@
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/carlito-400.woff2" as="font" type="font/woff2" crossorigin>
 <script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('arka-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;}catch(e){}</script>
-<link rel="stylesheet" href="assets/css/core.css?v=46">
-<link rel="stylesheet" href="assets/css/entry-home.css?v=46">
-<link rel="stylesheet" href="assets/css/about-skills.css?v=46">
-<link rel="stylesheet" href="assets/css/projects-certs.css?v=46">
-<link rel="stylesheet" href="assets/css/journey-contact.css?v=46">
-<link rel="stylesheet" href="assets/css/responsive.css?v=46">
+<link rel="stylesheet" href="assets/css/core.css?v=47">
+<link rel="stylesheet" href="assets/css/entry-home.css?v=47">
+<link rel="stylesheet" href="assets/css/about-skills.css?v=47">
+<link rel="stylesheet" href="assets/css/projects-certs.css?v=47">
+<link rel="stylesheet" href="assets/css/journey-contact.css?v=47">
+<link rel="stylesheet" href="assets/css/responsive.css?v=47">
 </head>
 <body class="entry-page">
 
@@ -40,26 +40,33 @@
 
 <main class="entry" id="main">
   <div class="entry__inner">
-    <p class="entry__eyebrow">Portfolio · UI/UX design</p>
-    <h1 class="entry__title" id="entryTitle">Arka Patra</h1>
-    <p class="entry__lead">Portfolio UI/UX design: a glass interface with light and dark modes, built for clear, fast, secure web work.</p>
+    <div class="entry__content">
+      <p class="entry__eyebrow">Portfolio · UI/UX design</p>
+      <h1 class="entry__title" id="entryTitle">Arka Patra</h1>
+      <p class="entry__lead">Portfolio UI/UX design: a glass interface with light and dark modes, built for clear, fast, secure web work.</p>
 
-    <nav class="entry__nav" aria-label="Portfolio sections">
-      <a href="dashboard.html">Home</a>
-      <i aria-hidden="true">·</i>
-      <a href="projects.html">Projects</a>
-      <i aria-hidden="true">·</i>
-      <a href="about.html">About</a>
-      <i aria-hidden="true">·</i>
-      <a href="certificates.html">Certificates</a>
-      <i aria-hidden="true">·</i>
-      <a href="contact.html">Contact</a>
-    </nav>
+      <nav class="entry__nav" aria-label="Portfolio sections">
+        <a href="dashboard.html">Home</a>
+        <i aria-hidden="true">·</i>
+        <a href="projects.html">Projects</a>
+        <i aria-hidden="true">·</i>
+        <a href="about.html">About</a>
+        <i aria-hidden="true">·</i>
+        <a href="certificates.html">Certificates</a>
+        <i aria-hidden="true">·</i>
+        <a href="contact.html">Contact</a>
+      </nav>
 
-    <div class="entry__actions">
-      <a class="btn btn--solid btn--lg" href="dashboard.html" data-enter>Enter portfolio <span class="arrow" aria-hidden="true">→</span></a>
-      <a class="btn btn--lg" href="assets/Arka_Patra_CV.pdf" download>Download CV ↓</a>
+      <div class="entry__actions">
+        <a class="btn btn--solid btn--lg" href="dashboard.html" data-enter>Enter portfolio <span class="arrow" aria-hidden="true">→</span></a>
+        <a class="btn btn--lg" href="assets/Arka_Patra_CV.pdf" download>Download CV ↓</a>
+      </div>
     </div>
+
+    <a class="entry__mascot" href="dashboard.html" data-enter aria-label="Enter the portfolio">
+      <span class="entry__mascot-tag" aria-hidden="true">Enter portfolio</span>
+      <img class="entry__mascot-img" src="assets/character.webp" alt="" width="205" height="518" fetchpriority="high" decoding="async">
+    </a>
   </div>
 
   <div class="entry__foot">
@@ -71,6 +78,6 @@
   </div>
 </main>
 
-<script src="assets/site.js?v=31"></script>
+<script src="assets/site.js?v=32"></script>
 </body>
 </html>

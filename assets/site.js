@@ -718,12 +718,12 @@
 
     if (bootSkip) bootSkip.addEventListener('click', finishBoot);
 
-    var enterLink = document.querySelector('[data-enter]');
-    if (enterLink) {
-      enterLink.addEventListener('click', function () {
+    var enterLinks = document.querySelectorAll('[data-enter]');
+    enterLinks.forEach(function (link) {
+      link.addEventListener('click', function () {
         try { sessionStorage.setItem('arka-booted', '1'); } catch (error) {}
       });
-    }
+    });
 
     var replayBoot = document.querySelector('[data-boot-replay]');
     if (replayBoot) {

@@ -6,7 +6,7 @@ The interface follows the **Secure HUD** design language from the supplied *Port
 
 ## Pages
 
-- [Entry](index.html) — animated cover with a boot sequence, typewriter name, orbit rings, laptop and phone
+- [Entry](index.html) — animated cover with a boot sequence, typewriter name and a 3D guide character that points at the Enter button
 - [Home](dashboard.html) — command deck with identity panel, live threat monitor, drag-to-rotate globe, terminal, active mission, counters and proof cards
 - [About](about.html) — profile, education and experience, the skill matrix, and the five-level cybersecurity journey from fundamentals to AI-powered security
 - [Projects](projects.html) — featured URL Scanner plus seven filterable builds and mission-report dialogs
@@ -25,13 +25,12 @@ The interface follows the **Secure HUD** design language from the supplied *Port
 ## Interaction
 
 - Boot sequence on the entry cover, playable once per tab and skippable.
-- Full-screen falling-code canvas behind the entry cover, paused while the tab is hidden and disabled for reduced motion.
+- The entry cover's 3D guide character links straight into the portfolio; it floats gently and its "Enter portfolio" tag highlights on hover.
 - Page-transition wipe for internal navigation, a short 180 ms curtain that hands over to the prefetched page; skipped when reduced motion is requested.
 - Navigation acceleration: internal pages are prefetched on hover and focus only, and skipped entirely on Save-Data or 2G connections.
 - Sticky navigation with a collapsible mobile menu (Escape closes it).
 - Scroll reveals, a 3D pointer tilt on the About identity stack, and animated HUD counters.
 - Rotating live-threat ticker on the home page.
-- Interactive orthographic globe on the home page: drag or use the arrow keys to rotate in any direction, with a pulsing marker on West Bengal and animated network arcs. Idle spin runs at 22.35°/s, and three magnetic-field orbit rings plus a radiation halo travel with it on the same 16.1 s revolution.
 - Project status filters, empty state and accessible `<dialog>` mission reports.
 - Skill badges that reveal the builds using each skill.
 - Flippable About identity card with a capability record on the back.
@@ -49,7 +48,7 @@ Then open <http://localhost:8000>.
 
 - Typefaces are self-hosted latin subsets in `assets/fonts/` and declared in `core.css` with `font-display: swap`; there is no third-party font request before first paint. The regular Carlito weight is preloaded.
 - Frosted blur is limited to true overlays — the page wipe, modal dialogs, the boot screen and the small portrait caption. Panels, cards and windows use translucent fills with borders and inset highlights, so the glass look is identical over the flat canvas at a fraction of the paint cost.
-- Images ship as WebP (portrait and certificate preview); the original JPG/PNG stay in `assets/` as source files.
+- Images ship as WebP (portrait, certificate preview and the entry character cut-out); the source files stay in `assets/`.
 - The boot sequence runs for 1.3 s and is skippable.
 - Nav prefetching happens on intent, not on load, so opening a page does not download the other five.
 - Animations respect `prefers-reduced-motion`, and the transition wipe is skipped for it.
@@ -73,12 +72,10 @@ assets/css/responsive.css
 assets/fonts/*.woff2      Self-hosted latin subsets: Carlito and Courier Prime (400/700)
 assets/site.js           Navigation, boot, wipe, reveals, tilt, filters,
                          dialogs, skill readout, card flip, ticker, counters and form
-assets/globe.js          Interactive home-page globe: rotation, land mask, arcs and location marker
-assets/world-land-110m.json
-                         Natural Earth 1:110m land geometry (public domain)
 assets/arka-patra.webp   Portrait used on the About profile card (JPG kept as source)
 assets/cert-thiranex-preview.webp
                          Thiranex certificate preview (PNG kept as source)
+assets/character.webp    Transparent 3D guide on the entry cover (PNG kept as source)
 assets/favicon.svg       Cyan "A" mark
 assets/Arka_Patra_CV.pdf Downloadable CV
 assets/cert-*.pdf        Credential documents
