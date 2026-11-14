@@ -8,18 +8,18 @@
 <meta property="og:title" content="About — Arka Patra">
 <meta property="og:description" content="Learning security by building it. A UI/UX developer and cybersecurity student from West Bengal.">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#110a0e">
+<meta name="theme-color" content="#05070c">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Carlito:wght@400;700&amp;family=Courier+Prime:wght@400;700&amp;display=swap" rel="stylesheet">
-<script>document.documentElement.classList.add('js');</script>
-<link rel="stylesheet" href="assets/css/core.css?v=35">
-<link rel="stylesheet" href="assets/css/entry-home.css?v=35">
-<link rel="stylesheet" href="assets/css/about-skills.css?v=35">
-<link rel="stylesheet" href="assets/css/projects-certs.css?v=35">
-<link rel="stylesheet" href="assets/css/journey-contact.css?v=35">
-<link rel="stylesheet" href="assets/css/responsive.css?v=35">
+<script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('arka-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;}catch(e){}</script>
+<link rel="stylesheet" href="assets/css/core.css?v=39">
+<link rel="stylesheet" href="assets/css/entry-home.css?v=39">
+<link rel="stylesheet" href="assets/css/about-skills.css?v=39">
+<link rel="stylesheet" href="assets/css/projects-certs.css?v=39">
+<link rel="stylesheet" href="assets/css/journey-contact.css?v=39">
+<link rel="stylesheet" href="assets/css/responsive.css?v=39">
 </head>
 <body>
 
@@ -30,14 +30,16 @@
     <a class="brand" href="dashboard.html" aria-label="Arka Patra — home">Arka Patra</a>
     <nav class="nav-links" aria-label="Primary">
       <a href="dashboard.html">Home</a>
-      <a href="about.html" aria-current="page">About</a>
-      <a href="skills.html">Skills</a>
       <a href="projects.html">Projects</a>
+      <a href="about.html" aria-current="page">About</a>
       <a href="certificates.html">Certificates</a>
+      <a href="skills.html">Skills</a>
       <a href="journey.html">Journey</a>
       <a href="contact.html">Contact</a>
     </nav>
-    <a class="btn nav-cta" href="contact.html">Get in touch</a>
+    <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to light mode" aria-pressed="false" title="Switch to light mode">
+      <span class="theme-toggle__knob"></span>
+    </button>
     <button class="nav-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -45,10 +47,10 @@
   <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile" aria-hidden="true">
     <div class="mobile-menu__inner frame">
       <a href="dashboard.html">Home <span aria-hidden="true">→</span></a>
-      <a href="about.html" aria-current="page">About <span aria-hidden="true">→</span></a>
-      <a href="skills.html">Skills <span aria-hidden="true">→</span></a>
       <a href="projects.html">Projects <span aria-hidden="true">→</span></a>
+      <a href="about.html" aria-current="page">About <span aria-hidden="true">→</span></a>
       <a href="certificates.html">Certificates <span aria-hidden="true">→</span></a>
+      <a href="skills.html">Skills <span aria-hidden="true">→</span></a>
       <a href="journey.html">Journey <span aria-hidden="true">→</span></a>
       <a href="contact.html">Contact <span aria-hidden="true">→</span></a>
     </div>
@@ -58,108 +60,65 @@
 <main id="main" class="page">
   <div class="frame">
 
-    <p class="page-label">02 — About</p>
-    <h1 class="page-title">Digital identity</h1>
+    <header class="page-head">
+      <h1 class="page-title">About</h1>
+      <p class="page-sub">Who I am and how I work.</p>
+    </header>
 
-    <div class="deck about-deck">
+    <div class="about-deck">
 
-      <div class="id-stack" data-reveal>
-        <div class="id-card" id="idCard">
-          <div class="id-card__inner">
+      <article class="panel about-card" data-reveal>
+        <h2>Arka Patra</h2>
+        <p>I’m a cybersecurity student and security-focused developer. My rule: if a person can’t understand a screen in five seconds, it needs another pass.</p>
+        <p>I design clear interfaces, build them with plain web technology and test them the way an attacker would — so the finished thing is calm to use and hard to break.</p>
+        <div class="chip-row">
+          <span class="chip">HTML</span>
+          <span class="chip">CSS</span>
+          <span class="chip">JavaScript</span>
+          <span class="chip">Python</span>
+        </div>
+      </article>
 
-            <article class="id-card__face id-card__face--front" aria-label="Digital identity card">
-              <div class="id-head"><span>Digital ID</span><span>● Verified</span></div>
-              <div class="id-body">
-                <div class="id-avatar">
-                  <img src="assets/arka-patra.jpg" alt="Portrait of Arka Patra" width="560" height="560" loading="lazy" decoding="async">
-                </div>
-                <h2 class="id-name">Arka Patra</h2>
-                <p class="id-role">UI/UX developer · Cybersecurity student</p>
-                <p class="id-place">West Bengal, India</p>
-              </div>
-            </article>
-
-            <article class="id-card__face id-card__face--back" aria-label="Capability record">
-              <div class="id-head"><span>Capability record</span><span>AP // 01</span></div>
-              <h3 class="id-back-title" style="margin-top:18px">Field record</h3>
-              <div class="id-back-grid">
-                <div class="id-stat"><b>08</b><span>Builds</span></div>
-                <div class="id-stat"><b>10</b><span>Credentials</span></div>
-                <div class="id-stat"><b>01</b><span>Internship</span></div>
-                <div class="id-stat"><b>05</b><span>Journey levels</span></div>
-              </div>
-              <p class="id-back-title">Core toolkit</p>
-              <div class="id-back-chips">
-                <span class="chip">Python</span>
-                <span class="chip">JavaScript</span>
-                <span class="chip">Flask</span>
-                <span class="chip">React</span>
-                <span class="chip">Linux</span>
-                <span class="chip">Git</span>
-              </div>
-              <div class="id-back-foot"><span>Clearance · Learner</span><b>Open</b></div>
-            </article>
-
+      <article class="panel about-card about-record" data-reveal style="--delay:80ms">
+        <h2>Education and experience</h2>
+        <div class="record-list">
+          <div class="record">
+            <h3>Cybersecurity studies</h3>
+            <p>B.Sc Cyber Security · Guru Nanak Institute of Technology · 2024 — present</p>
+          </div>
+          <div class="record">
+            <h3>Thiranex internship</h3>
+            <p>Cyber Security internship · 04 Aug — 03 Sept 2026<br>
+              Certificate <a href="assets/Thiranex_Certificate_Arka_Patra_THX-AUG0426-563.pdf" target="_blank" rel="noopener">THX-AUG0426-563 ↗</a>
+            </p>
+          </div>
+          <div class="record">
+            <h3>Independent builds</h3>
+            <p>Eight tools shipped on GitHub, from URL scanning to QR safety.</p>
           </div>
         </div>
-
-        <button class="id-flip" id="idFlip" type="button" aria-pressed="false"><span>Flip for capability record</span> <span aria-hidden="true">↻</span></button>
-      </div>
-
-      <div class="about-side" data-reveal style="--delay:80ms">
-
-        <article class="focus-card">
-          <h2>UI/UX design</h2>
-          <p>Interfaces that feel clear and deliberate</p>
-        </article>
-        <article class="focus-card">
-          <h2>Secure web builds</h2>
-          <p>Hardened pages and safe defaults</p>
-        </article>
-        <article class="focus-card">
-          <h2>Threat detection</h2>
-          <p>URL, phishing and identity checks</p>
-        </article>
-        <article class="focus-card">
-          <h2>AI-assisted tools</h2>
-          <p>Small utilities powered by AI</p>
-        </article>
-
-        <article class="record-card">
-          <span class="mono-label">Education</span>
-          <h2>B.Sc Cyber Security</h2>
-          <p>Guru Nanak Institute of Technology</p>
-          <p class="record-meta">2024 — present</p>
-        </article>
-        <article class="record-card">
-          <span class="mono-label">Experience</span>
-          <h2>Cybersecurity internship</h2>
-          <p>Internship · Thiranex</p>
-          <p class="record-meta"><a href="assets/Thiranex_Certificate_Arka_Patra_THX-AUG0426-563.pdf" target="_blank" rel="noopener">Certificate on file ↗</a></p>
-        </article>
-
-      </div>
+      </article>
 
     </div>
 
-    <section class="panel about-note" aria-labelledby="aboutBrief" data-reveal>
+    <aside class="panel about-note" aria-labelledby="aboutBrief" data-reveal>
       <div>
         <span class="mono-label mono-label--accent">Profile brief</span>
         <h2 id="aboutBrief">Learning security by building it.</h2>
-        <p>I design and build practical security projects, from URL scanners to secure apps, and keep learning how digital threats work and how to stop them. My approach is simple: understand the attack, then ship an interface that makes it visible.</p>
+        <p>I build practical security projects, from URL scanners to secure apps, and keep learning how digital threats work and how to stop them. My approach is simple: understand the attack, then ship an interface that makes it visible.</p>
       </div>
       <div class="about-note__actions">
         <a class="btn btn--solid" href="skills.html">Open skill matrix</a>
         <a class="btn" href="assets/Arka_Patra_CV.pdf" download>Download CV ↓</a>
       </div>
-    </section>
+    </aside>
 
   </div>
 </main>
 
 <footer class="site-foot">
   <div class="frame foot">
-    <span class="foot__note">Arka Patra © 2026 · <b>Crimson deck</b></span>
+    <span class="foot__note">Arka Patra © 2026 · <b>Glass deck</b></span>
     <span>System secured. Always learning. Always building.</span>
     <div class="socials">
       <a class="social-link" href="https://github.com/arkap1502" target="_blank" rel="noopener" aria-label="GitHub">GH</a>
@@ -169,6 +128,6 @@
   </div>
 </footer>
 
-<script src="assets/site.js?v=27"></script>
+<script src="assets/site.js?v=29"></script>
 </body>
 </html>

@@ -8,18 +8,18 @@
 <meta property="og:title" content="Contact — Arka Patra">
 <meta property="og:description" content="Let's build a more secure digital future. Internships, collaboration and security projects.">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#110a0e">
+<meta name="theme-color" content="#05070c">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Carlito:wght@400;700&amp;family=Courier+Prime:wght@400;700&amp;display=swap" rel="stylesheet">
-<script>document.documentElement.classList.add('js');</script>
-<link rel="stylesheet" href="assets/css/core.css?v=35">
-<link rel="stylesheet" href="assets/css/entry-home.css?v=35">
-<link rel="stylesheet" href="assets/css/about-skills.css?v=35">
-<link rel="stylesheet" href="assets/css/projects-certs.css?v=35">
-<link rel="stylesheet" href="assets/css/journey-contact.css?v=35">
-<link rel="stylesheet" href="assets/css/responsive.css?v=35">
+<script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('arka-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;}catch(e){}</script>
+<link rel="stylesheet" href="assets/css/core.css?v=39">
+<link rel="stylesheet" href="assets/css/entry-home.css?v=39">
+<link rel="stylesheet" href="assets/css/about-skills.css?v=39">
+<link rel="stylesheet" href="assets/css/projects-certs.css?v=39">
+<link rel="stylesheet" href="assets/css/journey-contact.css?v=39">
+<link rel="stylesheet" href="assets/css/responsive.css?v=39">
 </head>
 <body>
 
@@ -30,14 +30,16 @@
     <a class="brand" href="dashboard.html" aria-label="Arka Patra — home">Arka Patra</a>
     <nav class="nav-links" aria-label="Primary">
       <a href="dashboard.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="skills.html">Skills</a>
       <a href="projects.html">Projects</a>
+      <a href="about.html">About</a>
       <a href="certificates.html">Certificates</a>
+      <a href="skills.html">Skills</a>
       <a href="journey.html">Journey</a>
       <a href="contact.html" aria-current="page">Contact</a>
     </nav>
-    <a class="btn nav-cta" href="contact.html">Get in touch</a>
+    <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to light mode" aria-pressed="false" title="Switch to light mode">
+      <span class="theme-toggle__knob"></span>
+    </button>
     <button class="nav-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -45,10 +47,10 @@
   <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile" aria-hidden="true">
     <div class="mobile-menu__inner frame">
       <a href="dashboard.html">Home <span aria-hidden="true">→</span></a>
-      <a href="about.html">About <span aria-hidden="true">→</span></a>
-      <a href="skills.html">Skills <span aria-hidden="true">→</span></a>
       <a href="projects.html">Projects <span aria-hidden="true">→</span></a>
+      <a href="about.html">About <span aria-hidden="true">→</span></a>
       <a href="certificates.html">Certificates <span aria-hidden="true">→</span></a>
+      <a href="skills.html">Skills <span aria-hidden="true">→</span></a>
       <a href="journey.html">Journey <span aria-hidden="true">→</span></a>
       <a href="contact.html" aria-current="page">Contact <span aria-hidden="true">→</span></a>
     </div>
@@ -58,67 +60,67 @@
 <main id="main" class="page">
   <div class="frame">
 
-    <p class="page-label">07 — Contact</p>
-    <h1 class="page-title">Open channel</h1>
+    <header class="page-head">
+      <h1 class="page-title">Contact</h1>
+      <p class="page-sub">Replies usually arrive within two days.</p>
+    </header>
 
-    <div class="deck contact-deck">
+    <div class="contact-deck">
 
-      <section class="panel contact-info" aria-label="Contact details" data-reveal>
-        <a class="contact-info__item" href="mailto:arkap1502@gmail.com">
-          <span class="mono-label">Email</span>
-          <span class="contact-info__value">arkap1502@gmail.com</span>
-        </a>
-        <a class="contact-info__item" href="https://www.linkedin.com/in/arka-patra-579110422/" target="_blank" rel="noopener">
-          <span class="mono-label">LinkedIn</span>
-          <span class="contact-info__value">linkedin.com/in/arka-patra-579110422</span>
-        </a>
-        <a class="contact-info__item" href="https://github.com/arkap1502" target="_blank" rel="noopener">
-          <span class="mono-label">GitHub</span>
-          <span class="contact-info__value">github.com/arkap1502</span>
-        </a>
-        <a class="contact-info__item" href="tel:+919748813115">
-          <span class="mono-label">Phone</span>
-          <span class="contact-info__value">+91 97488 13115</span>
-        </a>
-        <div class="contact-info__item">
-          <span class="mono-label">Location</span>
-          <span class="contact-info__value">West Bengal, India</span>
+      <section class="panel contact-panel" aria-labelledby="reachTitle" data-reveal>
+        <h2 id="reachTitle">Reach me directly</h2>
+
+        <div class="contact-list">
+          <a class="contact-info__item contact-info__item--mail" href="mailto:arkap1502@gmail.com">
+            <span class="contact-info__label">Email</span>
+            <span class="contact-info__value">arkap1502@gmail.com</span>
+          </a>
+          <a class="contact-info__item" href="https://github.com/arkap1502" target="_blank" rel="noopener">
+            <span class="contact-info__label">GitHub</span>
+            <span class="contact-info__value">github.com/arkap1502</span>
+          </a>
+          <a class="contact-info__item" href="https://www.linkedin.com/in/arka-patra-579110422/" target="_blank" rel="noopener">
+            <span class="contact-info__label">LinkedIn</span>
+            <span class="contact-info__value">linkedin.com/in/arka-patra-579110422</span>
+          </a>
+          <a class="contact-info__item" href="tel:+919748813115">
+            <span class="contact-info__label">Phone</span>
+            <span class="contact-info__value">+91 97488 13115</span>
+          </a>
+          <div class="contact-info__item">
+            <span class="contact-info__label">Location</span>
+            <span class="contact-info__value">West Bengal, India</span>
+          </div>
+        </div>
+
+        <div class="contact-channel">
+          <span>Encrypted channel · status open</span>
+          <div class="term" aria-hidden="true">
+            <p><span class="term__prompt">&gt;</span> handshake ok</p>
+            <p><span class="term__prompt">&gt;</span> awaiting message<span class="cursor"></span></p>
+          </div>
         </div>
       </section>
 
-      <section class="panel contact-channel" aria-label="Encrypted channel" data-reveal style="--delay:70ms">
-        <span class="mono-label">Encrypted channel</span>
-        <div class="term">
-          <p><span class="term__prompt">$</span> open --channel secure</p>
-          <p><span class="term__prompt">&gt;</span> handshake ok</p>
-          <p><span class="term__prompt">&gt;</span> encrypted link ready</p>
-          <p><span class="term__prompt">&gt;</span> awaiting message<span class="cursor" aria-hidden="true"></span></p>
-        </div>
-        <div class="contact-channel__foot">
-          <span>System secured</span>
-          <b>Replies within 24h</b>
-        </div>
-      </section>
-
-      <section class="panel contact-form-panel" aria-labelledby="formTitle" data-reveal style="--delay:140ms">
-        <span class="mono-label" id="formTitle">Send a message</span>
+      <section class="panel contact-form-panel" aria-labelledby="formTitle" data-reveal style="--delay:80ms">
+        <h2 id="formTitle">Send a message</h2>
         <form id="contactForm" novalidate>
           <div class="field">
-            <label class="sr-only" for="cfName">Name</label>
-            <input id="cfName" name="name" type="text" placeholder="Name" autocomplete="name" aria-describedby="cfNameError">
+            <label for="cfName">Name</label>
+            <input id="cfName" name="name" type="text" placeholder="Your name" autocomplete="name" aria-describedby="cfNameError">
             <p class="field-error" id="cfNameError" aria-live="polite"></p>
           </div>
           <div class="field">
-            <label class="sr-only" for="cfEmail">Email</label>
-            <input id="cfEmail" name="email" type="email" placeholder="Email" autocomplete="email" aria-describedby="cfEmailError">
+            <label for="cfEmail">Email</label>
+            <input id="cfEmail" name="email" type="email" placeholder="you@example.com" autocomplete="email" aria-describedby="cfEmailError">
             <p class="field-error" id="cfEmailError" aria-live="polite"></p>
           </div>
           <div class="field">
-            <label class="sr-only" for="cfMessage">Message</label>
-            <textarea id="cfMessage" name="message" rows="4" placeholder="Message" aria-describedby="cfMessageError"></textarea>
+            <label for="cfMessage">Message</label>
+            <textarea id="cfMessage" name="message" rows="4" placeholder="What would you like to build or protect?" aria-describedby="cfMessageError"></textarea>
             <p class="field-error" id="cfMessageError" aria-live="polite"></p>
           </div>
-          <button class="btn btn--solid btn--block" id="cfSubmit" type="submit"><span class="btn-label">Send message</span></button>
+          <button class="btn btn--solid" id="cfSubmit" type="submit"><span class="btn-label">Send message</span></button>
           <p class="form-status" id="cfStatus" role="status" aria-live="polite"></p>
         </form>
       </section>
@@ -130,7 +132,7 @@
 
 <footer class="site-foot">
   <div class="frame foot">
-    <span class="foot__note">Arka Patra © 2026 · <b>Crimson deck</b></span>
+    <span class="foot__note">Arka Patra © 2026 · <b>Glass deck</b></span>
     <span>System secured. Always learning. Always building.</span>
     <div class="socials">
       <a class="social-link" href="https://github.com/arkap1502" target="_blank" rel="noopener" aria-label="GitHub">GH</a>
@@ -140,6 +142,6 @@
   </div>
 </footer>
 
-<script src="assets/site.js?v=27"></script>
+<script src="assets/site.js?v=29"></script>
 </body>
 </html>

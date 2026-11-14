@@ -4,44 +4,63 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Arka Patra — UI/UX Developer</title>
-<meta name="description" content="The portfolio of Arka Patra — a UI/UX developer and cybersecurity student from West Bengal. Enter the crimson command deck.">
+<meta name="description" content="The portfolio of Arka Patra — a UI/UX developer and cybersecurity student from West Bengal. A glass interface with light and dark modes.">
 <meta property="og:title" content="Arka Patra — UI/UX Developer">
-<meta property="og:description" content="Secure, human-centred interfaces and practical security tools. Enter the command deck.">
+<meta property="og:description" content="Interfaces that are easy to use and hard to break. Explore projects, credentials and security work.">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#110a0e">
+<meta name="theme-color" content="#05070c">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Carlito:wght@400;700&amp;family=Courier+Prime:wght@400;700&amp;display=swap" rel="stylesheet">
-<script>document.documentElement.classList.add('js');</script>
-<link rel="stylesheet" href="assets/css/core.css?v=35">
-<link rel="stylesheet" href="assets/css/entry-home.css?v=35">
-<link rel="stylesheet" href="assets/css/about-skills.css?v=35">
-<link rel="stylesheet" href="assets/css/projects-certs.css?v=35">
-<link rel="stylesheet" href="assets/css/journey-contact.css?v=35">
-<link rel="stylesheet" href="assets/css/responsive.css?v=35">
+<script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('arka-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;}catch(e){}</script>
+<link rel="stylesheet" href="assets/css/core.css?v=39">
+<link rel="stylesheet" href="assets/css/entry-home.css?v=39">
+<link rel="stylesheet" href="assets/css/about-skills.css?v=39">
+<link rel="stylesheet" href="assets/css/projects-certs.css?v=39">
+<link rel="stylesheet" href="assets/css/journey-contact.css?v=39">
+<link rel="stylesheet" href="assets/css/responsive.css?v=39">
 </head>
 <body class="entry-page">
 
 <a class="skip-link" href="#main">Skip to portfolio entry</a>
 
+<button class="theme-toggle entry-theme" type="button" data-theme-toggle aria-label="Switch to light mode" aria-pressed="false" title="Switch to light mode">
+  <span class="theme-toggle__knob"></span>
+</button>
+
 <div class="boot" id="bootOverlay" hidden aria-label="System boot sequence">
   <div class="boot__panel">
-    <div class="boot__head"><span>AP // BOOT SEQUENCE</span><span>v1.0</span></div>
-    <div class="boot__line"><span>loading secure modules</span><b>[ OK ]</b></div>
-    <div class="boot__line"><span>calibrating threat monitor</span><b>[ OK ]</b></div>
+    <div class="boot__head"><span>AP // BOOT SEQUENCE</span><span>v2.0</span></div>
+    <div class="boot__line"><span>mounting glass interface</span><b>[ OK ]</b></div>
+    <div class="boot__line"><span>loading light + dark themes</span><b>[ OK ]</b></div>
     <div class="boot__line"><span>identity verified</span><b>[ OK ]</b></div>
     <div class="boot__bar"><div class="boot__fill"></div></div>
-    <button class="boot__skip" type="button">Skip boot ▸</button>
+    <button class="boot__skip" type="button">Skip boot →</button>
   </div>
 </div>
 
 <main class="entry" id="main">
   <div class="entry__inner">
-    <h1 class="entry__title" id="entryTitle"><span>Hi there,</span><span>I am Arka</span></h1>
-    <p class="entry__lead">A UI/UX developer and cybersecurity student from West Bengal, India. Currently building secure, AI-powered tools for a safer web.</p>
+    <p class="entry__eyebrow">Portfolio · UI/UX design</p>
+    <h1 class="entry__title" id="entryTitle">Arka Patra</h1>
+    <p class="entry__lead">Portfolio UI/UX design: a glass interface with light and dark modes, built for clear, fast, secure web work.</p>
+
+    <nav class="entry__nav" aria-label="Portfolio sections">
+      <a href="dashboard.html">Home</a>
+      <i aria-hidden="true">·</i>
+      <a href="projects.html">Projects</a>
+      <i aria-hidden="true">·</i>
+      <a href="about.html">About</a>
+      <i aria-hidden="true">·</i>
+      <a href="certificates.html">Certificates</a>
+      <i aria-hidden="true">·</i>
+      <a href="contact.html">Contact</a>
+    </nav>
+
     <div class="entry__actions">
-      <a class="btn btn--lg" href="dashboard.html">View portfolio</a>
+      <a class="btn btn--solid btn--lg" href="dashboard.html" data-enter>Enter portfolio <span class="arrow" aria-hidden="true">→</span></a>
+      <a class="btn btn--lg" href="assets/Arka_Patra_CV.pdf" download>Download CV ↓</a>
     </div>
   </div>
 
@@ -50,10 +69,10 @@
     <i aria-hidden="true">·</i>
     <button type="button" data-boot-replay>Boot sequence</button>
     <i aria-hidden="true">·</i>
-    <a href="dashboard.html" data-enter>Skip ▸</a>
+    <a href="dashboard.html" data-enter>Skip →</a>
   </div>
 </main>
 
-<script src="assets/site.js?v=27"></script>
+<script src="assets/site.js?v=29"></script>
 </body>
 </html>

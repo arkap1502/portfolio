@@ -1,8 +1,8 @@
 /* ==========================================================================
-   ARKA PATRA — SECURE HUD behaviour
-   Boot sequence · page wipe · navigation · reveals · 3D tilt · counters
-   live threat monitor · project dialogs and filters · skill readout
-   identity flip · contact form
+   ARKA PATRA — GLASS DECK behaviour
+   Theme switch · boot sequence · page wipe · navigation · reveals · tilt
+   draggable windows · counters · project dialogs and filters · skill readout
+   contact form
    ========================================================================== */
 
 (function () {
@@ -15,6 +15,44 @@
   function pad(value) {
     return value < 10 ? '0' + value : String(value);
   }
+
+  /* -----------------------------------------------------------------------
+     Light / dark theme
+     The switch is in the header of every page. The choice is stored locally
+     and applied to <html data-theme> before paint by the inline head script.
+     ----------------------------------------------------------------------- */
+
+  var THEME_KEY = 'arka-theme';
+
+  function currentTheme() {
+    return root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+  }
+
+  function applyTheme(theme, persist) {
+    var next = theme === 'light' ? 'dark' : 'light';
+    root.setAttribute('data-theme', theme);
+
+    document.querySelectorAll('[data-theme-toggle]').forEach(function (button) {
+      button.setAttribute('aria-pressed', String(theme === 'light'));
+      button.setAttribute('aria-label', 'Switch to ' + next + ' mode');
+      button.setAttribute('title', 'Switch to ' + next + ' mode');
+    });
+
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', theme === 'light' ? '#eef2f8' : '#05070c');
+
+    if (persist) {
+      try { localStorage.setItem(THEME_KEY, theme); } catch (error) {}
+    }
+  }
+
+  applyTheme(currentTheme(), false);
+
+  document.querySelectorAll('[data-theme-toggle]').forEach(function (button) {
+    button.addEventListener('click', function () {
+      applyTheme(currentTheme() === 'dark' ? 'light' : 'dark', true);
+    });
+  });
 
   /* -----------------------------------------------------------------------
      Page navigation
@@ -211,6 +249,73 @@
   }
 
   /* -----------------------------------------------------------------------
+     Draggable windows
+     Home's identity, skill and terminal windows can be moved by their title
+     bar. Desktop pointer only; on small screens the windows stack instead.
+     Double-click a title bar to send the window home.
+     ----------------------------------------------------------------------- */
+
+  var canDrag = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  document.querySelectorAll('[data-drag]').forEach(function (win) {
+    var handle = win.querySelector('[data-drag-handle]');
+    if (!handle || !canDrag) return;
+
+    function resetPosition() {
+      win.style.left = '';
+      win.style.top = '';
+      win.style.right = '';
+      win.style.bottom = '';
+    }
+
+    handle.addEventListener('dblclick', resetPosition);
+
+    handle.addEventListener('pointerdown', function (event) {
+      if (event.button !== 0 || window.innerWidth < 1081) return;
+      if (event.target.closest('a, button, input, textarea')) return;
+
+      var parent = win.offsetParent;
+      if (!parent) return;
+
+      var box = parent.getBoundingClientRect();
+      var winBox = win.getBoundingClientRect();
+      var startX = event.clientX;
+      var startY = event.clientY;
+      var originLeft = win.offsetLeft;
+      var originTop = win.offsetTop;
+      var maxLeft = Math.max(-20, box.width - winBox.width - 4);
+      var maxTop = Math.max(-10, box.height - winBox.height - 4);
+
+      if (win.style.right !== 'auto') {
+        win.style.right = 'auto';
+        win.style.bottom = 'auto';
+      }
+
+      win.classList.add('is-dragging');
+      try { handle.setPointerCapture(event.pointerId); } catch (error) {}
+
+      function move(moveEvent) {
+        var left = originLeft + (moveEvent.clientX - startX);
+        var top = originTop + (moveEvent.clientY - startY);
+        win.style.left = Math.max(-20, Math.min(maxLeft, left)) + 'px';
+        win.style.top = Math.max(-10, Math.min(maxTop, top)) + 'px';
+      }
+
+      function stop() {
+        win.classList.remove('is-dragging');
+        handle.removeEventListener('pointermove', move);
+        handle.removeEventListener('pointerup', stop);
+        handle.removeEventListener('pointercancel', stop);
+      }
+
+      handle.addEventListener('pointermove', move);
+      handle.addEventListener('pointerup', stop);
+      handle.addEventListener('pointercancel', stop);
+      event.preventDefault();
+    });
+  });
+
+  /* -----------------------------------------------------------------------
      HUD counters
      ----------------------------------------------------------------------- */
 
@@ -287,8 +392,8 @@
 
   var projects = {
     url: {
-      index: '01',
-      title: 'URL Scanner',
+      index: '02',
+      title: 'URL Threat Scanner',
       category: 'URL security scanner · Threat detection',
       status: 'Completed',
       desc: 'A cybersecurity-focused URL scanner that flags raw IPs, uncommon TLDs, lookalike brand spellings, phishing keywords and weak security headers, then combines the signals into a 0–100 risk score with a plain-language verdict.',
@@ -299,7 +404,7 @@
       ]
     },
     copilot: {
-      index: '02',
+      index: '01',
       title: 'Website Security Copilot',
       category: 'Cybersecurity · Browser extension',
       status: 'Completed',
@@ -312,7 +417,7 @@
     },
     altron: {
       index: '03',
-      title: 'ALTRON Password Inspector',
+      title: 'Altron Password Inspector',
       category: 'Security · Web tool',
       status: 'Completed',
       desc: 'Passwords are generated with crypto.getRandomValues(), never Math.random(). Strength scoring checks character classes and a 15+ character length threshold. Everything runs in the browser.',
@@ -323,7 +428,7 @@
       ]
     },
     humanize: {
-      index: '04',
+      index: '06',
       title: 'Humanize AI',
       category: 'AI · Text tool',
       status: 'Ongoing',
@@ -335,7 +440,7 @@
       ]
     },
     nexvault: {
-      index: '05',
+      index: '04',
       title: 'NexVault',
       category: 'Security · Web app',
       status: 'Ongoing',
@@ -346,7 +451,7 @@
       ]
     },
     prompt: {
-      index: '06',
+      index: '05',
       title: 'Hidden-Prompt Scanner',
       category: 'AI security · Document analysis',
       status: 'Completed',
@@ -456,7 +561,7 @@
      ----------------------------------------------------------------------- */
 
   var filterButtons = Array.prototype.slice.call(document.querySelectorAll('.filter-btn'));
-  var projectCards = Array.prototype.slice.call(document.querySelectorAll('.featured-project, .project-card'));
+  var projectCards = Array.prototype.slice.call(document.querySelectorAll('.project-card'));
   var projectDeck = document.querySelector('.projects-deck');
   var filterCount = document.getElementById('filterCount');
   var emptyState = document.getElementById('buildEmpty');
@@ -465,15 +570,10 @@
     var shown = 0;
 
     projectCards.forEach(function (card) {
-      var match = filter === 'all' || card.getAttribute('data-status') === filter;
+      var match = filter === 'all' || card.getAttribute('data-category') === filter;
       card.classList.toggle('is-hidden', !match);
       if (match) shown += 1;
     });
-
-    if (projectDeck) {
-      var featured = projectDeck.querySelector('.featured-project');
-      projectDeck.classList.toggle('projects-deck--solo', !!(featured && featured.classList.contains('is-hidden')));
-    }
 
     if (filterCount) {
       filterCount.textContent = pad(shown) + (shown === 1 ? ' build' : ' builds');

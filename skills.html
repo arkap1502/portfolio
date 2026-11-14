@@ -8,18 +8,18 @@
 <meta property="og:title" content="Skills — Arka Patra">
 <meta property="og:description" content="A skill matrix that maps every capability to a shipped build.">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#110a0e">
+<meta name="theme-color" content="#05070c">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Carlito:wght@400;700&amp;family=Courier+Prime:wght@400;700&amp;display=swap" rel="stylesheet">
-<script>document.documentElement.classList.add('js');</script>
-<link rel="stylesheet" href="assets/css/core.css?v=35">
-<link rel="stylesheet" href="assets/css/entry-home.css?v=35">
-<link rel="stylesheet" href="assets/css/about-skills.css?v=35">
-<link rel="stylesheet" href="assets/css/projects-certs.css?v=35">
-<link rel="stylesheet" href="assets/css/journey-contact.css?v=35">
-<link rel="stylesheet" href="assets/css/responsive.css?v=35">
+<script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('arka-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;}catch(e){}</script>
+<link rel="stylesheet" href="assets/css/core.css?v=39">
+<link rel="stylesheet" href="assets/css/entry-home.css?v=39">
+<link rel="stylesheet" href="assets/css/about-skills.css?v=39">
+<link rel="stylesheet" href="assets/css/projects-certs.css?v=39">
+<link rel="stylesheet" href="assets/css/journey-contact.css?v=39">
+<link rel="stylesheet" href="assets/css/responsive.css?v=39">
 </head>
 <body>
 
@@ -30,14 +30,16 @@
     <a class="brand" href="dashboard.html" aria-label="Arka Patra — home">Arka Patra</a>
     <nav class="nav-links" aria-label="Primary">
       <a href="dashboard.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="skills.html" aria-current="page">Skills</a>
       <a href="projects.html">Projects</a>
+      <a href="about.html">About</a>
       <a href="certificates.html">Certificates</a>
+      <a href="skills.html" aria-current="page">Skills</a>
       <a href="journey.html">Journey</a>
       <a href="contact.html">Contact</a>
     </nav>
-    <a class="btn nav-cta" href="contact.html">Get in touch</a>
+    <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to light mode" aria-pressed="false" title="Switch to light mode">
+      <span class="theme-toggle__knob"></span>
+    </button>
     <button class="nav-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -45,10 +47,10 @@
   <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile" aria-hidden="true">
     <div class="mobile-menu__inner frame">
       <a href="dashboard.html">Home <span aria-hidden="true">→</span></a>
-      <a href="about.html">About <span aria-hidden="true">→</span></a>
-      <a href="skills.html" aria-current="page">Skills <span aria-hidden="true">→</span></a>
       <a href="projects.html">Projects <span aria-hidden="true">→</span></a>
+      <a href="about.html">About <span aria-hidden="true">→</span></a>
       <a href="certificates.html">Certificates <span aria-hidden="true">→</span></a>
+      <a href="skills.html" aria-current="page">Skills <span aria-hidden="true">→</span></a>
       <a href="journey.html">Journey <span aria-hidden="true">→</span></a>
       <a href="contact.html">Contact <span aria-hidden="true">→</span></a>
     </div>
@@ -58,8 +60,10 @@
 <main id="main" class="page">
   <div class="frame">
 
-    <p class="page-label">03 — Skills</p>
-    <h1 class="page-title">Skill modules</h1>
+    <header class="page-head">
+      <h1 class="page-title">Skills</h1>
+      <p class="page-sub">A working matrix — every capability is tied to a build you can open.</p>
+    </header>
 
     <div class="deck skills-deck">
 
@@ -137,7 +141,7 @@
 
 <footer class="site-foot">
   <div class="frame foot">
-    <span class="foot__note">Arka Patra © 2026 · <b>Crimson deck</b></span>
+    <span class="foot__note">Arka Patra © 2026 · <b>Glass deck</b></span>
     <span>System secured. Always learning. Always building.</span>
     <div class="socials">
       <a class="social-link" href="https://github.com/arkap1502" target="_blank" rel="noopener" aria-label="GitHub">GH</a>
@@ -147,6 +151,6 @@
   </div>
 </footer>
 
-<script src="assets/site.js?v=27"></script>
+<script src="assets/site.js?v=29"></script>
 </body>
 </html>

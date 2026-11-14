@@ -4,22 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Home — Arka Patra</title>
-<meta name="description" content="Arka Patra — UI/UX developer and cybersecurity student from West Bengal. Explore secure builds, credentials and practical interface work.">
+<meta name="description" content="Arka Patra — UI/UX developer and cybersecurity student from West Bengal. Interfaces that are easy to use and hard to break.">
 <meta property="og:title" content="Arka Patra — UI/UX Developer">
-<meta property="og:description" content="Secure, human-centred interfaces and practical security tools. Enter the command deck.">
+<meta property="og:description" content="Interfaces that are easy to use and hard to break. Explore secure builds, credentials and practical interface work.">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#110a0e">
+<meta name="theme-color" content="#05070c">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Carlito:wght@400;700&amp;family=Courier+Prime:wght@400;700&amp;display=swap" rel="stylesheet">
-<script>document.documentElement.classList.add('js');</script>
-<link rel="stylesheet" href="assets/css/core.css?v=35">
-<link rel="stylesheet" href="assets/css/entry-home.css?v=35">
-<link rel="stylesheet" href="assets/css/about-skills.css?v=35">
-<link rel="stylesheet" href="assets/css/projects-certs.css?v=35">
-<link rel="stylesheet" href="assets/css/journey-contact.css?v=35">
-<link rel="stylesheet" href="assets/css/responsive.css?v=35">
+<script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('arka-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;}catch(e){}</script>
+<link rel="stylesheet" href="assets/css/core.css?v=39">
+<link rel="stylesheet" href="assets/css/entry-home.css?v=39">
+<link rel="stylesheet" href="assets/css/about-skills.css?v=39">
+<link rel="stylesheet" href="assets/css/projects-certs.css?v=39">
+<link rel="stylesheet" href="assets/css/journey-contact.css?v=39">
+<link rel="stylesheet" href="assets/css/responsive.css?v=39">
 </head>
 <body>
 
@@ -30,14 +30,16 @@
     <a class="brand" href="dashboard.html" aria-label="Arka Patra — home">Arka Patra</a>
     <nav class="nav-links" aria-label="Primary">
       <a href="dashboard.html" aria-current="page">Home</a>
-      <a href="about.html">About</a>
-      <a href="skills.html">Skills</a>
       <a href="projects.html">Projects</a>
+      <a href="about.html">About</a>
       <a href="certificates.html">Certificates</a>
+      <a href="skills.html">Skills</a>
       <a href="journey.html">Journey</a>
       <a href="contact.html">Contact</a>
     </nav>
-    <a class="btn nav-cta" href="contact.html">Get in touch</a>
+    <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to light mode" aria-pressed="false" title="Switch to light mode">
+      <span class="theme-toggle__knob"></span>
+    </button>
     <button class="nav-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -45,102 +47,131 @@
   <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile" aria-hidden="true">
     <div class="mobile-menu__inner frame">
       <a href="dashboard.html" aria-current="page">Home <span aria-hidden="true">→</span></a>
-      <a href="about.html">About <span aria-hidden="true">→</span></a>
-      <a href="skills.html">Skills <span aria-hidden="true">→</span></a>
       <a href="projects.html">Projects <span aria-hidden="true">→</span></a>
+      <a href="about.html">About <span aria-hidden="true">→</span></a>
       <a href="certificates.html">Certificates <span aria-hidden="true">→</span></a>
+      <a href="skills.html">Skills <span aria-hidden="true">→</span></a>
       <a href="journey.html">Journey <span aria-hidden="true">→</span></a>
       <a href="contact.html">Contact <span aria-hidden="true">→</span></a>
     </div>
   </nav>
 </header>
 
-<main id="main" class="page">
+<main id="main" class="page home">
   <div class="frame">
 
-    <p class="page-label">01 — Home</p>
-    <h1 class="page-title">Command deck</h1>
-
-    <div class="deck home-deck">
-
-      <aside class="panel profile" aria-label="Identity panel" data-reveal>
-        <div class="profile__avatar" aria-hidden="true">AP</div>
-        <h2 class="profile__name">Arka Patra</h2>
-        <p class="profile__role">UI/UX developer · Cybersecurity student</p>
-        <p class="profile__place">West Bengal, India</p>
-
-        <div class="profile__stats" aria-label="Portfolio at a glance">
-          <div class="profile__stat">
-            <b data-count="8" data-pad="2">08</b>
-            <span>Builds</span>
-          </div>
-          <div class="profile__stat">
-            <b data-count="10" data-pad="2">10</b>
-            <span>Certificates</span>
-          </div>
-          <div class="profile__stat">
-            <b data-count="1" data-pad="2">01</b>
-            <span>Internship</span>
-          </div>
+    <section class="hero" aria-labelledby="heroTitle">
+      <div class="hero__copy" data-reveal>
+        <h1 class="hero__title" id="heroTitle">Interfaces that are easy to use and hard to break.</h1>
+        <p class="hero__lead">I’m a UI/UX developer and cybersecurity student in West Bengal, India. I build clear, fast web tools and test them like an attacker would.</p>
+        <div class="hero__actions">
+          <a class="btn btn--solid btn--lg" href="projects.html">View projects <span class="arrow" aria-hidden="true">→</span></a>
+          <a class="btn btn--lg" href="contact.html">Send a message</a>
         </div>
-
-        <div class="profile__links">
-          <a class="btn btn--ghost btn--sm" href="https://github.com/arkap1502" target="_blank" rel="noopener">GitHub ↗</a>
-          <a class="btn btn--ghost btn--sm" href="https://www.linkedin.com/in/arka-patra-579110422/" target="_blank" rel="noopener">LinkedIn ↗</a>
-        </div>
-      </aside>
-
-      <section class="panel monitor" aria-label="Live threat monitor" data-reveal style="--delay:60ms">
-        <div class="monitor__head">
-          <span class="mono-label">Live threat monitor</span>
-          <span class="live-dot">Live</span>
-        </div>
-
-        <div class="radar" aria-hidden="true">
-          <span class="radar__ring"></span>
-          <span class="radar__ellipse radar__ellipse--v"></span>
-          <span class="radar__ellipse radar__ellipse--h"></span>
-          <span class="radar__core"></span>
-          <span class="radar__sweep"></span>
-          <span class="radar__dot"></span>
-        </div>
-
-        <div class="monitor__feed" aria-live="off">
-          <div class="feed-row"><span>Phishing URL blocked</span><time>02:14</time></div>
-          <div class="feed-row"><span>Fake document flagged</span><time>02:09</time></div>
-        </div>
-      </section>
-
-      <div class="home-side">
-        <section class="panel home-side__panel" aria-label="Terminal" data-reveal style="--delay:100ms">
-          <span class="mono-label">Terminal</span>
-          <div class="term">
-            <p><span class="term__prompt">$</span> whoami</p>
-            <p><span class="term__prompt">&gt;</span> arka · ui/ux + security</p>
-            <p><span class="term__prompt">$</span> scan --url link</p>
-            <p><span class="term__prompt">[!]</span> 3 threats flagged</p>
-          </div>
-        </section>
-
-        <section class="panel home-side__panel mission" aria-label="Active mission" data-reveal style="--delay:140ms">
-          <span class="mono-label">Active mission</span>
-          <h2 class="mission__name">URL Threat Scanner</h2>
-          <p class="mission__text">Paste a link and get a clear risk verdict with a mission report.</p>
-          <div class="mission__bar" role="img" aria-label="Mission progress: 82 percent">
-            <div class="mission__fill"></div>
-          </div>
-          <p class="mission__meta">Live · 8 signals</p>
-        </section>
+        <p class="hero__note">Open to work · West Bengal, IN</p>
       </div>
 
-    </div>
+      <div class="hero__art" aria-label="Identity, skill levels and terminal windows" data-reveal style="--delay:90ms">
+
+        <article class="win win--identity" data-drag>
+          <div class="win__bar" data-drag-handle>
+            <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="win__title">Identity</span>
+            <span class="win__grip" aria-hidden="true">⋮⋮</span>
+          </div>
+          <div class="win__body">
+            <dl class="meta-list">
+              <div><dt>Role</dt><dd>UI/UX developer</dd></div>
+              <div><dt>Focus</dt><dd>Web security</dd></div>
+              <div><dt>Location</dt><dd>West Bengal, IN</dd></div>
+              <div><dt>Status</dt><dd class="is-open">Open to work</dd></div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="win win--skills" data-drag>
+          <div class="win__bar" data-drag-handle>
+            <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="win__title">Skill levels</span>
+            <span class="win__grip" aria-hidden="true">⋮⋮</span>
+          </div>
+          <div class="win__body">
+            <div class="level-list">
+              <div class="level"><span>Front-end</span><b>90%</b><i style="--pct:90%" aria-hidden="true"></i></div>
+              <div class="level"><span>Web security</span><b>75%</b><i style="--pct:75%" aria-hidden="true"></i></div>
+              <div class="level"><span>Python tooling</span><b>70%</b><i style="--pct:70%" aria-hidden="true"></i></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="win win--terminal" data-drag>
+          <div class="win__bar" data-drag-handle>
+            <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="win__title">Terminal</span>
+            <span class="win__grip" aria-hidden="true">⋮⋮</span>
+          </div>
+          <div class="win__body">
+            <div class="term">
+              <p><span class="term__prompt">$</span> whoami</p>
+              <p>arkap1502</p>
+              <p><span class="term__prompt">$</span> scan --url example.com</p>
+              <p><span class="term__prompt">[!]</span> 3 threats flagged<span class="cursor" aria-hidden="true"></span></p>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="home-feature-grid" aria-label="Selected project and main credential">
+
+      <article class="panel feature-card" data-reveal>
+        <div class="feature-card__top">
+          <span class="eyebrow">Selected project</span>
+          <span class="chip chip--sm chip--accent">Security</span>
+        </div>
+        <h2><a href="projects.html#project-url">URL Threat Scanner</a></h2>
+        <p>Checks a link for risky patterns before you open it — lookalike domains, phishing keywords and weak headers, scored into one plain-language verdict.</p>
+        <div class="feature-card__foot">
+          <a class="btn btn--solid btn--sm" href="projects.html#project-url">View build <span class="arrow" aria-hidden="true">→</span></a>
+          <div class="feature-links">
+            <a href="https://arkap1502.github.io/URL-Scanner/" target="_blank" rel="noopener">Live demo ↗</a>
+            <a href="https://github.com/arkap1502/URL-Scanner" target="_blank" rel="noopener">Source ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel feature-card" data-reveal style="--delay:80ms">
+        <div class="feature-card__top">
+          <span class="eyebrow">Main credential</span>
+          <span class="live-dot">Verified</span>
+        </div>
+        <div class="cert-mini">
+          <a class="cert-mini__preview" href="assets/Thiranex_Certificate_Arka_Patra_THX-AUG0426-563.pdf" target="_blank" rel="noopener" aria-label="Open the Thiranex internship certificate PDF">
+            <img src="assets/cert-thiranex-preview.png" alt="Thiranex certificate of achievement awarded to Arka Patra for a cyber security internship" width="1287" height="910" loading="lazy" decoding="async">
+          </a>
+          <div class="cert-mini__copy">
+            <h2>Thiranex Internship</h2>
+            <p>Cyber Security · 04 Aug — 03 Sept 2026</p>
+            <span class="cert-mini__id">ID THX-AUG0426-563</span>
+            <div class="cert-mini__actions">
+              <a class="btn btn--sm" href="assets/Thiranex_Certificate_Arka_Patra_THX-AUG0426-563.pdf" target="_blank" rel="noopener">Open PDF ↗</a>
+              <a class="btn btn--sm btn--ghost" href="certificates.html">Vault</a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </section>
+
+    <p class="home-hint">Windows can be dragged by their title bar · the toggle at top right switches light and dark</p>
 
   </div>
 </main>
 
 <footer class="site-foot">
   <div class="frame foot">
-    <span class="foot__note">Arka Patra © 2026 · <b>Crimson deck</b></span>
+    <span class="foot__note">Arka Patra © 2026 · <b>Glass deck</b></span>
     <span>System secured. Always learning. Always building.</span>
     <div class="socials">
       <a class="social-link" href="https://github.com/arkap1502" target="_blank" rel="noopener" aria-label="GitHub">GH</a>
@@ -150,6 +181,6 @@
   </div>
 </footer>
 
-<script src="assets/site.js?v=27"></script>
+<script src="assets/site.js?v=29"></script>
 </body>
 </html>
