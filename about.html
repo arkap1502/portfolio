@@ -10,16 +10,14 @@
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#05070c">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Carlito:wght@400;700&amp;family=Courier+Prime:wght@400;700&amp;display=swap" rel="stylesheet">
+<link rel="preload" href="assets/fonts/carlito-400.woff2" as="font" type="font/woff2" crossorigin>
 <script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('arka-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;}catch(e){}</script>
-<link rel="stylesheet" href="assets/css/core.css?v=45">
-<link rel="stylesheet" href="assets/css/entry-home.css?v=45">
-<link rel="stylesheet" href="assets/css/about-skills.css?v=45">
-<link rel="stylesheet" href="assets/css/projects-certs.css?v=45">
-<link rel="stylesheet" href="assets/css/journey-contact.css?v=45">
-<link rel="stylesheet" href="assets/css/responsive.css?v=45">
+<link rel="stylesheet" href="assets/css/core.css?v=46">
+<link rel="stylesheet" href="assets/css/entry-home.css?v=46">
+<link rel="stylesheet" href="assets/css/about-skills.css?v=46">
+<link rel="stylesheet" href="assets/css/projects-certs.css?v=46">
+<link rel="stylesheet" href="assets/css/journey-contact.css?v=46">
+<link rel="stylesheet" href="assets/css/responsive.css?v=46">
 </head>
 <body>
 
@@ -66,7 +64,7 @@
       <article class="panel about-card" data-reveal>
         <div class="about-card__top">
           <figure class="about-portrait">
-            <img src="assets/arka-patra.jpg" alt="Portrait of Arka Patra" width="560" height="560" decoding="async">
+            <img src="assets/arka-patra.webp" alt="Portrait of Arka Patra" width="560" height="560" fetchpriority="high" decoding="async">
             <figcaption><i class="about-portrait__dot" aria-hidden="true"></i>West Bengal <span class="about-portrait__country">· India</span></figcaption>
           </figure>
           <div class="about-card__intro">
@@ -280,6 +278,6 @@
   </div>
 </footer>
 
-<script src="assets/site.js?v=30"></script>
+<script src="assets/site.js?v=31"></script>
 </body>
 </html>

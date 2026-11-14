@@ -72,8 +72,14 @@
   }
 
   var prefetched = Object.create(null);
+  var saveData = false;
+  try {
+    var connection = navigator.connection;
+    saveData = Boolean(connection && (connection.saveData || /(^|-)2g$/.test(connection.effectiveType || '')));
+  } catch (error) {}
 
   function prefetch(link) {
+    if (saveData) return;
     if (!isInternalPage(link) || prefetched[link.href]) return;
     prefetched[link.href] = true;
 
@@ -89,6 +95,8 @@
     return target && target.closest ? target.closest('a') : null;
   }
 
+  /* Warm a page only when the pointer or keyboard focus reaches its link.
+     Bulk-prefetching every nav target on load costs more than it saves. */
   document.addEventListener('pointerover', function (event) {
     prefetch(linkOf(event));
   }, { passive: true });
@@ -96,16 +104,6 @@
   document.addEventListener('focusin', function (event) {
     prefetch(linkOf(event));
   });
-
-  function prefetchNavigation() {
-    document.querySelectorAll('.nav-links a, .mobile-menu a, .site-foot a').forEach(prefetch);
-  }
-
-  if ('requestIdleCallback' in window) {
-    window.requestIdleCallback(prefetchNavigation, { timeout: 2500 });
-  } else {
-    window.setTimeout(prefetchNavigation, 1500);
-  }
 
   /* -----------------------------------------------------------------------
      Page wipe
@@ -699,7 +697,7 @@
 
       boot.classList.add('is-done');
       document.body.classList.remove('is-booting');
-      window.setTimeout(function () { boot.hidden = true; }, 480);
+      window.setTimeout(function () { boot.hidden = true; }, 340);
     }
 
     var alreadyBooted = false;
@@ -715,7 +713,7 @@
           if (bootFill) bootFill.style.width = '100%';
         });
       });
-      bootTimer = window.setTimeout(finishBoot, 2050);
+      bootTimer = window.setTimeout(finishBoot, 1300);
     }
 
     if (bootSkip) bootSkip.addEventListener('click', finishBoot);
@@ -740,7 +738,7 @@
             if (bootFill) bootFill.style.width = '100%';
           });
         });
-        bootTimer = window.setTimeout(finishBoot, 2050);
+        bootTimer = window.setTimeout(finishBoot, 1300);
       });
     }
   }
