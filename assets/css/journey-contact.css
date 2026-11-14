@@ -1,5 +1,5 @@
 /* ==========================================================================
-   JOURNEY + CONTACT — glass deck
+   JOURNEY (inside About) + CONTACT — glass deck
    ========================================================================== */
 
 /* 01. Journey — five ascending glass steps -------------------------------- */
@@ -196,9 +196,9 @@ a.contact-info__item .contact-info__value:hover { color: var(--accent); }
 }
 .form-status.is-error { color: var(--red); }
 
-@media (max-width: 980px) {
+@media (max-width: 1080px) {
   .journey-deck {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     align-items: stretch;
     gap: 12px;
     min-height: 0;
@@ -208,7 +208,18 @@ a.contact-info__item .contact-info__value:hover { color: var(--accent); }
   .level-card--3,
   .level-card--4,
   .level-card--5 { height: auto; min-height: 0; }
+  .level-card--5 { grid-column: 1 / -1; }
   .level-go { margin-top: 16px; }
+}
+
+@media (max-width: 980px) {
+  .journey-deck {
+    grid-template-columns: 1fr;
+    align-items: stretch;
+    gap: 12px;
+    min-height: 0;
+  }
+  .level-card--5 { grid-column: auto; }
 
   .contact-deck { grid-template-columns: 1fr; }
 }

@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About — Arka Patra</title>
-<meta name="description" content="About Arka Patra — UI/UX developer and B.Sc Cyber Security student at GNIT, Thiranex intern and builder of practical security tools.">
+<meta name="description" content="About Arka Patra — UI/UX developer and B.Sc Cyber Security student at GNIT, Thiranex intern and builder of practical security tools, with the five-level cybersecurity journey from fundamentals to AI-powered security.">
 <meta property="og:title" content="About — Arka Patra">
-<meta property="og:description" content="Learning security by building it. A UI/UX developer and cybersecurity student from West Bengal.">
+<meta property="og:description" content="Learning security by building it. The background and five-level journey of a UI/UX developer and cybersecurity student from West Bengal.">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#05070c">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -14,12 +14,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Carlito:wght@400;700&amp;family=Courier+Prime:wght@400;700&amp;display=swap" rel="stylesheet">
 <script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('arka-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;}catch(e){}</script>
-<link rel="stylesheet" href="assets/css/core.css?v=39">
-<link rel="stylesheet" href="assets/css/entry-home.css?v=39">
-<link rel="stylesheet" href="assets/css/about-skills.css?v=39">
-<link rel="stylesheet" href="assets/css/projects-certs.css?v=39">
-<link rel="stylesheet" href="assets/css/journey-contact.css?v=39">
-<link rel="stylesheet" href="assets/css/responsive.css?v=39">
+<link rel="stylesheet" href="assets/css/core.css?v=41">
+<link rel="stylesheet" href="assets/css/entry-home.css?v=41">
+<link rel="stylesheet" href="assets/css/about-skills.css?v=41">
+<link rel="stylesheet" href="assets/css/projects-certs.css?v=41">
+<link rel="stylesheet" href="assets/css/journey-contact.css?v=41">
+<link rel="stylesheet" href="assets/css/responsive.css?v=41">
 </head>
 <body>
 
@@ -34,7 +34,6 @@
       <a href="about.html" aria-current="page">About</a>
       <a href="certificates.html">Certificates</a>
       <a href="skills.html">Skills</a>
-      <a href="journey.html">Journey</a>
       <a href="contact.html">Contact</a>
     </nav>
     <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to light mode" aria-pressed="false" title="Switch to light mode">
@@ -51,7 +50,6 @@
       <a href="about.html" aria-current="page">About <span aria-hidden="true">→</span></a>
       <a href="certificates.html">Certificates <span aria-hidden="true">→</span></a>
       <a href="skills.html">Skills <span aria-hidden="true">→</span></a>
-      <a href="journey.html">Journey <span aria-hidden="true">→</span></a>
       <a href="contact.html">Contact <span aria-hidden="true">→</span></a>
     </div>
   </nav>
@@ -62,7 +60,7 @@
 
     <header class="page-head">
       <h1 class="page-title">About</h1>
-      <p class="page-sub">Who I am and how I work.</p>
+      <p class="page-sub">Who I am, how I work and how I got here.</p>
     </header>
 
     <div class="about-deck">
@@ -79,7 +77,7 @@
         </div>
       </article>
 
-      <article class="panel about-card about-record" data-reveal style="--delay:80ms">
+      <article class="panel about-card about-record" id="education" data-reveal style="--delay:80ms">
         <h2>Education and experience</h2>
         <div class="record-list">
           <div class="record">
@@ -100,6 +98,73 @@
       </article>
 
     </div>
+
+    <section class="about-journey" id="journey" aria-labelledby="journeyTitle">
+
+      <header class="about-journey__head" data-reveal>
+        <span class="mono-label mono-label--accent">Journey</span>
+        <h2 id="journeyTitle">Five levels, one direction.</h2>
+        <p>From networking fundamentals to AI-powered security. Every level points to work you can open.</p>
+      </header>
+
+      <div class="journey-deck" data-reveal style="--delay:60ms">
+
+        <a class="level-card level-card--1" href="#education">
+          <span class="level-num">Level 01</span>
+          <h3 class="level-title">Fundamentals</h3>
+          <p class="level-desc">Core security concepts and safe habits.</p>
+          <span class="level-go">Education record <i aria-hidden="true">→</i></span>
+        </a>
+
+        <a class="level-card level-card--2" href="certificates.html">
+          <span class="level-num">Level 02</span>
+          <h3 class="level-title">Networks &amp; Linux</h3>
+          <p class="level-desc">How systems talk and how to read them.</p>
+          <span class="level-go">Open the record <i aria-hidden="true">→</i></span>
+        </a>
+
+        <a class="level-card level-card--3" href="projects.html#project-prototype">
+          <span class="level-num">Level 03</span>
+          <h3 class="level-title">Web security</h3>
+          <p class="level-desc">Attacks, defences and hardened builds.</p>
+          <span class="level-go">Inspect the build <i aria-hidden="true">→</i></span>
+        </a>
+
+        <a class="level-card level-card--4" href="projects.html">
+          <span class="level-num">Level 04</span>
+          <h3 class="level-title">Builds &amp; tools</h3>
+          <p class="level-desc">Scanners, inspectors and utilities.</p>
+          <span class="level-go">Open the archive <i aria-hidden="true">→</i></span>
+        </a>
+
+        <a class="level-card level-card--5" href="projects.html#project-prompt">
+          <span class="level-num">Level 05</span>
+          <h3 class="level-title">AI-powered security</h3>
+          <p class="level-desc">Models that detect and explain threats.</p>
+          <span class="level-go">See AI security work <i aria-hidden="true">→</i></span>
+        </a>
+
+      </div>
+
+      <div class="journey-legend">
+        <span><i aria-hidden="true"></i>Fundamentals</span>
+        <span><i aria-hidden="true"></i>Building</span>
+        <span><i aria-hidden="true"></i>Current level</span>
+        <span>One direction · always climbing</span>
+      </div>
+
+      <aside class="panel deck-note about-journey__note" data-reveal>
+        <div>
+          <span class="mono-label mono-label--accent">Next checkpoint</span>
+          <h2>Level five is already in progress.</h2>
+          <p>AI-assisted security, document forgery detection and the next generation of practical threat tools.</p>
+        </div>
+        <div class="deck-note__actions">
+          <a class="btn" href="https://github.com/arkap1502" target="_blank" rel="noopener">Follow on GitHub ↗</a>
+        </div>
+      </aside>
+
+    </section>
 
     <aside class="panel about-note" aria-labelledby="aboutBrief" data-reveal>
       <div>
@@ -128,6 +193,6 @@
   </div>
 </footer>
 
-<script src="assets/site.js?v=29"></script>
+<script src="assets/site.js?v=30"></script>
 </body>
 </html>

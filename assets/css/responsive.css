@@ -93,6 +93,9 @@
   .about-card h2 { font-size: 26px; }
   .about-record { padding: 24px; }
   .about-note { padding: 22px; }
+  .about-journey { margin-top: 34px; }
+  .about-journey__head h2 { font-size: 27px; }
+  .about-journey__note { padding: 22px; }
   .record-list { gap: 22px; margin-top: 24px; }
 
   .skill-module { padding: 22px; }

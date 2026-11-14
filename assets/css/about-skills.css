@@ -86,6 +86,28 @@
 }
 .about-note__actions { display: flex; justify-content: flex-end; gap: 10px; flex-wrap: wrap; }
 
+/* The five-level journey now lives inside About, below the profile cards. */
+.about-journey { margin-top: 46px; }
+.about-journey__head { max-width: 720px; }
+.about-journey__head h2 {
+  margin-top: 8px;
+  font-size: clamp(27px, 2.8vw, 36px);
+  line-height: 1.08;
+  font-weight: 700;
+  letter-spacing: -.025em;
+}
+.about-journey__head p {
+  max-width: 58ch;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 15.5px;
+  line-height: 1.6;
+}
+.about-journey .journey-deck { margin-top: 24px; }
+.about-journey__note { margin-top: 22px; }
+.about-journey__note h2 { font-size: 23px; }
+.about-journey .journey-legend { margin-top: 18px; }
+
 /* 02. Skills -------------------------------------------------------------- */
 
 .skills-deck {

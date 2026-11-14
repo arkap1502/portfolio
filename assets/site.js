@@ -199,7 +199,7 @@
   }
 
   /* -----------------------------------------------------------------------
-     Scroll reveals + journey line
+     Scroll reveals
      ----------------------------------------------------------------------- */
 
   var revealItems = document.querySelectorAll('[data-reveal]');
