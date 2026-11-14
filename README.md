@@ -6,7 +6,7 @@ The interface follows the **Secure HUD** design language from the supplied *Port
 
 ## Pages
 
-- [Entry](index.html) — animated cover with a full-screen code-rain canvas, boot sequence, typewriter name, orbit rings, laptop and phone
+- [Entry](index.html) — animated cover with a boot sequence, typewriter name, orbit rings, laptop and phone
 - [Home](dashboard.html) — command deck with identity panel, live threat monitor, drag-to-rotate globe, terminal, active mission, counters and proof cards
 - [About](about.html) — flippable digital identity card, focus grid, education and experience
 - [Skills](skills.html) — three skill modules; every badge maps to real projects
@@ -65,7 +65,7 @@ assets/css/about-skills.css
 assets/css/projects-certs.css
 assets/css/journey-contact.css
 assets/css/responsive.css
-assets/site.js           Navigation, boot, code rain, wipe, reveals, tilt, filters,
+assets/site.js           Navigation, boot, wipe, reveals, tilt, filters,
                          dialogs, skill readout, card flip, ticker, counters and form
 assets/globe.js          Interactive home-page globe: rotation, land mask, arcs and location marker
 assets/world-land-110m.json
