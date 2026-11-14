@@ -70,6 +70,50 @@
   }
 
   /* -----------------------------------------------------------------------
+     Page wipe
+     The curtain rises over the outgoing page and navigation starts as soon
+     as it is covered. Because the next page is normally prefetched, this
+     costs one short transition instead of a full network wait.
+     ----------------------------------------------------------------------- */
+
+  var wipe = document.createElement('div');
+  wipe.className = 'page-wipe';
+  wipe.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(wipe);
+
+  var wipeDuration = 180;
+  var leaving = false;
+
+  document.addEventListener('click', function (event) {
+    if (leaving || reducedMotion) return;
+    if (event.defaultPrevented) return;
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+
+    var link = linkOf(event);
+    if (!isInternalPage(link)) return;
+
+    leaving = true;
+    event.preventDefault();
+    wipe.classList.add('is-active');
+
+    window.setTimeout(function () {
+      window.location.href = link.href;
+
+      /* If the navigation never commits, put the page back rather than
+         leaving the curtain over content the visitor can still reach. */
+      window.setTimeout(function () {
+        leaving = false;
+        wipe.classList.remove('is-active');
+      }, 4000);
+    }, wipeDuration);
+  });
+
+  window.addEventListener('pageshow', function (event) {
+    leaving = false;
+    if (event.persisted) wipe.classList.remove('is-active');
+  });
+
+  /* -----------------------------------------------------------------------
      Mobile navigation
      ----------------------------------------------------------------------- */
 

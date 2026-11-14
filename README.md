@@ -28,7 +28,8 @@ The interface follows the **Secure HUD** design language from the supplied *Port
 
 - Boot sequence on the entry cover, playable once per tab and skippable.
 - Full-screen falling-code canvas behind the entry cover, paused while the tab is hidden and disabled for reduced motion.
-- Navigation acceleration: internal pages are prefetched on hover, focus and idle, and links navigate natively with no artificial delay.
+- Page-transition wipe for internal navigation, a short 180 ms curtain that hands over to the prefetched page; skipped when reduced motion is requested.
+- Navigation acceleration: internal pages are prefetched on hover, focus and idle, so a click paints from cache instead of waiting on the network.
 - Sticky navigation with a collapsible mobile menu (Escape closes it).
 - Scroll reveals, a 3D pointer tilt on the About identity stack, and animated HUD counters.
 - Rotating live-threat ticker on the home page.
