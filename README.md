@@ -2,12 +2,11 @@
 
 A static portfolio for Arka Patra, a cybersecurity student and developer from Kolkata, India. Plain HTML, CSS and JavaScript — no frameworks, no build step.
 
-The interface follows the page-by-page design in `DESIGN.md`: a cream editorial landing page, a pine-split Home page, brutalist Work / About / Certificates pages and a pine-and-lime Contact page. Each page has one fixed look — there is no dark mode and no theme switch.
+The interface follows the page-by-page design in `DESIGN.md`: a pine home page, brutalist Work / About / Certificates pages and a pine-and-lime Contact page. Each page has one fixed look — there is no dark mode and no theme switch.
 
 ## Pages
 
-- [Landing](index.html) — cream editorial entry page: Georgia heading, arch portrait, orange builds badge
-- [Home](home.html) — pine split hero, profile stats, selected work, the certificate portion (internship + Deloitte) and an about/contact pair
+- [Home](index.html) — pine hero with portrait, builds badge and stats, selected work, the certificate portion (internship + Deloitte) and an about/contact pair
 - [Work](projects.html) — featured Website Security Copilot and the three-row project ledger
 - [About](about.html) — hero, marquee strip, profile and record, the working skills matrix with related-builds readout, technical skills ledger and the five-level journey
 - [Certificates](certificates.html) — the Thiranex internship certificate first, the Deloitte cyber job simulation second, then eight more credentials
@@ -15,10 +14,9 @@ The interface follows the page-by-page design in `DESIGN.md`: a cream editorial 
 
 ## Design system
 
-- **Landing:** cream `#F2EEE6`, ink `#141414`, orange `#C2410C`; Georgia heading, Arial body.
 - **Home / Contact:** pine `#0F2A22` and `#1E3A30`, clay `#D98B5F` on Home, lime `#D5F87A` on Contact.
 - **Work / About / Certificates:** stone `#E4E2DD`, black `#0B0B0B` nav band and ledger strips.
-- **Type:** Arial for headings and body, Courier New for wordmark, labels and ledger metadata, Georgia for the landing heading, Calibri and Cambria on Contact. System fonts only.
+- **Type:** Arial for headings and body, Courier New for wordmark, labels and ledger metadata, Georgia for display headings, Calibri and Cambria on Contact. System fonts only.
 - Capsule buttons, square-cornered panels and ledgers, no shadows, gradients or glass. One stylesheet (`assets/css/site.css`) and one deferred script (`assets/site.js`).
 
 ## Run locally
@@ -38,8 +36,7 @@ Then open <http://localhost:8000>.
 ## Project structure
 
 ```
-index.html               Landing (cream)
-home.html                Home (pine split)
+index.html               Home (pine hero, work, certificates, about/contact)
 projects.html            Work
 about.html               Profile, skills matrix, technical ledger, journey
 certificates.html        Internship and Deloitte credentials plus the vault
