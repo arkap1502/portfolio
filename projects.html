@@ -6,13 +6,13 @@
 <title>Projects — Arka Patra</title>
 <meta name="description" content="Security-focused builds by Arka Patra — website scanning, phishing detection, password tools, document forensics and QR code safety.">
 <meta property="og:title" content="Projects — Arka Patra">
-<meta property="og:description" content="Eight security builds with source and live demos. Filter by Security, AI or Web.">
+<meta property="og:description" content="Six security builds with source and live demos. Filter by Security, AI or Web.">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#05070c">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/carlito-400.woff2" as="font" type="font/woff2" crossorigin>
 <script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('arka-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;}catch(e){}</script>
-<link rel="stylesheet" href="assets/css/core.css?v=56">
+<link rel="stylesheet" href="assets/css/core.css?v=57">
 <link rel="stylesheet" href="assets/css/entry-home.css?v=54">
 <link rel="stylesheet" href="assets/css/about-skills.css?v=54">
 <link rel="stylesheet" href="assets/css/projects-certs.css?v=54">
@@ -30,8 +30,8 @@
       <a href="dashboard.html">Home</a>
       <a href="projects.html" aria-current="page">Projects</a>
       <a href="about.html">About</a>
-      <a href="certificates.html">Certificates</a>
       <a href="contact.html">Contact</a>
+      <a class="nav-cv" href="assets/Arka_Patra_CV2.pdf" download>Download CV <span aria-hidden="true">&darr;</span></a>
     </nav>
     <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to light mode" aria-pressed="false" title="Switch to light mode">
       <span class="theme-toggle__knob"></span>
@@ -45,8 +45,8 @@
       <a href="dashboard.html">Home <span aria-hidden="true">→</span></a>
       <a href="projects.html" aria-current="page">Projects <span aria-hidden="true">→</span></a>
       <a href="about.html">About <span aria-hidden="true">→</span></a>
-      <a href="certificates.html">Certificates <span aria-hidden="true">→</span></a>
       <a href="contact.html">Contact <span aria-hidden="true">→</span></a>
+      <a href="assets/Arka_Patra_CV2.pdf" download>Download CV <span aria-hidden="true">&darr;</span></a>
     </div>
   </nav>
 </header>
@@ -60,11 +60,11 @@
     </header>
 
     <div class="project-filters" role="group" aria-label="Filter projects">
-      <button class="filter-btn" type="button" data-filter="all" aria-pressed="true">All <span>08</span></button>
-      <button class="filter-btn" type="button" data-filter="security" aria-pressed="false">Security <span>04</span></button>
+      <button class="filter-btn" type="button" data-filter="all" aria-pressed="true">All <span>06</span></button>
+      <button class="filter-btn" type="button" data-filter="security" aria-pressed="false">Security <span>02</span></button>
       <button class="filter-btn" type="button" data-filter="ai" aria-pressed="false">AI <span>02</span></button>
       <button class="filter-btn" type="button" data-filter="web" aria-pressed="false">Web <span>02</span></button>
-      <span class="filter-count" id="filterCount" aria-live="polite">08 builds</span>
+      <span class="filter-count" id="filterCount" aria-live="polite">06 builds</span>
     </div>
 
     <div class="projects-deck" id="projectGrid">
@@ -85,42 +85,10 @@
         </div>
       </article>
 
-      <article class="project-card" id="project-url" data-category="security" data-reveal style="--delay:40ms">
-        <div class="project-card__top">
-          <span class="project-card__type">Security</span>
-          <span class="project-card__index">02</span>
-        </div>
-        <h2 class="project-card__title">URL Threat Scanner</h2>
-        <p class="project-card__desc">Checks a link for risky patterns before you open it, then scores the verdict.</p>
-        <div class="project-card__foot">
-          <button class="project-open" type="button" data-open-project="url" aria-haspopup="dialog">Report</button>
-          <div class="project-card__links">
-            <a class="project-card__link" href="https://arkap1502.github.io/URL-Scanner/" target="_blank" rel="noopener">Live</a>
-            <a class="project-card__link" href="https://github.com/arkap1502/URL-Scanner" target="_blank" rel="noopener">Code</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="project-card" id="project-altron" data-category="security" data-reveal style="--delay:80ms">
-        <div class="project-card__top">
-          <span class="project-card__type">Security</span>
-          <span class="project-card__index">03</span>
-        </div>
-        <h2 class="project-card__title">Altron Password Inspector</h2>
-        <p class="project-card__desc">Rates password strength, explains fixes and generates safer passwords locally.</p>
-        <div class="project-card__foot">
-          <button class="project-open" type="button" data-open-project="altron" aria-haspopup="dialog">Report</button>
-          <div class="project-card__links">
-            <a class="project-card__link" href="https://arkap1502.github.io/password-making/" target="_blank" rel="noopener">Live</a>
-            <a class="project-card__link" href="https://github.com/arkap1502/password-making" target="_blank" rel="noopener">Code</a>
-          </div>
-        </div>
-      </article>
-
       <article class="project-card" id="project-nexvault" data-category="security" data-reveal style="--delay:120ms">
         <div class="project-card__top">
           <span class="project-card__type">Security</span>
-          <span class="project-card__index">04</span>
+          <span class="project-card__index">02</span>
         </div>
         <h2 class="project-card__title">NexVault</h2>
         <p class="project-card__desc">A local vault for sensitive notes, gated behind authentication and access control.</p>
@@ -135,7 +103,7 @@
       <article class="project-card" id="project-prompt" data-category="ai" data-reveal>
         <div class="project-card__top">
           <span class="project-card__type">AI</span>
-          <span class="project-card__index">05</span>
+          <span class="project-card__index">03</span>
         </div>
         <h2 class="project-card__title">Hidden-Prompt Scanner</h2>
         <p class="project-card__desc">Finds hidden instructions, zero-width text and injection phrases in documents.</p>
@@ -151,7 +119,7 @@
       <article class="project-card" id="project-humanize" data-category="ai" data-reveal style="--delay:40ms">
         <div class="project-card__top">
           <span class="project-card__type">AI</span>
-          <span class="project-card__index">06</span>
+          <span class="project-card__index">04</span>
         </div>
         <h2 class="project-card__title">Humanize AI</h2>
         <p class="project-card__desc">Rewrites stiff machine text so it reads naturally, with a live word diff.</p>
@@ -167,7 +135,7 @@
       <article class="project-card" id="project-prototype" data-category="web" data-reveal style="--delay:80ms">
         <div class="project-card__top">
           <span class="project-card__type">Web</span>
-          <span class="project-card__index">07</span>
+          <span class="project-card__index">05</span>
         </div>
         <h2 class="project-card__title">Prototype Safety Check</h2>
         <p class="project-card__desc">Reviews a prototype for passive security issues — no exploitation involved.</p>
@@ -183,7 +151,7 @@
       <article class="project-card" id="project-quishing" data-category="web" data-reveal style="--delay:120ms">
         <div class="project-card__top">
           <span class="project-card__type">Web</span>
-          <span class="project-card__index">08</span>
+          <span class="project-card__index">06</span>
         </div>
         <h2 class="project-card__title">Quishing Guard</h2>
         <p class="project-card__desc">Scans a QR code and scores the payload locally before anything opens.</p>

@@ -329,6 +329,20 @@ strong, b { font-weight: 700; }
   font-weight: 700;
 }
 
+/* CV download sits at the end of the nav, beside Contact. */
+.nav-links .nav-cv {
+  margin-left: 6px;
+  border: 1px solid var(--line-strong);
+  background: var(--chip);
+  color: var(--text);
+  font-weight: 700;
+}
+.nav-links .nav-cv:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
 /* Theme switch — dark puts the knob on the right, as in the deck. */
 .theme-toggle {
   position: relative;
