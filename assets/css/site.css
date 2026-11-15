@@ -178,8 +178,8 @@ button { font: inherit; color: inherit; }
 /* Brutalist nav band */
 .site-head--band { background: var(--black); color: var(--on-dark); }
 .site-head--band .nav { min-height: 99px; padding-top: 0; padding-bottom: 0; }
-.site-head--band .nav-links a { color: var(--on-dark-muted); }
-.site-head--band .nav-links a:hover { color: var(--on-dark); }
+.site-head--band .nav-links a:not(.nav-cv) { color: var(--on-dark-muted); }
+.site-head--band .nav-links a:not(.nav-cv):hover { color: var(--on-dark); }
 .site-head--band .nav-links a[aria-current="page"] {
   color: var(--on-dark);
   text-decoration: underline;
@@ -243,9 +243,8 @@ button { font: inherit; color: inherit; }
 .page-landing { background: var(--cream); color: var(--ink-l); }
 .page-landing .brand,
 .page-landing .nav-cv { color: var(--ink-l); }
-.page-landing .nav-links a { color: var(--text-l-muted); }
-.page-landing .nav-links a:hover,
-.page-landing .nav-cv:hover { color: var(--ink-l); }
+.page-landing .nav-links a:not(.nav-cv) { color: var(--text-l-muted); }
+.page-landing .nav-links a:not(.nav-cv):hover { color: var(--ink-l); }
 .page-landing .nav-cv:hover { background: var(--ink-l); color: var(--cream); }
 
 .landing {
@@ -335,9 +334,9 @@ button { font: inherit; color: inherit; }
 .page-home { background: var(--pine); color: var(--pine-text); }
 .page-home .brand,
 .page-home .nav-cv { color: var(--pine-text); }
-.page-home .nav-links a { color: var(--sage); }
-.page-home .nav-links a:hover,
-.page-home .nav-links a[aria-current="page"] { color: var(--pine-text); }
+.page-home .nav-links a:not(.nav-cv) { color: var(--sage); }
+.page-home .nav-links a:not(.nav-cv):hover,
+.page-home .nav-links a:not(.nav-cv)[aria-current="page"] { color: var(--pine-text); }
 .page-home .nav-cv:hover { background: var(--pine-text); color: var(--pine); }
 
 .home-hero {
@@ -982,9 +981,9 @@ a.readout__build:hover { background: var(--on-dark); color: var(--black); }
 .page-contact { background: var(--pine); color: var(--text-c); }
 .page-contact .brand,
 .page-contact .nav-cv { color: var(--pine-text); }
-.page-contact .nav-links a { color: var(--sage); }
-.page-contact .nav-links a:hover,
-.page-contact .nav-links a[aria-current="page"] { color: var(--pine-text); }
+.page-contact .nav-links a:not(.nav-cv) { color: var(--sage); }
+.page-contact .nav-links a:not(.nav-cv):hover,
+.page-contact .nav-links a:not(.nav-cv)[aria-current="page"] { color: var(--pine-text); }
 .page-contact .nav-cv:hover { background: var(--pine-text); color: var(--pine); }
 
 .contact-grid {
