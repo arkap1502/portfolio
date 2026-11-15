@@ -365,29 +365,6 @@ html.hero-scroll .home-hero__grid {
   object-position: center top;
 }
 
-.home-hero__badge {
-  position: absolute;
-  left: -54px;
-  bottom: 46px;
-  width: 132px;
-  height: 132px;
-  border-radius: 50%;
-  background: var(--clay);
-  color: var(--pine);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  text-align: center;
-}
-.home-hero__badge b { font: 700 24px/1 var(--sans); }
-.home-hero__badge span {
-  font: 700 10px/1 var(--mono);
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-}
-
 .home-hero__stats {
   position: absolute;
   right: 0;
@@ -1280,8 +1257,6 @@ a.readout__build:hover { background: var(--on-dark); color: var(--black); }
   .home-hero__actions { margin-top: 28px; }
   .home-hero__actions .btn,
   .home-hero__actions .btn--outline-cream { width: 100%; }
-  .home-hero__badge { left: -16px; bottom: 66px; width: 108px; height: 108px; }
-  .home-hero__badge b { font-size: 21px; }
   .home-hero__stats { width: 64%; }
 
   .panel-pine { padding: 26px; }
