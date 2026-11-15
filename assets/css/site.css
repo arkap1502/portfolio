@@ -39,12 +39,12 @@
   --text-s: #565654;
   --photo: #BDBAB3;
 
-  /* Type stacks (system fonts only) */
-  --sans: Arial, "Helvetica Neue", Helvetica, sans-serif;
-  --mono: "Courier New", Courier, monospace;
-  --serif: Georgia, "Times New Roman", serif;
-  --calibri: Calibri, Carlito, "Segoe UI", sans-serif;
-  --cambria: Cambria, Caladea, Georgia, serif;
+  /* Type stacks (system fonts only) — all text renders in Times New Roman */
+  --sans: "Times New Roman", Times, serif;
+  --mono: "Times New Roman", Times, serif;
+  --serif: "Times New Roman", Times, serif;
+  --calibri: "Times New Roman", Times, serif;
+  --cambria: "Times New Roman", Times, serif;
 }
 
 /* --------------------------------------------------------------- base ---- */
