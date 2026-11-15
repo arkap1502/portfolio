@@ -31,6 +31,88 @@
     });
   }
 
+  /* ---------------------------------------------------------- hero scroll */
+
+  /* The hero is pinned behind the flow on large screens; its content drifts up
+     and fades as the first section slides over it. Everything is scrubbed by
+     scroll position, so scrolling back up reverses it exactly. */
+
+  var hero = document.querySelector('.home-hero');
+
+  if (hero && head) {
+    var heroInner = hero.querySelector('.home-hero__grid');
+    var flow = document.querySelector('.home-flow');
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var heroHeight = 0;
+    var coverDistance = 0;
+    var queued = false;
+
+    function measureHero() {
+      heroHeight = hero.offsetHeight || window.innerHeight;
+      /* Distance the page scrolls before the next section's sheet reaches the
+         top of the viewport and has fully covered the hero. */
+      coverDistance = flow
+        ? flow.getBoundingClientRect().top + window.scrollY
+        : heroHeight;
+    }
+
+    function paintHero() {
+      queued = false;
+      var max = Math.max(heroHeight, 1);
+      var travel = Math.max(coverDistance, 1);
+      var progress = Math.min(Math.max(window.scrollY, 0) / travel, 1);
+
+      /* The copy stays on screen until the sheet is on its way up, then fades
+         out as it is covered — never leaving an empty stretch of pine. */
+      var fade = Math.min(Math.max((progress - 0.45) / 0.5, 0), 1);
+
+      heroInner.style.transform =
+        'translate3d(0, ' + (-progress * max * 0.3).toFixed(2) + 'px, 0)' +
+        ' scale(' + (1 - progress * 0.035).toFixed(3) + ')';
+      heroInner.style.opacity = (1 - fade).toFixed(3);
+    }
+
+    function queueHero() {
+      /* Background tabs neither fire rAF nor reliably deliver scroll events, so
+         paint straight away there to keep the state truthful on return. */
+      if (document.hidden) {
+        paintHero();
+        return;
+      }
+      if (queued) return;
+      queued = true;
+      window.requestAnimationFrame(paintHero);
+    }
+
+    if (heroInner && !reduced.matches) {
+      document.documentElement.classList.add('hero-scroll');
+      measureHero();
+      paintHero();
+
+      window.addEventListener('scroll', queueHero, { passive: true });
+      window.addEventListener('resize', function () { measureHero(); queueHero(); });
+      window.addEventListener('orientationchange', function () { measureHero(); queueHero(); });
+      document.addEventListener('visibilitychange', function () {
+        if (!document.hidden) { measureHero(); paintHero(); }
+      });
+
+      /* Switching on reduced motion mid-session returns the hero to normal flow. */
+      if (reduced.addEventListener) {
+        reduced.addEventListener('change', function () {
+          if (reduced.matches) {
+            document.documentElement.classList.remove('hero-scroll');
+            heroInner.style.transform = '';
+            heroInner.style.opacity = '';
+          } else {
+            document.documentElement.classList.add('hero-scroll');
+            measureHero();
+            paintHero();
+          }
+        });
+      }
+    }
+  }
+
   /* --------------------------------------------------------- skill readout */
 
   /* Builds that exist on the Work page carry an href, so the readout can link
