@@ -4,342 +4,275 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About — Arka Patra</title>
-<meta name="description" content="About Arka Patra — UI/UX developer and B.Sc Cyber Security student at GNIT, Thiranex intern and builder of practical security tools, with the five-level cybersecurity journey from fundamentals to AI-powered security.">
-<meta property="og:title" content="About — Arka Patra">
-<meta property="og:description" content="Learning security by building it. The background and five-level journey of a UI/UX developer and cybersecurity student from West Bengal.">
-<meta property="og:type" content="website">
-<meta name="theme-color" content="#05070c">
+<meta name="description" content="About Arka Patra — cybersecurity student at GNIT Kolkata. Profile and record, the working skills matrix, the technical stack and the five-level journey.">
+<meta name="theme-color" content="#E4E2DD">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<link rel="preload" href="assets/fonts/carlito-400.woff2" as="font" type="font/woff2" crossorigin>
-<script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('arka-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;}catch(e){}</script>
-<link rel="stylesheet" href="assets/css/core.css?v=57">
-<link rel="stylesheet" href="assets/css/entry-home.css?v=54">
-<link rel="stylesheet" href="assets/css/about-skills.css?v=54">
-<link rel="stylesheet" href="assets/css/projects-certs.css?v=54">
-<link rel="stylesheet" href="assets/css/journey-contact.css?v=54">
-<link rel="stylesheet" href="assets/css/responsive.css?v=55">
+<link rel="stylesheet" href="assets/css/site.css?v=2">
 </head>
-<body>
+<body class="page-brutal">
 
 <a class="skip-link" href="#main">Skip to content</a>
 
-<header class="site-header">
-  <div class="frame nav">
-    <a class="brand" href="dashboard.html" aria-label="Arka Patra — home">Arka Patra</a>
+<header class="site-head site-head--band">
+  <div class="wrap nav">
+    <a class="brand" href="home.html">ARKA PATRA</a>
     <nav class="nav-links" aria-label="Primary">
-      <a href="dashboard.html">Home</a>
-      <a href="projects.html">Projects</a>
+      <a href="projects.html">Work</a>
       <a href="about.html" aria-current="page">About</a>
       <a href="contact.html">Contact</a>
-      <a class="nav-cv" href="assets/Arka_Patra_CV2.pdf" download>Download CV <span aria-hidden="true">&darr;</span></a>
+      <a class="nav-cv" href="assets/Arka_Patra_CV2.pdf" target="_blank" rel="noopener">Resume <span aria-hidden="true">↗</span></a>
     </nav>
-    <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to light mode" aria-pressed="false" title="Switch to light mode">
-      <span class="theme-toggle__knob"></span>
-    </button>
     <button class="nav-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </div>
-  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile" aria-hidden="true">
-    <div class="mobile-menu__inner frame">
-      <a href="dashboard.html">Home <span aria-hidden="true">→</span></a>
-      <a href="projects.html">Projects <span aria-hidden="true">→</span></a>
-      <a href="about.html" aria-current="page">About <span aria-hidden="true">→</span></a>
-      <a href="contact.html">Contact <span aria-hidden="true">→</span></a>
-      <a href="assets/Arka_Patra_CV2.pdf" download>Download CV <span aria-hidden="true">&darr;</span></a>
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
+    <div class="mobile-menu__inner wrap">
+      <a href="projects.html">Work</a>
+      <a href="about.html" aria-current="page">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="assets/Arka_Patra_CV2.pdf" target="_blank" rel="noopener">Resume ↗</a>
     </div>
   </nav>
 </header>
 
-<main id="main" class="page">
-  <div class="frame">
+<main id="main">
 
-    <header class="page-head">
-      <h1 class="page-title">About</h1>
-      <p class="page-sub">Who I am, what I work with and how I got here.</p>
-    </header>
+  <div class="wrap">
+    <section class="about-hero" aria-labelledby="aboutTitle">
+      <div>
+        <h1 id="aboutTitle">Arka<br>Patra</h1>
+        <p class="about-hero__intro">Cybersecurity student and developer building security tools, full-stack apps and AI-assisted systems.</p>
+        <a class="btn btn--solid" href="projects.html">Explore work <span aria-hidden="true">↗</span></a>
+      </div>
+      <figure class="about-hero__figure">
+        <div class="about-hero__photo">
+          <img src="assets/arka-patra.webp" alt="Portrait of Arka Patra" width="386" height="481" fetchpriority="high" decoding="async">
+        </div>
+        <figcaption>Fig. 01 — Arka Patra, GNIT Kolkata</figcaption>
+      </figure>
+    </section>
+  </div>
 
-    <div class="about-deck">
+  <div class="marquee" aria-hidden="true">
+    <p>Secure by design ✦ Build with intent ✦ Ship with care ✦ Secure by design ✦ Build with intent ✦ Ship with care</p>
+  </div>
 
-      <article class="panel about-card" data-reveal>
-        <div class="about-card__top">
-          <figure class="about-portrait">
-            <img src="assets/arka-patra.webp" alt="Portrait of Arka Patra" width="560" height="560" fetchpriority="high" decoding="async">
-            <figcaption><i class="about-portrait__dot" aria-hidden="true"></i>West Bengal <span class="about-portrait__country">· India</span></figcaption>
-          </figure>
-          <div class="about-card__intro">
-            <h2>Arka Patra</h2>
-            <p>I’m a cybersecurity student and security-focused developer. My rule: if a person can’t understand a screen in five seconds, it needs another pass.</p>
-            <p>I design clear interfaces, build them with plain web technology and test them the way an attacker would — so the finished thing is calm to use and hard to break.</p>
+  <div class="wrap">
+
+    <section class="section" id="profile" aria-labelledby="profileTitle">
+      <p class="label section-label">Profile and record</p>
+      <h2 class="section-title" id="profileTitle">A short record.</h2>
+
+      <div class="profile-grid">
+        <div class="profile-grid__bio">
+          <p>I’m a cybersecurity student and developer from Kolkata. My rule: if a person can’t understand a screen in five seconds, it needs another pass. I design clear interfaces, build them with plain web technology and test them the way an attacker would.</p>
+        </div>
+
+        <div class="two-col-ledger">
+          <div class="two-col-ledger__head">
+            <span>Education</span>
+            <span>Record</span>
+          </div>
+          <div class="two-col-ledger__body">
+            <div>
+              <p><strong>B.Sc. Cyber Security</strong><br>GNIT Kolkata<br>2024 — present</p>
+            </div>
+            <div>
+              <ul>
+                <li><strong>Thiranex</strong> — Cyber Security internship, 04 Aug — 03 Sept 2026.</li>
+                <li><strong>Deloitte</strong> — Cyber job simulation, Jun — Jul 2026.</li>
+                <li><strong>Independent builds</strong> — security tools, web apps and applied AI.</li>
+              </ul>
+            </div>
           </div>
         </div>
-        <div class="chip-row">
-          <span class="chip">HTML</span>
-          <span class="chip">CSS</span>
-          <span class="chip">JavaScript</span>
-          <span class="chip">Python</span>
-        </div>
-      </article>
+      </div>
+    </section>
 
-      <article class="panel about-card about-record" id="education" data-reveal style="--delay:80ms">
-        <h2>Education and experience</h2>
-        <div class="record-list">
-          <div class="record">
-            <h3>Cybersecurity studies</h3>
-            <p>B.Sc Cyber Security · Guru Nanak Institute of Technology · 2024 — present</p>
+    <section class="section" id="skills" aria-labelledby="matrixTitle">
+      <p class="label section-label">Skills</p>
+      <h2 class="section-title" id="matrixTitle">A working matrix.</h2>
+      <p class="section-line">Every capability is tied to a build you can open. Select a badge to see the builds that use it.</p>
+
+      <div class="matrix">
+
+        <section class="matrix__col" data-used="urlScanner altron quishing" aria-labelledby="matrixSecurity">
+          <span class="matrix__index" aria-hidden="true">01</span>
+          <h3 id="matrixSecurity">Security</h3>
+          <p class="matrix__sub">Find, test and explain risk.</p>
+          <div class="chip-grid">
+            <button class="chip-btn" type="button" aria-pressed="false" data-skill="Threat detection">Threat detection</button>
+            <button class="chip-btn" type="button" aria-pressed="false" data-skill="Password audit">Password audit</button>
+            <button class="chip-btn" type="button" aria-pressed="false" data-skill="Network recon">Network recon</button>
+            <button class="chip-btn" type="button" aria-pressed="false" data-skill="Phishing analysis">Phishing analysis</button>
+            <button class="chip-btn" type="button" aria-pressed="false" data-skill="URL scanning">URL scanning</button>
+            <button class="chip-btn" type="button" aria-pressed="false" data-skill="Wi-Fi security">Wi-Fi security</button>
           </div>
-          <div class="record">
-            <h3>Thiranex internship</h3>
-            <p>Cyber Security internship · 04 Aug — 03 Sept 2026<br>
-              Certificate <a href="assets/Thiranex_Certificate_Arka_Patra_THX-AUG0426-563.pdf" target="_blank" rel="noopener">THX-AUG0426-563 ↗</a>
-            </p>
-          </div>
-          <div class="record">
-            <h3>Independent builds</h3>
-            <p>Eight tools shipped on GitHub, from URL scanning to QR safety.</p>
-          </div>
-        </div>
-      </article>
-
-    </div>
-
-    <section class="about-skills" id="skills" aria-labelledby="skillsTitle">
-
-      <header class="about-section__head" data-reveal>
-        <span class="mono-label mono-label--accent">Skills</span>
-        <h2 id="skillsTitle">A working matrix.</h2>
-        <p>Every capability is tied to a build you can open. Select a badge to see the builds that use it.</p>
-      </header>
-
-      <div class="skills-deck" data-reveal style="--delay:60ms">
-
-        <section class="panel skill-module" aria-labelledby="moduleSecurity">
-          <span class="module-index" aria-hidden="true">01</span>
-          <h3 class="module-title" id="moduleSecurity">Security</h3>
-          <p class="module-sub">Find, test and explain risk.</p>
-
-          <div class="skill-grid">
-            <button class="skill-chip" type="button" title="Threat Analysis" data-skill="Threat Analysis" data-projects="url,quishing">Threat detection</button>
-            <button class="skill-chip" type="button" title="Password Security" data-skill="Password Security" data-projects="altron">Password audit</button>
-            <button class="skill-chip" type="button" title="Network Reconnaissance" data-skill="Network Reconnaissance" data-projects="copilot">Network recon</button>
-            <button class="skill-chip" type="button" title="Phishing Detection" data-skill="Phishing Detection" data-projects="url,quishing">Phishing analysis</button>
-            <button class="skill-chip" type="button" title="Web Security" data-skill="Web Security" data-projects="url,copilot,prototype,quishing">URL scanning</button>
-            <button class="skill-chip" type="button" title="Wi-Fi Security" data-skill="Wi-Fi Security" data-projects="">Wi-Fi security</button>
-          </div>
-
-          <div class="module-used">
-            <span class="mono-label">Used in</span>
+          <div class="matrix__used">
+            <span class="label">Used in</span>
             <p>URL Scanner · ALTRON · Quishing Guard</p>
           </div>
         </section>
 
-        <section class="panel skill-module" aria-labelledby="moduleDevelopment">
-          <span class="module-index" aria-hidden="true">02</span>
-          <h3 class="module-title" id="moduleDevelopment">Web &amp; UI</h3>
-          <p class="module-sub">Interfaces that look sharp and stay safe.</p>
-
-          <div class="skill-grid">
-            <button class="skill-chip" type="button" data-skill="HTML5" data-projects="url,altron">HTML5</button>
-            <button class="skill-chip" type="button" data-skill="CSS3" data-projects="url,altron">CSS3</button>
-            <button class="skill-chip" type="button" data-skill="JavaScript" data-projects="url,altron,humanize,quishing">JavaScript</button>
-            <button class="skill-chip" type="button" data-skill="Figma" data-projects="">Figma</button>
-            <button class="skill-chip" type="button" title="Responsive UI" data-skill="Responsive UI" data-projects="url,altron">Responsive UI</button>
-            <button class="skill-chip" type="button" data-skill="Accessibility" data-projects="url,altron">Accessibility</button>
+        <section class="matrix__col" data-used="portfolio nexvault urlScanner" aria-labelledby="matrixWeb">
+          <span class="matrix__index" aria-hidden="true">02</span>
+          <h3 id="matrixWeb">Web &amp; UI</h3>
+          <p class="matrix__sub">Interfaces that look sharp and stay safe.</p>
+          <div class="chip-grid">
+            <button class="chip-btn" type="button" aria-pressed="false" data-skill="HTML5">HTML5</button>
+            <button class="chip-btn" type="button" aria-pressed="false" data-skill="CSS3">CSS3</button>
+            <button class="chip-btn" type="button" aria-pressed="false" data-skill="JavaScript">JavaScript</button>
+            <button class="chip-btn" type="button" aria-pressed="false" data-skill="Figma">Figma</button>
+            <button class="chip-btn" type="button" aria-pressed="false" data-skill="Responsive UI">Responsive UI</button>
+            <button class="chip-btn" type="button" aria-pressed="false" data-skill="Accessibility">Accessibility</button>
           </div>
-
-          <div class="module-used">
-            <span class="mono-label">Used in</span>
+          <div class="matrix__used">
+            <span class="label">Used in</span>
             <p>Portfolio · NexVault · URL Scanner</p>
           </div>
         </section>
 
-        <section class="panel skill-module" aria-labelledby="moduleTools">
-          <span class="module-index" aria-hidden="true">03</span>
-          <h3 class="module-title" id="moduleTools">AI &amp; Automation</h3>
-          <p class="module-sub">Small tools that think for you.</p>
-
-          <div class="skill-grid">
-            <button class="skill-chip" type="button" data-skill="Python" data-projects="copilot,prompt,prototype">Python</button>
-            <button class="skill-chip" type="button" title="Prompt design" data-skill="Prompt design" data-projects="humanize,prompt">Prompt design</button>
-            <button class="skill-chip" type="button" data-skill="ML basics" data-projects="prompt">ML basics</button>
-            <button class="skill-chip" type="button" title="Text analysis" data-skill="Text analysis" data-projects="humanize,prompt">Text analysis</button>
-            <button class="skill-chip" type="button" data-skill="Forensics" data-projects="copilot,prompt">Forensics</button>
-            <button class="skill-chip" type="button" data-skill="Automation" data-projects="copilot,prototype">Automation</button>
+        <section class="matrix__col" data-used="humanize prompt copilot" aria-labelledby="matrixAI">
+          <span class="matrix__index" aria-hidden="true">03</span>
+          <h3 id="matrixAI">AI &amp; Automation</h3>
+          <p class="matrix__sub">Small tools that think for you.</p>
+          <div class="chip-grid">
+            <button class="chip-btn" type="button" aria-pressed="false" data-skill="Python">Python</button>
+            <button class="chip-btn" type="button" aria-pressed="false" data-skill="Prompt design">Prompt design</button>
+            <button class="chip-btn" type="button" aria-pressed="false" data-skill="ML basics">ML basics</button>
+            <button class="chip-btn" type="button" aria-pressed="false" data-skill="Text analysis">Text analysis</button>
+            <button class="chip-btn" type="button" aria-pressed="false" data-skill="Forensics">Forensics</button>
+            <button class="chip-btn" type="button" aria-pressed="false" data-skill="Automation">Automation</button>
           </div>
-
-          <div class="module-used">
-            <span class="mono-label">Used in</span>
+          <div class="matrix__used">
+            <span class="label">Used in</span>
             <p>Humanize AI · Hidden-Prompt Scanner · Copilot</p>
           </div>
         </section>
 
       </div>
 
-      <div class="panel skill-readout" data-reveal>
-        <div class="skill-readout__label"><b id="skillReadoutName">Awaiting input</b>Related builds</div>
-        <div class="skill-readout__body" id="skillReadoutBody">
-          <p class="skill-readout__empty">Select a skill chip to see the builds that use it.</p>
+      <div class="readout" aria-live="polite">
+        <div class="readout__label">
+          <b id="skillReadoutName">Awaiting input</b>
+          <span class="readout__sub">Related builds</span>
         </div>
+        <p class="readout__body" id="skillReadoutBody">Select a skill chip to see the builds that use it.</p>
       </div>
-
-      <section class="panel skill-ledger" id="technical-skills" aria-labelledby="techSkillsTitle" data-reveal>
-        <header class="skill-ledger__head">
-          <span class="mono-label mono-label--accent">Technical skills</span>
-          <h3 id="techSkillsTitle">The stack behind the builds.</h3>
-          <p>Grouped the way it reads on my CV — languages, platforms and tools.</p>
-        </header>
-
-        <dl class="skill-ledger__rows">
-          <div class="skill-ledger__row">
-            <dt>Programming</dt>
-            <dd>
-              <span class="tech-tag">Python</span>
-              <span class="tech-tag">JavaScript</span>
-              <span class="tech-tag">HTML</span>
-              <span class="tech-tag">CSS</span>
-              <span class="tech-tag">SQL</span>
-            </dd>
-          </div>
-
-          <div class="skill-ledger__row">
-            <dt>Cybersecurity</dt>
-            <dd>
-              <span class="tech-tag">Web security</span>
-              <span class="tech-tag">Phishing awareness</span>
-              <span class="tech-tag">Password security</span>
-              <span class="tech-tag">Security analysis</span>
-              <span class="tech-tag">Security fundamentals</span>
-            </dd>
-          </div>
-
-          <div class="skill-ledger__row">
-            <dt>Development</dt>
-            <dd>
-              <span class="tech-tag">Flask</span>
-              <span class="tech-tag">SQLite</span>
-              <span class="tech-tag">Frontend</span>
-              <span class="tech-tag">Responsive UI</span>
-              <span class="tech-tag">REST / API concepts</span>
-            </dd>
-          </div>
-
-          <div class="skill-ledger__row">
-            <dt>Operating systems</dt>
-            <dd>
-              <span class="tech-tag">Windows 11</span>
-              <span class="tech-tag">Linux</span>
-            </dd>
-          </div>
-
-          <div class="skill-ledger__row">
-            <dt>Tools</dt>
-            <dd>
-              <span class="tech-tag">VS Code</span>
-              <span class="tech-tag">Git</span>
-              <span class="tech-tag">GitHub</span>
-              <span class="tech-tag">Vercel</span>
-              <span class="tech-tag">Render</span>
-              <span class="tech-tag">Microsoft Office</span>
-            </dd>
-          </div>
-
-          <div class="skill-ledger__row">
-            <dt>Soft skills</dt>
-            <dd>
-              <span class="tech-tag">Problem solving</span>
-              <span class="tech-tag">Communication</span>
-              <span class="tech-tag">Teamwork</span>
-              <span class="tech-tag">Logical thinking</span>
-              <span class="tech-tag">Continuous learning</span>
-            </dd>
-          </div>
-        </dl>
-      </section>
-
     </section>
 
-    <section class="about-journey" id="journey" aria-labelledby="journeyTitle">
+    <section class="section" id="technical-skills" aria-labelledby="techTitle">
+      <p class="label section-label">Technical skills</p>
+      <h2 class="section-title" id="techTitle">The stack behind the builds.</h2>
+      <p class="section-line">Grouped the way it reads on my CV — languages, platforms and tools.</p>
 
-      <header class="about-section__head" data-reveal>
-        <span class="mono-label mono-label--accent">Journey</span>
-        <h2 id="journeyTitle">Five levels, one direction.</h2>
-        <p>From networking fundamentals to AI-powered security. Every level points to work you can open.</p>
-      </header>
-
-      <div class="journey-deck" data-reveal style="--delay:60ms">
-
-        <a class="level-card level-card--1" href="#education">
-          <span class="level-num">Level 01</span>
-          <h3 class="level-title">Fundamentals</h3>
-          <p class="level-desc">Core security concepts and safe habits.</p>
-          <span class="level-go">Education record <i aria-hidden="true">→</i></span>
-        </a>
-
-        <a class="level-card level-card--2" href="certificates.html">
-          <span class="level-num">Level 02</span>
-          <h3 class="level-title">Networks &amp; Linux</h3>
-          <p class="level-desc">How systems talk and how to read them.</p>
-          <span class="level-go">Open the record <i aria-hidden="true">→</i></span>
-        </a>
-
-        <a class="level-card level-card--3" href="projects.html#project-prototype">
-          <span class="level-num">Level 03</span>
-          <h3 class="level-title">Web security</h3>
-          <p class="level-desc">Attacks, defences and hardened builds.</p>
-          <span class="level-go">Inspect the build <i aria-hidden="true">→</i></span>
-        </a>
-
-        <a class="level-card level-card--4" href="projects.html">
-          <span class="level-num">Level 04</span>
-          <h3 class="level-title">Builds &amp; tools</h3>
-          <p class="level-desc">Scanners, inspectors and utilities.</p>
-          <span class="level-go">Open the archive <i aria-hidden="true">→</i></span>
-        </a>
-
-        <a class="level-card level-card--5" href="projects.html#project-prompt">
-          <span class="level-num">Level 05</span>
-          <h3 class="level-title">AI-powered security</h3>
-          <p class="level-desc">Models that detect and explain threats.</p>
-          <span class="level-go">See AI security work <i aria-hidden="true">→</i></span>
-        </a>
-
-      </div>
-
-      <div class="journey-legend">
-        <span><i aria-hidden="true"></i>Fundamentals</span>
-        <span><i aria-hidden="true"></i>Building</span>
-        <span><i aria-hidden="true"></i>Current level</span>
-        <span>One direction · always climbing</span>
-      </div>
-
-      <aside class="panel deck-note about-journey__note" data-reveal>
-        <div>
-          <span class="mono-label mono-label--accent">Next checkpoint</span>
-          <h2>Level five is already in progress.</h2>
-          <p>AI-assisted security, document forgery detection and the next generation of practical threat tools.</p>
+      <div class="ledger tech-ledger">
+        <div class="ledger__head" aria-hidden="true">
+          <span>Group</span>
+          <span>Skills</span>
         </div>
-        <div class="deck-note__actions">
-          <a class="btn" href="https://github.com/arkap1502" target="_blank" rel="noopener">Follow on GitHub ↗</a>
+        <div class="ledger__rows">
+          <div class="ledger__row">
+            <span class="ledger__group">Programming</span>
+            <div class="chip-list">
+              <span class="chip">Python</span>
+              <span class="chip">JavaScript</span>
+              <span class="chip">HTML</span>
+              <span class="chip">CSS</span>
+              <span class="chip">SQL</span>
+            </div>
+          </div>
+          <div class="ledger__row">
+            <span class="ledger__group">Cybersecurity</span>
+            <div class="chip-list">
+              <span class="chip">Web security</span>
+              <span class="chip">Phishing awareness</span>
+              <span class="chip">Password security</span>
+              <span class="chip">Security analysis</span>
+              <span class="chip">Security fundamentals</span>
+            </div>
+          </div>
+          <div class="ledger__row">
+            <span class="ledger__group">Development</span>
+            <div class="chip-list">
+              <span class="chip">Flask</span>
+              <span class="chip">SQLite</span>
+              <span class="chip">Frontend</span>
+              <span class="chip">Responsive UI</span>
+              <span class="chip">REST / API concepts</span>
+            </div>
+          </div>
+          <div class="ledger__row">
+            <span class="ledger__group">Operating systems</span>
+            <div class="chip-list">
+              <span class="chip">Windows 11</span>
+              <span class="chip">Linux</span>
+            </div>
+          </div>
+          <div class="ledger__row">
+            <span class="ledger__group">Tools</span>
+            <div class="chip-list">
+              <span class="chip">VS Code</span>
+              <span class="chip">Git</span>
+              <span class="chip">GitHub</span>
+              <span class="chip">Vercel</span>
+              <span class="chip">Render</span>
+              <span class="chip">Microsoft Office</span>
+            </div>
+          </div>
+          <div class="ledger__row">
+            <span class="ledger__group">Soft skills</span>
+            <div class="chip-list">
+              <span class="chip">Problem solving</span>
+              <span class="chip">Communication</span>
+              <span class="chip">Teamwork</span>
+              <span class="chip">Logical thinking</span>
+              <span class="chip">Continuous learning</span>
+            </div>
+          </div>
         </div>
-      </aside>
+      </div>
+    </section>
 
+    <section class="section" id="journey" aria-labelledby="journeyTitle">
+      <p class="label section-label">Journey</p>
+      <h2 class="section-title" id="journeyTitle">Five levels, one direction.</h2>
+
+      <div class="ledger journey">
+        <div class="ledger__rows">
+          <div class="ledger__row">
+            <span class="ledger__no">01</span>
+            <span class="ledger__project">Fundamentals</span>
+            <span class="ledger__what">Core security concepts and safe habits.</span>
+          </div>
+          <div class="ledger__row">
+            <span class="ledger__no">02</span>
+            <span class="ledger__project">Networks &amp; Linux</span>
+            <span class="ledger__what">How systems talk and how to read them.</span>
+          </div>
+          <div class="ledger__row">
+            <span class="ledger__no">03</span>
+            <span class="ledger__project">Web security</span>
+            <span class="ledger__what">Attacks, defences and hardened builds.</span>
+          </div>
+          <div class="ledger__row">
+            <span class="ledger__no">04</span>
+            <span class="ledger__project">Builds &amp; tools</span>
+            <span class="ledger__what">Scanners, inspectors and utilities.</span>
+          </div>
+          <div class="ledger__row">
+            <span class="ledger__no">05</span>
+            <span class="ledger__project">AI-powered security</span>
+            <span class="ledger__what">Models that detect and explain threats.</span>
+          </div>
+        </div>
+      </div>
     </section>
 
   </div>
 </main>
 
-<footer class="site-foot">
-  <div class="frame foot">
-    <span class="foot__note">Arka Patra © 2026 · <b>Glass deck</b></span>
-    <span>System secured. Always learning. Always building.</span>
-    <div class="socials">
-      <a class="social-link" href="https://github.com/arkap1502" target="_blank" rel="noopener" aria-label="GitHub">GH</a>
-      <a class="social-link" href="https://www.linkedin.com/in/arka-patra-579110422/" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
-      <a class="social-link" href="mailto:arkap1502@gmail.com" aria-label="Email">@</a>
-    </div>
-  </div>
-</footer>
-
-<script src="assets/site.js?v=33"></script>
+<script src="assets/site.js?v=2" defer></script>
 </body>
 </html>

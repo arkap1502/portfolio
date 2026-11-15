@@ -3,79 +3,65 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Arka Patra — UI/UX Developer</title>
-<meta name="description" content="The portfolio of Arka Patra — a UI/UX developer and cybersecurity student from West Bengal. A glass interface with light and dark modes.">
-<meta property="og:title" content="Arka Patra — UI/UX Developer">
-<meta property="og:description" content="Interfaces that are easy to use and hard to break. Explore projects, credentials and security work.">
-<meta property="og:type" content="website">
-<meta name="theme-color" content="#05070c">
+<title>Arka Patra — Secure by design, useful by default.</title>
+<meta name="description" content="Arka Patra is a cybersecurity student and developer at GNIT Kolkata building security tools, full-stack apps and AI-assisted systems.">
+<meta name="theme-color" content="#F2EEE6">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<link rel="preload" href="assets/fonts/carlito-400.woff2" as="font" type="font/woff2" crossorigin>
-<script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('arka-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;}catch(e){}</script>
-<link rel="stylesheet" href="assets/css/core.css?v=57">
-<link rel="stylesheet" href="assets/css/entry-home.css?v=54">
-<link rel="stylesheet" href="assets/css/about-skills.css?v=54">
-<link rel="stylesheet" href="assets/css/projects-certs.css?v=54">
-<link rel="stylesheet" href="assets/css/journey-contact.css?v=54">
-<link rel="stylesheet" href="assets/css/responsive.css?v=55">
+<link rel="stylesheet" href="assets/css/site.css?v=2">
 </head>
-<body class="entry-page">
+<body class="page-landing">
 
-<a class="skip-link" href="#main">Skip to portfolio entry</a>
+<a class="skip-link" href="#main">Skip to content</a>
 
-<button class="theme-toggle entry-theme" type="button" data-theme-toggle aria-label="Switch to light mode" aria-pressed="false" title="Switch to light mode">
-  <span class="theme-toggle__knob"></span>
-</button>
-
-<div class="boot" id="bootOverlay" hidden aria-label="System boot sequence">
-  <div class="boot__panel">
-    <div class="boot__head"><span>AP // BOOT SEQUENCE</span><span>v2.0</span></div>
-    <div class="boot__line"><span>mounting glass interface</span><b>[ OK ]</b></div>
-    <div class="boot__line"><span>loading light + dark themes</span><b>[ OK ]</b></div>
-    <div class="boot__line"><span>identity verified</span><b>[ OK ]</b></div>
-    <div class="boot__bar"><div class="boot__fill"></div></div>
-    <button class="boot__skip" type="button">Skip boot →</button>
+<header class="site-head">
+  <div class="wrap nav">
+    <a class="brand" href="home.html">ARKA PATRA</a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="projects.html">Work</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a class="nav-cv" href="assets/Arka_Patra_CV2.pdf" target="_blank" rel="noopener">Resume <span aria-hidden="true">↗</span></a>
+    </nav>
+    <button class="nav-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
-</div>
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
+    <div class="mobile-menu__inner wrap">
+      <a href="projects.html">Work</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="assets/Arka_Patra_CV2.pdf" target="_blank" rel="noopener">Resume ↗</a>
+    </div>
+  </nav>
+</header>
 
-<main class="entry" id="main">
-  <div class="entry__inner">
-    <div class="entry__content">
-      <p class="entry__eyebrow">Portfolio · UI/UX design</p>
-      <h1 class="entry__title" id="entryTitle">Arka Patra</h1>
-      <p class="entry__lead">Portfolio UI/UX design: a glass interface with light and dark modes, built for clear, fast, secure web work.</p>
+<main id="main">
+  <section class="landing wrap" aria-labelledby="landingTitle">
 
-      <nav class="entry__nav" aria-label="Portfolio sections">
-        <a href="dashboard.html">Home</a>
-        <i aria-hidden="true">·</i>
-        <a href="projects.html">Projects</a>
-        <i aria-hidden="true">·</i>
-        <a href="about.html">About</a>
-        <i aria-hidden="true">·</i>
-        <i aria-hidden="true">·</i>
-        <a href="contact.html">Contact</a>
-      </nav>
-
-      <div class="entry__actions">
-        <a class="btn btn--solid btn--lg" href="dashboard.html" data-enter>Enter portfolio <span class="arrow" aria-hidden="true">→</span></a>
+    <div>
+      <p class="label landing__label">· B.Sc. Cyber Security / GNIT Kolkata</p>
+      <h1 class="landing__title" id="landingTitle">Secure by design,<br>useful by default.</h1>
+      <p class="landing__intro">I’m Arka Patra — a cybersecurity student building security tools, UI/UX developer and AI-assisted systems.</p>
+      <div class="landing__actions">
+        <a class="btn btn--ink" href="projects.html">Explore selected work <span aria-hidden="true">↗</span></a>
+        <a class="btn btn--outline" href="assets/Arka_Patra_CV2.pdf" target="_blank" rel="noopener">View résumé <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="landing__foot">
+        <p class="landing__mono">Full-stack • App security • Applied AI</p>
       </div>
     </div>
 
-    <a class="entry__stage" href="dashboard.html" data-enter aria-label="Enter the portfolio">
-      <canvas class="entry__orb" id="entryOrb" width="720" height="720" aria-hidden="true"></canvas>
-    </a>
-  </div>
+    <div class="landing__art">
+      <div class="landing__arch">
+        <img src="assets/arka-patra.webp" alt="Portrait of Arka Patra" width="437" height="578" fetchpriority="high" decoding="async">
+      </div>
+      <p class="landing__badge"><span>08</span><span>BUILDS</span></p>
+    </div>
 
-  <div class="entry__foot">
-    <a href="dashboard.html" data-enter>Entry</a>
-    <i aria-hidden="true">·</i>
-    <button type="button" data-boot-replay>Boot sequence</button>
-    <i aria-hidden="true">·</i>
-    <a href="dashboard.html" data-enter>Skip →</a>
-  </div>
+  </section>
 </main>
 
-<script src="assets/entry-orb.js?v=3"></script>
-<script src="assets/site.js?v=33"></script>
+<script src="assets/site.js?v=2" defer></script>
 </body>
 </html>

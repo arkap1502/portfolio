@@ -1,751 +1,151 @@
 /* ==========================================================================
-   ARKA PATRA — GLASS DECK behaviour
-   Theme switch · boot sequence · page wipe · navigation · reveals · tilt
-   draggable windows · counters · project dialogs and filters · skill readout
-   contact form
+   ARKA PATRA — small interaction layer
+   Mobile menu · skills readout · contact form. No theme logic, no libraries.
    ========================================================================== */
 
 (function () {
   'use strict';
 
-  var root = document.documentElement;
-  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  root.classList.add('js');
+  /* ----------------------------------------------------------------- menu */
 
-  function pad(value) {
-    return value < 10 ? '0' + value : String(value);
-  }
-
-  /* -----------------------------------------------------------------------
-     Light / dark theme
-     The switch is in the header of every page. The choice is stored locally
-     and applied to <html data-theme> before paint by the inline head script.
-     ----------------------------------------------------------------------- */
-
-  var THEME_KEY = 'arka-theme';
-
-  function currentTheme() {
-    return root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
-  }
-
-  function applyTheme(theme, persist) {
-    var next = theme === 'light' ? 'dark' : 'light';
-    root.setAttribute('data-theme', theme);
-
-    document.querySelectorAll('[data-theme-toggle]').forEach(function (button) {
-      button.setAttribute('aria-pressed', String(theme === 'light'));
-      button.setAttribute('aria-label', 'Switch to ' + next + ' mode');
-      button.setAttribute('title', 'Switch to ' + next + ' mode');
-    });
-
-    var meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute('content', theme === 'light' ? '#eef2f8' : '#05070c');
-
-    if (persist) {
-      try { localStorage.setItem(THEME_KEY, theme); } catch (error) {}
-    }
-  }
-
-  applyTheme(currentTheme(), false);
-
-  document.querySelectorAll('[data-theme-toggle]').forEach(function (button) {
-    button.addEventListener('click', function () {
-      applyTheme(currentTheme() === 'dark' ? 'light' : 'dark', true);
-    });
-  });
-
-  /* -----------------------------------------------------------------------
-     Page navigation
-     Internal pages are fetched as soon as a pointer or focus reaches their
-     link, so a click paints the next document from cache instead of
-     waiting on a network round trip.
-     ----------------------------------------------------------------------- */
-
-  function isInternalPage(link) {
-    if (!link || !link.getAttribute) return false;
-    if (link.target === '_blank' || link.hasAttribute('download')) return false;
-    if (link.protocol !== 'http:' && link.protocol !== 'https:') return false;
-    if (link.host !== window.location.host) return false;
-    if (link.pathname === window.location.pathname) return false;
-    if (!/\.html?$/i.test(link.pathname)) return false;
-    return true;
-  }
-
-  var prefetched = Object.create(null);
-  var saveData = false;
-  try {
-    var connection = navigator.connection;
-    saveData = Boolean(connection && (connection.saveData || /(^|-)2g$/.test(connection.effectiveType || '')));
-  } catch (error) {}
-
-  function prefetch(link) {
-    if (saveData) return;
-    if (!isInternalPage(link) || prefetched[link.href]) return;
-    prefetched[link.href] = true;
-
-    var hint = document.createElement('link');
-    hint.rel = 'prefetch';
-    hint.as = 'document';
-    hint.href = link.href;
-    document.head.appendChild(hint);
-  }
-
-  function linkOf(event) {
-    var target = event.target;
-    return target && target.closest ? target.closest('a') : null;
-  }
-
-  /* Warm a page only when the pointer or keyboard focus reaches its link.
-     Bulk-prefetching every nav target on load costs more than it saves. */
-  document.addEventListener('pointerover', function (event) {
-    prefetch(linkOf(event));
-  }, { passive: true });
-
-  document.addEventListener('focusin', function (event) {
-    prefetch(linkOf(event));
-  });
-
-  /* -----------------------------------------------------------------------
-     Page wipe
-     The curtain rises over the outgoing page and navigation starts as soon
-     as it is covered. Because the next page is normally prefetched, this
-     costs one short transition instead of a full network wait.
-     ----------------------------------------------------------------------- */
-
-  var wipe = document.createElement('div');
-  wipe.className = 'page-wipe';
-  wipe.setAttribute('aria-hidden', 'true');
-  document.body.appendChild(wipe);
-
-  var wipeDuration = 180;
-  var leaving = false;
-
-  document.addEventListener('click', function (event) {
-    if (leaving || reducedMotion) return;
-    if (event.defaultPrevented) return;
-    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-
-    var link = linkOf(event);
-    if (!isInternalPage(link)) return;
-
-    leaving = true;
-    event.preventDefault();
-    wipe.classList.add('is-active');
-
-    window.setTimeout(function () {
-      window.location.href = link.href;
-
-      /* If the navigation never commits, put the page back rather than
-         leaving the curtain over content the visitor can still reach. */
-      window.setTimeout(function () {
-        leaving = false;
-        wipe.classList.remove('is-active');
-      }, 4000);
-    }, wipeDuration);
-  });
-
-  window.addEventListener('pageshow', function (event) {
-    leaving = false;
-    if (event.persisted) wipe.classList.remove('is-active');
-  });
-
-  /* -----------------------------------------------------------------------
-     Mobile navigation
-     ----------------------------------------------------------------------- */
-
-  var header = document.querySelector('.site-header');
-  var menu = document.getElementById('mobileMenu');
+  var head = document.querySelector('.site-head');
   var toggle = document.getElementById('menuToggle');
+  var menu = document.getElementById('mobileMenu');
 
-  function closeMenu() {
-    if (!header || !menu || !toggle) return;
-    header.classList.remove('is-open');
-    toggle.setAttribute('aria-expanded', 'false');
-    toggle.setAttribute('aria-label', 'Open menu');
-    menu.setAttribute('aria-hidden', 'true');
-  }
-
-  if (header && menu && toggle) {
-    toggle.addEventListener('click', function () {
-      var open = toggle.getAttribute('aria-expanded') !== 'true';
-      header.classList.toggle('is-open', open);
+  if (head && toggle && menu) {
+    function setMenu(open) {
+      head.classList.toggle('is-open', open);
       toggle.setAttribute('aria-expanded', String(open));
       toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-      menu.setAttribute('aria-hidden', String(!open));
-    });
+    }
 
-    menu.querySelectorAll('a').forEach(function (link) {
-      link.addEventListener('click', closeMenu);
+    toggle.addEventListener('click', function () {
+      setMenu(toggle.getAttribute('aria-expanded') !== 'true');
     });
 
     document.addEventListener('keydown', function (event) {
-      if (event.key !== 'Escape') return;
-      if (toggle.getAttribute('aria-expanded') !== 'true') return;
-      closeMenu();
-      toggle.focus();
-    });
-
-    document.addEventListener('click', function (event) {
-      if (toggle.getAttribute('aria-expanded') !== 'true') return;
-      if (menu.contains(event.target) || toggle.contains(event.target)) return;
-      closeMenu();
-    });
-
-    window.addEventListener('resize', function () {
-      if (window.innerWidth > 980) closeMenu();
-    });
-  }
-
-  /* -----------------------------------------------------------------------
-     Scroll reveals
-     ----------------------------------------------------------------------- */
-
-  var revealItems = document.querySelectorAll('[data-reveal]');
-
-  if (!reducedMotion && 'IntersectionObserver' in window) {
-    var revealObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('is-visible');
-        revealObserver.unobserve(entry.target);
-      });
-    }, { threshold: .08, rootMargin: '0px 0px -4% 0px' });
-
-    revealItems.forEach(function (item) { revealObserver.observe(item); });
-
-    window.setTimeout(function () {
-      revealItems.forEach(function (item) { item.classList.add('is-visible'); });
-    }, 5000);
-  } else {
-    revealItems.forEach(function (item) { item.classList.add('is-visible'); });
-  }
-
-  /* -----------------------------------------------------------------------
-     Pointer tilt
-     ----------------------------------------------------------------------- */
-
-  if (!reducedMotion && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    document.querySelectorAll('[data-tilt]').forEach(function (target) {
-      var strength = parseFloat(target.getAttribute('data-tilt')) || 5;
-
-      target.addEventListener('pointermove', function (event) {
-        var box = target.getBoundingClientRect();
-        if (!box.width || !box.height) return;
-        var x = (event.clientX - box.left) / box.width - .5;
-        var y = (event.clientY - box.top) / box.height - .5;
-        target.style.setProperty('--tilt-y', (x * strength).toFixed(2) + 'deg');
-        target.style.setProperty('--tilt-x', (-y * strength).toFixed(2) + 'deg');
-        target.classList.add('is-tilting');
-      });
-
-      target.addEventListener('pointerleave', function () {
-        target.style.setProperty('--tilt-y', '0deg');
-        target.style.setProperty('--tilt-x', '0deg');
-        target.classList.remove('is-tilting');
-      });
-    });
-  }
-
-  /* -----------------------------------------------------------------------
-     Draggable windows
-     Home's identity, skill and terminal windows can be moved by their title
-     bar. Desktop pointer only; on small screens the windows stack instead.
-     Double-click a title bar to send the window home.
-     ----------------------------------------------------------------------- */
-
-  var canDrag = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-
-  document.querySelectorAll('[data-drag]').forEach(function (win) {
-    var handle = win.querySelector('[data-drag-handle]');
-    if (!handle || !canDrag) return;
-
-    function resetPosition() {
-      win.style.left = '';
-      win.style.top = '';
-      win.style.right = '';
-      win.style.bottom = '';
-    }
-
-    handle.addEventListener('dblclick', resetPosition);
-
-    handle.addEventListener('pointerdown', function (event) {
-      if (event.button !== 0 || window.innerWidth < 1081) return;
-      if (event.target.closest('a, button, input, textarea')) return;
-
-      var parent = win.offsetParent;
-      if (!parent) return;
-
-      var box = parent.getBoundingClientRect();
-      var winBox = win.getBoundingClientRect();
-      var startX = event.clientX;
-      var startY = event.clientY;
-      var originLeft = win.offsetLeft;
-      var originTop = win.offsetTop;
-      var maxLeft = Math.max(-20, box.width - winBox.width - 4);
-      var maxTop = Math.max(-10, box.height - winBox.height - 4);
-
-      if (win.style.right !== 'auto') {
-        win.style.right = 'auto';
-        win.style.bottom = 'auto';
+      if (event.key === 'Escape' && head.classList.contains('is-open')) {
+        setMenu(false);
+        toggle.focus();
       }
-
-      win.classList.add('is-dragging');
-      try { handle.setPointerCapture(event.pointerId); } catch (error) {}
-
-      function move(moveEvent) {
-        var left = originLeft + (moveEvent.clientX - startX);
-        var top = originTop + (moveEvent.clientY - startY);
-        win.style.left = Math.max(-20, Math.min(maxLeft, left)) + 'px';
-        win.style.top = Math.max(-10, Math.min(maxTop, top)) + 'px';
-      }
-
-      function stop() {
-        win.classList.remove('is-dragging');
-        handle.removeEventListener('pointermove', move);
-        handle.removeEventListener('pointerup', stop);
-        handle.removeEventListener('pointercancel', stop);
-      }
-
-      handle.addEventListener('pointermove', move);
-      handle.addEventListener('pointerup', stop);
-      handle.addEventListener('pointercancel', stop);
-      event.preventDefault();
     });
-  });
-
-  /* -----------------------------------------------------------------------
-     HUD counters
-     ----------------------------------------------------------------------- */
-
-  var counters = document.querySelectorAll('[data-count]');
-
-  function runCounter(el) {
-    var end = parseInt(el.getAttribute('data-count'), 10);
-    var digits = el.getAttribute('data-pad');
-    if (isNaN(end)) return;
-
-    if (reducedMotion) {
-      el.textContent = digits === '2' ? pad(end) : String(end);
-      return;
-    }
-
-    var start = performance.now();
-    var duration = 900;
-
-    function tick(now) {
-      var t = Math.min((now - start) / duration, 1);
-      var eased = 1 - Math.pow(1 - t, 3);
-      var value = Math.round(end * eased);
-      el.textContent = digits === '2' ? pad(value) : String(value);
-      if (t < 1) window.requestAnimationFrame(tick);
-    }
-    window.requestAnimationFrame(tick);
   }
 
-  if (counters.length) {
-    if ('IntersectionObserver' in window) {
-      var countObserver = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (!entry.isIntersecting) return;
-          runCounter(entry.target);
-          countObserver.unobserve(entry.target);
-        });
-      }, { threshold: .5 });
-      counters.forEach(function (el) { countObserver.observe(el); });
-    } else {
-      counters.forEach(runCounter);
-    }
-  }
+  /* --------------------------------------------------------- skill readout */
 
-  /* -----------------------------------------------------------------------
-     Live threat monitor
-     ----------------------------------------------------------------------- */
-
-  var threatMessage = document.getElementById('threatMessage');
-  var threatLevel = document.getElementById('threatLevel');
-
-  if (threatMessage && threatLevel) {
-    var threats = [
-      { text: 'Typosquatted domain detected', level: 'High' },
-      { text: 'Phishing link intercepted', level: 'High' },
-      { text: 'Weak password pattern found', level: 'Medium' },
-      { text: 'Certificate expiring in 6 days', level: 'Low' },
-      { text: 'Lookalike login page blocked', level: 'High' }
-    ];
-    var threatIndex = 0;
-
-    if (!reducedMotion) {
-      window.setInterval(function () {
-        if (document.hidden) return;
-        threatIndex = (threatIndex + 1) % threats.length;
-        threatMessage.textContent = threats[threatIndex].text;
-        threatLevel.textContent = threats[threatIndex].level;
-      }, 5200);
-    }
-  }
-
-  /* -----------------------------------------------------------------------
-     Project data
-     ----------------------------------------------------------------------- */
-
-  var projects = {
-    url: {
-      index: '02',
-      title: 'URL Threat Scanner',
-      category: 'URL security scanner · Threat detection',
-      status: 'Completed',
-      desc: 'A cybersecurity-focused URL scanner that flags raw IPs, uncommon TLDs, lookalike brand spellings, phishing keywords and weak security headers, then combines the signals into a 0–100 risk score with a plain-language verdict.',
-      stack: ['JavaScript', 'HTML', 'CSS'],
-      links: [
-        { label: 'Live demo', href: 'https://arkap1502.github.io/URL-Scanner/' },
-        { label: 'Source code', href: 'https://github.com/arkap1502/URL-Scanner' }
-      ]
-    },
-    copilot: {
-      index: '01',
-      title: 'Website Security Copilot',
-      category: 'Cybersecurity · Browser extension',
-      status: 'Completed',
-      desc: 'A FastAPI engine checks security headers, TLS certificates, cookie flags, DNS email records, open ports and phishing signals. The MV3 extension watches tabs and blocks harmful pages before they load. AI explains the tool output — it never invents findings.',
-      stack: ['Next.js', 'FastAPI', 'Python', 'SQLite', 'Docker', 'MV3'],
-      links: [
-        { label: 'Live demo', href: 'https://website-security-copilot-3m0hij8jl-arkap1502-9053s-projects.vercel.app/' },
-        { label: 'Source code', href: 'https://github.com/arkap1502/Website-Security-Copilot' }
-      ]
-    },
-    altron: {
-      index: '03',
-      title: 'Altron Password Inspector',
-      category: 'Security · Web tool',
-      status: 'Completed',
-      desc: 'Passwords are generated with crypto.getRandomValues(), never Math.random(). Strength scoring checks character classes and a 15+ character length threshold. Everything runs in the browser.',
-      stack: ['JavaScript', 'Web Crypto API', 'HTML', 'CSS'],
-      links: [
-        { label: 'Live demo', href: 'https://arkap1502.github.io/password-making/' },
-        { label: 'Source code', href: 'https://github.com/arkap1502/password-making' }
-      ]
-    },
-    humanize: {
-      index: '06',
-      title: 'Humanize AI',
-      category: 'AI · Text tool',
-      status: 'Ongoing',
-      desc: 'A React frontend with an Express backend, plus a zero-build client-side fallback so it runs offline. Light, Medium and Strong modes transform text in real time with a word-count diff.',
-      stack: ['React', 'Express', 'JavaScript'],
-      links: [
-        { label: 'Live demo', href: 'https://arkap1502.github.io/Humanize-AI/' },
-        { label: 'Source code', href: 'https://github.com/arkap1502/Humanize-AI' }
-      ]
-    },
-    nexvault: {
-      index: '04',
-      title: 'NexVault',
-      category: 'Security · Web app',
-      status: 'Ongoing',
-      desc: 'A group-built web vault following a “your data, your vault, your control” model. Vault data is gated behind authentication, with encrypted, access-controlled storage and a personal dashboard per user.',
-      stack: ['Web App', 'Authentication', 'Data Security'],
-      links: [
-        { label: 'Live demo', href: 'https://secure-vault-system.onrender.com/' }
-      ]
-    },
-    prompt: {
-      index: '05',
-      title: 'Hidden-Prompt Scanner',
-      category: 'AI security · Document analysis',
-      status: 'Completed',
-      desc: 'Extracts visible text and layout signals — colour, font size, opacity, position — to flag hidden text, zero-width characters, metadata, comments and injection phrases. Ships as a CLI and Flask UI, fully local.',
-      stack: ['Python', 'Flask', 'PyPDF2', 'python-docx'],
-      links: [
-        { label: 'Live demo', href: 'https://hidden-prompt-scanner-for-documents.onrender.com/' },
-        { label: 'Source code', href: 'https://github.com/arkap1502/Hidden-prompt-scanner-for-documents%2E' }
-      ]
-    },
-    prototype: {
-      index: '07',
-      title: 'Prototype Safety Check',
-      category: 'Web security · Passive checks',
-      status: 'Ongoing',
-      desc: 'Passive checks for exposed parameters, database errors, missing security headers, suspicious scripts and HTTPS signals. Ships a web UI, CLI and REST API — no exploitation.',
-      stack: ['Python', 'Flask', 'REST API'],
-      links: [
-        { label: 'Live demo', href: 'https://prototype-safety-check.onrender.com/' },
-        { label: 'Source code', href: 'https://github.com/arkap1502/prototype-safety-check' }
-      ]
-    },
-    quishing: {
-      index: '08',
-      title: 'Quishing Guard',
-      category: 'Web security · QR phishing',
-      status: 'Completed',
-      desc: 'Scans QR codes from your camera or an uploaded image, decodes the payload locally and scores the risk before anything opens. Flags shortened links, lookalike and punycode domains, IP-address URLs, suspicious TLDs and UPI payee mismatches — with scan history kept on the device.',
-      stack: ['React', 'TypeScript', 'Vite', 'jsQR', 'PWA'],
-      links: [
-        { label: 'Live demo', href: 'https://quishing-guard.vercel.app/' },
-        { label: 'Source code', href: 'https://github.com/arkap1502/Quishing-Guard' }
-      ]
-    }
+  /* Builds that exist on the Work page carry an href, so the readout can link
+     to them. Everything else is plain text. */
+  var builds = {
+    copilot: { title: 'Website Security Copilot', href: 'projects.html#project-copilot' },
+    netraksha: { title: 'Netraksha', href: 'projects.html#project-netraksha' },
+    nexvault: { title: 'NexVault', href: 'projects.html#project-nexvault' },
+    humanize: { title: 'Humanize AI', href: 'projects.html#project-humanize' },
+    urlScanner: { title: 'URL Scanner' },
+    altron: { title: 'ALTRON' },
+    quishing: { title: 'Quishing Guard' },
+    prompt: { title: 'Hidden-Prompt Scanner' },
+    portfolio: { title: 'Portfolio' },
+    prototype: { title: 'Prototype Safety Check' }
   };
 
-  /* -----------------------------------------------------------------------
-     Project dialog
-     ----------------------------------------------------------------------- */
+  /* Which builds each skill chip points at. A chip with no entry falls back to
+     its column's USED IN builds (the data-used attribute). */
+  var skillBuilds = {
+    'Threat detection': ['urlScanner', 'quishing'],
+    'Password audit': ['altron', 'nexvault'],
+    'Network recon': ['urlScanner', 'copilot'],
+    'Phishing analysis': ['quishing', 'netraksha'],
+    'URL scanning': ['urlScanner', 'quishing', 'copilot'],
 
-  var dialog = document.getElementById('projectDialog');
+    'HTML5': ['portfolio', 'nexvault'],
+    'CSS3': ['portfolio', 'nexvault'],
+    'JavaScript': ['portfolio', 'nexvault', 'humanize'],
+    'Responsive UI': ['portfolio', 'nexvault'],
+    'Accessibility': ['portfolio', 'nexvault'],
 
-  if (dialog && typeof dialog.showModal === 'function') {
-    var dialogEyebrow = document.getElementById('dialogEyebrow');
-    var dialogTitle = document.getElementById('dialogTitle');
-    var dialogMeta = document.getElementById('dialogMeta');
-    var dialogDesc = document.getElementById('dialogDesc');
-    var dialogStack = document.getElementById('dialogStack');
-    var dialogLinks = document.getElementById('dialogLinks');
-    var lastTrigger = null;
+    'Python': ['copilot', 'prompt'],
+    'Prompt design': ['humanize', 'prompt'],
+    'ML basics': ['netraksha', 'prompt'],
+    'Text analysis': ['humanize', 'prompt'],
+    'Forensics': ['copilot', 'netraksha'],
+    'Automation': ['copilot', 'prototype']
+  };
 
-    function fillDialog(project) {
-      dialogEyebrow.textContent = project.index + ' / Project';
-      dialogTitle.textContent = project.title;
-      dialogMeta.textContent = project.category + ' · ' + project.status;
-      dialogDesc.textContent = project.desc;
+  var DEFAULT_NAME = 'Awaiting input';
+  var DEFAULT_BODY = 'Select a skill chip to see the builds that use it.';
 
-      dialogStack.textContent = '';
-      project.stack.forEach(function (item) {
-        var chip = document.createElement('span');
-        chip.textContent = item;
-        dialogStack.appendChild(chip);
-      });
+  var chips = document.querySelectorAll('.chip-btn');
+  var readoutName = document.getElementById('skillReadoutName');
+  var readoutBody = document.getElementById('skillReadoutBody');
 
-      dialogLinks.textContent = '';
-      project.links.forEach(function (link) {
-        var anchor = document.createElement('a');
-        anchor.className = 'link-arrow';
-        anchor.href = link.href;
-        if (link.href.indexOf('http') === 0) {
-          anchor.target = '_blank';
-          anchor.rel = 'noopener';
-        }
-        anchor.innerHTML = link.label + ' <span class="arrow" aria-hidden="true">↗</span>';
-        dialogLinks.appendChild(anchor);
-      });
-    }
-
-    document.querySelectorAll('[data-open-project]').forEach(function (trigger) {
-      trigger.addEventListener('click', function () {
-        var key = trigger.getAttribute('data-open-project');
-        var project = projects[key];
-        if (!project) return;
-        lastTrigger = trigger;
-        fillDialog(project);
-        dialog.showModal();
-        document.body.style.overflow = 'hidden';
-      });
-    });
-
-    dialog.querySelectorAll('[data-close-dialog]').forEach(function (button) {
-      button.addEventListener('click', function () { dialog.close(); });
-    });
-
-    dialog.addEventListener('click', function (event) {
-      if (event.target === dialog) dialog.close();
-    });
-
-    dialog.addEventListener('close', function () {
-      document.body.style.overflow = '';
-      if (lastTrigger) lastTrigger.focus();
-    });
+  function resetReadout() {
+    chips.forEach(function (chip) { chip.setAttribute('aria-pressed', 'false'); });
+    readoutName.textContent = DEFAULT_NAME;
+    readoutBody.textContent = DEFAULT_BODY;
   }
 
-  /* -----------------------------------------------------------------------
-     Project filters
-     ----------------------------------------------------------------------- */
+  function renderBuilds(ids) {
+    readoutBody.textContent = '';
 
-  var filterButtons = Array.prototype.slice.call(document.querySelectorAll('.filter-btn'));
-  var projectCards = Array.prototype.slice.call(document.querySelectorAll('.project-card'));
-  var projectDeck = document.querySelector('.projects-deck');
-  var filterCount = document.getElementById('filterCount');
-  var emptyState = document.getElementById('buildEmpty');
+    ids.forEach(function (id) {
+      var build = builds[id];
+      if (!build) return;
 
-  function applyFilter(filter) {
-    var shown = 0;
-
-    projectCards.forEach(function (card) {
-      var match = filter === 'all' || card.getAttribute('data-category') === filter;
-      card.classList.toggle('is-hidden', !match);
-      if (match) shown += 1;
-    });
-
-    if (filterCount) {
-      filterCount.textContent = pad(shown) + (shown === 1 ? ' build' : ' builds');
-    }
-    if (emptyState) {
-      emptyState.hidden = shown !== 0;
-    }
-
-    filterButtons.forEach(function (button) {
-      button.setAttribute('aria-pressed', String(button.getAttribute('data-filter') === filter));
-    });
-  }
-
-  if (filterButtons.length && projectCards.length) {
-    filterButtons.forEach(function (button) {
-      button.addEventListener('click', function () {
-        applyFilter(button.getAttribute('data-filter') || 'all');
-      });
-    });
-    applyFilter('all');
-  }
-
-  /* -----------------------------------------------------------------------
-     Skill → related build readout
-     ----------------------------------------------------------------------- */
-
-  var skillButtons = Array.prototype.slice.call(document.querySelectorAll('.skill-chip'));
-  var skillName = document.getElementById('skillReadoutName');
-  var skillBody = document.getElementById('skillReadoutBody');
-
-  function resetSkillReadout() {
-    if (skillName) skillName.textContent = 'Awaiting input';
-    if (skillBody) {
-      skillBody.innerHTML = '<p class="skill-readout__empty">Select a skill badge to see the builds that use it.</p>';
-    }
-  }
-
-  function showSkill(button) {
-    var label = button.getAttribute('data-skill') || 'Skill';
-    var keys = (button.getAttribute('data-projects') || '').split(',').filter(Boolean);
-    if (skillName) skillName.textContent = label;
-
-    if (!skillBody) return;
-    skillBody.textContent = '';
-
-    if (!keys.length) {
-      var empty = document.createElement('p');
-      empty.className = 'skill-readout__empty';
-      empty.textContent = 'No public build mapped to this skill yet.';
-      skillBody.appendChild(empty);
-      return;
-    }
-
-    var list = document.createElement('div');
-    list.className = 'skill-readout__list';
-
-    keys.forEach(function (key) {
-      var project = projects[key];
-      if (!project) return;
-      var link = document.createElement('a');
-      link.className = 'skill-readout__link';
-      link.href = 'projects.html#project-' + key;
-      link.innerHTML = project.title + ' <span aria-hidden="true">↗</span>';
-      list.appendChild(link);
-    });
-
-    skillBody.appendChild(list);
-  }
-
-  skillButtons.forEach(function (button) {
-    button.setAttribute('aria-pressed', 'false');
-    button.addEventListener('click', function () {
-      var wasActive = button.classList.contains('is-active');
-      skillButtons.forEach(function (other) {
-        other.classList.remove('is-active');
-        other.setAttribute('aria-pressed', 'false');
-      });
-
-      if (wasActive) {
-        resetSkillReadout();
-        return;
+      var element;
+      if (build.href) {
+        element = document.createElement('a');
+        element.className = 'readout__build';
+        element.href = build.href;
+        element.appendChild(document.createTextNode(build.title));
+        var arrow = document.createElement('span');
+        arrow.setAttribute('aria-hidden', 'true');
+        arrow.textContent = '↗';
+        element.appendChild(arrow);
+      } else {
+        element = document.createElement('span');
+        element.className = 'readout__build';
+        element.textContent = build.title;
       }
 
-      button.classList.add('is-active');
-      button.setAttribute('aria-pressed', 'true');
-      showSkill(button);
-    });
-  });
-
-  /* -----------------------------------------------------------------------
-     Identity card flip
-     ----------------------------------------------------------------------- */
-
-  var idCard = document.getElementById('idCard');
-  var idFlip = document.getElementById('idFlip');
-
-  if (idCard && idFlip) {
-    idFlip.addEventListener('click', function () {
-      var flipped = idCard.classList.toggle('is-flipped');
-      idFlip.setAttribute('aria-pressed', String(flipped));
-      idFlip.querySelector('span').textContent = flipped ? 'Flip to identity' : 'Flip to stats';
+      readoutBody.appendChild(element);
     });
   }
 
-  /* -----------------------------------------------------------------------
-     Boot sequence — entry cover only, once per tab
-     ----------------------------------------------------------------------- */
+  if (chips.length && readoutName && readoutBody) {
+    chips.forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        var active = chip.getAttribute('aria-pressed') === 'true';
 
-  var boot = document.getElementById('bootOverlay');
+        if (active) {
+          resetReadout();
+          return;
+        }
 
-  if (boot) {
-    var bootFill = boot.querySelector('.boot__fill');
-    var bootSkip = boot.querySelector('.boot__skip');
-    var bootDone = false;
-    var bootTimer = 0;
+        chips.forEach(function (other) { other.setAttribute('aria-pressed', 'false'); });
+        chip.setAttribute('aria-pressed', 'true');
+        readoutName.textContent = chip.dataset.skill || chip.textContent.trim();
 
-    function finishBoot() {
-      if (bootDone) return;
-      bootDone = true;
-      window.clearTimeout(bootTimer);
+        var ids = skillBuilds[chip.dataset.skill] || [];
 
-      try { sessionStorage.setItem('arka-booted', '1'); } catch (error) {}
+        if (!ids.length) {
+          var column = chip.closest('[data-used]');
+          ids = column ? column.dataset.used.split(/\s+/).filter(Boolean) : [];
+        }
 
-      boot.classList.add('is-done');
-      document.body.classList.remove('is-booting');
-      window.setTimeout(function () { boot.hidden = true; }, 340);
-    }
-
-    var alreadyBooted = false;
-    try { alreadyBooted = sessionStorage.getItem('arka-booted') === '1'; } catch (error) {}
-
-    if (alreadyBooted || reducedMotion) {
-      boot.hidden = true;
-    } else {
-      boot.hidden = false;
-      document.body.classList.add('is-booting');
-      window.requestAnimationFrame(function () {
-        window.requestAnimationFrame(function () {
-          if (bootFill) bootFill.style.width = '100%';
-        });
-      });
-      bootTimer = window.setTimeout(finishBoot, 1300);
-    }
-
-    if (bootSkip) bootSkip.addEventListener('click', finishBoot);
-
-    var enterLinks = document.querySelectorAll('[data-enter]');
-    enterLinks.forEach(function (link) {
-      link.addEventListener('click', function () {
-        try { sessionStorage.setItem('arka-booted', '1'); } catch (error) {}
+        renderBuilds(ids);
       });
     });
 
-    var replayBoot = document.querySelector('[data-boot-replay]');
-    if (replayBoot) {
-      replayBoot.addEventListener('click', function () {
-        bootDone = false;
-        boot.hidden = false;
-        boot.classList.remove('is-done');
-        document.body.classList.add('is-booting');
-        if (bootFill) bootFill.style.width = '0';
-        window.requestAnimationFrame(function () {
-          window.requestAnimationFrame(function () {
-            if (bootFill) bootFill.style.width = '100%';
-          });
-        });
-        bootTimer = window.setTimeout(finishBoot, 1300);
-      });
-    }
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && readoutName.textContent !== DEFAULT_NAME) {
+        resetReadout();
+        var selected = document.querySelector('.chip-btn[aria-pressed="true"]');
+        if (selected) selected.focus();
+      }
+    });
   }
 
-  /* -----------------------------------------------------------------------
-     Contact form
-     ----------------------------------------------------------------------- */
+  /* --------------------------------------------------------- contact form */
 
   var form = document.getElementById('contactForm');
 
@@ -755,13 +155,9 @@
     var messageInput = document.getElementById('cfMessage');
     var status = document.getElementById('cfStatus');
     var submit = document.getElementById('cfSubmit');
-    var submitLabel = submit ? submit.querySelector('.btn-label') : null;
-
-    function fieldOf(input) { return input.closest('.field'); }
 
     function setError(input, message) {
-      if (!input) return;
-      var field = fieldOf(input);
+      var field = input.closest('.field');
       var error = field ? field.querySelector('.field-error') : null;
       if (field) field.classList.toggle('has-error', Boolean(message));
       input.setAttribute('aria-invalid', message ? 'true' : 'false');
@@ -802,10 +198,11 @@
 
       var inbox = 'f3400068730008743ebb2c550435c41d';
       status.classList.remove('is-error');
-      status.textContent = 'Transmitting…';
+      status.textContent = 'Sending…';
       if (submit) {
         submit.disabled = true;
-        if (submitLabel) submitLabel.textContent = 'Transmitting…';
+        submit.label = submit.textContent;
+        submit.textContent = 'Sending…';
       }
 
       fetch('https://formsubmit.co/ajax/' + inbox, {
@@ -824,18 +221,18 @@
         })
         .then(function () {
           status.classList.remove('is-error');
-          status.textContent = 'Channel open — message received. I reply within 24 hours.';
+          status.textContent = 'Message received — I reply within a day.';
           form.reset();
           [nameInput, emailInput, messageInput].forEach(function (input) { setError(input, ''); });
         })
         .catch(function () {
           status.classList.add('is-error');
-          status.textContent = 'Channel busy — email me directly at arkap1502@gmail.com.';
+          status.textContent = 'Could not send — email me directly at arkap1502@gmail.com.';
         })
-        .finally(function () {
+        .then(function () {
           if (submit) {
             submit.disabled = false;
-            if (submitLabel) submitLabel.textContent = 'Send message';
+            submit.textContent = submit.label || 'Send message →';
           }
         });
     });
