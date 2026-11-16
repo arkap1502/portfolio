@@ -201,7 +201,7 @@ Every page except Contact ends in the footer; Home's footer repeats the same rou
 | 01 | Netraksha | AI fake-identity & document screening. | SIH 2026 ↗ |
 | 02 | URL Scanner | Scores a link for phishing risk and traces its hosting IP. | LIVE ↗ / GITHUB ↗ |
 | 03 | NexVault | Secure vault for notes and credentials. | WEB APP ↗ |
-| 04 | Humanize AI | Turns AI text into natural writing. | AI ↗ |
+| 04 | Humanize AI | Turns AI text into natural writing. | LIVE ↗ / GITHUB ↗ |
 | 05 | Assembly | Multi-agent AI workspace that cross-examines models for cited answers. | LIVE ↗ / GITHUB ↗ |
 
 **Excluded:** ALTRON Password Inspector. Row 05 carries the `CONTRIBUTOR` tag and the disclosure line under the ledger.
