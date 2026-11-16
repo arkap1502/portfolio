@@ -553,12 +553,14 @@ html.hero-scroll .home-hero__grid {
   transition: background 0.15s ease, color 0.15s ease;
 }
 
-a.ledger__row:hover,
-a.ledger__row:focus-visible { background: var(--row-hi); color: var(--on-dark); }
+/* every project row in the Work ledger lights up on hover, whether or not the
+   row itself is a link; :focus-within gives keyboard users the same state */
+.work-ledger .ledger__row:hover,
+.work-ledger .ledger__row:focus-within { background: var(--row-hi); color: var(--on-dark); }
 
 .ledger__no { font: 400 15px/1.4 var(--mono); letter-spacing: 0.12em; }
 .ledger__project { font: 700 30px/1.2 var(--sans); letter-spacing: -0.01em; }
-.ledger__what { font: 400 18px/1.4 var(--sans); color: var(--text-s); }
+.ledger__what { font: 400 18px/1.4 var(--sans); color: var(--text-s); transition: color 0.15s ease; }
 .ledger__status {
   font: 400 15px/1.4 var(--mono);
   letter-spacing: 0.14em;
@@ -566,8 +568,49 @@ a.ledger__row:focus-visible { background: var(--row-hi); color: var(--on-dark); 
   text-align: right;
 }
 
-a.ledger__row:hover .ledger__what,
-a.ledger__row:focus-visible .ledger__what { color: var(--on-dark-muted); }
+.work-ledger .ledger__row:hover .ledger__what,
+.work-ledger .ledger__row:focus-within .ledger__what { color: var(--on-dark-muted); }
+
+/* contributor entry */
+
+.ledger__tag {
+  display: inline-block;
+  margin-left: 12px;
+  padding: 4px 10px;
+  border: 1.5px solid var(--black);
+  border-radius: 999px;
+  font: 700 11px/1 var(--mono);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  vertical-align: middle;
+  white-space: nowrap;
+  transition: border-color 0.15s ease;
+}
+
+.work-ledger .ledger__row:hover .ledger__tag,
+.work-ledger .ledger__row:focus-within .ledger__tag { border-color: var(--on-dark); }
+
+.ledger__status a {
+  text-decoration: none;
+  white-space: nowrap;
+}
+.ledger__status a:hover,
+.ledger__status a:focus-visible { text-decoration: underline; text-underline-offset: 3px; }
+
+.ledger__status--stack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.ledger__disclosure {
+  margin-top: 20px;
+  max-width: 900px;
+  font: 400 16px/1.5 var(--sans);
+  color: var(--text-s);
+}
+.ledger__disclosure strong { color: var(--black); }
 
 /* marquee */
 
@@ -1223,6 +1266,7 @@ a.readout__build:hover { background: var(--on-dark); color: var(--black); }
   .ledger__project { grid-column: 2; }
   .ledger__what { grid-column: 2; }
   .ledger__status { grid-column: 2; text-align: left; }
+  .ledger__status--stack { flex-direction: row; align-items: flex-start; gap: 14px; }
 
   .journey .ledger__row { grid-template-columns: 56px minmax(0, 1fr); }
   .journey .ledger__project { font-size: 22px; }

@@ -21,7 +21,7 @@ Five pages, one stylesheet and one deferred script. Each page has one fixed look
 3. **No Certificates button in the nav bar.** The nav holds Work, About, Contact and the Resume button. Certificates is reached only from the certificate portion of the Home page. The Certificates page keeps the standard nav plus a mono `← BACK TO HOME` link above its title.
 4. **Certificates order:** the Thiranex **internship certificate first**, the **Deloitte cyber job simulation second and shown as the main credential after it**, then the remaining credentials.
 5. **Featured project:** **Website Security Copilot**, shown with one internship certificate (Thiranex) on Home.
-6. **The Work page must not list** URL Threat Scanner or ALTRON Password Inspector.
+6. **The Work page must not list** ALTRON Password Inspector. URL Scanner (Sentinel ML) **is** listed, as ledger row 02.
 7. **The About page carries two skills sections** — the working matrix and the technical skills ledger — in the brutalist style, with the live interaction described in 7.4.
 8. **The Home hero must fill the first screen** (viewport height minus the header) and drives the scroll transition in section 8.
 9. **A footer appears on every page except Contact.**
@@ -147,7 +147,7 @@ No font files and no font requests. On narrow screens display sizes scale with `
 ### Ledger (Work, technical skills, journey)
 - Header strip: `--black` fill, 48px tall, mono 13px labels in `--on-dark-muted`.
 - Rows about 78px tall, separated by 1px dark rules, no zebra, no outer box.
-- Link rows: hover fills `--row-hi` with `--on-dark` text. Status is mono 15px with ↗.
+- Every project row in the Work ledger (`.work-ledger`) fills `--row-hi` with `--on-dark` text on hover or `:focus-within`, link row or not; `.ledger__what` moves to `--on-dark-muted` and the `CONTRIBUTOR` tag border to `--on-dark`. The About ledgers (`.tech-ledger`, `.journey`) keep their plain rows. Status is mono 15px with ↗.
 - Columns on Work: `NO` (88px), `PROJECT`, `WHAT IT DOES`, `STATUS` (200px), 22px inner padding.
 
 ### Chip
@@ -199,10 +199,12 @@ Every page except Contact ends in the footer; Home's footer repeats the same rou
 | No | Project | What it does | Status |
 |---|---|---|---|
 | 01 | Netraksha | AI fake-identity & document screening. | SIH 2026 ↗ |
-| 02 | NexVault | Secure vault for notes and credentials. | WEB APP ↗ |
-| 03 | Humanize AI | Turns AI text into natural writing. | AI ↗ |
+| 02 | URL Scanner | Scores a link for phishing risk and traces its hosting IP. | LIVE ↗ / GITHUB ↗ |
+| 03 | NexVault | Secure vault for notes and credentials. | WEB APP ↗ |
+| 04 | Humanize AI | Turns AI text into natural writing. | AI ↗ |
+| 05 | Assembly | Multi-agent AI workspace that cross-examines models for cited answers. | LIVE ↗ / GITHUB ↗ |
 
-**Excluded:** URL Threat Scanner, ALTRON Password Inspector.
+**Excluded:** ALTRON Password Inspector. Row 05 carries the `CONTRIBUTOR` tag and the disclosure line under the ledger.
 
 ### Certificates
 1. **Thiranex internship certificate** (ID `THX-AUG0426-563`): first and main.
@@ -226,7 +228,7 @@ Every page except Contact ends in the footer; Home's footer repeats the same rou
 ### 6.2 Work (`projects.html`) — brutalist
 1. Black nav band (99px), then the title **WORK** (Arial 700, 120px).
 2. Featured panel: Website Security Copilot (1px `--black` border on `--stone`), chips, solid + ghost buttons.
-3. Ledger with the black header strip, hover row, and rows Netraksha, NexVault, Humanize AI.
+3. Ledger with the black header strip, hover row, and rows Netraksha, URL Scanner, NexVault, Humanize AI, Assembly (the last with a `CONTRIBUTOR` tag and the disclosure line below the ledger).
 4. **Footer.**
 
 ### 6.3 About (`about.html`) — brutalist
@@ -320,7 +322,7 @@ The page body never scrolls sideways.
 - One stylesheet (`assets/css/site.css`) and one deferred script (`assets/site.js`).
 - System fonts only; no libraries, no blur, no canvas, no continuous animation.
 - Images are WebP at display size, with width and height in markup.
-- Assets are requested with a version query (`?v=9`); bump it when the CSS or JS changes.
+- Assets are requested with a version query (`site.css?v=14`, `site.js?v=10`); bump the matching one whenever the CSS or JS changes.
 
 ---
 
@@ -361,7 +363,7 @@ assets/Thiranex_Certificate_Arka_Patra_THX-AUG0426-563.pdf
 **Don't**
 - Reintroduce a landing page, a theme toggle, or any light/dark switching.
 - Add a Certificates item to the nav.
-- List URL Threat Scanner or ALTRON Password Inspector on the Work page.
+- List ALTRON Password Inspector on the Work page.
 - Add the circular builds badge back to the hero.
 - Mix palettes across pages (clay only on Home, lime only on Contact).
 - Use shadows, gradients, glow, glassmorphism or rounded shadowed cards.
@@ -380,7 +382,7 @@ assets/Thiranex_Certificate_Arka_Patra_THX-AUG0426-563.pdf
 - [ ] Scroll down/up plays the reveal symmetrically with no empty stretch of pine
 - [ ] Home certificate portion shows Thiranex then Deloitte, with a View all certificates button
 - [ ] Certificates page order: Thiranex, Deloitte, then the vault
-- [ ] Work page: Website Security Copilot featured; ledger has no URL Threat Scanner or ALTRON Password Inspector
+- [ ] Work page: Website Security Copilot featured; ledger rows Netraksha, URL Scanner, NexVault, Humanize AI, Assembly; no ALTRON Password Inspector
 - [ ] About page: matrix (three columns, readout bar, keyboard-selectable chips) and all six technical groups
 - [ ] Footer present on Home, Work, About, Certificates; absent on Contact; Back to top returns to the hero
 - [ ] Marquee strip is static; reduced motion verified

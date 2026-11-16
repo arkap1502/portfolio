@@ -122,7 +122,7 @@
     netraksha: { title: 'Netraksha', href: 'projects.html#project-netraksha' },
     nexvault: { title: 'NexVault', href: 'projects.html#project-nexvault' },
     humanize: { title: 'Humanize AI', href: 'projects.html#project-humanize' },
-    urlScanner: { title: 'URL Scanner' },
+    urlScanner: { title: 'URL Scanner', href: 'projects.html#project-url-scanner' },
     altron: { title: 'ALTRON' },
     quishing: { title: 'Quishing Guard' },
     prompt: { title: 'Hidden-Prompt Scanner' },
