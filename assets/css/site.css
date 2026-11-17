@@ -388,15 +388,17 @@ html.hero-scroll .home-hero__grid {
   background: var(--black);
 }
 
-/* Each dot rides its own invisible carriage around the outer ring. */
+/* Each dot rides its own invisible carriage: black on the outer ring,
+   orange on the middle ring. */
 .hero-orbit__spin {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  animation: hero-orbit-spin 42s linear infinite;
+  animation: hero-orbit-spin 14s linear infinite;
 }
 .hero-orbit__spin--b {
-  animation-duration: 58s;
+  inset: 10%;
+  animation-duration: 20s;
   animation-direction: reverse;
 }
 .hero-orbit__spin--b .hero-orbit__dot {
