@@ -251,7 +251,8 @@ button { font: inherit; color: inherit; }
 }
 
 .home-hero {
-  background-color: var(--stone);
+  background-color: var(--black);
+  color: var(--on-dark);
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -299,27 +300,31 @@ html.hero-scroll .home-hero__grid {
   padding-bottom: 64px;
 }
 
+/* Shared by the hero label and the section labels in the light flow. */
 .home-hero__label {
   font-size: 13px;
   letter-spacing: 0.22em;
   color: var(--text-s);
 }
 
+/* On the dark hero the copy flips to light. */
+.home-hero .home-hero__label { color: var(--on-dark-muted); }
+
 .home-hero h1 {
   margin-top: 26px;
   font: 700 clamp(2.6rem, 4.9vw, 84px)/0.95 var(--sans);
   text-transform: uppercase;
   letter-spacing: -0.02em;
-  color: var(--black);
+  color: var(--on-dark);
 }
 .home-hero h1 span { display: block; }
-.home-hero h1 em { display: block; font-style: normal; color: var(--black); }
+.home-hero h1 em { display: block; font-style: normal; color: var(--on-dark); }
 
 .home-hero__intro {
   margin-top: 32px;
   max-width: 560px;
   font: 400 21px/1.4 var(--sans);
-  color: var(--text-s);
+  color: var(--on-dark-muted);
 }
 
 .home-hero__actions {
@@ -335,6 +340,14 @@ html.hero-scroll .home-hero__grid {
   padding: 0 28px;
   font-size: 18px;
 }
+.home-hero__actions .btn--solid {
+  background: var(--on-dark);
+  color: var(--black);
+  border-color: var(--on-dark);
+}
+.home-hero__actions .btn--solid:hover { background: transparent; color: var(--on-dark); }
+.home-hero__actions .btn--ghost { color: var(--on-dark); border-color: var(--on-dark); }
+.home-hero__actions .btn--ghost:hover { background: var(--on-dark); color: var(--black); }
 
 .home-hero__skills {
   display: flex;
@@ -345,10 +358,10 @@ html.hero-scroll .home-hero__grid {
   font: 700 12px/1 var(--mono);
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--text-s);
+  color: var(--on-dark-muted);
 }
 .home-hero__skills [aria-hidden="true"] {
-  color: var(--black);
+  color: var(--on-dark);
   letter-spacing: 0;
 }
 
@@ -370,12 +383,12 @@ html.hero-scroll .home-hero__grid {
 
 .hero-orbit__ring {
   position: absolute;
-  border: 1px solid rgba(11, 11, 11, 0.24);
+  border: 1px solid rgba(245, 241, 234, 0.22);
   border-radius: 50%;
 }
 .hero-orbit__ring--outer { inset: 0; }
-.hero-orbit__ring--mid { inset: 10%; border-color: rgba(11, 11, 11, 0.34); }
-.hero-orbit__ring--inner { inset: 20%; border-color: rgba(11, 11, 11, 0.5); }
+.hero-orbit__ring--mid { inset: 10%; border-color: rgba(245, 241, 234, 0.32); }
+.hero-orbit__ring--inner { inset: 20%; border-color: rgba(245, 241, 234, 0.45); }
 
 .hero-orbit__dot {
   position: absolute;
@@ -386,6 +399,7 @@ html.hero-scroll .home-hero__grid {
   border-radius: 50%;
   transform: translate(-50%, -50%);
   background: var(--black);
+  box-shadow: 0 0 0 1px var(--on-dark);
 }
 
 /* Each dot rides its own invisible carriage: black on the outer ring,
@@ -406,6 +420,7 @@ html.hero-scroll .home-hero__grid {
   right: 0;
   transform: translate(50%, -50%);
   background: var(--orange);
+  box-shadow: none;
 }
 
 @keyframes hero-orbit-spin {
@@ -425,7 +440,7 @@ html.hero-scroll .home-hero__grid {
   content: "";
   position: absolute;
   inset: 0;
-  border: 1px solid rgba(11, 11, 11, 0.6);
+  border: 1px solid rgba(245, 241, 234, 0.6);
   border-radius: 50%;
   pointer-events: none;
 }
@@ -445,20 +460,20 @@ html.hero-scroll .home-hero__grid {
   flex-direction: column;
   gap: 5px;
   padding: 8px 12px;
-  border: 1px solid var(--black);
-  background: var(--stone);
+  border: 1px solid var(--on-dark);
+  background: var(--black);
   text-align: right;
 }
 .home-hero__place > span:first-child {
   font: 700 12px/1 var(--mono);
   letter-spacing: 0.06em;
-  color: var(--black);
+  color: var(--on-dark);
 }
 .home-hero__coords {
   font: 700 8px/1 var(--mono);
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--text-s);
+  color: var(--on-dark-muted);
 }
 
 .hero-bar {
@@ -467,6 +482,7 @@ html.hero-scroll .home-hero__grid {
   justify-content: space-between;
   gap: 24px;
   padding: 16px var(--gutter);
+  border-top: 1px solid rgba(245, 241, 234, 0.16);
   background: var(--black);
   color: var(--on-dark);
 }
@@ -1261,9 +1277,55 @@ a.readout__build:hover { background: var(--on-dark); color: var(--black); }
 .form-status:empty { display: none; }
 .form-status.is-error { border-left-color: var(--orange); }
 
+/* ---------------------------------------------------- contact dark ------ */
+
+.page-dark { background: var(--black); color: var(--on-dark); }
+
+.page-dark .skip-link { background: var(--on-dark); color: var(--black); }
+
+.page-dark .contact-label { color: var(--on-dark-muted); }
+
+.page-dark .contact-title,
+.page-dark .contact-title em { color: var(--on-dark); }
+
+.page-dark .contact-intro { color: var(--on-dark-muted); }
+
+.page-dark .link-ledger { border-top-color: var(--on-dark); }
+.page-dark .link-ledger a { border-bottom-color: var(--on-dark); }
+.page-dark .link-ledger .label { color: var(--on-dark-muted); }
+.page-dark .link-ledger .value { color: var(--on-dark); }
+.page-dark .link-ledger .arrow { color: var(--on-dark); }
+
+.page-dark .form-panel { border-color: var(--on-dark); }
+.page-dark .form-panel > .label { color: var(--on-dark-muted); }
+.page-dark .field label { color: var(--on-dark-muted); }
+.page-dark .field input,
+.page-dark .field textarea {
+  background: #141413;
+  border-color: var(--on-dark);
+  color: var(--on-dark);
+}
+.page-dark .field input::placeholder,
+.page-dark .field textarea::placeholder { color: rgba(245, 241, 234, 0.45); }
+.page-dark .field input:focus,
+.page-dark .field textarea:focus { outline-color: var(--on-dark); }
+
+.page-dark .field-error { color: var(--on-dark); }
+.page-dark .form-status { color: var(--on-dark); border-left-color: var(--on-dark); }
+.page-dark .form-status.is-error { border-left-color: var(--orange); }
+
+.page-dark .form .btn--solid {
+  background: var(--on-dark);
+  color: var(--black);
+  border-color: var(--on-dark);
+}
+.page-dark .form .btn--solid:hover { background: transparent; color: var(--on-dark); }
+
 /* ------------------------------------------------------------ focus ----- */
 
 .page-brutal :focus-visible { outline: 3px solid var(--black); outline-offset: 3px; }
+.page-dark :focus-visible { outline-color: var(--on-dark); }
+.home-hero :focus-visible { outline-color: var(--on-dark); }
 .site-head--band :focus-visible { outline-color: var(--on-dark); }
 
 /* --------------------------------------------------------- site footer --- */
