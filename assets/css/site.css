@@ -880,6 +880,30 @@ html.hero-scroll .home-hero__grid {
 }
 .profile-grid__bio p + p { margin-top: 14px; }
 
+.profile-facts {
+  margin-top: 48px;
+  max-width: 460px;
+  border-top: 1px solid var(--black);
+}
+.profile-facts__row {
+  display: grid;
+  grid-template-columns: 148px minmax(0, 1fr);
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(11, 11, 11, 0.18);
+  font-size: 17px;
+  line-height: 1.45;
+}
+.profile-facts dt {
+  font: 700 12px/1.7 var(--mono);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-s);
+}
+.profile-facts dd { color: var(--black); }
+.profile-facts dd a { text-decoration: underline; text-underline-offset: 3px; }
+.profile-facts dd a:hover { color: var(--orange); }
+
 .two-col-ledger { border-top: 1px solid var(--black); }
 .two-col-ledger__head {
   display: grid;
@@ -1449,6 +1473,7 @@ a.readout__build:hover { background: var(--on-dark); color: var(--black); }
   .about-hero__photo { max-width: 386px; }
 
   .profile-grid { grid-template-columns: 1fr; gap: 32px; }
+  .profile-facts { margin-top: 36px; max-width: none; }
 
   .matrix { grid-template-columns: 1fr; border-top: 1px solid var(--black); }
   .matrix__col {
