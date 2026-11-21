@@ -827,13 +827,21 @@ html.hero-scroll .home-hero__grid {
 .about-hero .btn { margin-top: 76px; width: 252px; }
 
 .about-hero__figure { margin-top: 17px; }
-.about-hero__photo { background: var(--photo); width: 386px; max-width: 100%; }
+.about-hero__photo {
+  background: var(--photo);
+  width: 386px;
+  max-width: 100%;
+  border-radius: 28px;
+  overflow: hidden;
+}
 .about-hero__photo img {
+  display: block;
   width: 100%;
   height: auto;
   aspect-ratio: 386 / 481;
   object-fit: cover;
   object-position: center top;
+  border-radius: 28px;
 }
 .about-hero figcaption {
   margin-top: 14px;
