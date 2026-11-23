@@ -113,6 +113,155 @@
     }
   }
 
+  /* ------------------------------------------------------- ledger shuffle */
+
+  /* The five project rows on the Work page start as a slightly overlapped
+     deck and fan into the exact ledger as it rises into view. Progress comes
+     from scroll position, so scrolling back up reverses the shuffle exactly.
+     Only transforms are written — flow height, links and type stay put. */
+
+  var workLedger = document.querySelector('.work-ledger');
+
+  if (workLedger) {
+    var ledgerRows = Array.prototype.slice.call(workLedger.querySelectorAll('.ledger__row'));
+    var ledgerDeck = workLedger.querySelector('.ledger__rows');
+    var deckReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var deckWide = window.matchMedia('(min-width: 901px)');
+    var deckMetrics = [];
+    var deckQueued = false;
+    var deckProgress = -1;
+    var deckSettled = false;
+    var deckBound = false;
+    /* Last value written per row, so a frame that changes nothing writes
+       nothing — each write costs a style recalculation on scroll. */
+    var deckLastY = [];
+    var deckLastPlane = null;
+
+    function measureDeck() {
+      deckMetrics = ledgerRows.map(function (row) {
+        return { row: row, height: row.offsetHeight || 78 };
+      });
+      deckProgress = -1;
+      deckLastY = [];
+      deckLastPlane = null;
+    }
+
+    function paintDeck() {
+      deckQueued = false;
+
+      var viewport = window.innerHeight || 1;
+      var box = workLedger.getBoundingClientRect();
+      /* A shorter travel distance lands the deck sooner: same motion, less
+         scrolling, so it never feels like it is dragging behind the wheel. */
+      var span = Math.max(viewport * 0.42, 1);
+      var progress = Math.min(Math.max((viewport - box.top) / span, 0), 1);
+
+      if (progress === deckProgress) return;
+      deckProgress = progress;
+
+      var wide = deckWide.matches;
+
+      if (ledgerDeck) {
+        var planeLocal = Math.min(Math.max(progress / 0.85, 0), 1);
+        var planeEase = planeLocal * planeLocal * (3 - 2 * planeLocal);
+        var plane = Math.round((wide ? 2.2 : 0) * (1 - planeEase) * 100) / 100;
+
+        if (plane !== deckLastPlane) {
+          deckLastPlane = plane;
+          ledgerDeck.style.setProperty('--deck-plane', plane.toFixed(2) + 'deg');
+        }
+      }
+
+      deckMetrics.forEach(function (item, index) {
+        /* Each row starts its own settle a little later than the one above,
+           so the deck fans from the top instead of moving as one block. */
+        var local = Math.min(Math.max((progress - 0.05 - index * 0.03) / 0.7, 0), 1);
+        var eased = local * local * (3 - 2 * local);
+        var rest = 1 - eased;
+
+        var overlap = Math.min(18, item.height * 0.26);
+        /* Half-pixel steps: finer moves are invisible, and skipping them keeps
+           fast scrolling off the style recalculation path. */
+        var y = rest ? Math.round(-(index * overlap * rest) * 2) / 2 : 0;
+
+        if (deckLastY[index] === y) return;
+        deckLastY[index] = y;
+
+        item.row.style.setProperty('--deck-y', y + 'px');
+      });
+
+      var finished = progress > 0.994;
+      if (finished !== deckSettled) {
+        deckSettled = finished;
+        workLedger.classList.toggle('is-settled', finished);
+      }
+    }
+
+    function queueDeck() {
+      if (document.hidden) {
+        paintDeck();
+        return;
+      }
+      if (deckQueued) return;
+      deckQueued = true;
+      window.requestAnimationFrame(paintDeck);
+    }
+
+    function clearDeck() {
+      workLedger.classList.remove('has-deck');
+      workLedger.classList.remove('is-settled');
+      if (ledgerDeck) ledgerDeck.style.removeProperty('--deck-plane');
+      ledgerRows.forEach(function (row) {
+        row.style.removeProperty('--deck-layer');
+        row.style.removeProperty('--deck-y');
+      });
+      deckProgress = -1;
+      deckSettled = false;
+      deckLastY = [];
+      deckLastPlane = null;
+    }
+
+    function enableDeck() {
+      if (deckReduced.matches) return;
+
+      workLedger.classList.add('has-deck');
+      ledgerRows.forEach(function (row, index) {
+        row.style.setProperty('--deck-layer', String(index + 1));
+      });
+
+      measureDeck();
+      paintDeck();
+
+      if (deckBound) return;
+      deckBound = true;
+
+      window.addEventListener('scroll', queueDeck, { passive: true });
+      window.addEventListener('resize', function () { measureDeck(); queueDeck(); });
+      window.addEventListener('orientationchange', function () { measureDeck(); queueDeck(); });
+      window.addEventListener('load', function () { measureDeck(); queueDeck(); });
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(function () { measureDeck(); queueDeck(); });
+      }
+      document.addEventListener('visibilitychange', function () {
+        if (!document.hidden) { measureDeck(); paintDeck(); }
+      });
+    }
+
+    if (ledgerRows.length) {
+      enableDeck();
+
+      if (deckReduced.addEventListener) {
+        deckReduced.addEventListener('change', function () {
+          if (deckReduced.matches) {
+            clearDeck();
+          } else {
+            enableDeck();
+          }
+        });
+      }
+    }
+  }
+
   /* --------------------------------------------------------- skill readout */
 
   /* Builds that exist on the Work page carry an href, so the readout can link

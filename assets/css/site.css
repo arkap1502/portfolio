@@ -781,6 +781,69 @@ html.hero-scroll .home-hero__grid {
 }
 .ledger__disclosure strong { color: var(--black); }
 
+/* -------------------------------------------------- ledger card shuffle --- */
+
+/* The five Work rows begin as a shallow, slightly turned deck and fan into
+   the exact ledger as the section rises. Only transforms are written, so
+   widths, type, flow height and links never move. JS adds .has-deck, so
+   without scripting (or with reduced motion) the ledger stays untouched. */
+
+.work-ledger.has-deck { perspective: 1600px; perspective-origin: 50% 20%; }
+
+.work-ledger.has-deck .ledger__rows {
+  transform-origin: 50% 0;
+  transform: rotateX(var(--deck-plane, 0deg));
+  will-change: transform;
+}
+
+.work-ledger.has-deck .ledger__row {
+  position: relative;
+  z-index: var(--deck-layer, 1);
+  transform-origin: 50% 0;
+  transform: translate3d(
+    0,
+    calc(var(--deck-y, 0px) + var(--deck-lift, 0px)),
+    0
+  );
+}
+
+/* While the rows are stacked they borrow the page surface so a card hides
+   the one beneath it, and a hard hairline shadow separates the sheets. A
+   blurred shadow here is repainted on every scroll frame and made the deck
+   lag, so the cast is a crisp edge instead — free to composite. */
+.work-ledger.has-deck:not(.is-settled) .ledger__row {
+  background: var(--stone);
+  box-shadow: 0 1px 0 rgba(11, 11, 11, 0.16);
+}
+/* Hover belongs to the landed deck, so mid-shuffle the row keeps its resting
+   colours instead of flashing dark under the cursor. */
+.work-ledger.has-deck:not(.is-settled) .ledger__row:hover,
+.work-ledger.has-deck:not(.is-settled) .ledger__row:focus-within {
+  background: var(--stone);
+  color: var(--black);
+}
+.work-ledger.has-deck:not(.is-settled) .ledger__row:hover .ledger__what,
+.work-ledger.has-deck:not(.is-settled) .ledger__row:focus-within .ledger__what { color: var(--text-s); }
+.work-ledger.has-deck:not(.is-settled) .ledger__row:hover .ledger__tag,
+.work-ledger.has-deck:not(.is-settled) .ledger__row:focus-within .ledger__tag { border-color: var(--black); }
+
+.work-ledger.has-deck:not(.is-settled) .ledger__row { will-change: transform; }
+
+/* Once the deck has landed the row can lift a hair on hover; during the
+   shuffle the transform belongs to the scroll position alone. */
+.work-ledger.is-settled .ledger__row {
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    box-shadow 0.24s ease,
+    transform 0.24s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+@media (hover: hover) {
+  .work-ledger.is-settled .ledger__row:hover,
+  .work-ledger.is-settled .ledger__row:focus-within { --deck-lift: -3px; }
+}
+
 /* marquee */
 
 .marquee {
